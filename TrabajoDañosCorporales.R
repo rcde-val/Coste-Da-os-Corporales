@@ -14,7 +14,7 @@ library(usethis)
 # git push una vez que ya lo hayamos linkeado con el master, vamos a usar solo push
 
 
-paquetes <- c("tidyverse", "readxl", "usethis", "ggplot2")
+paquetes <- c("tidyverse", "readxl", "usethis", "ggplot2", "moments")
 
 for (pkg in paquetes) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -27,4 +27,37 @@ for (pkg in paquetes) {
 }
 
 datos <- read_excel("CASO 5_ daños corporales autos.xlsx")
+datos<-data.frame(datos)
 head(datos)
+summary(datos)
+
+
+namesNum <-c("ClaimNb", "Exposure", "CarAge", "DriverAge",
+             "Density", "ClaimAmount", "InjuryAmount", "PropertyAmount")
+namesChar<-c("Power","Brand","Gas","Region")
+
+apply(datos[namesNum],2,summary)
+apply(datos[namesNum],2,var)
+apply(datos[namesNum],2,skewness)
+apply(datos[namesNum],2,kurtosis)
+apply(datos[namesNum],2,boxplot)
+apply(datos[namesNum],2,hist)
+apply(datos[namesChar],2,table)
+
+pairs <- combn(namesChar, 2, simplify = FALSE)
+for (p in pairs) {
+  cat("\nTabla de:", p[1], "vs", p[2], "\n")
+  print(table(datos[[p[1]]], datos[[p[2]]]))
+}
+
+
+
+cor_matrix<-cor(datos[namesNum], use = "complete.obs")
+heatmap(cor_matrix, 
+        Rowv = NA, Colv = NA, 
+        col = colorRampPalette(c("red","white","green"))(20), 
+        scale = "none")
+
+
+
+
