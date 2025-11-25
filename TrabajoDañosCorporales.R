@@ -59,7 +59,22 @@ heatmap(cor_matrix,
         scale = "none")
 
 
+
+
+¡for (catVar in namesChar) {
+  for (numVar in namesNum) {
+    p <- ggplot(datos, aes_string(x = catVar, y = numVar)) +
+      geom_boxplot(fill = "lightblue") +
+      labs(title = paste("Boxplot de", numVar, "por", catVar),
+           x = catVar, y = numVar) +
+      theme_minimal()
+    print(p)
+  }
+}
+
 pairs(datos[namesNum], main="Scatterplots entre variables numéricas")
+
+
 
 apply(datos[,-datos$InjuryAmount],2,function(x) lm(datos$InjuryAmount~x))
 
