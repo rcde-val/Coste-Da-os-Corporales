@@ -59,5 +59,23 @@ heatmap(cor_matrix,
         scale = "none")
 
 
+pairs(datos[namesNum], main="Scatterplots entre variables numéricas")
+
+apply(datos[,-datos$InjuryAmount],2,function(x) lm(datos$InjuryAmount~x))
 
 
+names_without_output <- c("ClaimNb","Exposure","CarAge","DriverAge",
+              "Density","ClaimAmount","PropertyAmount",
+              "Power","Brand","Gas","Region")  # No esta InjuryAmount
+datos1<-datos[,-1]#Quitamos PolicyID
+
+models <- lapply(names_without_output, function(x) {
+  formula <- as.formula(paste("InjuryAmount ~", x))
+  lm(formula, data = datos1)
+})
+#models
+summaries <- lapply(models, summary)
+summaries
+
+modelGeneral<-lm(InjuryAmount~.,data=datos1)
+summary(modelGeneral)
