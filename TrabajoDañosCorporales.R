@@ -1,4 +1,4 @@
-# Prueba Victor Perez 2
+# Prueba Victor Perez 3
 
 library(usethis)
 #usethis::edit_git_config()
@@ -15,28 +15,32 @@ library(usethis)
 #git push -u origin master
 # git push una vez que ya lo hayamos linkeado con el master, vamos a usar solo push
 
-
+# Definición de paquetes
 paquetes <- c("tidyverse", "readxl", "usethis", "ggplot2", "moments")
-
+# Instalación de paquetes no instalados (de ser requerido)
 for (pkg in paquetes) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     install.packages(pkg)
   }
 }
-
+# Carga de paquetes
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
 }
-
+# Lectura de la base de datos
 datos <- read_excel("CASO 5_ daños corporales autos.xlsx")
+# Convertir en data frame
 datos<-data.frame(datos)
 head(datos)
 summary(datos)
 
-
+# Definición de las variables numéricas
 namesNum <-c("ClaimNb", "Exposure", "CarAge", "DriverAge",
              "Density", "ClaimAmount", "InjuryAmount", "PropertyAmount")
+# Definición de las variables categóricas
 namesChar<-c("Power","Brand","Gas","Region")
+
+
 
 apply(datos[namesNum],2,summary)
 apply(datos[namesNum],2,var)
@@ -54,6 +58,7 @@ for (p in pairs) {
 
 
 
+
 cor_matrix<-cor(datos[namesNum], use = "complete.obs")
 heatmap(cor_matrix, 
         Rowv = NA, Colv = NA, 
@@ -63,7 +68,7 @@ heatmap(cor_matrix,
 
 
 
-¡for (catVar in namesChar) {
+for (catVar in namesChar) {
   for (numVar in namesNum) {
     p <- ggplot(datos, aes_string(x = catVar, y = numVar)) +
       geom_boxplot(fill = "lightblue") +
