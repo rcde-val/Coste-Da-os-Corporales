@@ -261,6 +261,67 @@ text(x = DriverAge_barplot,
      y = DriverAgeCluster_freq_rel,
      labels = round(DriverAgeCluster_freq_rel, 1),
      pos = 3)
+#-------------------------------------------------------------------------------
+# 3.1.1.1.5 Density (Discreta)
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$Density)
+#
+# k-means para agrupar
+# Normalizar la variable
+Density_scaled<-scale(datos$Density)
+# Método del codo para determinar el número óptimo de clústers
+set.seed(123)
+Density_wss<-sapply(1:10, function(k){
+  kmeans(Density_scaled,centers=k,nstart=10)$tot.withinss
+})
+# Gráfico del codo
+plot(1:10, Density_wss, type = "b", pch = 19,
+     xlab = "Número de clusters (k)",
+     ylab = "Suma de cuadrados dentro del cluster",
+     main = "Método del codo")
+# Aplicación del método de k-means
+set.seed(123)
+Density_kmeans_result<-kmeans(Density_scaled,centers=4,nstart=25)
+# Resultados en escala original
+Density_media<-mean(datos$Density)
+Density_desv<-sd(datos$Density)
+Density_centroides_original<-Density_kmeans_result$centers*Density_desv+Density_media
+# Añadir los clusters al data frame y analizar tamaños y rangos
+datos$DensityCluster<-Density_kmeans_result$cluster
+# Mostrar tamaño de cada grupo
+print(table(datos$DensityCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+DensityCluster_rango<- aggregate(datos$Density, by = list(Cluster = datos$DensityCluster), range)
+print(DensityCluster_rango)
+#
+# Barplot
+# Calcular frecuencias relativas
+DensityCluster_freq_abs <- table(datos$DensityCluster)
+DensityCluster_freq_rel <- prop.table(DensityCluster_freq_abs) * 100
+# Ordenar por el mínimo del rango
+DensityCluster_orden<- order(DensityCluster_rango$x[,1])
+DensityCluster_rango<-DensityCluster_rango[DensityCluster_orden, ]
+DensityCluster_freq_rel<-DensityCluster_freq_rel[DensityCluster_orden]
+# Crear etiquetas con los rangos
+DensityCluster_labels <- apply(DensityCluster_rango$x, 1, function(r) {
+  paste0("(", r[1], ", ", r[2], "]")
+})
+# Barplot ordenado
+Density_barplot<-barplot(DensityCluster_freq_rel,
+                           names.arg = DensityCluster_labels,
+                           col = "lightblue",
+                           ylim = c(0, 120),
+                           main = "Clusters (Density)",
+                           xlab = "Rango del número de habitantes por km2 en la ciudad del conductor",
+                           ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("k-means", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas numéricas sobre cada barra
+text(x = Density_barplot,
+     y = DensityCluster_freq_rel,
+     labels = round(DensityCluster_freq_rel, 1),
+     pos = 3)
 
 
 

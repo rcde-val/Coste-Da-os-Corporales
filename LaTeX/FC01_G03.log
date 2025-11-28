@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  28 NOV 2025 21:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  29 NOV 2025 00:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -266,81 +266,88 @@ File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen162
 \Gin@req@width=\dimen163
-) (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
-Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
-Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
-\col@sep=\dimen164
-\ar@mcellbox=\box53
-\extrarowheight=\dimen165
-\NC@list=\toks22
-\extratabsurround=\skip52
-\backup@length=\skip53
-\ar@cellbox=\box54
-)
-\TX@col@width=\dimen166
-\TX@old@table=\dimen167
-\TX@old@col=\dimen168
-\TX@target=\dimen169
-\TX@delta=\dimen170
-\TX@cols=\count301
-\TX@ftn=\toks23
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
-Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen171
-\lightrulewidth=\dimen172
-\cmidrulewidth=\dimen173
-\belowrulesep=\dimen174
-\belowbottomsep=\dimen175
-\aboverulesep=\dimen176
-\abovetopsep=\dimen177
-\cmidrulesep=\dimen178
-\cmidrulekern=\dimen179
-\defaultaddspace=\dimen180
-\@cmidla=\count302
-\@cmidlb=\count303
-\@aboverulesep=\dimen181
-\@belowrulesep=\dimen182
-\@thisruleclass=\count304
-\@lastruleclass=\count305
-\@thisrulewidth=\dimen183
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
-Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip54
-\multirow@cntb=\count306
-\multirow@dima=\skip55
-\bigstrutjot=\dimen184
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count307
-\float@exts=\toks24
-\float@box=\box55
-\@float@everytoks=\toks25
-\@floatcapt=\box56
-)
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen185
-\captionmargin=\dimen186
-\caption@leftmargin=\dimen187
-\caption@rightmargin=\dimen188
-\caption@width=\dimen189
-\caption@indent=\dimen190
-\caption@parindent=\dimen191
-\caption@hangindent=\dimen192
+\caption@tempdima=\dimen164
+\captionmargin=\dimen165
+\caption@leftmargin=\dimen166
+\caption@rightmargin=\dimen167
+\caption@width=\dimen168
+\caption@indent=\dimen169
+\caption@parindent=\dimen170
+\caption@hangindent=\dimen171
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count308
-\c@continuedfloat=\count309
-Package caption Info: float package is loaded.
+\c@caption@flags=\count301
+\c@continuedfloat=\count302
 Package caption Info: hyperref package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count303
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count304
+) (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+\col@sep=\dimen172
+\ar@mcellbox=\box53
+\extrarowheight=\dimen173
+\NC@list=\toks22
+\extratabsurround=\skip52
+\backup@length=\skip53
+\ar@cellbox=\box54
+)
+\TX@col@width=\dimen174
+\TX@old@table=\dimen175
+\TX@old@col=\dimen176
+\TX@target=\dimen177
+\TX@delta=\dimen178
+\TX@cols=\count305
+\TX@ftn=\toks23
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen179
+\lightrulewidth=\dimen180
+\cmidrulewidth=\dimen181
+\belowrulesep=\dimen182
+\belowbottomsep=\dimen183
+\aboverulesep=\dimen184
+\abovetopsep=\dimen185
+\cmidrulesep=\dimen186
+\cmidrulekern=\dimen187
+\defaultaddspace=\dimen188
+\@cmidla=\count306
+\@cmidlb=\count307
+\@aboverulesep=\dimen189
+\@belowrulesep=\dimen190
+\@thisruleclass=\count308
+\@lastruleclass=\count309
+\@thisrulewidth=\dimen191
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip54
+\multirow@cntb=\count310
+\multirow@dima=\skip55
+\bigstrutjot=\dimen192
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count311
+\float@exts=\toks24
+\float@box=\box55
+\@float@everytoks=\toks25
+\@floatcapt=\box56
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
@@ -348,7 +355,7 @@ Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.def
 File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO
 )
-\BKM@id=\count310
+\BKM@id=\count312
 ))
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/threeparttable\threepar
 ttable.sty
@@ -356,7 +363,7 @@ Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box57
 )
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 2
-5.
+7.
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
@@ -364,7 +371,7 @@ File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count311
+\l__color_backend_stack_int=\count313
 ) (FC01_G03.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
@@ -373,26 +380,26 @@ Package babel Info: 'spanish' activates 'spanish' shorthands.
 )
 \openout1 = `FC01_G03.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Info: Redefining \. on input line 25.
-LaTeX Info: Redefining \% on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Info: Redefining \. on input line 27.
+LaTeX Info: Redefining \% on input line 27.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -437,21 +444,21 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 Package color Info: Driver file: pdftex.def on input line 149.
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
 )
-Package hyperref Info: Link coloring ON on input line 25.
+Package hyperref Info: Link coloring ON on input line 27.
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count312
+\scratchcounter=\count314
 \scratchdimen=\dimen193
 \scratchbox=\box58
-\nofMPsegments=\count313
-\nofMParguments=\count314
+\nofMPsegments=\count315
+\nofMParguments=\count316
 \everyMPshowfont=\toks26
-\MPscratchCnt=\count315
+\MPscratchCnt=\count317
 \MPscratchDim=\dimen194
-\MPnumerator=\count316
-\makeMPintoPDFobject=\count317
+\MPnumerator=\count318
+\makeMPintoPDFobject=\count319
 \everyMPtoPDFconversion=\toks27
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
@@ -465,14 +472,15 @@ fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 30.
+(Font)              <12> on input line 32.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 30.
+(Font)              <8> on input line 32.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 30.
+(Font)              <6> on input line 32.
 
 
 [1
@@ -494,59 +502,54 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.36 \newpage
+l.38 \newpage
               [1]
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 48--49
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 66--69
+Underfull \hbox (badness 10000) in paragraph at lines 68--71
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--74
+Underfull \hbox (badness 10000) in paragraph at lines 74--76
 
  []
 
 
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 75--77
+Underfull \hbox (badness 10000) in paragraph at lines 77--79
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 78--82
+Underfull \hbox (badness 10000) in paragraph at lines 80--84
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--86
+Underfull \hbox (badness 10000) in paragraph at lines 85--88
 
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+phv on input line 9
-1.
+3.
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 93--94
 
  []
@@ -557,14 +560,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--96
  []
 
 
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 97--99
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
 
  []
 
@@ -579,32 +582,74 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--105
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
-[4]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 136.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 136.
-
-Underfull \hbox (badness 10000) in alignment at lines 177--177
-[][][][][][] 
  []
 
 
 
+[4]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 138.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 138.
+
+
 [5]
-Underfull \hbox (badness 10000) in alignment at lines 195--195
+Underfull \hbox (badness 10000) in alignment at lines 193--193
+[][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 210--210
 [][][][] 
  []
 
 
 
-[6] (FC01_G03.bbl
+[6]
+<FC01_G03_Imagenes/Gráfico01.png, id=86, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico01.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico01.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico01.png  used on input line 2
+20.
+(pdftex.def)             Requested size: 204.85846pt x 137.6845pt.
+<FC01_G03_Imagenes/Gráfico02.png, id=87, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico02.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico02.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico02.png  used on input line 2
+24.
+(pdftex.def)             Requested size: 204.85846pt x 137.6845pt.
+<FC01_G03_Imagenes/Gráfico03.png, id=88, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico03.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico03.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico03.png  used on input line 2
+29.
+(pdftex.def)             Requested size: 204.85846pt x 137.6845pt.
+<FC01_G03_Imagenes/Gráfico04.png, id=89, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico04.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico04.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico04.png  used on input line 2
+33.
+(pdftex.def)             Requested size: 204.85846pt x 137.6845pt.
+<FC01_G03_Imagenes/Gráfico05.png, id=90, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico05.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico05.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico05.png  used on input line 2
+37.
+(pdftex.def)             Requested size: 204.85846pt x 137.6845pt.
+
+
+[7]
+
+[8 <./FC01_G03_Imagenes/Gráfico01.png> <./FC01_G03_Imagenes/Gráfico02.png> <.
+/FC01_G03_Imagenes/Gráfico03.png> <./FC01_G03_Imagenes/Gráfico04.png> <./FC01
+_G03_Imagenes/Gráfico05.png>] (FC01_G03.bbl
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 19.
 )
 
-[7] (FC01_G03.aux
+[9] (FC01_G03.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
 )
@@ -614,20 +659,20 @@ L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 12646 strings out of 468130
- 207065 string characters out of 5430633
- 634210 words of memory out of 5000000
- 41072 multiletter control sequences out of 15000+600000
+ 12819 strings out of 468130
+ 211059 string characters out of 5430633
+ 637272 words of memory out of 5000000
+ 41237 multiletter control sequences out of 15000+600000
  650005 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,1037b,484s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,1037b,535s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a
 .pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhv
 r8a.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/
 uhvro8a.pfb>
-Output written on FC01_G03.pdf (8 pages, 69536 bytes).
+Output written on FC01_G03.pdf (10 pages, 113759 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
- 31 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 174 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
+ 130 words of extra memory for PDF output out of 10000 (max. 10000000)
 

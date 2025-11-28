@@ -9,6 +9,8 @@
 \usepackage[colorlinks=true,linkcolor=black]{hyperref}  % Hipervínculos en el índice
 \usepackage{hyperref} % Hipervínculos
 \usepackage{graphicx} % Imágenes
+\usepackage{subcaption} % Imágenes
+\graphicspath{{FC01_G03_Imagenes/}}
 \usepackage{tabularx} % Tablas
 \usepackage{booktabs} % Tablas
 \usepackage{multirow} % Tablas
@@ -107,7 +109,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 % Fecha de entrega 2: 19/12/25
 % Comentarios: Deben quedar claramente diferenciados el enfoque metodológico y los resultados que desde el punto de vista del alumno se asocian a la asignatura de Modelos estadísticos y los que se asocian a la asignatura de Cuantificación de riesgos, indicando como decíamos en el punto anterior, sus contribuciones fundamentales. La asociación a cada asignatura debe ser fácilmente localizable en el texto.
 \section{Análisis metodológico escogido}
-    El objetivo inicial es comprender la estructura del conjunto de datos y familiarizarnos con las variables disponibles, ya que esto constituye la base para cualquier análisis exploratorio. En el Cuadro 01 se presenta una descripción resumida de las variables correspondientes a una cartera de una aseguradora en Francia, que incluyen características del vehículo, del conductor, de la póliza y los montos asociados a los reclamos, entre otros.
+    El objetivo inicial es comprender la estructura del conjunto de datos y familiarizarnos con las variables disponibles, ya que esto constituye la base para cualquier análisis exploratorio. En el Cuadro 1 se presenta una descripción resumida de las variables correspondientes a una cartera de una aseguradora en Francia, que incluyen características del vehículo, del conductor, de la póliza y los montos asociados a los reclamos, entre otros.
     
     \begin{table}[H]
     \centering
@@ -117,7 +119,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     \textbf{Variable} & \textbf{Tipo\textsuperscript{(1)}} & \textbf{Descripción} \\
     \midrule
     IDpol & 2 & Número de póliza. \\
-    ClaimNb & 2 & Número de reclamos realizados. \\
+    ClaimNb & 2 & Número de siniestros. \\
     Exposure & 3 & Tiempo de vigencia y exposición al riesgo, en años. \\
     VehPower & 1 &Potencia del coche (en orden ascendente, de d a o). \\
     CarAge & 2 & Antigüedad del vehículo, en años. \\
@@ -138,8 +140,21 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 
     % A realizar entre el 01/11/25 y el 21/11/25
     \subsection{Análisis descriptivo univariado y bivariado de la base de datos}
-        La variable ClaimNb indica el número de reclamos por póliza. La distribución está fuertemente concentrada en cero (96,09\%), con pocos casos de 1 reclamo (3,54\%) y valores mayores extremadamente raros. Presenta una alta asimetría positiva (5,78), lo que significa que la mayoría de los valores se encuentran en el extremo inferior (cero) y existe una cola larga hacia la derecha debido a unos pocos casos con múltiples reclamos. Además, la curtosis es muy elevada (38,79), lo que indica una distribución con un pico muy pronunciado en torno a cero y colas pesadas, reflejando la presencia de valores extremos que, aunque escasos, están muy alejados del centro y afectan la forma de la distribución.
+    
+    	\subsubsection{Análisis descriptivo univariado}
+    	Se realiza un análisis descriptivo de las variables numéricas considerando medidas de tendencia central, dispersión y forma (\hyperref[Anexo01]{\textcolor{blue}{Anexos - Cuadro 2}}). Adicionalmente, para las variables Exposure, CarAge, DriverAge y Density se aplica una técnica de segmentación mediante el método de k-means (\hyperref[Anexo02]{\textcolor{blue}{Anexos - Figura 1}}). Esta metodología permite clasificar los datos en conjuntos homogéneos, minimizando la variabilidad interna dentro de cada grupo y maximizando la diferencia entre ellos. Para determinar el número óptimo de clusters se utilizó el método del codo. Los aspectos más relevantes se detallan a continuación:
+    		\begin{itemize}
+    			\item \textbf{Número de siniestros (ClaimNb):} Presenta una media y mediana muy bajas (0.04 y 0), consecuencia de que el 96.1\% de las pólizas analizadas no registraron siniestros. Esto se ve reflejado en su alta asimetría (5.78), indicando una distribución con cola larga hacia la derecha. La curtosis, extremadamente alta (38.79), confirma una distribución leptocúrtica, muy concentrada alrededor de la media y con mayor probabilidad de valores extremos.
+    			La desviación estándar (0.22), aunque pequeña en términos absolutos, es elevada respecto a la media (0.04), lo que indica una gran variabilidad relativa: la mayoría de los valores son cero, pero existen pocos casos con valores altos que generan dispersión.
+    			\item \textbf{Tiempo de vigencia y exposición al riesgo (Exposure):} La vigencia promedio de una póliza es de aproximadamente medio año (media 0.56, mediana 0.54), con mínima variabilidad (desviación estándar 0.37), lo que significa que la mayoría de las pólizas tienen duraciones similares. El coeficiente de asimetría (-0.05) indica una distribución prácticamente simétrica, semejante a una campana de Gauss. La curtosis negativa (-1.57) sugiere una distribución platicúrtica, más plana que la normal, con menor concentración en torno a la media y colas ligeras.
+    			\item \textbf{Antigüedad del vehículo (CarAge):} La edad promedio del vehículo es de 7.53 años, con una alta dispersión (desviación estándar 5.76), lo que significa que existen diferencias importantes entre vehículos nuevos y antiguos. Esta variabilidad se explica porque, aunque el 48.7\% de los autos tienen menos de 6 años, hay casos extremos (máximo 100 años). La asimetría positiva (1.21) indica predominio de autos relativamente nuevos, pero con presencia de valores altos. La curtosis (8.3) confirma una distribución leptocúrtica, concentrada alrededor de la media y con mayor probabilidad de valores extremos.
+    			\item \textbf{Edad del conductor (DriverAge):} La edad promedio del conductor es 45.32 años, con una mediana cercana (44), lo que indica una distribución equilibrada. El rango es amplio (de 18 a 99 años), y la desviación estándar (14.33) refleja una dispersión moderada: los valores están relativamente separados de la media, mostrando diversidad entre conductores jóvenes y mayores, pero sin diferencias extremas que distorsionen la distribución. A diferencia de otras variables, como la antigüedad del vehículo, no se observan valores atípicos desproporcionados. La asimetría (0.46) es baja, lo que sugiere un ligero sesgo hacia edades mayores, mientras que la curtosis (-0.3) indica una forma cercana a la normal, sin colas pronunciadas.
+    			\item \textbf{Densidad poblacional por km2 en la ciudad del conductor (Density):} Presenta una media muy superior a la mediana (1987.33 vs 287), lo que indica una distribución fuertemente sesgada hacia valores altos. La gran variabilidad (desviación estándar 4779.6) y la asimetría positiva (4.13) reflejan diferencias significativas entre zonas de baja y alta densidad. La curtosis (17.72) confirma una distribución leptocúrtica, con concentración en valores bajos y presencia de colas largas hacia la derecha.
+    		\end{itemize}
 
+
+		\subsubsection{Análisis descriptivo bivariado}
+		
     % A realizar entre el 22/11/25 y el 19/12/25
     \subsection{Modelización seleccionada y objetivos a alcanzar}
         Por desarrollar.
@@ -158,28 +173,28 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 % Fecha de entrega: 10/01/26
 \section{Anexos}
 
-% Análisis descriptivo univariado (Variables discretas y contínuas)
+% Análisis descriptivo univariado (Variables discretas y contínuas): Tabla estadísticos
+	\label{Anexo01}
 	\begin{table}[H]
 		\centering
-		\caption{Análisis descriptivo univariado - variables discretas y continuas}
+		\caption{Análisis descriptivo univariado - variables numéricas}
 		\begin{tabularx}{\textwidth}{llllll}
 			\toprule
 			\textbf{Concepto} & \textbf{Claim Nb} & \textbf{Exposure} & \textbf{CarAge} & \textbf{DriverAge} & \textbf{Density} \\
 			\midrule
-			Media & 0.04 & 0.56 & 7.53 & 45.32 & - \\
-			Mediana & 0 & 0.54 & 7 & 44 & - \\
-			Mínimo & 0 & 0 & 0 & 18 & - \\
-			Máximo & 4 & 1.99 & 100 & 99 & - \\
-			Desv. Estándar & 0.22 & 0.37 & 5.76 & 14.33 & - \\
-			Asimetría & 5.78 & -0.05 & 1.21 & 0.46 & - \\
-			Curtosis & 38.79 & -1.57 & 8.3 & -0.3 & - \\
+			Media & 0.04 & 0.56 & 7.53 & 45.32 & 1987.33 \\
+			Mediana & 0 & 0.54 & 7 & 44 & 287 \\
+			Mínimo & 0 & 0 & 0 & 18 & 2 \\
+			Máximo & 4 & 1.99 & 100 & 99 & 27000 \\
+			Desv. Estándar & 0.22 & 0.37 & 5.76 & 14.33 & 4779.6 \\
+			Asimetría & 5.78 & -0.05 & 1.21 & 0.46 & 4.13 \\
+			Curtosis & 38.79 & -1.57 & 8.3 & -0.3 & 17.72 \\
 			\bottomrule
 		\end{tabularx}
 	\end{table}
-	
 	\begin{table}[H]\ContinuedFloat
 		\centering
-		\caption{Análisis descriptivo univariado - variables discretas y continuas (cont.)}
+		\caption{Análisis descriptivo univariado - variables numéricas}
 		\begin{tabularx}{\textwidth}{llll}
 			\toprule
 			\textbf{Concepto} & \textbf{Claim Amount} & \textbf{Injury Amount} & \textbf{Property Amount} \\
@@ -194,6 +209,36 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 			\bottomrule
 		\end{tabularx}
 	\end{table}
+
+% Análisis descriptivo univariado (Variables discretas y contínuas): Tabla estadísticos
+	\label{Anexo02}
+	\begin{figure}[htbp]
+		\centering
+		\caption{Diagramas de barras}
+		% Primera fila
+		\begin{subfigure}[b]{0.45\textwidth}
+			\includegraphics[width=\textwidth]{Gráfico01.png}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.45\textwidth}
+			\includegraphics[width=\textwidth]{Gráfico02.png}
+		\end{subfigure}
+		% Segunda fila
+		\vspace{0.5cm} % Espacio entre filas
+		\begin{subfigure}[b]{0.45\textwidth}
+			\includegraphics[width=\textwidth]{Gráfico03.png}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.45\textwidth}
+			\includegraphics[width=\textwidth]{Gráfico04.png}
+		\end{subfigure}
+		% Tercera fila
+		\begin{subfigure}[b]{0.45\textwidth}
+			\includegraphics[width=\textwidth]{Gráfico05.png}
+		\end{subfigure}
+		\hfill
+		\label{fig:imagenes_2x2}
+	\end{figure}
 
 % Referencias
 \newpage
