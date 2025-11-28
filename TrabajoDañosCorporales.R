@@ -1,4 +1,4 @@
-# Prueba Victor Perez 4
+# Cambios en los outputs
 
 library(usethis)
 #usethis::edit_git_config()
@@ -79,7 +79,8 @@ for (catVar in namesChar) {
   }
 }
 
-pairs(datos[namesNum], main="Scatterplots entre variables numéricas")
+#Tarda mucho este scatterplor en ejecutarse
+#pairs(datos[namesNum], main="Scatterplots entre variables numéricas")
 
 
 
@@ -91,13 +92,52 @@ names_without_output <- c("ClaimNb","Exposure","CarAge","DriverAge",
               "Power","Brand","Gas","Region")  # No esta InjuryAmount
 datos1<-datos[,-1]#Quitamos PolicyID
 
-models <- lapply(names_without_output, function(x) {
-  formula <- as.formula(paste("InjuryAmount ~", x))
-  lm(formula, data = datos1)
-})
-#models
-summaries <- lapply(models, summary)
-summaries
+modelSimple<- function(output, data=datos1, input_names=names_without_output) {
+  
+  
+  
+  models <- lapply(input_names, function(x) {
+    
+    formula <- as.formula(paste(output, "~", x))
+    
+    lm(formula, data = datos)
+    
+  })
+  
+  return(models)
+  
+}
 
-modelGeneral<-lm(InjuryAmount~.,data=datos1)
-summary(modelGeneral)
+#Modelo Simple para Coste de Daños Personales. Cuantificación de Riesgos
+
+modelSimple_InjuryAmount<-modelSimple(output="InjuryAmount",datos1,names_without_output)
+
+modelSimple_InjuryAmount
+
+summary_modelSimple_InjuryAmount<-lapply(modelSimple_InjuryAmount, summary)
+
+summary_modelSimple_InjuryAmount
+
+#Modelo General para Coste de Daños Personales. Cuantificación de Riesgos
+
+modelGeneral_InjuryAmount<-lm(InjuryAmount~.,data=datos1)
+
+summary(modelGeneral_InjuryAmount)
+
+
+
+#Modelo Simple para Número de Siniestros. Modelos Estadísticos
+
+modelSimple_ClaimNb<-modelSimple(output="ClaimNb",datos1,names_without_output)
+
+modelSimple_ClaimNb
+
+summary_modelSimple_ClaimNb<-lapply(modelSimple_ClaimNb, summary)
+
+summary_modelSimple_ClaimNb
+
+#Modelo General para Número de Siniestros. Modelos Estadísticos
+
+modelGeneral_ClaimNb<-lm(ClaimNb~.,data=datos1)
+
+summary(modelGeneral_ClaimNb)
