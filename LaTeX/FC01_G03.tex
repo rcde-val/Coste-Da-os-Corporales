@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage[spanish]{babel}  % Idioma español
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+    \singlespacing  % Espaciado sencillo
+    \usepackage[a4paper,margin=2.5cm]{geometry}  % Márgenes de 2.5 cm
+\usepackage{helvet}  % Usa Helvetica, que es muy similar a Arial
+    \renewcommand{\familydefault}{\sfdefault}  % Aplica fuente sans-serif (Helvetica)
+\usepackage[colorlinks=true,linkcolor=black]{hyperref}  % Hipervínculos en el índice
+\usepackage{graphicx} % Imagenes
+\usepackage{tabularx} % Tablas
+\usepackage{multirow} % Tablas
+\usepackage{threeparttable} % Notas al pie de tablas
+\usepackage{hyperref}
+
+\title{\textbf{Costes esperados por daños corporales en seguro de automóviles e influencia en reservas\\[2em]}}
+\author{\underline{Grupo 3} \\ Víctor Alonso Lara \\ David López Avakian \\ Sergio Obando Henao \\ Víctor Manuel Pérez \\ Miquel Trullols Salat \\[6em]}
+\date{30 de Octubre de 2025}
+
+\begin{document}
+
+% Portada
+\begin{titlepage}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+\newpage
+
+% Índice
+\tableofcontents
+\newpage
+
+% Sección 1: Objetivo
+% Fecha de entrega 1: 31/10/25 (Máximo 4 páginas en total)
+\section{Objetivo}
+
+Este estudio tiene como objetivo aplicar los conocimientos en modelos estadísticos y cuantificación de riesgos al análisis de un caso práctico en el ámbito del seguro de automóviles. En particular, se centra en el estudio de los costes esperados por daños corporales y su influencia en el cálculo de reservas técnicas.\\
+
+Se trata de un tema de gran relevancia, especialmente en el mercado español, donde la compensación por daños corporales representa más del 60\% del coste total en el seguro de responsabilidad civil del automóvil \cite{santolino_prieto_metodos_2011}. \\
+
+Para su desarrollo, el trabajo se estructura en dos fases:
+
+- Revisión de la literatura existente, con especial atención a los modelos utilizados en la estimación de costes y reservas.
+
+- Modelización del número y la cuantía de los siniestros, mediante técnicas estadísticas aplicadas a datos reales. \\
+
+Antes de abordar el análisis, se presentarán dos conceptos fundamentales que permiten contextualizar el problema y establecer las bases teóricas del estudio:
+
+- En España, el \textbf{seguro obligatorio de automóviles} está regulado por el Real Decreto Legislativo 8/2004. La ley establece que todo propietario de un vehículo a motor con estacionamiento habitual en España debe contratar y mantener un seguro que cubra la responsabilidad civil por los daños causados a personas o bienes durante la circulación del vehículo \cite{noauthor_boe--2004-18911_nodate}.
+
+- Los \textbf{daños corporales} son las lesiones físicas o psíquicas sufridas por una persona en un accidente de circulación, incluyendo lesiones temporales, secuelas permanentes y fallecimiento. Su valoración e indemnización se regulan en la Ley 35/2015 mediante el Baremo oficial \cite{jefatura_del_estado_ley_2015}. 
+    
+% Sección 2: Estado de la cuestión: Revisión de la literatura existente
+% Fecha de entrega 1: 31/10/25 (Máximo 4 páginas en total)
+% Comentarios: 
+% - La literatura encontrada y usada debe ser agrupada por ítems o ideas fundamentales. Se trata de agrupar de forma conjunta todos aquellos trabajos que se centren en aproximaciones similares, diferenciándolos del resto.
+% - Deben quedar claramente diferenciados los artículos que desde el punto de vista del alumno se asocian a la asignatura de Modelos estadísticos y los que se asocian a la asignatura de Cuantificación de riesgos, indicando como decíamos en el punto anterior, sus contribuciones fundamentales. La asociación a cada asignatura debe ser fácilmente localizable en el texto.
+% - Debe acompañarse la entrega con el listado de referencias bibliográficas usadas (también se explicará en clase como hacerlo) – entrega de librería en formato de Excel.
+\section{Estado de la cuestión: Revisión de la literatura existente}
+
+\subsection{Número de siniestros}
+
+La frecuencia de siniestros es un elemento fundamental en la estimación de los costes esperados por daños corporales en el seguro del automóvil, ya que una predicción más precisa del número de reclamaciones permite ajustar con mayor exactitud las reservas técnicas y reducir la incertidumbre asociada a los siniestros futuros. En los últimos años, distintos estudios han buscado mejorar la modelización de esta variable mediante enfoques
+capaces de reflejar la complejidad y las dependencias que caracterizan los datos de
+siniestralidad. \\
+
+Los siniestros con daños corporales constituyen un subconjunto específico dentro del conjunto total de siniestros en el seguro de automóviles, dado que no todos los siniestros implican necesariamente lesiones físicas. \\
+
+En este contexto, Álvarez Jareño y Muñiz Rodríguez analizan la idoneidad de las distribuciones clásicas para modelizar el número de siniestros en carteras de seguros de responsabilidad civil de automóviles. A partir del estudio de 15 carteras, los autores identifican diversas anomalías muestrales recurrentes que cuestionan la validez de la distribución de Poisson como modelo base. Entre estas anomalías destacan el contagio, la sobre-dispersión (varianza superior a la media), el inflado de ceros (frecuencia excesiva de asegurados sin siniestros), el desinflado de unos (subestimación de asegurados con un único siniestro) y la presencia de colas más pesadas (subestimación de conductores con múltiples siniestros). Estas irregularidades evidencian que el
+supuesto de independencia entre eventos y la igualdad entre media y varianza del modelo de Poisson no se cumplen en la práctica \cite{alvarez_jareno_reparametrizacion_2010}. \\
+
+Para abordar estas limitaciones, los autores proponen la reparametrización de distribuciones alternativas que ofrecen un mejor ajuste a los datos observados: la distribución binomial negativa, la distribución Polya-Aeppli, la distribución Poisson
+Inversa Gausiana y la distribución Poisson Pascal Generalizada. Estas distribuciones permiten capturar la presencia de colas pesadas, proporcionando así una base más robusta para la modelización de la frecuencia siniestral. \\
+
+Otros autores como Pechon, Trufin y Denuit (2018) analizan la frecuencia de siniestros en el seguro obligatorio de responsabilidad civil automotriz tomando al hogar como unidad de riesgo. A diferencia de los modelos que tratan cada póliza de manera independiente, los autores incorporan efectos
+aleatorios correlacionados a través de mezclas Poisson–LogNormal y Poisson–Gamma, con el propósito de capturar la dependencia entre los miembros de un mismo hogar y la heterogeneidad no observada. Los resultados muestran una correlación significativa entre
+las siniestralidades de los cónyuges, cercana al 40\%, lo que confirma la existencia de una propensión común al riesgo. Este enfoque permite afinar las estimaciones de frecuencia y,
+en consecuencia, mejorar la valoración de los daños corporales y la suficiencia de las provisiones técnicas \cite{pechon_multivariate_2018}. \\
+
+Otro enfoque a tener en cuenta es el de \cite{tzougas_bivariate_2023}. En su artículo, han desarrollado una clase de modelos de regresión Poisson bivariados mixtos con dispersión variable, orientados a modelizar de forma conjunta la frecuencia de
+reclamaciones por daños corporales y la frecuencia de reclamaciones por daños materiales en el seguro de responsabilidad civil de automóviles. Estos modelos incorporan distribuciones de mezcla para capturar la variabilidad no explicada y permiten
+analizar simultáneamente las dos variables correlacionadas. Además, son capaces de reflejar tanto la sobredispersión como la correlación positiva entre ambas frecuencias, lo que representa un avance significativo en la modelización multivariada del riesgo.\\
+
+La literatura revisada evidencia que comprender la frecuencia de siniestros no solo mejora la precisión en la estimación de los daños corporales, sino que también constituye un componente esencial en la gestión del riesgo y en la sostenibilidad del sistema asegurador.
+
+\subsection{Cuantía del siniestro}
+
+Los siniestros con daños corporales en el seguro de automóviles se caracterizan por una alta variabilidad en sus costes. En España, durante 2005, la mayoría de estos siniestros costaron menos de 1.500 €, pero un 0,5\% superaron los 300.000 €, y algunos casos graves, como lesiones tetrapléjicas, pueden superar el millón de euros \cite{SantolinoMiguel2007Urmd}. \\
+
+Como primera aproximación, se realiza un análisis descriptivo de los factores que determinan el coste por daños corporales. Por ejemplo, Marter y Weisberg (1991) clasifican los siniestros de tráfico en cuatro categorías según el tipo de lesión sufrida por la víctima —esguince, fractura, contusión y herido grave— y, para cada una, comparan elementos como el coste médico total, el coste sin hospitalización, el proveedor de asistencia, la frecuencia de visitas y el período de curación [Santolino Prieto, 2011]. Santolino también subraya la relevancia del análisis descriptivo como punto de partida en su estudio sobre indemnizaciones por daños corporales en seguros de auto fijadas judicialmente en Cataluña y Aragón durante el período 2001-2003 \cite{santolino_prieto_metodos_2011}.\\
+
+A partir del análisis descriptivo, la literatura propone modelos para estimar el coste de los siniestros. Weisberg y Derrig \cite{santolino_prieto_metodos_2011} plantean el uso del modelo Tobit, adecuado para datos censurados, donde la indemnización no puede ser inferior a cero ni superar los límites legales o de póliza. La variable dependiente es la indemnización (continua y censurada), mientras que las explicativas incluyen factores dicotómicos —contratación de abogado, lesión grave, fractura, indicios de exageración— y cuantitativos —porcentaje de culpa, coste médico total, semanas de incapacidad—. Este enfoque permite estimar el impacto de factores médicos y legales sobre el logaritmo de la indemnización esperada, ajustando por censura. Los resultados muestran que la contratación de un abogado, la clasificación de la lesión como grave y la presencia de fracturas incrementan la indemnización, mientras que los indicios de exageración la reducen.\\
+
+El modelo logit ordenado es una herramienta estadística adecuada para analizar variables categóricas jerárquicas, especialmente cuando las categorías tienen un orden natural. En el contexto de siniestros, este modelo permite clasificar la severidad de los eventos en distintos niveles como leve, moderado y grave, y evaluar cómo diferentes factores influyen en la probabilidad de que un siniestro pertenezca a una categoría de mayor severidad.
+El objetivo principal de este modelo es identificar los factores que incrementan la probabilidad de que un siniestro se clasifique en niveles superiores de pérdida, lo que resulta fundamental para la gestión del riesgo. Para abordar limitaciones del modelo logit ordenado clásico y capturar mejor la complejidad de los datos, se pueden considerar varias extensiones: ordenado mixto, ordenado heterocedástico y  multinomiales \cite{santolino_prieto_metodos_2011}.\\
+
+Santolino propone un modelo econométrico log-lineal para explicar el logaritmo de la indemnización total, incorporando variables como edad, tipo de lesión, tipo de vehículo y sexo del lesionado. Un hallazgo relevante es que ni el tipo de vehículo ni la edad del conductor resultan significativos al 10\% de nivel de confianza. Además, se observa que las mujeres reciben indemnizaciones mayores que los hombres y que, cuando el perito necesita más de una visita a la víctima, la cuantía indemnizatoria tiende a incrementarse \cite{santolino_prieto_metodos_2011}. \\
+
+La predicción del coste de indemnización es un aspecto crítico para las compañías aseguradoras, ya que determina la capacidad de la entidad para cumplir con sus obligaciones futuras. Las aseguradoras deben disponer de reservas suficientes que garanticen la estabilidad financiera y la solvencia del ramo. Este desafío se intensifica en los siniestros corporales cuya indemnización se reclama por vía judicial, dado que la resolución suele demorarse durante meses o incluso años. En consecuencia, estos expedientes permanecen abiertos en la contabilidad de la compañía, lo que obliga a realizar provisiones adecuadas para cubrir el coste esperado. \cite{SantolinoMiguel2007Urmd}. \\
+
+Por último, se recomienda a las aseguradoras prestar especial atención a los siniestros que superan el percentil 90-95\%, ya que representan casos atípicos con costes significativamente elevados. Estos expedientes requieren una evaluación más exhaustiva para verificar la consistencia de los gastos médicos reclamados y detectar posibles exageraciones o prácticas fraudulentas. Un análisis detallado en esta franja no solo contribuye a reducir el riesgo de sobreindemnización, sino que también permite optimizar la asignación de reservas \cite{weisberg_quantitative_nodate}.\\
+
+% Sección 3: Análisis metodológico escogido
+% Fecha de entrega 2: 19/12/25
+% Comentarios: Deben quedar claramente diferenciados el enfoque metodológico y los resultados que desde el punto de vista del alumno se asocian a la asignatura de Modelos estadísticos y los que se asocian a la asignatura de Cuantificación de riesgos, indicando como decíamos en el punto anterior, sus contribuciones fundamentales. La asociación a cada asignatura debe ser fácilmente localizable en el texto.
+\section{Análisis metodológico escogido}
+    Por desarrollar.
+
+    % A realizar entre el 01/11/25 y el 21/11/25
+    \subsection{Análisis descriptivo univariado y bivariado de la base de datos}
+        Por desarrollar.
+
+    % A realizar entre el 22/11/25 y el 19/12/25
+    \subsection{Modelización seleccionada y objetivos a alcanzar}
+        Por desarrollar.
+
+% Sección 4: Resultados
+% Fecha de entrega: 19/12/25
+\section{Resultados}
+    Por desarrollar.
+
+% Sección 5: Informe ejecutivo
+% Fecha de entrega: 10/01/26
+\section{Informe ejecutivo}
+    Por desarrollar.
+
+% Referencias
+\newpage
+\addcontentsline{toc}{section}{6.  Referencias}
+\bibliographystyle{apalike}
+\bibliography{FC01_G03_Referencias}
+
+\end{document}

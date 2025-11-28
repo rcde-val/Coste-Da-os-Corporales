@@ -28,7 +28,7 @@ for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
 }
 # Lectura de la base de datos
-datos <- read_excel("CASO 5_ daños corporales autos.xlsx")
+datos <- read_excel("FC01_G03_BBDD.xlsx")
 # Convertir en data frame
 datos<-data.frame(datos)
 head(datos)
