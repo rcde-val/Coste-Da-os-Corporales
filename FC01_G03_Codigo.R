@@ -26,11 +26,15 @@ for (pkg in paquetes) {
     install.packages(pkg)
   }
 }
+install.packages("readxl") # Lector de Excel
+install.packages("ggplot2") # Gráficos
 install.packages("psych") # Estadísticos descriptivos
 # Carga de paquetes
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
 }
+library("readxl") # Lector de Excel
+library("ggplot2") # Gráficos
 library("psych") # Estadísticos descriptivos 
 #-------------------------------------------------------------------------------
 # Importación de base de datos
@@ -62,6 +66,7 @@ str(datos)
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$ClaimNb)
+#
 # Barplot
 ClaimNb_barplot<-barplot(round(prop.table(table(datos$ClaimNb))*100,1),
               main = "ClaimNb",
@@ -78,33 +83,192 @@ text(x = ClaimNb_barplot,
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$Exposure)
-# Crear "n" intervalos 
-Exposure_intervalos<-cut(datos$Exposure,breaks=5)
-# Calcular frecuencias relativas asociadas a cada uno de los "n" intervalos
-Exposure_freq_rel <- round(prop.table(table(Exposure_intervalos)) * 100, 1)
-# Reformatear etiquetas con 1 decimal
-Exposure_niveles_fmt <- gsub("\\(|\\]|\\[", "", levels(Exposure_intervalos))
-Exposure_niveles_fmt <- sapply(strsplit(Exposure_niveles_fmt, ","), function(x) {
-  sprintf("(%.1f, %.1f]", as.numeric(x[1]), as.numeric(x[2]))
+#
+# k-means para agrupar
+# Normalizar la variable
+Exposure_scaled<-scale(datos$Exposure)
+# Método del codo para determinar el número óptimo de clústers
+set.seed(123)
+Exposure_wss<-sapply(1:10, function(k){
+  kmeans(Exposure_scaled,centers=k,nstart=10)$tot.withinss
 })
+# Gráfico del codo
+plot(1:10, Exposure_wss, type = "b", pch = 19,
+     xlab = "Número de clusters (k)",
+     ylab = "Suma de cuadrados dentro del cluster",
+     main = "Método del codo")
+# Aplicación del método de k-means
+set.seed(123)
+Exposure_kmeans_result<-kmeans(Exposure_scaled,centers=4,nstart=25)
+# Resultados en escala original
+Exposure_media<-mean(datos$Exposure)
+Exposure_desv<-sd(datos$Exposure)
+Exposure_centroides_original<-Exposure_kmeans_result$centers*Exposure_desv+Exposure_media
+# Añadir los clusters al data frame y analizar tamaños y rangos
+datos$ExposureCluster<-Exposure_kmeans_result$cluster
+# Mostrar tamaño de cada grupo
+print(table(datos$ExposureCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+ExposureCluster_rango<- aggregate(datos$Exposure, by = list(Cluster = datos$ExposureCluster), range)
+print(ExposureCluster_rango)
+#
 # Barplot
-Exposure_barplot<-barplot(Exposure_freq_rel,
-              main = "Exposure",
-              xlab = "Tiempo de vigencia y exposición al riesgo (años)",
-              ylab = "Frecuencia relativa (%)",
-              col = "lightblue",
-              ylim = c(0, 120),
-              names.arg = Exposure_niveles_fmt)
-# Añadir etiquetas sobre cada barra
-text(x = Exposure_barplot, 
-     y = Exposure_freq_rel + 5,
-     labels = sprintf("%.1f", Exposure_freq_rel))
+# Calcular frecuencias relativas
+ExposureCluster_freq_abs <- table(datos$ExposureCluster)
+ExposureCluster_freq_rel <- prop.table(ExposureCluster_freq_abs) * 100
+# Ordenar por el mínimo del rango
+ExposureCluster_orden<- order(ExposureCluster_rango$x[,1])
+ExposureCluster_rango<-ExposureCluster_rango[ExposureCluster_orden, ]
+ExposureCluster_freq_rel<-ExposureCluster_freq_rel[ExposureCluster_orden]
+# Crear etiquetas con los rangos
+ExposureCluster_labels <- apply(round(ExposureCluster_rango$x,1), 1, function(r) {
+  paste0("(", r[1], ", ", r[2], "]")
+})
+# Barplot ordenado
+Exposure_barplot<-barplot(ExposureCluster_freq_rel,
+                        names.arg = ExposureCluster_labels,
+                        col = "lightblue",
+                        ylim = c(0, 120),
+                        main = "Clusters (Exposure)",
+                        xlab = "Rango de tiempo de vigencia y exposición al riesgo (años)",
+                        ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("k-means", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas numéricas sobre cada barra
+text(x = Exposure_barplot,
+     y = ExposureCluster_freq_rel,
+     labels = round(ExposureCluster_freq_rel, 1),
+     pos = 3)
+#-------------------------------------------------------------------------------
+# 3.1.1.1.3 CarAge (Discreta)
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$CarAge)
+#
+# k-means para agrupar
+# Normalizar la variable
+CarAge_scaled<-scale(datos$CarAge)
+# Método del codo para determinar el número óptimo de clústers
+set.seed(123)
+CarAge_wss<-sapply(1:10, function(k){
+  kmeans(CarAge_scaled,centers=k,nstart=10)$tot.withinss
+})
+# Gráfico del codo
+plot(1:10, CarAge_wss, type = "b", pch = 19,
+     xlab = "Número de clusters (k)",
+     ylab = "Suma de cuadrados dentro del cluster",
+     main = "Método del codo")
+# Aplicación del método de k-means
+set.seed(123)
+CarAge_kmeans_result<-kmeans(CarAge_scaled,centers=4,nstart=25)
+# Resultados en escala original
+CarAge_media<-mean(datos$CarAge)
+CarAge_desv<-sd(datos$CarAge)
+CarAge_centroides_original<-CarAge_kmeans_result$centers*CarAge_desv+CarAge_media
+# Añadir los clusters al data frame y analizar tamaños y rangos
+datos$CarAgeCluster<-CarAge_kmeans_result$cluster
+# Mostrar tamaño de cada grupo
+print(table(datos$CarAgeCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+CarAgeCluster_rango<- aggregate(datos$CarAge, by = list(Cluster = datos$CarAgeCluster), range)
+print(CarAgeCluster_rango)
+#
+# Barplot
+# Calcular frecuencias relativas
+CarAgeCluster_freq_abs <- table(datos$CarAgeCluster)
+CarAgeCluster_freq_rel <- prop.table(CarAgeCluster_freq_abs) * 100
+# Ordenar por el mínimo del rango
+CarAgeCluster_orden<- order(CarAgeCluster_rango$x[,1])
+CarAgeCluster_rango<-CarAgeCluster_rango[CarAgeCluster_orden, ]
+CarAgeCluster_freq_rel<-CarAgeCluster_freq_rel[CarAgeCluster_orden]
+# Crear etiquetas con los rangos
+CarAgeCluster_labels <- apply(CarAgeCluster_rango$x, 1, function(r) {
+  paste0("(", r[1], ", ", r[2], "]")
+})
+# Barplot ordenado
+CarAge_barplot<-barplot(CarAgeCluster_freq_rel,
+                          names.arg = CarAgeCluster_labels,
+                          col = "lightblue",
+                          ylim = c(0, 120),
+                          main = "Clusters (CarAge)",
+                          xlab = "Rango de antigüedad del vehículo (años)",
+                          ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("k-means", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas numéricas sobre cada barra
+text(x = CarAge_barplot,
+     y = CarAgeCluster_freq_rel,
+     labels = round(CarAgeCluster_freq_rel, 1),
+     pos = 3)
+#-------------------------------------------------------------------------------
+# 3.1.1.1.4 DriveAge (Discreta)
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$DriverAge)
+#
+# k-means para agrupar
+# Normalizar la variable
+DriverAge_scaled<-scale(datos$DriverAge)
+# Método del codo para determinar el número óptimo de clústers
+set.seed(123)
+DriverAge_wss<-sapply(1:10, function(k){
+  kmeans(DriverAge_scaled,centers=k,nstart=10)$tot.withinss
+})
+# Gráfico del codo
+plot(1:10, DriverAge_wss, type = "b", pch = 19,
+     xlab = "Número de clusters (k)",
+     ylab = "Suma de cuadrados dentro del cluster",
+     main = "Método del codo")
+# Aplicación del método de k-means
+set.seed(123)
+DriverAge_kmeans_result<-kmeans(DriverAge_scaled,centers=4,nstart=25)
+# Resultados en escala original
+DriverAge_media<-mean(datos$DriverAge)
+DriverAge_desv<-sd(datos$DriverAge)
+DriverAge_centroides_original<-DriverAge_kmeans_result$centers*DriverAge_desv+DriverAge_media
+# Añadir los clusters al data frame y analizar tamaños y rangos
+datos$DriverAgeCluster<-DriverAge_kmeans_result$cluster
+# Mostrar tamaño de cada grupo
+print(table(datos$DriverAgeCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+DriverAgeCluster_rango<- aggregate(datos$DriverAge, by = list(Cluster = datos$DriverAgeCluster), range)
+print(DriverAgeCluster_rango)
+#
+# Barplot
+# Calcular frecuencias relativas
+DriverAgeCluster_freq_abs <- table(datos$DriverAgeCluster)
+DriverAgeCluster_freq_rel <- prop.table(DriverAgeCluster_freq_abs) * 100
+# Ordenar por el mínimo del rango
+DriverAgeCluster_orden<- order(DriverAgeCluster_rango$x[,1])
+DriverAgeCluster_rango<-DriverAgeCluster_rango[DriverAgeCluster_orden, ]
+DriverAgeCluster_freq_rel<-DriverAgeCluster_freq_rel[DriverAgeCluster_orden]
+# Crear etiquetas con los rangos
+DriverAgeCluster_labels <- apply(DriverAgeCluster_rango$x, 1, function(r) {
+  paste0("(", r[1], ", ", r[2], "]")
+})
+# Barplot ordenado
+DriverAge_barplot<-barplot(DriverAgeCluster_freq_rel,
+        names.arg = DriverAgeCluster_labels,
+        col = "lightblue",
+        ylim = c(0, 120),
+        main = "Clusters (DriverAge)",
+        xlab = "Rango de edad del conductor (años)",
+        ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("k-means", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas numéricas sobre cada barra
+text(x = DriverAge_barplot,
+     y = DriverAgeCluster_freq_rel,
+     labels = round(DriverAgeCluster_freq_rel, 1),
+     pos = 3)
 
 
 
-    
 
-# 
+
+
+
+
 
 # Definición de las variables numéricas
 namesNum <-c("ClaimNb", "Exposure", "CarAge", "DriverAge",

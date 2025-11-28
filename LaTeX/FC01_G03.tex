@@ -7,6 +7,7 @@
 \usepackage{helvet}  % Usa Helvética, que es muy similar a Arial
     \renewcommand{\familydefault}{\sfdefault}  % Aplica fuente sans-serif (Helvética)
 \usepackage[colorlinks=true,linkcolor=black]{hyperref}  % Hipervínculos en el índice
+\usepackage{hyperref} % Hipervínculos
 \usepackage{graphicx} % Imágenes
 \usepackage{tabularx} % Tablas
 \usepackage{booktabs} % Tablas
@@ -15,7 +16,7 @@
 \usepackage{caption} % Tablas
 \usepackage{bookmark}
 \usepackage{threeparttable} % Notas al pie de tablas
-\usepackage{hyperref}
+
 
 \title{\textbf{Costes esperados por daños corporales en seguro de automóviles e influencia en reservas\\[2em]}}
 \author{\underline{Grupo 3} \\ Víctor Alonso Lara \\ David López Avakian \\ Sergio Obando Henao \\ Víctor Manuel Pérez \\ Miquel Trullols Salat \\[6em]}
@@ -119,8 +120,8 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     ClaimNb & 2 & Número de reclamos realizados. \\
     Exposure & 3 & Tiempo de vigencia y exposición al riesgo, en años. \\
     VehPower & 1 &Potencia del coche (en orden ascendente, de d a o). \\
-    VehAge & 2 & Antigüedad del vehículo, en años. \\
-    DrivAge & 2 & Edad del conductor, en años. \\
+    CarAge & 2 & Antigüedad del vehículo, en años. \\
+    DriverAge & 2 & Edad del conductor, en años. \\
     VehBrand & 1 & Marca del vehículo. \\
     VehGas & 1 & Tipo de combustible: Diesel o Regular. \\
     Density & 2 & Número de habitantes por km² en la ciudad del conductor. \\
@@ -163,16 +164,15 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		\caption{Análisis descriptivo univariado - variables discretas y continuas}
 		\begin{tabularx}{\textwidth}{llllll}
 			\toprule
-			\textbf{Concepto} & \textbf{Claim Nb} & \textbf{Exposure} & \textbf{VehAge} & \textbf{DrivAge} & \textbf{Density} \\
+			\textbf{Concepto} & \textbf{Claim Nb} & \textbf{Exposure} & \textbf{CarAge} & \textbf{DriverAge} & \textbf{Density} \\
 			\midrule
-			Media & 0.04 & - & - & - & - \\
-			Mediana & 0 & - & - & - & - \\
-			Mínimo & 0 & - & - & - & - \\
-			Máximo & 4 & - & - & - & - \\
-			Desv. Estándar & 0.22 & - & - & - & - \\
-			Rango & 4 & - & - & - & - \\
-			Asimetría & 5.78 & - & - & - & - \\
-			Curtosis & 38.79 & - & - & - & - \\
+			Media & 0.04 & 0.56 & 7.53 & 45.32 & - \\
+			Mediana & 0 & 0.54 & 7 & 44 & - \\
+			Mínimo & 0 & 0 & 0 & 18 & - \\
+			Máximo & 4 & 1.99 & 100 & 99 & - \\
+			Desv. Estándar & 0.22 & 0.37 & 5.76 & 14.33 & - \\
+			Asimetría & 5.78 & -0.05 & 1.21 & 0.46 & - \\
+			Curtosis & 38.79 & -1.57 & 8.3 & -0.3 & - \\
 			\bottomrule
 		\end{tabularx}
 	\end{table}
@@ -189,7 +189,6 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 			Mínimo & - & - & - \\
 			Máximo & - & - & - \\
 			Desv. Estándar & - & - & - \\
-			Rango & - & - & - \\
 			Asimetría & - & - & - \\
 			Curtosis & - & - & - \\
 			\bottomrule
