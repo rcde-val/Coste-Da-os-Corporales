@@ -12,6 +12,7 @@
 \usepackage{booktabs} % Tablas
 \usepackage{multirow} % Tablas
 \usepackage{float} % Tablas
+\usepackage{caption} % Tablas
 \usepackage{bookmark}
 \usepackage{threeparttable} % Notas al pie de tablas
 \usepackage{hyperref}
@@ -105,36 +106,38 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 % Fecha de entrega 2: 19/12/25
 % Comentarios: Deben quedar claramente diferenciados el enfoque metodológico y los resultados que desde el punto de vista del alumno se asocian a la asignatura de Modelos estadísticos y los que se asocian a la asignatura de Cuantificación de riesgos, indicando como decíamos en el punto anterior, sus contribuciones fundamentales. La asociación a cada asignatura debe ser fácilmente localizable en el texto.
 \section{Análisis metodológico escogido}
-    El objetivo inicial es comprender la estructura del conjunto de datos y familiarizarnos con las variables disponibles, ya que esto constituye la base para cualquier análisis exploratorio. En la Tabla 01 se presenta una descripción resumida de las variables correspondientes a una cartera de una aseguradora en Francia, que incluyen características del vehículo, del conductor, de la póliza y los montos asociados a los reclamos, entre otros.
+    El objetivo inicial es comprender la estructura del conjunto de datos y familiarizarnos con las variables disponibles, ya que esto constituye la base para cualquier análisis exploratorio. En el Cuadro 01 se presenta una descripción resumida de las variables correspondientes a una cartera de una aseguradora en Francia, que incluyen características del vehículo, del conductor, de la póliza y los montos asociados a los reclamos, entre otros.
     
     \begin{table}[H]
     \centering
     \caption{Diccionario de Variables}
-    \begin{tabularx}{\textwidth}{lX}
+    \begin{tabularx}{\textwidth}{llX}
     \toprule
-    \textbf{Variable} & \textbf{Descripción} \\
+    \textbf{Variable} & \textbf{Tipo\textsuperscript{(1)}} & \textbf{Descripción} \\
     \midrule
-    IDpol & Número de póliza. \\
-    ClaimNb & Número de reclamos realizados durante el período de exposición. \\
-    Exposure & Tiempo que la póliza estuvo vigente y expuesta al riesgo, en años. \\
-    VehPower & Potencia del coche (valores ordenados en orden ascendente, de d a o). \\
-    VehAge & Antigüedad del vehículo, en años. \\
-    DrivAge & Edad del conductor, en años. \\
-    BonusMalus & Sistema Bonus/Malus: $<100$ = bonificación, $>100$ = penalización. \\
-    VehBrand & Marca del vehículo. \\
-    VehGas & Tipo de combustible: Diesel o Regular. \\
-    Density & Número de habitantes por km² en la ciudad del conductor. \\
-    Region & Región de la póliza en Francia. \\
-    ClaimAmount & Costo total del reclamo. \\
-    InjuryAmount & Costo de compensación por lesiones corporales. \\
-    PropertyAmount & Costo por daños a la propiedad. \\
+    IDpol & 2 & Número de póliza. \\
+    ClaimNb & 2 & Número de reclamos realizados. \\
+    Exposure & 3 & Tiempo de vigencia y exposición al riesgo, en años. \\
+    VehPower & 1 &Potencia del coche (en orden ascendente, de d a o). \\
+    VehAge & 2 & Antigüedad del vehículo, en años. \\
+    DrivAge & 2 & Edad del conductor, en años. \\
+    VehBrand & 1 & Marca del vehículo. \\
+    VehGas & 1 & Tipo de combustible: Diesel o Regular. \\
+    Density & 2 & Número de habitantes por km² en la ciudad del conductor. \\
+    Region & 1 & Región de la póliza en Francia. \\
+    ClaimAmount & 3 & Costo total del reclamo. \\
+    InjuryAmount & 3 & Costo de compensación por lesiones corporales. \\
+    PropertyAmount & 3 & Costo por daños a la propiedad. \\
     \bottomrule
     \end{tabularx}
+    \vspace{0.5em}
+    \raggedright
+    \footnotesize{\textsuperscript{(1)} 1 = variable categórica, 2 = variable discreta, 3 = variable continua.}
     \end{table}
 
     % A realizar entre el 01/11/25 y el 21/11/25
     \subsection{Análisis descriptivo univariado y bivariado de la base de datos}
-        Por desarrollar.
+        La variable ClaimNb indica el número de reclamos por póliza. La distribución está fuertemente concentrada en cero (96,09\%), con pocos casos de 1 reclamo (3,54\%) y valores mayores extremadamente raros. Presenta una alta asimetría positiva (5,78), lo que significa que la mayoría de los valores se encuentran en el extremo inferior (cero) y existe una cola larga hacia la derecha debido a unos pocos casos con múltiples reclamos. Además, la curtosis es muy elevada (38,79), lo que indica una distribución con un pico muy pronunciado en torno a cero y colas pesadas, reflejando la presencia de valores extremos que, aunque escasos, están muy alejados del centro y afectan la forma de la distribución.
 
     % A realizar entre el 22/11/25 y el 19/12/25
     \subsection{Modelización seleccionada y objetivos a alcanzar}
@@ -149,6 +152,49 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 % Fecha de entrega: 10/01/26
 \section{Informe ejecutivo}
     Por desarrollar.
+
+% Sección 6: Anexos
+% Fecha de entrega: 10/01/26
+\section{Anexos}
+
+% Análisis descriptivo univariado (Variables discretas y contínuas)
+	\begin{table}[H]
+		\centering
+		\caption{Análisis descriptivo univariado - variables discretas y continuas}
+		\begin{tabularx}{\textwidth}{llllll}
+			\toprule
+			\textbf{Concepto} & \textbf{Claim Nb} & \textbf{Exposure} & \textbf{VehAge} & \textbf{DrivAge} & \textbf{Density} \\
+			\midrule
+			Media & 0.04 & - & - & - & - \\
+			Mediana & 0 & - & - & - & - \\
+			Mínimo & 0 & - & - & - & - \\
+			Máximo & 4 & - & - & - & - \\
+			Desv. Estándar & 0.22 & - & - & - & - \\
+			Rango & 4 & - & - & - & - \\
+			Asimetría & 5.78 & - & - & - & - \\
+			Curtosis & 38.79 & - & - & - & - \\
+			\bottomrule
+		\end{tabularx}
+	\end{table}
+	
+	\begin{table}[H]\ContinuedFloat
+		\centering
+		\caption{Análisis descriptivo univariado - variables discretas y continuas (cont.)}
+		\begin{tabularx}{\textwidth}{llll}
+			\toprule
+			\textbf{Concepto} & \textbf{Claim Amount} & \textbf{Injury Amount} & \textbf{Property Amount} \\
+			\midrule
+			Media & - & - & - \\
+			Mediana & - & - & - \\
+			Mínimo & - & - & - \\
+			Máximo & - & - & - \\
+			Desv. Estándar & - & - & - \\
+			Rango & - & - & - \\
+			Asimetría & - & - & - \\
+			Curtosis & - & - & - \\
+			\bottomrule
+		\end{tabularx}
+	\end{table}
 
 % Referencias
 \newpage

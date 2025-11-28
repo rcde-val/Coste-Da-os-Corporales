@@ -15,6 +15,9 @@ library(usethis)
 #git push -u origin master
 # git push una vez que ya lo hayamos linkeado con el master, vamos a usar solo push
 
+#-------------------------------------------------------------------------------
+# Paquetes
+#-------------------------------------------------------------------------------
 # Definición de paquetes
 paquetes <- c("tidyverse", "readxl", "usethis", "ggplot2", "moments","dplyr","sandwich","MASS","car","broom","performance")
 # Instalación de paquetes no instalados (de ser requerido)
@@ -23,16 +26,59 @@ for (pkg in paquetes) {
     install.packages(pkg)
   }
 }
+install.packages("psych") # Estadísticos descriptivos
 # Carga de paquetes
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
 }
+library("psych") # Estadísticos descriptivos 
+#-------------------------------------------------------------------------------
+# Importación de base de datos
+#-------------------------------------------------------------------------------
 # Lectura de la base de datos
 datos <- read_excel("FC01_G03_BBDD.xlsx")
 # Convertir en data frame
 datos<-data.frame(datos)
+# Encabezado
 head(datos)
+# Resumen
 summary(datos)
+#-------------------------------------------------------------------------------
+# 3. Análisis metodológico escogido
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.1. Análisis descriptivo univariado y bivariado de la base de datos
+#-------------------------------------------------------------------------------
+# Tipo de variable
+str(datos)
+#-------------------------------------------------------------------------------
+# 3.1.1 Univariado
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.1.1.1 Variables discretas y contínuas
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.1.1.1.1 ClaimNb
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$ClaimNb)
+# Barplot
+ClaimNb_barplot<-barplot(round(prop.table(table(datos$ClaimNb))*100,3),
+              main = "ClaimNb",
+              xlab = "Número de reclamos",
+              ylab = "Frecuencia relativa (%)",
+              col = "lightblue",
+              ylim = c(0,120))
+# Añadir etiquetas sobre cada barra
+text(x = ClaimNb_barplot, 
+     y = round(prop.table(table(datos$ClaimNb))*100,2)+5,
+     labels = round(prop.table(table(datos$ClaimNb))*100,3))
+     
+
+
+    
+
+# 
 
 # Definición de las variables numéricas
 namesNum <-c("ClaimNb", "Exposure", "CarAge", "DriverAge",
