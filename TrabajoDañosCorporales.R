@@ -141,3 +141,9 @@ summary_modelSimple_ClaimNb
 modelGeneral_ClaimNb<-lm(ClaimNb~.,data=datos1)
 
 summary(modelGeneral_ClaimNb)
+
+
+#Descargamos los datos modificados
+library(openxlsx)
+nombre_archivo <- "datos.xlsx" 
+write.xlsx(x = datos, path = nombre_archivo)
