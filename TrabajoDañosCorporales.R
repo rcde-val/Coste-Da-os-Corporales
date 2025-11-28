@@ -16,7 +16,7 @@ library(usethis)
 # git push una vez que ya lo hayamos linkeado con el master, vamos a usar solo push
 
 # Definición de paquetes
-paquetes <- c("tidyverse", "readxl", "usethis", "ggplot2", "moments")
+paquetes <- c("tidyverse", "readxl", "usethis", "ggplot2", "moments","dplyr","sandwich","MASS","car","broom","performance")
 # Instalación de paquetes no instalados (de ser requerido)
 for (pkg in paquetes) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -39,7 +39,17 @@ namesNum <-c("ClaimNb", "Exposure", "CarAge", "DriverAge",
              "Density", "ClaimAmount", "InjuryAmount", "PropertyAmount")
 # Definición de las variables categóricas
 namesChar<-c("Power","Brand","Gas","Region")
+# Convertir variables categóricas a factor
+datos <- datos %>%
+  mutate(
+    Power  = factor(Power),
+    Brand  = factor(Brand),
+    Gas    = factor(Gas),
+    Region = factor(Region)
+  )
 
+# Filtrar pólizas con exposición válida
+datos <- datos %>% filter(Exposure > 0)
 
 
 apply(datos[namesNum],2,summary)
@@ -144,6 +154,125 @@ summary(modelGeneral_ClaimNb)
 
 
 #Descargamos los datos modificados
-library(openxlsx)
-nombre_archivo <- "datos.xlsx" 
-write.xlsx(x = datos, path = nombre_archivo)
+#library(openxlsx)
+#nombre_archivo <- "datos.xlsx" 
+#write.xlsx(x = datos, path = nombre_archivo)
+
+
+
+
+
+#Parte de Cuantificación
+###############################################
+#   5. AJUSTE DEL MODELO POISSON (FRECUENCIA)
+###############################################
+
+fit_glm_2 <- glm(
+  ClaimNb ~ DriverAge + CarAge + Power + Brand + Gas + Region + Density,
+  data   = datos,
+  family = poisson(link = "log"),
+  offset = log(Exposure)
+)
+
+summary(fit_glm_2)
+
+###############################################
+#   6. SOBREDISPERSIÓN
+###############################################
+
+mean_claim <- mean(datos$ClaimNb)
+var_claim  <- var(datos$ClaimNb)
+cat("Media ClaimNb:", mean_claim, "  Varianza ClaimNb:", var_claim, "\n")
+
+deviance_ratio <- deviance(fit_glm_2) / df.residual(fit_glm_2)
+cat("Razón Deviance/GL:", deviance_ratio, "\n")
+
+if (deviance_ratio > 1.5) {
+  cat("Hay indicios de sobredispersión.\n")
+} else {
+  cat("No hay evidencia de sobredispersión.\n")
+}
+
+###############################################
+#   7. TEST CHI-CUADRADO DE AJUSTE GLOBAL
+###############################################
+
+with(
+  fit_glm_2,
+  cbind(
+    res.deviance = deviance,
+    df           = df.residual,
+    p            = pchisq(deviance, df.residual, lower.tail = FALSE)
+  )
+)
+
+###############################################
+#   8. ERRORES ROBUSTOS
+###############################################
+
+cov_poisson_rob <- sandwich::vcovHC(fit_glm_2, type = "HC0")
+std.err <- sqrt(diag(cov_poisson_rob))
+
+resultados_robustos <- cbind(
+  Estimate     = coef(fit_glm_2),
+  `EE robusto` = std.err,
+  `Pr(>|z|)`   = 2 * pnorm(abs(coef(fit_glm_2)/std.err), lower.tail = FALSE)
+)
+
+resultados_robustos
+
+###############################################
+#   9. MODELO QUASIPOISSON
+###############################################
+
+mod_quasi <- glm(
+  ClaimNb ~ DriverAge + CarAge + Power + Brand + Gas + Region + Density,
+  data   = datos,
+  family = quasipoisson(link = "log"),
+  offset = log(Exposure)
+)
+
+summary(mod_quasi)
+
+###############################################
+#   10. MODELO BINOMIAL NEGATIVO
+###############################################
+
+mod_nb <- glm.nb(
+  ClaimNb ~ DriverAge + CarAge + Power + Brand + Gas + Region + Density + offset(log(Exposure)),
+  data = datos
+)
+
+summary(mod_nb)
+
+# Comparación Quasi vs Binomial Negativa
+anova(mod_quasi, mod_nb, test = "F")
+
+###############################################
+#   11. PREDICCIONES DEL MODELO
+###############################################
+
+datos$pred <- predict(fit_glm_2, type = "response")
+
+ggplot(datos, aes(x = pred)) +
+  geom_histogram(color = "black", bins = 40) +
+  theme_bw() +
+  ggtitle("Predicciones del número esperado de siniestros")
+
+###############################################
+#   12. DIAGNÓSTICO
+###############################################
+
+par(mfrow = c(2,2))
+plot(fit_glm_2)
+
+# Residuos de deviance
+res_dev <- residuals(fit_glm_2, type = "deviance")
+
+hist(res_dev, col="lightblue", main="Residuos de deviance")
+qqnorm(res_dev); qqline(res_dev, col="red")
+
+# Distancia de Cook
+cooks_d <- cooks.distance(fit_glm_2)
+plot(cooks_d, type="h", main="Distancia de Cook")
+abline(h = 4 / (nrow(datos)-length(coef(fit_glm_2))), col="red")
