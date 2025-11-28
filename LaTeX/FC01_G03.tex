@@ -4,12 +4,15 @@
 \usepackage{setspace}
     \singlespacing  % Espaciado sencillo
     \usepackage[a4paper,margin=2.5cm]{geometry}  % Márgenes de 2.5 cm
-\usepackage{helvet}  % Usa Helvetica, que es muy similar a Arial
-    \renewcommand{\familydefault}{\sfdefault}  % Aplica fuente sans-serif (Helvetica)
+\usepackage{helvet}  % Usa Helvética, que es muy similar a Arial
+    \renewcommand{\familydefault}{\sfdefault}  % Aplica fuente sans-serif (Helvética)
 \usepackage[colorlinks=true,linkcolor=black]{hyperref}  % Hipervínculos en el índice
-\usepackage{graphicx} % Imagenes
+\usepackage{graphicx} % Imágenes
 \usepackage{tabularx} % Tablas
+\usepackage{booktabs} % Tablas
 \usepackage{multirow} % Tablas
+\usepackage{float} % Tablas
+\usepackage{bookmark}
 \usepackage{threeparttable} % Notas al pie de tablas
 \usepackage{hyperref}
 
@@ -34,9 +37,7 @@
 % Fecha de entrega 1: 31/10/25 (Máximo 4 páginas en total)
 \section{Objetivo}
 
-Este estudio tiene como objetivo aplicar los conocimientos en modelos estadísticos y cuantificación de riesgos al análisis de un caso práctico en el ámbito del seguro de automóviles. En particular, se centra en el estudio de los costes esperados por daños corporales y su influencia en el cálculo de reservas técnicas.\\
-
-Se trata de un tema de gran relevancia, especialmente en el mercado español, donde la compensación por daños corporales representa más del 60\% del coste total en el seguro de responsabilidad civil del automóvil \cite{santolino_prieto_metodos_2011}. \\
+Este estudio tiene como objetivo aplicar los conocimientos en modelos estadísticos y cuantificación de riesgos al análisis de un caso práctico en el ámbito del seguro de automóviles. En particular, se centra en el estudio de los costes esperados por daños corporales y su influencia en el cálculo de reservas técnicas. Se trata de un tema de gran relevancia, especialmente en el mercado español, donde la compensación por daños corporales representa más del 60\% del coste total en el seguro de responsabilidad civil del automóvil \cite{santolino_prieto_metodos_2011}. \\
 
 Para su desarrollo, el trabajo se estructura en dos fases:
 
@@ -70,7 +71,7 @@ En este contexto, Álvarez Jareño y Muñiz Rodríguez analizan la idoneidad de 
 supuesto de independencia entre eventos y la igualdad entre media y varianza del modelo de Poisson no se cumplen en la práctica \cite{alvarez_jareno_reparametrizacion_2010}. \\
 
 Para abordar estas limitaciones, los autores proponen la reparametrización de distribuciones alternativas que ofrecen un mejor ajuste a los datos observados: la distribución binomial negativa, la distribución Polya-Aeppli, la distribución Poisson
-Inversa Gausiana y la distribución Poisson Pascal Generalizada. Estas distribuciones permiten capturar la presencia de colas pesadas, proporcionando así una base más robusta para la modelización de la frecuencia siniestral. \\
+Inversa Gaussiana y la distribución Poisson Pascal Generalizada. Estas distribuciones permiten capturar la presencia de colas pesadas, proporcionando así una base más robusta para la modelización de la frecuencia siniestral. \\
 
 Otros autores como Pechon, Trufin y Denuit (2018) analizan la frecuencia de siniestros en el seguro obligatorio de responsabilidad civil automotriz tomando al hogar como unidad de riesgo. A diferencia de los modelos que tratan cada póliza de manera independiente, los autores incorporan efectos
 aleatorios correlacionados a través de mezclas Poisson–LogNormal y Poisson–Gamma, con el propósito de capturar la dependencia entre los miembros de un mismo hogar y la heterogeneidad no observada. Los resultados muestran una correlación significativa entre
@@ -79,7 +80,7 @@ en consecuencia, mejorar la valoración de los daños corporales y la suficienci
 
 Otro enfoque a tener en cuenta es el de \cite{tzougas_bivariate_2023}. En su artículo, han desarrollado una clase de modelos de regresión Poisson bivariados mixtos con dispersión variable, orientados a modelizar de forma conjunta la frecuencia de
 reclamaciones por daños corporales y la frecuencia de reclamaciones por daños materiales en el seguro de responsabilidad civil de automóviles. Estos modelos incorporan distribuciones de mezcla para capturar la variabilidad no explicada y permiten
-analizar simultáneamente las dos variables correlacionadas. Además, son capaces de reflejar tanto la sobredispersión como la correlación positiva entre ambas frecuencias, lo que representa un avance significativo en la modelización multivariada del riesgo.\\
+analizar simultáneamente las dos variables correlacionadas. Además, son capaces de reflejar tanto la sobre dispersión como la correlación positiva entre ambas frecuencias, lo que representa un avance significativo en la modelización multivariada del riesgo.\\
 
 La literatura revisada evidencia que comprender la frecuencia de siniestros no solo mejora la precisión en la estimación de los daños corporales, sino que también constituye un componente esencial en la gestión del riesgo y en la sostenibilidad del sistema asegurador.
 
@@ -98,13 +99,38 @@ Santolino propone un modelo econométrico log-lineal para explicar el logaritmo 
 
 La predicción del coste de indemnización es un aspecto crítico para las compañías aseguradoras, ya que determina la capacidad de la entidad para cumplir con sus obligaciones futuras. Las aseguradoras deben disponer de reservas suficientes que garanticen la estabilidad financiera y la solvencia del ramo. Este desafío se intensifica en los siniestros corporales cuya indemnización se reclama por vía judicial, dado que la resolución suele demorarse durante meses o incluso años. En consecuencia, estos expedientes permanecen abiertos en la contabilidad de la compañía, lo que obliga a realizar provisiones adecuadas para cubrir el coste esperado. \cite{SantolinoMiguel2007Urmd}. \\
 
-Por último, se recomienda a las aseguradoras prestar especial atención a los siniestros que superan el percentil 90-95\%, ya que representan casos atípicos con costes significativamente elevados. Estos expedientes requieren una evaluación más exhaustiva para verificar la consistencia de los gastos médicos reclamados y detectar posibles exageraciones o prácticas fraudulentas. Un análisis detallado en esta franja no solo contribuye a reducir el riesgo de sobreindemnización, sino que también permite optimizar la asignación de reservas \cite{weisberg_quantitative_nodate}.\\
+Por último, se recomienda a las aseguradoras prestar especial atención a los siniestros que superan el percentil 90-95\%, ya que representan casos atípicos con costes significativamente elevados. Estos expedientes requieren una evaluación más exhaustiva para verificar la consistencia de los gastos médicos reclamados y detectar posibles exageraciones o prácticas fraudulentas. Un análisis detallado en esta franja no solo contribuye a reducir el riesgo de sobre indemnización, sino que también permite optimizar la asignación de reservas \cite{weisberg_quantitative_nodate}.\\
 
 % Sección 3: Análisis metodológico escogido
 % Fecha de entrega 2: 19/12/25
 % Comentarios: Deben quedar claramente diferenciados el enfoque metodológico y los resultados que desde el punto de vista del alumno se asocian a la asignatura de Modelos estadísticos y los que se asocian a la asignatura de Cuantificación de riesgos, indicando como decíamos en el punto anterior, sus contribuciones fundamentales. La asociación a cada asignatura debe ser fácilmente localizable en el texto.
 \section{Análisis metodológico escogido}
-    Por desarrollar.
+    El objetivo inicial es comprender la estructura del conjunto de datos y familiarizarnos con las variables disponibles, ya que esto constituye la base para cualquier análisis exploratorio. En la Tabla 01 se presenta una descripción resumida de las variables correspondientes a una cartera de una aseguradora en Francia, que incluyen características del vehículo, del conductor, de la póliza y los montos asociados a los reclamos, entre otros.
+    
+    \begin{table}[H]
+    \centering
+    \caption{Diccionario de Variables}
+    \begin{tabularx}{\textwidth}{lX}
+    \toprule
+    \textbf{Variable} & \textbf{Descripción} \\
+    \midrule
+    IDpol & Número de póliza. \\
+    ClaimNb & Número de reclamos realizados durante el período de exposición. \\
+    Exposure & Tiempo que la póliza estuvo vigente y expuesta al riesgo, en años. \\
+    VehPower & Potencia del coche (valores ordenados en orden ascendente, de d a o). \\
+    VehAge & Antigüedad del vehículo, en años. \\
+    DrivAge & Edad del conductor, en años. \\
+    BonusMalus & Sistema Bonus/Malus: $<100$ = bonificación, $>100$ = penalización. \\
+    VehBrand & Marca del vehículo. \\
+    VehGas & Tipo de combustible: Diesel o Regular. \\
+    Density & Número de habitantes por km² en la ciudad del conductor. \\
+    Region & Región de la póliza en Francia. \\
+    ClaimAmount & Costo total del reclamo. \\
+    InjuryAmount & Costo de compensación por lesiones corporales. \\
+    PropertyAmount & Costo por daños a la propiedad. \\
+    \bottomrule
+    \end{tabularx}
+    \end{table}
 
     % A realizar entre el 01/11/25 y el 21/11/25
     \subsection{Análisis descriptivo univariado y bivariado de la base de datos}
@@ -126,8 +152,8 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 
 % Referencias
 \newpage
-\addcontentsline{toc}{section}{6.  Referencias}
+\addcontentsline{toc}{section}{Referencias}
 \bibliographystyle{apalike}
-\bibliography{FC01_G03_Referencias}
+\bibliography{FC01_G03_Referencias.bib}
 
 \end{document}

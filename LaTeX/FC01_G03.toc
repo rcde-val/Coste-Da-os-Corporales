@@ -1,0 +1,11 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Objetivo}{2}{section.1}%
+\contentsline {section}{\numberline {2}Estado de la cuestión: Revisión de la literatura existente}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Número de siniestros}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Cuantía del siniestro}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Análisis metodológico escogido}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Análisis descriptivo univariado y bivariado de la base de datos}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Modelización seleccionada y objetivos a alcanzar}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Resultados}{5}{section.4}%
+\contentsline {section}{\numberline {5}Informe ejecutivo}{5}{section.5}%
+\contentsline {section}{Referencias}{6}{section.5}%
