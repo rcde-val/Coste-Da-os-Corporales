@@ -58,12 +58,12 @@ str(datos)
 # 3.1.1.1 Variables discretas y contínuas
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
-# 3.1.1.1.1 ClaimNb
+# 3.1.1.1.1 ClaimNb (Discreta)
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$ClaimNb)
 # Barplot
-ClaimNb_barplot<-barplot(round(prop.table(table(datos$ClaimNb))*100,3),
+ClaimNb_barplot<-barplot(round(prop.table(table(datos$ClaimNb))*100,1),
               main = "ClaimNb",
               xlab = "Número de reclamos",
               ylab = "Frecuencia relativa (%)",
@@ -71,9 +71,35 @@ ClaimNb_barplot<-barplot(round(prop.table(table(datos$ClaimNb))*100,3),
               ylim = c(0,120))
 # Añadir etiquetas sobre cada barra
 text(x = ClaimNb_barplot, 
-     y = round(prop.table(table(datos$ClaimNb))*100,2)+5,
-     labels = round(prop.table(table(datos$ClaimNb))*100,3))
-     
+     y = round(prop.table(table(datos$ClaimNb))*100,1)+5,
+     labels = round(prop.table(table(datos$ClaimNb))*100,1))
+#-------------------------------------------------------------------------------
+# 3.1.1.1.2 Exposure (Contínua)
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$Exposure)
+# Crear "n" intervalos 
+Exposure_intervalos<-cut(datos$Exposure,breaks=5)
+# Calcular frecuencias relativas asociadas a cada uno de los "n" intervalos
+Exposure_freq_rel <- round(prop.table(table(Exposure_intervalos)) * 100, 1)
+# Reformatear etiquetas con 1 decimal
+Exposure_niveles_fmt <- gsub("\\(|\\]|\\[", "", levels(Exposure_intervalos))
+Exposure_niveles_fmt <- sapply(strsplit(Exposure_niveles_fmt, ","), function(x) {
+  sprintf("(%.1f, %.1f]", as.numeric(x[1]), as.numeric(x[2]))
+})
+# Barplot
+Exposure_barplot<-barplot(Exposure_freq_rel,
+              main = "Exposure",
+              xlab = "Tiempo de vigencia y exposición al riesgo (años)",
+              ylab = "Frecuencia relativa (%)",
+              col = "lightblue",
+              ylim = c(0, 120),
+              names.arg = Exposure_niveles_fmt)
+# Añadir etiquetas sobre cada barra
+text(x = Exposure_barplot, 
+     y = Exposure_freq_rel + 5,
+     labels = sprintf("%.1f", Exposure_freq_rel))
+
 
 
     
