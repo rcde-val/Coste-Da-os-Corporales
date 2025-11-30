@@ -571,7 +571,7 @@ mean(PropertyAmount_positivos_G2[PropertyAmount_positivos_G2<=100000])*1000
 # 3.1.1.2.1 Power
 #-------------------------------------------------------------------------------
 table(datos$Power)
-describe(datos$Power)           
+        
 
 
 
