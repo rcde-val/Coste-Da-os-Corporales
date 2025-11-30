@@ -19,7 +19,6 @@
 \usepackage{bookmark}
 \usepackage{threeparttable} % Notas al pie de tablas
 
-
 \title{\textbf{Costes esperados por daños corporales en seguro de automóviles e influencia en reservas\\[2em]}}
 \author{\underline{Grupo 3} \\ Víctor Alonso Lara \\ David López Avakian \\ Sergio Obando Henao \\ Víctor Manuel Pérez \\ Miquel Trullols Salat \\[6em]}
 \date{30 de Octubre de 2025}
@@ -121,7 +120,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     IDpol & 2 & Número de póliza. \\
     ClaimNb & 2 & Número de siniestros. \\
     Exposure & 3 & Tiempo de vigencia y exposición al riesgo, en años. \\
-    VehPower & 1 &Potencia del coche (en orden ascendente, de d a o). \\
+    Power & 1 &Potencia del coche (en orden ascendente, de d a o). \\
     CarAge & 2 & Antigüedad del vehículo, en años. \\
     DriverAge & 2 & Edad del conductor, en años. \\
     VehBrand & 1 & Marca del vehículo. \\
@@ -130,7 +129,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     Region & 1 & Región de la póliza en Francia. \\
     ClaimAmount & 3 & Costo total del reclamo. \\
     InjuryAmount & 3 & Costo de compensación por lesiones corporales. \\
-    PropertyAmount & 3 & Costo por daños a la propiedad. \\
+    PropertyAmount & 3 & Costo por daños materiales. \\
     \bottomrule
     \end{tabularx}
     \vspace{0.5em}
@@ -142,7 +141,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     \subsection{Análisis descriptivo univariado y bivariado de la base de datos}
     
     	\subsubsection{Análisis descriptivo univariado}
-    	Se realiza un análisis descriptivo de las variables numéricas considerando medidas de tendencia central, dispersión y forma (\hyperref[Anexo01]{\textcolor{blue}{Anexos - Cuadro 2}}). Adicionalmente, para las variables Exposure, CarAge, DriverAge y Density se aplica una técnica de segmentación mediante el método de k-means (\hyperref[Anexo02]{\textcolor{blue}{Anexos - Figura 1}}). Esta metodología permite clasificar los datos en conjuntos homogéneos, minimizando la variabilidad interna dentro de cada grupo y maximizando la diferencia entre ellos. Para determinar el número óptimo de clusters se utilizó el método del codo. Los aspectos más relevantes se detallan a continuación:
+    	Se realiza un análisis descriptivo de las variables numéricas considerando medidas de tendencia central, dispersión y forma (\hyperref[Anexo01]{\textcolor{blue}{Anexos - Cuadro 2}}). Adicionalmente, para las variables Exposure, CarAge, DriverAge y Density se aplica una técnica de segmentación mediante el método de k-means (\hyperref[Anexo02]{\textcolor{blue}{Anexos - Figura 2}}). Esta metodología permite clasificar los datos en conjuntos homogéneos, minimizando la variabilidad interna dentro de cada grupo y maximizando la diferencia entre ellos. Para determinar el número óptimo de clusters se utilizó el método del codo. Concluido este análisis, se procede al estudio de las variables categóricas, examinando su distribución de frecuencias y representaciones gráficas para identificar patrones relevantes. Los aspectos más significativos se detallan a continuación:
     		\begin{itemize}
     			\item \textbf{Número de siniestros (ClaimNb):} Presenta una media y mediana muy bajas (0.04 y 0), consecuencia de que el 96.1\% de las pólizas analizadas no registraron siniestros. Esto se ve reflejado en su alta asimetría (5.78), indicando una distribución con cola larga hacia la derecha. La curtosis, extremadamente alta (38.79), confirma una distribución leptocúrtica, muy concentrada alrededor de la media y con mayor probabilidad de valores extremos.
     			La desviación estándar (0.22), aunque pequeña en términos absolutos, es elevada respecto a la media (0.04), lo que indica una gran variabilidad relativa: la mayoría de los valores son cero, pero existen pocos casos con valores altos que generan dispersión.
@@ -150,8 +149,21 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     			\item \textbf{Antigüedad del vehículo (CarAge):} La edad promedio del vehículo es de 7.53 años, con una alta dispersión (desviación estándar 5.76), lo que significa que existen diferencias importantes entre vehículos nuevos y antiguos. Esta variabilidad se explica porque, aunque el 48.7\% de los autos tienen menos de 6 años, hay casos extremos (máximo 100 años). La asimetría positiva (1.21) indica predominio de autos relativamente nuevos, pero con presencia de valores altos. La curtosis (8.3) confirma una distribución leptocúrtica, concentrada alrededor de la media y con mayor probabilidad de valores extremos.
     			\item \textbf{Edad del conductor (DriverAge):} La edad promedio del conductor es 45.32 años, con una mediana cercana (44), lo que indica una distribución equilibrada. El rango es amplio (de 18 a 99 años), y la desviación estándar (14.33) refleja una dispersión moderada: los valores están relativamente separados de la media, mostrando diversidad entre conductores jóvenes y mayores, pero sin diferencias extremas que distorsionen la distribución. A diferencia de otras variables, como la antigüedad del vehículo, no se observan valores atípicos desproporcionados. La asimetría (0.46) es baja, lo que sugiere un ligero sesgo hacia edades mayores, mientras que la curtosis (-0.3) indica una forma cercana a la normal, sin colas pronunciadas.
     			\item \textbf{Densidad poblacional por km2 en la ciudad del conductor (Density):} Presenta una media muy superior a la mediana (1987.33 vs 287), lo que indica una distribución fuertemente sesgada hacia valores altos. La gran variabilidad (desviación estándar 4779.6) y la asimetría positiva (4.13) reflejan diferencias significativas entre zonas de baja y alta densidad. La curtosis (17.72) confirma una distribución leptocúrtica, con concentración en valores bajos y presencia de colas largas hacia la derecha.
+    			\item \textbf{Costo total del reclamo (ClaimAmount):} presenta una distribución altamente desbalanceada y con valores extremos. El valor promedio es de 832,57 euros, mientras que la mediana es cero, lo que indica que más del 50\% de los registros no tienen reclamo asociado. El mínimo también es cero, confirmando la existencia de pólizas sin siniestro, mientras que el máximo alcanza los 20.368.330 euros, evidenciando la presencia de valores extremadamente altos. La desviación estándar, de 41.847 euros, refleja una gran dispersión en los datos. Además, la asimetría es de 375,9 y la curtosis de 166.362,6, lo que indica una distribución extremadamente sesgada hacia la derecha, con una concentración muy alta en valores bajos y la presencia de outliers. Para complementar este análisis, se elaboraron dos histogramas (\hyperref[Anexo03]{\textcolor{blue}{Anexos - Figura 3}}), considerando únicamente las pólizas con al menos un siniestro, dado que el 96,1\% de las pólizas no registraron ningún reclamo y, por tanto, un histograma completo concentraría la masa de probabilidad en cero, ocultando el comportamiento del resto:
+    				\begin{itemize}
+    					\item El primer histograma corresponde al 99 \% de las pólizas con siniestros y revela que la gran mayoría de los reclamos son de bajo coste: el 96,9 \% no supera los 50.000 euros, mientras que solo el 2,4\% se encuentra entre 50.000 y 100.000 euros, y menos del 1 \% supera los 100.000 euros. El coste promedio dentro de este grupo es de 13.560 euros, lo que confirma que los siniestros de alto importe son excepcionales. El gráfico refuerza esta conclusión, mostrando una barra dominante en el primer intervalo (0–50 miles de euros) y frecuencias marginales en los tramos superiores, lo que evidencia una concentración extrema en valores bajos. 
+    					\item El histograma del 1 \% de las pólizas con siniestros muestra que, aunque este grupo corresponde a los casos más costosos, la concentración sigue siendo muy marcada en el primer intervalo: el 98,8 \% de estos reclamos extremos se sitúan entre 161.500 y 5.000.000 euros, con un coste promedio en este tramo de 577.685 euros. Esto indica que, incluso dentro de la cola, la mayoría de los siniestros se ubican en rangos elevados pero moderados en comparación con los máximos observados, aunque siguen siendo significativamente superiores al promedio general. Los intervalos superiores, que incluyen reclamos entre 10 y 15 millones y entre 20 y 25 millones de euros, apenas representan el 0,6 \% cada uno, lo que confirma que los valores más altos son casos excepcionales con un impacto potencial muy significativo en la compañía aseguradora.
+    				\end{itemize}
+    			\item \textbf{Costo de compensación por daños corporales (InjuryAmount):} Presenta una alta concentración en valores nulos y una cola prolongada con pocos casos de gran magnitud. El promedio es 615,9 euros, mientras que la mediana y el mínimo son cero; el máximo alcanza 19.972.821 euros, reflejando reclamos excepcionales. La dispersión es elevada (desviación estándar: 40.867 euros) y los indicadores de forma son extremos: asimetría 375,25 y curtosis 165.244,5, lo que evidencia un fuerte sesgo a la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas considerando solo pólizas con siniestros, confirmando la concentración en valores bajos y la existencia de una cola con pocos casos de gran coste. Ambos gráficos se incluyen en los anexos. (\hyperref[Anexo02]{\textcolor{blue}{Anexos - Figura 3}}).
+    			\item \textbf{Costo por daños materiales (PropertyAmount):} La distribución muestra una fuerte concentración en valores nulos y casos positivos menos extremos que en \textit{\textbf{InjuryAmount}}. El promedio es 216,7 euros, la mediana y el mínimo son cero, y el máximo llega a 575.508,8 euros, lo que indica reclamos significativos pero no desproporcionados. La dispersión es alta (desviación estándar: 1.554 euros) y la asimetría (129,54) y curtosis (45.682,36) confirman un sesgo marcado hacia la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas: el primero concentra el 99 \% de los casos por debajo de 12.000 euros, destacando los rangos de 8.000-10.000 euros (26,3 \%), 4.000-6.0000 euros (23,7 \%) y  2.000-4.000 euros (22,3 \%). El segundo muestra el 1 \% restante, casi todo entre 10.400 y 100.000 euros, con algunos reclamos aislados de mayor coste. Aunque existen siniestros elevados, la mayoría se sitúa en valores moderados. Ambos gráficos se incluyen en los anexos. (\hyperref[Anexo02]{\textcolor{blue}{Anexos - Figura 3}}).
     		\end{itemize}
-
+		Tras el análisis detallado de las variables numéricas, se continúa con el estudio de las variables categóricas, examinando su distribución de frecuencias y representación gráfica para identificar patrones relevantes:
+			\begin{itemize}
+				\item \textbf{Potencia del coche (Power):}
+				\item \textbf{Marca del vehículo (VehBrand):}
+				\item \textbf{Tipo de combustible (VehGas):}
+				\item \textbf{Región de la póliza (Region):}
+			\end{itemize}
 
 		\subsubsection{Análisis descriptivo bivariado}
 		
@@ -178,34 +190,34 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	\begin{table}[H]
 		\centering
 		\caption{Análisis descriptivo univariado - variables numéricas}
-		\begin{tabularx}{\textwidth}{llllll}
+		\begin{tabularx}{\textwidth}{lrrrrr}
 			\toprule
 			\textbf{Concepto} & \textbf{Claim Nb} & \textbf{Exposure} & \textbf{CarAge} & \textbf{DriverAge} & \textbf{Density} \\
 			\midrule
-			Media & 0.04 & 0.56 & 7.53 & 45.32 & 1987.33 \\
-			Mediana & 0 & 0.54 & 7 & 44 & 287 \\
+			Media & 0,04 & 0,56 & 7,53 & 45,32 & 1.987,33 \\
+			Mediana & 0 & 0,54 & 7 & 44 & 287 \\
 			Mínimo & 0 & 0 & 0 & 18 & 2 \\
-			Máximo & 4 & 1.99 & 100 & 99 & 27000 \\
-			Desv. Estándar & 0.22 & 0.37 & 5.76 & 14.33 & 4779.6 \\
-			Asimetría & 5.78 & -0.05 & 1.21 & 0.46 & 4.13 \\
-			Curtosis & 38.79 & -1.57 & 8.3 & -0.3 & 17.72 \\
+			Máximo & 4 & 1,99 & 100 & 99 & 27000 \\
+			Desv. Estándar & 0,22 & 0,37 & 5,76 & 14,33 & 4.779,6 \\
+			Asimetría & 5,78 & -0,05 & 1,21 & 0,46 & 4,13 \\
+			Curtosis & 38,79 & -1,57 & 8,3 & -0,3 & 17,72 \\
 			\bottomrule
 		\end{tabularx}
 	\end{table}
 	\begin{table}[H]\ContinuedFloat
 		\centering
 		\caption{Análisis descriptivo univariado - variables numéricas}
-		\begin{tabularx}{\textwidth}{llll}
+		\begin{tabularx}{\textwidth}{lrrr}
 			\toprule
 			\textbf{Concepto} & \textbf{Claim Amount} & \textbf{Injury Amount} & \textbf{Property Amount} \\
 			\midrule
-			Media & - & - & - \\
-			Mediana & - & - & - \\
-			Mínimo & - & - & - \\
-			Máximo & - & - & - \\
-			Desv. Estándar & - & - & - \\
-			Asimetría & - & - & - \\
-			Curtosis & - & - & - \\
+			Media & 832,57 & 615,9 & 216,67 \\
+			Mediana & 0 & 0 & 0 \\
+			Mínimo & 0 & 0 & 0 \\
+			Máximo & 20.368.330 & 19.792.821 & 575.508,8 \\
+			Desv. Estándar & 41.847 & 40.867,4 & 1.554,24 \\
+			Asimetría & 375,9 & 375,25 & 129,54 \\
+			Curtosis & 166.362,6 & 165.244,5 & 45.682,36 \\
 			\bottomrule
 		\end{tabularx}
 	\end{table}
@@ -214,31 +226,63 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	\label{Anexo02}
 	\begin{figure}[htbp]
 		\centering
-		\caption{Diagramas de barras}
+		\caption{Análisis descriptivo univariado - Técnica de segmentación}
 		% Primera fila
-		\begin{subfigure}[b]{0.45\textwidth}
+		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Gráfico01.png}
 		\end{subfigure}
 		\hfill
-		\begin{subfigure}[b]{0.45\textwidth}
+		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Gráfico02.png}
 		\end{subfigure}
 		% Segunda fila
 		\vspace{0.5cm} % Espacio entre filas
-		\begin{subfigure}[b]{0.45\textwidth}
+		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Gráfico03.png}
 		\end{subfigure}
 		\hfill
-		\begin{subfigure}[b]{0.45\textwidth}
+		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Gráfico04.png}
 		\end{subfigure}
 		% Tercera fila
-		\begin{subfigure}[b]{0.45\textwidth}
+		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Gráfico05.png}
 		\end{subfigure}
 		\hfill
-		\label{fig:imagenes_2x2}
 	\end{figure}
+
+% Análisis descriptivo univariado (Variables discretas y contínuas): Tabla estadísticos
+\label{Anexo03}
+\begin{figure}[htbp]
+	\centering
+	\caption{Análisis descriptivo univariado: Histogramas}
+	% Primera fila
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico06.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico07.png}
+	\end{subfigure}
+	% Segunda fila
+	\vspace{0.5cm} % Espacio entre filas
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico08.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico09.png}
+	\end{subfigure}
+	% Tercera fila
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico10.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico11.png}
+	\end{subfigure}
+\end{figure}
+
 
 % Referencias
 \newpage

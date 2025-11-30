@@ -59,10 +59,10 @@ str(datos)
 # 3.1.1 Univariado
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
-# 3.1.1.1 Variables discretas y contínuas
+# 3.1.1.1 Variables numéricas
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
-# 3.1.1.1.1 ClaimNb (Discreta)
+# 3.1.1.1.1 ClaimNb
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$ClaimNb)
@@ -79,7 +79,7 @@ text(x = ClaimNb_barplot,
      y = round(prop.table(table(datos$ClaimNb))*100,1)+5,
      labels = round(prop.table(table(datos$ClaimNb))*100,1))
 #-------------------------------------------------------------------------------
-# 3.1.1.1.2 Exposure (Contínua)
+# 3.1.1.1.2 Exposure
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$Exposure)
@@ -130,7 +130,7 @@ Exposure_barplot<-barplot(ExposureCluster_freq_rel,
                         col = "lightblue",
                         ylim = c(0, 120),
                         main = "Clusters (Exposure)",
-                        xlab = "Rango de tiempo de vigencia y exposición al riesgo (años)",
+                        xlab = "Tiempo de vigencia y exposición al riesgo (años)",
                         ylab = "Frecuencia relativa (%)")
 # Añadir segunda línea al título
 mtext("k-means", side = 3, line = 0.5, cex = 1)
@@ -140,7 +140,7 @@ text(x = Exposure_barplot,
      labels = round(ExposureCluster_freq_rel, 1),
      pos = 3)
 #-------------------------------------------------------------------------------
-# 3.1.1.1.3 CarAge (Discreta)
+# 3.1.1.1.3 CarAge
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$CarAge)
@@ -191,7 +191,7 @@ CarAge_barplot<-barplot(CarAgeCluster_freq_rel,
                           col = "lightblue",
                           ylim = c(0, 120),
                           main = "Clusters (CarAge)",
-                          xlab = "Rango de antigüedad del vehículo (años)",
+                          xlab = "Antigüedad del vehículo (años)",
                           ylab = "Frecuencia relativa (%)")
 # Añadir segunda línea al título
 mtext("k-means", side = 3, line = 0.5, cex = 1)
@@ -201,7 +201,7 @@ text(x = CarAge_barplot,
      labels = round(CarAgeCluster_freq_rel, 1),
      pos = 3)
 #-------------------------------------------------------------------------------
-# 3.1.1.1.4 DriveAge (Discreta)
+# 3.1.1.1.4 DriveAge
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$DriverAge)
@@ -252,7 +252,7 @@ DriverAge_barplot<-barplot(DriverAgeCluster_freq_rel,
         col = "lightblue",
         ylim = c(0, 120),
         main = "Clusters (DriverAge)",
-        xlab = "Rango de edad del conductor (años)",
+        xlab = "Edad del conductor (años)",
         ylab = "Frecuencia relativa (%)")
 # Añadir segunda línea al título
 mtext("k-means", side = 3, line = 0.5, cex = 1)
@@ -262,7 +262,7 @@ text(x = DriverAge_barplot,
      labels = round(DriverAgeCluster_freq_rel, 1),
      pos = 3)
 #-------------------------------------------------------------------------------
-# 3.1.1.1.5 Density (Discreta)
+# 3.1.1.1.5 Density
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$Density)
@@ -313,7 +313,7 @@ Density_barplot<-barplot(DensityCluster_freq_rel,
                            col = "lightblue",
                            ylim = c(0, 120),
                            main = "Clusters (Density)",
-                           xlab = "Rango del número de habitantes por km2 en la ciudad del conductor",
+                           xlab = "Número de habitantes en la ciudad del conductor (km2)",
                            ylab = "Frecuencia relativa (%)")
 # Añadir segunda línea al título
 mtext("k-means", side = 3, line = 0.5, cex = 1)
@@ -322,9 +322,256 @@ text(x = Density_barplot,
      y = DensityCluster_freq_rel,
      labels = round(DensityCluster_freq_rel, 1),
      pos = 3)
-
-
-
+#-------------------------------------------------------------------------------
+# 3.1.1.1.6 ClaimAmount
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$ClaimAmount)
+#
+# Barplot
+# Vamos a centrarnos en el ClaimAmount que excede el 0. Habíamos visto que del 
+# total de pólizas, el 96% no habían registrado ningún siniestro, por lo que el
+# gráfico saldria al 96% en cero y no se podría ver a detalle lo que pasa más allá.
+# ClaimAmount > 0
+ClaimAmount_positivos<-datos$ClaimAmount[datos$ClaimAmount > 0]
+# ClaimAmount > 0 y ordenados en orden ascendente
+ClaimAmount_positivos_ordenados<-sort(ClaimAmount_positivos)
+# Calcular el punto de corte para dividir en dos ClaimAmount > 0 (G1:99%, G2:1%)
+ClaimAmount_puntocorte<-length(ClaimAmount_positivos_ordenados)
+ClaimAmount_puntocorte<-floor(ClaimAmount_puntocorte*0.99)
+# ClaimAmount > 0: Grupo 1
+ClaimAmount_positivos_G1<-ClaimAmount_positivos_ordenados[1:ClaimAmount_puntocorte]/1000
+head(ClaimAmount_positivos_G1)
+tail(ClaimAmount_positivos_G1)
+# ClaimAmount > 0: Grupo 2
+ClaimAmount_positivos_G2<-ClaimAmount_positivos_ordenados[(ClaimAmount_puntocorte+1):length(ClaimAmount_positivos_ordenados)]/1000
+head(ClaimAmount_positivos_G2)
+tail(ClaimAmount_positivos_G2)
+# Validación (debe ser 0)
+length(ClaimAmount_positivos)-length(ClaimAmount_positivos_G1)-length(ClaimAmount_positivos_G2)
+# G1: 
+# Crear histograma sin graficar
+ClaimAmount_positivos_G1_h<-hist(ClaimAmount_positivos_G1,
+          breaks = 5,  # Ajusta el número de intervalos
+          plot = FALSE)
+# Calcular frecuencias relativas en porcentaje
+ClaimAmount_positivos_G1_frecuencias_relativas<-(ClaimAmount_positivos_G1_h$counts/sum(ClaimAmount_positivos_G1_h$counts)) * 100
+# Crear barplot con formato personalizado
+ClaimAmount_positivos_G1_barplot<-barplot(ClaimAmount_positivos_G1_frecuencias_relativas,
+              names.arg = paste0("(", round(ClaimAmount_positivos_G1_h$breaks[-length(ClaimAmount_positivos_G1_h$breaks)], 1), ", ", round(ClaimAmount_positivos_G1_h$breaks[-1], 1), "]"),
+              col = "lightblue",
+              ylim = c(0, 120),
+              main = "ClaimAmount > 0",
+              xlab = "Costo total del reclamo (miles euros)",
+              ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("99% de los datos", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas centradas sobre las barras
+text(x = ClaimAmount_positivos_G1_barplot,
+     y = ClaimAmount_positivos_G1_frecuencias_relativas,
+     labels = round(ClaimAmount_positivos_G1_frecuencias_relativas, 1),
+     pos = 3, cex = 0.9)
+# Promedio
+mean(ClaimAmount_positivos_G1)*1000
+# G2:
+# Crear histograma sin graficar
+ClaimAmount_positivos_G2_h<-hist(ClaimAmount_positivos_G2,
+                                 breaks = 5,  # Ajusta el número de intervalos 
+                                 plot = FALSE)
+# Calcular frecuencias relativas en porcentaje
+ClaimAmount_positivos_G2_frecuencias_relativas<-(ClaimAmount_positivos_G2_h$counts/sum(ClaimAmount_positivos_G2_h$counts)) * 100
+# Generar etiquetas originales
+ClaimAmount_positivos_G2_labels_originales <- paste0("(", round(ClaimAmount_positivos_G2_h$breaks[-length(ClaimAmount_positivos_G2_h$breaks)], 1), ", ",
+                            round(ClaimAmount_positivos_G2_h$breaks[-1], 1), "]")
+# Modificar solo el primer label: Para que no muestre desde 0, sino desde el valor mínimo
+ClaimAmount_positivos_G2_labels_originales[1] <- paste0("(", round(min(ClaimAmount_positivos_G2), 1), ", ", round(ClaimAmount_positivos_G2_h$breaks[2], 1), "]")
+# Crear barplot con formato personalizado
+ClaimAmount_positivos_G2_barplot<-barplot(ClaimAmount_positivos_G2_frecuencias_relativas,
+                                          names.arg = ClaimAmount_positivos_G2_labels_originales,
+                                          col = "lightblue",
+                                          ylim = c(0, 120),
+                                          main = "ClaimAmount > 0",
+                                          xlab = "Costo total del reclamo (miles euros)",
+                                          ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("1% de los datos", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas centradas sobre las barras
+text(x = ClaimAmount_positivos_G2_barplot,
+     y = ClaimAmount_positivos_G2_frecuencias_relativas,
+     labels = round(ClaimAmount_positivos_G2_frecuencias_relativas, 1),
+     pos = 3, cex = 0.9)
+# Promedio
+mean(ClaimAmount_positivos_G2[ClaimAmount_positivos_G2<=5000])*1000
+#-------------------------------------------------------------------------------
+# 3.1.1.1.7 InjuryAmount
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$InjuryAmount)
+#
+# Barplot
+# Vamos a centrarnos en el InjuryAmount que excede el 0. Habíamos visto que del 
+# total de pólizas, el 96% no habían registrado ningún siniestro, por lo que el
+# gráfico saldria al 96% en cero y no se podría ver a detalle lo que pasa más allá.
+# InjuryAmount > 0
+InjuryAmount_positivos<-datos$InjuryAmount[datos$InjuryAmount > 0]
+length(InjuryAmount_positivos)/length(datos$InjuryAmount)
+# InjuryAmount > 0 y ordenados en orden ascendente
+InjuryAmount_positivos_ordenados<-sort(InjuryAmount_positivos)
+# Calcular el punto de corte para dividir en dos InjuryAmount > 0 (G1:99%, G2:1%)
+InjuryAmount_puntocorte<-length(InjuryAmount_positivos_ordenados)
+InjuryAmount_puntocorte<-floor(InjuryAmount_puntocorte*0.99)
+# InjuryAmount > 0: Grupo 1
+InjuryAmount_positivos_G1<-InjuryAmount_positivos_ordenados[1:InjuryAmount_puntocorte]/1000
+head(InjuryAmount_positivos_G1)
+tail(InjuryAmount_positivos_G1)
+# InjuryAmount > 0: Grupo 2
+InjuryAmount_positivos_G2<-InjuryAmount_positivos_ordenados[(InjuryAmount_puntocorte+1):length(InjuryAmount_positivos_ordenados)]/1000
+head(InjuryAmount_positivos_G2)
+tail(InjuryAmount_positivos_G2)
+# Validación (debe ser 0)
+length(InjuryAmount_positivos)-length(InjuryAmount_positivos_G1)-length(InjuryAmount_positivos_G2)
+# G1: 
+# Crear histograma sin graficar
+InjuryAmount_positivos_G1_h<-hist(InjuryAmount_positivos_G1,
+                                 breaks = 5,  # Ajusta el número de intervalos
+                                 plot = FALSE)
+# Calcular frecuencias relativas en porcentaje
+InjuryAmount_positivos_G1_frecuencias_relativas<-(InjuryAmount_positivos_G1_h$counts/sum(InjuryAmount_positivos_G1_h$counts)) * 100
+# Crear barplot con formato personalizado
+InjuryAmount_positivos_G1_barplot<-barplot(InjuryAmount_positivos_G1_frecuencias_relativas,
+                                          names.arg = paste0("(", round(InjuryAmount_positivos_G1_h$breaks[-length(InjuryAmount_positivos_G1_h$breaks)], 1), ", ", round(InjuryAmount_positivos_G1_h$breaks[-1], 1), "]"),
+                                          col = "lightblue",
+                                          ylim = c(0, 120),
+                                          main = "InjuryAmount > 0",
+                                          xlab = "Costo total del reclamo (miles euros)",
+                                          ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("99% de los datos", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas centradas sobre las barras
+text(x = InjuryAmount_positivos_G1_barplot,
+     y = InjuryAmount_positivos_G1_frecuencias_relativas,
+     labels = round(InjuryAmount_positivos_G1_frecuencias_relativas, 1),
+     pos = 3, cex = 0.9)
+# Promedio
+mean(InjuryAmount_positivos_G1)*1000
+# G2:
+# Crear histograma sin graficar
+InjuryAmount_positivos_G2_h<-hist(InjuryAmount_positivos_G2,
+                                 breaks = 5,  # Ajusta el número de intervalos 
+                                 plot = FALSE)
+# Calcular frecuencias relativas en porcentaje
+InjuryAmount_positivos_G2_frecuencias_relativas<-(InjuryAmount_positivos_G2_h$counts/sum(InjuryAmount_positivos_G2_h$counts)) * 100
+# Generar etiquetas originales
+InjuryAmount_positivos_G2_labels_originales <- paste0("(", round(InjuryAmount_positivos_G2_h$breaks[-length(InjuryAmount_positivos_G2_h$breaks)], 1), ", ",
+                                                     round(InjuryAmount_positivos_G2_h$breaks[-1], 1), "]")
+# Modificar solo el primer label: Para que no muestre desde 0, sino desde el valor mínimo
+InjuryAmount_positivos_G2_labels_originales[1] <- paste0("(", round(min(InjuryAmount_positivos_G2), 1), ", ", round(InjuryAmount_positivos_G2_h$breaks[2], 1), "]")
+# Crear barplot con formato personalizado
+InjuryAmount_positivos_G2_barplot<-barplot(InjuryAmount_positivos_G2_frecuencias_relativas,
+                                          names.arg = InjuryAmount_positivos_G2_labels_originales,
+                                          col = "lightblue",
+                                          ylim = c(0, 120),
+                                          main = "InjuryAmount > 0",
+                                          xlab = "Costo daños corporales (miles euros)",
+                                          ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("1% de los datos", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas centradas sobre las barras
+text(x = InjuryAmount_positivos_G2_barplot,
+     y = InjuryAmount_positivos_G2_frecuencias_relativas,
+     labels = round(InjuryAmount_positivos_G2_frecuencias_relativas, 1),
+     pos = 3, cex = 0.9)
+# Promedio
+mean(InjuryAmount_positivos_G2[InjuryAmount_positivos_G2<=5000])*1000
+#-------------------------------------------------------------------------------
+# 3.1.1.1.7 PropertyAmount
+#-------------------------------------------------------------------------------
+# Estadísticos
+describe(datos$PropertyAmount)
+#
+# Barplot
+# Vamos a centrarnos en el PropertyAmount que excede el 0. Habíamos visto que del 
+# total de pólizas, el 96% no habían registrado ningún siniestro, por lo que el
+# gráfico saldria al 96% en cero y no se podría ver a detalle lo que pasa más allá.
+# PropertyAmount > 0
+PropertyAmount_positivos<-datos$PropertyAmount[datos$PropertyAmount > 0]
+length(PropertyAmount_positivos)/length(datos$PropertyAmount)
+# PropertyAmount > 0 y ordenados en orden ascendente
+PropertyAmount_positivos_ordenados<-sort(PropertyAmount_positivos)
+# Calcular el punto de corte para dividir en dos PropertyAmount > 0 (G1:99%, G2:1%)
+PropertyAmount_puntocorte<-length(PropertyAmount_positivos_ordenados)
+PropertyAmount_puntocorte<-floor(PropertyAmount_puntocorte*0.99)
+# PropertyAmount > 0: Grupo 1
+PropertyAmount_positivos_G1<-PropertyAmount_positivos_ordenados[1:PropertyAmount_puntocorte]/1000
+head(PropertyAmount_positivos_G1)
+tail(PropertyAmount_positivos_G1)
+# PropertyAmount > 0: Grupo 2
+PropertyAmount_positivos_G2<-PropertyAmount_positivos_ordenados[(PropertyAmount_puntocorte+1):length(PropertyAmount_positivos_ordenados)]/1000
+head(PropertyAmount_positivos_G2)
+tail(PropertyAmount_positivos_G2)
+# Validación (debe ser 0)
+length(PropertyAmount_positivos)-length(PropertyAmount_positivos_G1)-length(PropertyAmount_positivos_G2)
+# G1: 
+# Crear histograma sin graficar
+PropertyAmount_positivos_G1_h<-hist(PropertyAmount_positivos_G1,
+                                  breaks = 5,  # Ajusta el número de intervalos
+                                  plot = FALSE)
+# Calcular frecuencias relativas en porcentaje
+PropertyAmount_positivos_G1_frecuencias_relativas<-(PropertyAmount_positivos_G1_h$counts/sum(PropertyAmount_positivos_G1_h$counts)) * 100
+# Crear barplot con formato personalizado
+PropertyAmount_positivos_G1_barplot<-barplot(PropertyAmount_positivos_G1_frecuencias_relativas,
+                                           names.arg = paste0("(", round(PropertyAmount_positivos_G1_h$breaks[-length(PropertyAmount_positivos_G1_h$breaks)], 1), ", ", round(PropertyAmount_positivos_G1_h$breaks[-1], 1), "]"),
+                                           col = "lightblue",
+                                           ylim = c(0, 120),
+                                           main = "PropertyAmount > 0",
+                                           xlab = "Costo total del reclamo (miles euros)",
+                                           ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("99% de los datos", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas centradas sobre las barras
+text(x = PropertyAmount_positivos_G1_barplot,
+     y = PropertyAmount_positivos_G1_frecuencias_relativas,
+     labels = round(PropertyAmount_positivos_G1_frecuencias_relativas, 1),
+     pos = 3, cex = 0.9)
+# Promedio
+mean(PropertyAmount_positivos_G1)*1000
+# G2:
+# Crear histograma sin graficar
+PropertyAmount_positivos_G2_h<-hist(PropertyAmount_positivos_G2,
+                                  breaks = 5,  # Ajusta el número de intervalos 
+                                  plot = FALSE)
+# Calcular frecuencias relativas en porcentaje
+PropertyAmount_positivos_G2_frecuencias_relativas<-(PropertyAmount_positivos_G2_h$counts/sum(PropertyAmount_positivos_G2_h$counts)) * 100
+# Generar etiquetas originales
+PropertyAmount_positivos_G2_labels_originales <- paste0("(", round(PropertyAmount_positivos_G2_h$breaks[-length(PropertyAmount_positivos_G2_h$breaks)], 1), ", ",
+                                                      round(PropertyAmount_positivos_G2_h$breaks[-1], 1), "]")
+# Modificar solo el primer label: Para que no muestre desde 0, sino desde el valor mínimo
+PropertyAmount_positivos_G2_labels_originales[1] <- paste0("(", round(min(PropertyAmount_positivos_G2), 1), ", ", round(PropertyAmount_positivos_G2_h$breaks[2], 1), "]")
+# Crear barplot con formato personalizado
+PropertyAmount_positivos_G2_barplot<-barplot(PropertyAmount_positivos_G2_frecuencias_relativas,
+                                           names.arg = PropertyAmount_positivos_G2_labels_originales,
+                                           col = "lightblue",
+                                           ylim = c(0, 120),
+                                           main = "PropertyAmount > 0",
+                                           xlab = "Costo daños materiales (miles euros)",
+                                           ylab = "Frecuencia relativa (%)")
+# Añadir segunda línea al título
+mtext("1% de los datos", side = 3, line = 0.5, cex = 1)
+# Añadir etiquetas centradas sobre las barras
+text(x = PropertyAmount_positivos_G2_barplot,
+     y = PropertyAmount_positivos_G2_frecuencias_relativas,
+     labels = round(PropertyAmount_positivos_G2_frecuencias_relativas, 1),
+     pos = 3, cex = 0.9)
+# Promedio
+mean(PropertyAmount_positivos_G2[PropertyAmount_positivos_G2<=100000])*1000
+#-------------------------------------------------------------------------------
+# 3.1.1.2 Variables categóricas
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.1.1.2.1 Power
+#-------------------------------------------------------------------------------
+table(datos$Power)
+describe(datos$Power)           
 
 
 
