@@ -570,14 +570,145 @@ mean(PropertyAmount_positivos_G2[PropertyAmount_positivos_G2<=100000])*1000
 #-------------------------------------------------------------------------------
 # 3.1.1.2.1 Power
 #-------------------------------------------------------------------------------
-table(datos$Power)
-        
+# Estadísticos
+# Tabla
+Power_freq_abs<-table(datos$Power)
+# Número de categorías
+Power_categorias<-length(Power_freq_abs)
+# Moda
+Power_moda<-names(Power_freq_abs)[which.max(Power_freq_abs)]  
+#
+# Pie 
+# Frecuencias absolutas ordenadas
+Power_freq_abs_ord<-sort(Power_freq_abs, decreasing = TRUE)
+# Frecuencias relativas ordenadas
+Power_freq_rel<-100*Power_freq_abs_ord/sum(Power_freq_abs_ord)
+# Frecuencias relativas acumuladas ordenadas      
+Power_freq_rel_cum<-cumsum(Power_freq_rel)
+# Frecuencias a no incluir en "Otros"
+Power_freq_rel_top<-which(Power_freq_rel_cum<= 90)
+# Frecuencias a incluir en "Otros"
+Power_freq_rel_otros<-sum(Power_freq_abs_ord[-Power_freq_rel_top])
+# Vector final
+Power_freq_rel_final<-c(Power_freq_abs_ord[Power_freq_rel_top], Otros=Power_freq_rel_otros)
+# Calcular porcentajes
+Power_porcentajes<-round(100 *Power_freq_rel_final/sum(Power_freq_rel_final), 1)
+# Crear etiquetas con nombre + porcentaje
+Power_etiquetas<-paste(names(Power_freq_rel_final),"-",Power_porcentajes, "%")
+# Gráfico
+pie(Power_freq_rel_final,
+    main = "Power",
+    init.angle = 90,
+    col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Power_freq_rel_final)),
+    labels=Power_etiquetas)
+# Añadir segunda línea al título
+mtext("(d:menos potente a o:más potente); ", side = 3, line = 0.5, cex = 1)            
+#-------------------------------------------------------------------------------
+# 3.1.1.2.2 Brand
+#-------------------------------------------------------------------------------
+# Estadísticos
+# Tabla
+Brand_freq_abs<-table(datos$Brand)
+# Número de categorías
+Brand_categorias<-length(Brand_freq_abs)
+# Moda
+Brand_moda<-names(Brand_freq_abs)[which.max(Brand_freq_abs)]  
+#
+# Pie 
+# Frecuencias absolutas ordenadas
+Brand_freq_abs_ord<-sort(Brand_freq_abs, decreasing = TRUE)
+# Frecuencias relativas ordenadas
+Brand_freq_rel<-100*Brand_freq_abs_ord/sum(Brand_freq_abs_ord)
+# Frecuencias relativas acumuladas ordenadas      
+Brand_freq_rel_cum<-cumsum(Brand_freq_rel)
+# Frecuencias a no incluir en "Otros"
+Brand_freq_rel_top<-which(Brand_freq_rel_cum<= 90)
+# Frecuencias a incluir en "Otros"
+Brand_freq_rel_otros<-sum(Brand_freq_abs_ord[-Brand_freq_rel_top])
+# Vector final
+Brand_freq_rel_final<-c(Brand_freq_abs_ord[Brand_freq_rel_top], Otros=Brand_freq_rel_otros)
+# Calcular porcentajes
+Brand_porcentajes<-round(100 *Brand_freq_rel_final/sum(Brand_freq_rel_final), 1)
+# Crear etiquetas con nombre + porcentaje
+Brand_etiquetas<-paste(names(Brand_freq_rel_final),"-",Brand_porcentajes, "%")
+# Gráfico
+pie(Brand_freq_rel_final,
+    main = "Brand",
+    init.angle = 90,
+    col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Brand_freq_rel_final)),
+    labels=Brand_etiquetas)
+#-------------------------------------------------------------------------------
+# 3.1.1.2.3 Gas
+#-------------------------------------------------------------------------------
+# Estadísticos
+# Tabla
+Gas_freq_abs<-table(datos$Gas)
+# Número de categorías
+Gas_categorias<-length(Gas_freq_abs)
+# Moda
+Gas_moda<-names(Gas_freq_abs)[which.max(Gas_freq_abs)]  
+#
+# Pie 
+# Frecuencias absolutas ordenadas
+Gas_freq_abs_ord<-sort(Gas_freq_abs, decreasing = TRUE)
+# Frecuencias relativas ordenadas
+Gas_freq_rel<-100*Gas_freq_abs_ord/sum(Gas_freq_abs_ord)
+# Frecuencias relativas acumuladas ordenadas      
+Gas_freq_rel_cum<-cumsum(Gas_freq_rel)
+# Frecuencias a no incluir en "Otros"
+Gas_freq_rel_top<-which(Gas_freq_rel_cum<= 100)
+# Frecuencias a incluir en "Otros"
+Gas_freq_rel_otros<-sum(Gas_freq_abs_ord[-Gas_freq_rel_top])
+# Vector final
+Gas_freq_rel_final<-c(Gas_freq_abs_ord[Gas_freq_rel_top], Otros=Gas_freq_rel_otros)
+# Calcular porcentajes
+Gas_porcentajes<-round(100 *Gas_freq_rel_final/sum(Gas_freq_rel_final), 1)
+# Crear etiquetas con nombre + porcentaje
+Gas_etiquetas<-paste(names(Gas_freq_rel_final),"-",Gas_porcentajes, "%")
+# Gráfico
+pie(Gas_freq_rel_final,
+    main = "Gas",
+    init.angle = 90,
+    col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Gas_freq_rel_final)),
+    labels=Gas_etiquetas)
+#-------------------------------------------------------------------------------
+# 3.1.1.2.4 Region
+#-------------------------------------------------------------------------------
+# Estadísticos
+# Tabla
+Region_freq_abs<-table(datos$Region)
+# Número de categorías
+Region_categorias<-length(Region_freq_abs)
+# Moda
+Region_moda<-names(Region_freq_abs)[which.max(Region_freq_abs)]  
+#
+# Pie 
+# Frecuencias absolutas ordenadas
+Region_freq_abs_ord<-sort(Region_freq_abs, decreasing = TRUE)
+# Frecuencias relativas ordenadas
+Region_freq_rel<-100*Region_freq_abs_ord/sum(Region_freq_abs_ord)
+# Frecuencias relativas acumuladas ordenadas      
+Region_freq_rel_cum<-cumsum(Region_freq_rel)
+# Frecuencias a no incluir en "Otros"
+Region_freq_rel_top<-which(Region_freq_rel_cum<= 90)
+# Frecuencias a incluir en "Otros"
+Region_freq_rel_otros<-sum(Region_freq_abs_ord[-Region_freq_rel_top])
+# Vector final
+Region_freq_rel_final<-c(Region_freq_abs_ord[Region_freq_rel_top], Otros=Region_freq_rel_otros)
+# Calcular porcentajes
+Region_porcentajes<-round(100 *Region_freq_rel_final/sum(Region_freq_rel_final), 1)
+# Crear etiquetas con nombre + porcentaje
+Region_etiquetas<-paste(names(Region_freq_rel_final),"-",Region_porcentajes, "%")
+# Gráfico
+pie(Region_freq_rel_final,
+    main = "Region",
+    init.angle = 90,
+    col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Region_freq_rel_final)),
+    labels=Region_etiquetas)
 
 
 
-
-
-
+#-------------------------------------------------------------------------------
 # Definición de las variables numéricas
 namesNum <-c("ClaimNb", "Exposure", "CarAge", "DriverAge",
              "Density", "ClaimAmount", "InjuryAmount", "PropertyAmount")

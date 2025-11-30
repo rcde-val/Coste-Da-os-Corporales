@@ -119,22 +119,22 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     \midrule
     IDpol & 2 & Número de póliza. \\
     ClaimNb & 2 & Número de siniestros. \\
-    Exposure & 3 & Tiempo de vigencia y exposición al riesgo, en años. \\
+    Exposure & 2 & Tiempo de vigencia y exposición al riesgo, en años. \\
     Power & 1 &Potencia del coche (en orden ascendente, de d a o). \\
     CarAge & 2 & Antigüedad del vehículo, en años. \\
     DriverAge & 2 & Edad del conductor, en años. \\
-    VehBrand & 1 & Marca del vehículo. \\
-    VehGas & 1 & Tipo de combustible: Diesel o Regular. \\
+    Brand & 1 & Marca del vehículo. \\
+    Gas & 1 & Tipo de combustible: Diesel o Regular. \\
     Density & 2 & Número de habitantes por km² en la ciudad del conductor. \\
     Region & 1 & Región de la póliza en Francia. \\
-    ClaimAmount & 3 & Costo total del reclamo. \\
-    InjuryAmount & 3 & Costo de compensación por lesiones corporales. \\
-    PropertyAmount & 3 & Costo por daños materiales. \\
+    ClaimAmount & 2 & Costo total del reclamo. \\
+    InjuryAmount & 2 & Costo de compensación por lesiones corporales. \\
+    PropertyAmount & 2 & Costo por daños materiales. \\
     \bottomrule
     \end{tabularx}
     \vspace{0.5em}
     \raggedright
-    \footnotesize{\textsuperscript{(1)} 1 = variable categórica, 2 = variable discreta, 3 = variable continua.}
+    \footnotesize{\textsuperscript{(1)} 1 = variable categórica, 2 = numérica}
     \end{table}
 
     % A realizar entre el 01/11/25 y el 21/11/25
@@ -154,15 +154,15 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     					\item El primer histograma corresponde al 99 \% de las pólizas con siniestros y revela que la gran mayoría de los reclamos son de bajo coste: el 96,9 \% no supera los 50.000 euros, mientras que solo el 2,4\% se encuentra entre 50.000 y 100.000 euros, y menos del 1 \% supera los 100.000 euros. El coste promedio dentro de este grupo es de 13.560 euros, lo que confirma que los siniestros de alto importe son excepcionales. El gráfico refuerza esta conclusión, mostrando una barra dominante en el primer intervalo (0–50 miles de euros) y frecuencias marginales en los tramos superiores, lo que evidencia una concentración extrema en valores bajos. 
     					\item El histograma del 1 \% de las pólizas con siniestros muestra que, aunque este grupo corresponde a los casos más costosos, la concentración sigue siendo muy marcada en el primer intervalo: el 98,8 \% de estos reclamos extremos se sitúan entre 161.500 y 5.000.000 euros, con un coste promedio en este tramo de 577.685 euros. Esto indica que, incluso dentro de la cola, la mayoría de los siniestros se ubican en rangos elevados pero moderados en comparación con los máximos observados, aunque siguen siendo significativamente superiores al promedio general. Los intervalos superiores, que incluyen reclamos entre 10 y 15 millones y entre 20 y 25 millones de euros, apenas representan el 0,6 \% cada uno, lo que confirma que los valores más altos son casos excepcionales con un impacto potencial muy significativo en la compañía aseguradora.
     				\end{itemize}
-    			\item \textbf{Costo de compensación por daños corporales (InjuryAmount):} Presenta una alta concentración en valores nulos y una cola prolongada con pocos casos de gran magnitud. El promedio es 615,9 euros, mientras que la mediana y el mínimo son cero; el máximo alcanza 19.972.821 euros, reflejando reclamos excepcionales. La dispersión es elevada (desviación estándar: 40.867 euros) y los indicadores de forma son extremos: asimetría 375,25 y curtosis 165.244,5, lo que evidencia un fuerte sesgo a la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas considerando solo pólizas con siniestros, confirmando la concentración en valores bajos y la existencia de una cola con pocos casos de gran coste. Ambos gráficos se incluyen en los anexos. (\hyperref[Anexo02]{\textcolor{blue}{Anexos - Figura 2}}).
-    			\item \textbf{Costo por daños materiales (PropertyAmount):} La distribución muestra una fuerte concentración en valores nulos y casos positivos menos extremos que en \textit{\textbf{InjuryAmount}}. El promedio es 216,7 euros, la mediana y el mínimo son cero, y el máximo llega a 575.508,8 euros, lo que indica reclamos significativos pero no desproporcionados. La dispersión es alta (desviación estándar: 1.554 euros) y la asimetría (129,54) y curtosis (45.682,36) confirman un sesgo marcado hacia la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas: el primero concentra el 99 \% de los casos por debajo de 12.000 euros, destacando los rangos de 8.000-10.000 euros (26,3 \%), 4.000-6.0000 euros (23,7 \%) y  2.000-4.000 euros (22,3 \%). El segundo muestra el 1 \% restante, casi todo entre 10.400 y 100.000 euros, con algunos reclamos aislados de mayor coste. Aunque existen siniestros elevados, la mayoría se sitúa en valores moderados. Ambos gráficos se incluyen en los anexos. (\hyperref[Anexo02]{\textcolor{blue}{Anexos - Figura 2}}).
+    			\item \textbf{Costo de compensación por daños corporales (InjuryAmount):} Presenta una alta concentración en valores nulos y una cola prolongada con pocos casos de gran magnitud. El promedio es 615,9 euros, mientras que la mediana y el mínimo son cero; el máximo alcanza 19.972.821 euros, reflejando reclamos excepcionales. La dispersión es elevada (desviación estándar: 40.867 euros) y los indicadores de forma son extremos: asimetría 375,25 y curtosis 165.244,5, lo que evidencia un fuerte sesgo a la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas considerando solo pólizas con siniestros, confirmando la concentración en valores bajos y la existencia de una cola con pocos casos de gran coste. Ambos gráficos se incluyen en los anexos. (\hyperref[Anexo03]{\textcolor{blue}{Anexos - Figura 2}}).
+    			\item \textbf{Costo por daños materiales (PropertyAmount):} La distribución muestra una fuerte concentración en valores nulos y casos positivos menos extremos que en \textit{\textbf{InjuryAmount}}. El promedio es 216,7 euros, la mediana y el mínimo son cero, y el máximo llega a 575.508,8 euros, lo que indica reclamos significativos pero no desproporcionados. La dispersión es alta (desviación estándar: 1.554 euros) y la asimetría (129,54) y curtosis (45.682,36) confirman un sesgo marcado hacia la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas: el primero concentra el 99 \% de los casos por debajo de 12.000 euros, destacando los rangos de 8.000-10.000 euros (26,3 \%), 4.000-6.0000 euros (23,7 \%) y  2.000-4.000 euros (22,3 \%). El segundo muestra el 1 \% restante, casi todo entre 10.400 y 100.000 euros, con algunos reclamos aislados de mayor coste. Aunque existen siniestros elevados, la mayoría se sitúa en valores moderados. Ambos gráficos se incluyen en los anexos. (\hyperref[Anexo03]{\textcolor{blue}{Anexos - Figura 2}}).
     		\end{itemize}
-		Tras el análisis detallado de las variables numéricas, se continúa con el estudio de las variables categóricas, examinando su distribución de frecuencias y representación gráfica para identificar patrones relevantes:
+		Tras el análisis detallado de las variables numéricas, se continúa con el estudio de las variables categóricas, examinando su distribución de frecuencias y representación gráfica (\hyperref[Anexo04]{\textcolor{blue}{Anexos - Figura 3}}) para identificar patrones relevantes:
 			\begin{itemize}
-				\item \textbf{Potencia del coche (Power):}
-				\item \textbf{Marca del vehículo (VehBrand):}
-				\item \textbf{Tipo de combustible (VehGas):}
-				\item \textbf{Región de la póliza (Region):}
+				\item \textbf{Potencia del coche (Power):} Representa la potencia del vehículo desde la menor (d) hasta la mayor (o), cuenta con 12 categorías distintas. La categoría más frecuente es f, con 95.902 registros, lo que equivale al 23,2 \% del total. Las categorías d, e, f y g concentran la mayor parte de los datos, con porcentajes de 16,5 \% , 18,6 \% , 23,2 \%  y 22,1 \%  respectivamente, sumando en conjunto aproximadamente 80,4 \%  del total, mientras que las demás categorías, representan solo el 13,2 \% , lo que indica que la mayoría de los vehículos se sitúan en rangos de potencia media.
+				\item \textbf{Marca del vehículo (Brand):} Cuenta con 7 categorías distintas, la más frecuente es “Renault, Nissan or Citroen”, con 218.591 registros, lo que equivale aproximadamente al 52,8 \% del total, mostrando una clara predominancia de estas marcas en el conjunto de datos. Le siguen Japanese (except Nissan) or Korean con 79228 registros (19,1 \%), Opel, General Motors or Ford con 37477 (9,0 \%) y Volkswagen, Audi, Skoda or Seat con 32707 (7,9 \%), mientras que el resto de marcas representan solo el 11,1 \%. Esta distribución indica que más de la mitad de los vehículos pertenecen a marcas del grupo Renault-Nissan-Citroën, evidenciando una concentración significativa en este segmento.
+				\item \textbf{Tipo de combustible (Gas):} Presenta únicamente 2 categorías, regular y diesel. La categoría más frecuente es regular, con 207.610 registros, lo que representa aproximadamente el 50,2 \% del total, mientras que Diesel concentra el 49,8 \% restante. Esta distribución muestra un equilibrio casi perfecto entre ambos tipos de combustible.
+				\item \textbf{Región de la póliza (Region):} Cuenta con 10 categorías diferentes, la más frecuente es Centre, con 160.814 registros, lo que representa aproximadamente el 38,8 \% del total, seguida por Île-de-France con 16,9 \%, Bretagne con 10,2 \%, Pays-de-la-Loire con 9,4 \%, Aquitaine con 7,6 \% y Nord-Pas-de-Calais con 6,6 \%, mientras que el resto de regiones suman el 10,5 \%. Esta distribución evidencia una fuerte concentración en la región Centre, que por sí sola agrupa más de un tercio de los registros, mientras que las demás regiones presentan proporciones significativamente menores.
 			\end{itemize}
 
 		\subsubsection{Análisis descriptivo bivariado}
@@ -222,7 +222,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		\end{tabularx}
 	\end{table}
 
-% Análisis descriptivo univariado (Variables discretas y contínuas): Tabla estadísticos
+% Análisis descriptivo univariado (Variables numéricas): Técnica de segmentación
 	\label{Anexo02}
 	\begin{figure}[htbp]
 		\centering
@@ -251,11 +251,11 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		\hfill
 	\end{figure}
 
-% Análisis descriptivo univariado (Variables discretas y contínuas): Tabla estadísticos
+% Análisis descriptivo univariado (Variables numéricas): Histogramas
 \label{Anexo03}
 \begin{figure}[htbp]
 	\centering
-	\caption{Análisis descriptivo univariado - Histogramas}
+	\caption{Análisis descriptivo univariado (Variables numéricas) - Histogramas}
 	% Primera fila
 	\begin{subfigure}[b]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{Gráfico06.png}
@@ -280,6 +280,29 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	\hfill
 	\begin{subfigure}[b]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{Gráfico11.png}
+	\end{subfigure}
+\end{figure}
+
+% Análisis descriptivo univariado (Variables categóricas): Gráfico de pastel
+\label{Anexo04}
+\begin{figure}[htbp]
+	\centering
+	\caption{Análisis descriptivo univariado (Variables categóricas) - Gráfico de pastel}
+	% Primera fila
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico12.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico13.png}
+	\end{subfigure}
+	% Primera fila
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico14.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico15.png}
 	\end{subfigure}
 \end{figure}
 
