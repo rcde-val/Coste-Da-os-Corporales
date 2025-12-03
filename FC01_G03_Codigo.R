@@ -803,9 +803,6 @@ ggplot(data = subset(datos, Power %in% c("m", "n", "o")),
   theme_minimal() +
   labs(title = "",
        x = "Power", y = "InjuryAmount (Miles euros)")
-
-
-
 #-------------------------------------------------------------------------------
 # 3.1.2.2.3 Brand y ClaimNb
 #-------------------------------------------------------------------------------
@@ -864,8 +861,111 @@ ggplot(data = subset(datos, Brand %in% c("other")),
   theme_minimal() +
   labs(title = "",
        x = "Brand", y = "InjuryAmount (Miles euros)")
+#-------------------------------------------------------------------------------
+# 3.1.2.2.5 Gas y ClaimNb
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Gas)
+# Gas "Diesel" y "Regular"
+ggplot(data = subset(datos, Gas %in% c("Diesel", "Regular")),
+       aes(x = Gas, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Gas", y = "ClaimNb")
+#-------------------------------------------------------------------------------
+# 3.1.2.2.6 Gas y InjuryAmount
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Gas)
+# Gas "Diesel", "Regular"
+ggplot(data = subset(datos, Gas %in% c("Diesel", "Regular")),
+       aes(x = Gas, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Gas", y = "InjuryAmount (Miles euros)")
 
 
+
+
+
+#-------------------------------------------------------------------------------
+# 3.1.2.2.7 Region y ClaimNb
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Region)
+# Region "Aquitaine", "Basse-Normandie" y "Bretagne"
+ggplot(data = subset(datos, Region %in% c("Aquitaine", "Basse-Normandie", "Bretagne")),
+       aes(x = Region, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "ClaimNb")
+# Region "Centre", "Haute-Normandie" y "Ile-de-France"
+ggplot(data = subset(datos, Region %in% c("Centre", "Haute-Normandie", "Ile-de-France")),
+       aes(x = Region, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "ClaimNb")
+# Region "Limousin", "Nord-Pas-de-Calais" y "Pays-de-la-Loire"
+ggplot(data = subset(datos, Region %in% c("Limousin", "Nord-Pas-de-Calais", "Pays-de-la-Loire")),
+       aes(x = Region, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "ClaimNb")
+# Region "Poitou-Charentes"
+ggplot(data = subset(datos, Region %in% c("Poitou-Charentes")),
+       aes(x = Region, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "ClaimNb")
+#-------------------------------------------------------------------------------
+# 3.1.2.2.8 Region y InjuryAmount
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Region)
+# Region "Aquitaine", "Basse-Normandie" y "Bretagne"
+ggplot(data = subset(datos, Region %in% c("Aquitaine", "Basse-Normandie", "Bretagne")),
+       aes(x = Region, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "InjuryAmount (Miles euros)")
+# Region "Centre", "Haute-Normandie" y "Ile-de-France"
+ggplot(data = subset(datos, Region %in% c("Centre", "Haute-Normandie", "Ile-de-France")),
+       aes(x = Region, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "InjuryAmount (Miles euros)")
+# Region "Limousin", "Nord-Pas-de-Calais" y "Pays-de-la-Loire"
+ggplot(data = subset(datos, Region %in% c("Limousin", "Nord-Pas-de-Calais", "Pays-de-la-Loire")),
+       aes(x = Region, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "InjuryAmount (Miles euros)")
+# Region "Poitou-Charentes"
+ggplot(data = subset(datos, Region %in% c("Poitou-Charentes")),
+       aes(x = Region, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Region", y = "InjuryAmount (Miles euros)")
 
 
 
