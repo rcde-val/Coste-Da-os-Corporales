@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  30 NOV 2025 18:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  3 DEC 2025 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -596,118 +596,127 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 [5]
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 157.
+LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 157.
+
 
 [6]
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 158.
-LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 158.
-
 
 [7]
-Underfull \hbox (badness 10000) in alignment at lines 205--205
+Underfull \hbox (badness 10000) in alignment at lines 206--206
 [][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 222--222
+Underfull \hbox (badness 10000) in alignment at lines 223--223
+[][][][] 
+ []
+
+<FC01_G03_Imagenes/Gráfico01.png, id=103, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico01.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico01.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico01.png  used on input line 2
+33.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico02.png, id=104, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico02.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico02.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico02.png  used on input line 2
+37.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico03.png, id=105, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico03.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico03.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico03.png  used on input line 2
+42.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico04.png, id=106, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico04.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico04.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico04.png  used on input line 2
+46.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico05.png, id=107, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico05.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico05.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico05.png  used on input line 2
+50.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico06.png, id=108, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico06.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico06.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico06.png  used on input line 2
+62.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico07.png, id=109, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico07.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico07.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico07.png  used on input line 2
+66.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico08.png, id=110, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico08.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico08.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico08.png  used on input line 2
+71.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico09.png, id=111, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico09.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico09.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico09.png  used on input line 2
+75.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico10.png, id=112, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico10.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico10.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico10.png  used on input line 2
+79.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico11.png, id=113, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico11.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico11.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico11.png  used on input line 2
+83.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico12.png, id=114, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico12.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico12.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico12.png  used on input line 2
+94.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico13.png, id=115, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico13.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico13.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico13.png  used on input line 2
+98.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico14.png, id=116, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico14.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico14.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico14.png  used on input line 3
+02.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+<FC01_G03_Imagenes/Gráfico15.png, id=117, 444.4605pt x 298.716pt>
+File: FC01_G03_Imagenes/Gráfico15.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico15.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico15.png  used on input line 3
+06.
+(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
+
+Underfull \hbox (badness 10000) in alignment at lines 329--329
+[][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 348--348
 [][][][] 
  []
 
 
 
 [8]
-<FC01_G03_Imagenes/Gráfico01.png, id=103, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico01.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico01.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico01.png  used on input line 2
-32.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico02.png, id=104, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico02.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico02.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico02.png  used on input line 2
-36.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico03.png, id=105, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico03.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico03.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico03.png  used on input line 2
-41.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico04.png, id=106, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico04.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico04.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico04.png  used on input line 2
-45.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico05.png, id=107, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico05.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico05.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico05.png  used on input line 2
-49.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico06.png, id=108, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico06.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico06.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico06.png  used on input line 2
-61.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico07.png, id=109, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico07.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico07.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico07.png  used on input line 2
-65.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico08.png, id=110, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico08.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico08.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico08.png  used on input line 2
-70.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico09.png, id=111, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico09.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico09.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico09.png  used on input line 2
-74.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico10.png, id=112, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico10.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico10.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico10.png  used on input line 2
-78.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico11.png, id=113, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico11.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico11.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico11.png  used on input line 2
-82.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico12.png, id=114, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico12.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico12.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico12.png  used on input line 2
-93.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico13.png, id=115, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico13.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico13.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico13.png  used on input line 2
-97.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico14.png, id=116, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico14.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico14.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico14.png  used on input line 3
-01.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico15.png, id=117, 444.4605pt x 298.716pt>
-File: FC01_G03_Imagenes/Gráfico15.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico15.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico15.png  used on input line 3
-05.
-(pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-
 
 [9 <./FC01_G03_Imagenes/Gráfico01.png> <./FC01_G03_Imagenes/Gráfico02.png> <.
 /FC01_G03_Imagenes/Gráfico03.png> <./FC01_G03_Imagenes/Gráfico04.png> <./FC01
@@ -717,9 +726,18 @@ _G03_Imagenes/Gráfico05.png>]
 ./FC01_G03_Imagenes/Gráfico08.png> <./FC01_G03_Imagenes/Gráfico09.png> <./FC0
 1_G03_Imagenes/Gráfico10.png> <./FC01_G03_Imagenes/Gráfico11.png> <./FC01_G03
 _Imagenes/Gráfico12.png> <./FC01_G03_Imagenes/Gráfico13.png> <./FC01_G03_Imag
-enes/Gráfico14.png> <./FC01_G03_Imagenes/Gráfico15.png>] (FC01_G03.bbl)
+enes/Gráfico14.png> <./FC01_G03_Imagenes/Gráfico15.png>]
+<FC01_G03_Imagenes/Gráfico16.png, id=148, 509.5035pt x 310.761pt>
+File: FC01_G03_Imagenes/Gráfico16.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico16.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico16.png  used on input line 3
+57.
+(pdftex.def)             Requested size: 409.71692pt x 249.89891pt.
 
-[11] (FC01_G03.aux
+
+[11 <./FC01_G03_Imagenes/Gráfico16.png>] (FC01_G03.bbl)
+
+[12] (FC01_G03.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
 )
@@ -729,21 +747,23 @@ L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 12920 strings out of 468130
- 214297 string characters out of 5430633
- 638295 words of memory out of 5000000
- 41332 multiletter control sequences out of 15000+600000
+ 12935 strings out of 468130
+ 214682 string characters out of 5430633
+ 641371 words of memory out of 5000000
+ 41343 multiletter control sequences out of 15000+600000
  651764 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,1199b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a
-.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhv
-bo8a.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic
-/uhvr8a.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helve
-tic/uhvro8a.pfb>
-Output written on FC01_G03.pdf (12 pages, 201710 bytes).
+ 75i,12n,79p,1239b,546s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmr10.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/ur
+w/helvetic/uhvb8a.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1
+/urw/helvetic/uhvbo8a.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/urw/helvetic/uhvr8a.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/font
+s/type1/urw/helvetic/uhvro8a.pfb>
+Output written on FC01_G03.pdf (13 pages, 232673 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 40 named destinations out of 1000 (max. 500000)
- 180 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 241 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 185 words of extra memory for PDF output out of 10000 (max. 10000000)
 
