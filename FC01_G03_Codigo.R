@@ -29,20 +29,25 @@ for (pkg in paquetes) {
 install.packages("readxl") # Lector de Excel
 install.packages("ggplot2") # Gráficos
 install.packages("psych") # Estadísticos descriptivos
+install.packages("corrplot") # Correlaciones
 # Carga de paquetes
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
 }
 library("readxl") # Lector de Excel
 library("ggplot2") # Gráficos
-library("psych") # Estadísticos descriptivos 
+library("psych") # Estadísticos descriptivos
+library("corrplot") # Correlaciones
+
 #-------------------------------------------------------------------------------
 # Importación de base de datos
 #-------------------------------------------------------------------------------
 # Lectura de la base de datos
-datos <- read_excel("FC01_G03_BBDD.xlsx")
+datos<-read_excel("FC01_G03_BBDD.xlsx")
 # Convertir en data frame
 datos<-data.frame(datos)
+# Variables numéricas
+datos_numericos<-datos[, sapply(datos,is.numeric)]
 # Encabezado
 head(datos)
 # Resumen
@@ -84,7 +89,7 @@ text(x = ClaimNb_barplot,
 # Estadísticos
 describe(datos$Exposure)
 #
-# k-means para agrupar
+# k-means para agrupar (solo variable Exposure)
 # Normalizar la variable
 Exposure_scaled<-scale(datos$Exposure)
 # Método del codo para determinar el número óptimo de clústers
@@ -705,6 +710,165 @@ pie(Region_freq_rel_final,
     init.angle = 90,
     col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Region_freq_rel_final)),
     labels=Region_etiquetas)
+#-------------------------------------------------------------------------------
+# 3.1.2 Multivariado
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.1.2.1 Variables numéricas
+#-------------------------------------------------------------------------------
+# Correlación Pearson
+datos_numericos_matriz_cor<-cor(datos_numericos,use = "complete.obs",method = "pearson")
+round(datos_numericos_matriz_cor,4)
+# Gráfico
+corrplot(datos_numericos_matriz_cor,
+         method = "circle",      # círculos
+         type = "lower",         # solo la parte inferior
+         tl.col = "black",         # color de las etiquetas
+         tl.cex = 0.8,           # tamaño de las etiquetas
+         col = colorRampPalette(c("red", "grey90", "lightblue"))(200)) # paleta de colores
+#-------------------------------------------------------------------------------
+# 3.1.2.2 Variables categóricas
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.1.2.2.1 Power y ClaimNb
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Power)
+# Power "d", "e" y "f"
+ggplot(data = subset(datos, Power %in% c("d", "e", "f")),
+       aes(x = Power, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "ClaimNb")
+# Power "g", "h" y "i"
+ggplot(data = subset(datos, Power %in% c("g", "h", "i")),
+       aes(x = Power, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "ClaimNb")
+# Power "j", "k" y "l"
+ggplot(data = subset(datos, Power %in% c("j", "k", "l")),
+       aes(x = Power, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "ClaimNb")
+# Power "m", "n" y "o"
+ggplot(data = subset(datos, Power %in% c("m", "n", "o")),
+       aes(x = Power, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "ClaimNb")
+#-------------------------------------------------------------------------------
+# 3.1.2.2.2 Power y InjuryAmount
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Power)
+# Power "d", "e" y "f"
+ggplot(data = subset(datos, Power %in% c("d", "e", "f")),
+       aes(x = Power, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "InjuryAmount (Miles euros)")
+# Power "g", "h" y "i"
+ggplot(data = subset(datos, Power %in% c("g", "h", "i")),
+       aes(x = Power, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "InjuryAmount (Miles euros)")
+# Power "j", "k" y "l"
+ggplot(data = subset(datos, Power %in% c("j", "k", "l")),
+       aes(x = Power, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "InjuryAmount (Miles euros)")
+# Power "m", "n" y "o"
+ggplot(data = subset(datos, Power %in% c("m", "n", "o")),
+       aes(x = Power, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Power", y = "InjuryAmount (Miles euros)")
+
+
+
+#-------------------------------------------------------------------------------
+# 3.1.2.2.3 Brand y ClaimNb
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Brand)
+# Brand "Fiat", "Japanese (except Nissan) or Korean" y "Mercedes, Chrysler or BMW"
+ggplot(data = subset(datos, Brand %in% c("Fiat", "Japanese (except Nissan) or Korean", "Mercedes, Chrysler or BMW")),
+       aes(x = Brand, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Brand", y = "ClaimNb")
+# Brand "Opel, General Motors or Ford", "Renault, Nissan or Citroen" y "Volkswagen, Audi, Skoda or Seat"
+ggplot(data = subset(datos, Brand %in% c("Opel, General Motors or Ford", "Renault, Nissan or Citroen", "Volkswagen, Audi, Skoda or Seat")),
+       aes(x = Brand, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Brand", y = "ClaimNb")
+# Brand "other" 
+ggplot(data = subset(datos, Brand %in% c("other")),
+       aes(x = Brand, y = ClaimNb)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,4)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Brand", y = "ClaimNb")
+#-------------------------------------------------------------------------------
+# 3.1.2.2.4 Brand y InjuryAmount
+#-------------------------------------------------------------------------------
+# Descriptivos
+table(datos$Brand)
+# Brand "Fiat", "Japanese (except Nissan) or Korean" y "Mercedes, Chrysler or BMW"
+ggplot(data = subset(datos, Brand %in% c("Fiat", "Japanese (except Nissan) or Korean", "Mercedes, Chrysler or BMW")),
+       aes(x = Brand, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Brand", y = "InjuryAmount (Miles euros)")
+# Brand "Opel, General Motors or Ford", "Renault, Nissan or Citroen" y "Volkswagen, Audi, Skoda or Seat"
+ggplot(data = subset(datos, Brand %in% c("Opel, General Motors or Ford", "Renault, Nissan or Citroen", "Volkswagen, Audi, Skoda or Seat")),
+       aes(x = Brand, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Brand", y = "InjuryAmount (Miles euros)")
+# Brand "other"
+ggplot(data = subset(datos, Brand %in% c("other")),
+       aes(x = Brand, y = InjuryAmount/1000)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.6, color = "lightblue") +
+  ylim(-0.5,20000)+
+  theme_minimal() +
+  labs(title = "",
+       x = "Brand", y = "InjuryAmount (Miles euros)")
+
+
+
+
+
 
 
 

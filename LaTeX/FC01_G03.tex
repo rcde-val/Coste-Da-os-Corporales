@@ -153,8 +153,8 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     					\item El primer histograma, que corresponde al 99 \% de las pólizas con siniestro, muestra que la mayoría de los reclamos son de bajo coste: el 96,9 \% no supera los 50.000 euros, solo el 2,4 \% está entre 50.000 y 100.000 euros y menos del 1 \% excede los 100.000 euros. El coste promedio es de 13.560 euros, lo que confirma que los siniestros de alto importe son excepcionales y que existe una fuerte concentración en valores bajos.
     					\item El histograma del 1 \% de pólizas más costosas muestra que, aunque pertenecen a la cola de la distribución, el 98,8 \% de los reclamos extremos se concentra entre 161.500 y 5.000.000 euros, con un promedio de 577.685 euros. Los valores más altos, entre 10 y 25 millones, apenas representan el 0,6 \% cada uno, confirmando que los siniestros de importe máximo son casos excepcionales con gran impacto potencial.
     				\end{itemize}
-    			\item \textbf{Costo de compensación por daños corporales (InjuryAmount):} Indica una fuerte concentración en valores nulos y una cola muy prolongada con pocos reclamos de gran magnitud. La media es 615,9 euros, mientras que la mediana y el mínimo son cero, y el máximo alcanza 19.972.821 euros, evidenciando casos excepcionales. La dispersión es elevada (desviación estándar 40.867 euros) y la distribución está fuertemente sesgada a la derecha (asimetría 375,25) y leptocúrtica (curtosis 165.244,5), con alta concentración en valores bajos y presencia de outliers. Histogramas con pólizas con siniestros confirman concentración en valores bajos y una cola con pocos casos de gran coste. (\hyperref[Anexo03]{\textcolor{blue}{Anexos - Figura 2}}).
-    			\item \textbf{Costo por daños materiales (PropertyAmount):} La distribución muestra una fuerte concentración en valores nulos y casos positivos menos extremos que en \textit{\textbf{InjuryAmount}}. El promedio es 216,7 euros, la mediana y el mínimo son cero, y el máximo llega a 575.508,8 euros, lo que indica reclamos significativos pero no desproporcionados. La dispersión es alta (desviación estándar: 1.554 euros) y la asimetría (129,54) y curtosis (45.682,36) confirman un sesgo marcado hacia la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas: el primero concentra el 99 \% de los casos por debajo de 12.000 euros, destacando los rangos de 8.000-10.000 euros (26,3 \%), 4.000-6.0000 euros (23,7 \%) y  2.000-4.000 euros (22,3 \%). El segundo muestra el 1 \% restante, casi todo entre 10.400 y 100.000 euros, con algunos reclamos aislados de mayor coste. Aunque existen siniestros elevados, la mayoría se sitúa en valores moderados. Ambos gráficos se incluyen en los anexos. (\hyperref[Anexo03]{\textcolor{blue}{Anexos - Figura 2}}).
+    			\item \textbf{Costo de compensación por daños corporales (InjuryAmount):} Indica una fuerte concentración en valores nulos y una cola muy prolongada con pocos reclamos de gran magnitud. La media es 615,9 euros, mientras que la mediana y el mínimo son cero, y el máximo alcanza 19.972.821 euros, evidenciando casos excepcionales. La dispersión es elevada (desviación estándar 40.867 euros) y la distribución está fuertemente sesgada a la derecha (asimetría 375,25) y leptocúrtica (curtosis 165.244,5), con alta concentración en valores bajos y presencia de outliers. Histogramas con pólizas con siniestros confirman concentración en valores bajos y una cola con pocos casos de gran coste (\hyperref[Anexo03]{\textcolor{blue}{Anexos - Figura 2}}).
+    			\item \textbf{Costo por daños materiales (PropertyAmount):} La distribución muestra una fuerte concentración en valores nulos y casos positivos menos extremos que en \textit{InjuryAmount}. El promedio es 216,7 euros, la mediana y el mínimo son cero, y el máximo llega a 575.508,8 euros, lo que indica reclamos significativos pero no desproporcionados. La dispersión es alta (desviación estándar: 1.554 euros) y la asimetría (129,54) y curtosis (45.682,36) confirman un sesgo marcado hacia la derecha. Para evitar que los ceros oculten el patrón real, se elaboraron dos histogramas: el primero concentra el 99 \% de los casos por debajo de 12.000 euros, destacando los rangos de 8.000-10.000 euros (26,3 \%), 4.000-6.0000 euros (23,7 \%) y  2.000-4.000 euros (22,3 \%). El segundo muestra el 1 \% restante, casi todo entre 10.400 y 100.000 euros, con algunos reclamos aislados de mayor coste. Aunque existen siniestros elevados, la mayoría se sitúa en valores moderados. Ambos gráficos se incluyen en los anexos (\hyperref[Anexo03]{\textcolor{blue}{Anexos - Figura 2}}).
     		\end{itemize}
 		Tras el análisis detallado de las variables numéricas, se continúa con el estudio de las variables categóricas, examinando su distribución de frecuencias y representación gráfica (\hyperref[Anexo04]{\textcolor{blue}{Anexos - Figura 3}}) para identificar patrones relevantes:
 			\begin{itemize}
@@ -166,7 +166,13 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 
 		\subsubsection{Análisis descriptivo bivariado}
 		
-		El análisis de correlación entre las variables numéricas muestra que la mayoría de las relaciones son débiles o prácticamente nulas, lo que indica baja dependencia lineal entre ellas (Pearson). Destacan correlaciones muy altas, como era de esperarse, entre ClaimAmount e InjuryAmount ($\approx 99\%$), así como entre ClaimAmount y PropertyAmount ($\approx 64 \%$). También se observa una correlación considerable entre ClaimNb y PropertyAmount ($\approx 66 \%$), indicando que un mayor número de reclamaciones tiende a relacionarse con mayores daños materiales. El resto de las variables, como CarAge, DriverAge, Density y Exposure, presentan correlaciones muy bajas con las variables de coste, lo que sugiere que no influyen significativamente en el valor de los siniestros. En general, el patrón confirma que las variables monetarias están fuertemente interrelacionadas, mientras que las características del vehículo y del conductor tienen poca relación lineal con los montos reclamados. En el Anexo se incluye la matriz de correlaciones (\hyperref[Anexo05]{\textcolor{blue}{Anexos - Cuadro 3}}), así como un mapa de calor (\hyperref[Anexo06]{\textcolor{blue}{Anexos - Figura 4}}) .
+		El análisis de correlación entre las variables numéricas muestra que la mayoría de las relaciones son débiles o prácticamente nulas, lo que indica baja dependencia lineal entre ellas (Pearson). Destacan correlaciones muy altas, como era de esperarse, entre\textit{ ClaimAmount} e \textit{InjuryAmount} ($\approx 99\%$), así como entre \textit{ClaimAmount} y \textit{PropertyAmount} ($\approx 64 \%$). También se observa una correlación considerable entre \textit{ClaimNb} y \textit{PropertyAmount} ($\approx 66 \%$), indicando que un mayor número de reclamaciones tiende a relacionarse con mayores daños materiales. El resto de las variables, como \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Exposure}, presentan correlaciones muy bajas con las variables de coste, lo que sugiere que no influyen significativamente en el valor de los siniestros. En general, el patrón confirma que las variables monetarias están fuertemente interrelacionadas, mientras que las características del vehículo y del conductor tienen poca relación lineal con los montos reclamados. En el Anexo se incluye la matriz de correlaciones (\hyperref[Anexo05]{\textcolor{blue}{Anexos - Cuadro 3}}), así como un mapa de calor (\hyperref[Anexo06]{\textcolor{blue}{Anexos - Figura 4}}). \\
+		
+		Se analiza la relación entre variables categóricas y dos indicadores clave: el número de reclamos (\textit{ClaimNb}) y el coste de daños corporales (\textit{InjuryAmount}).\\
+		
+		Los vehículos de menor potencia concentran más siniestros, alcanzando hasta 3 o 4 reclamos por póliza, mientras que los de mayor potencia no superan los dos, lo que indica que la potencia no incrementa la frecuencia de siniestros (\hyperref[Anexo07]{\textcolor{blue}{Anexos - Figura 5}}). En cuanto al coste de lesiones, la mayoría de los valores se sitúan cerca de cero, reflejando montos bajos en la mayoría de los casos. Sin embargo, se observan outliers en categorías como f y n, con cifras cercanas a 20.000.000 euros. En general, no se aprecia una relación clara entre la potencia y el importe de las lesiones corporales (\hyperref[Anexo08]{\textcolor{blue}{Anexos - Figura 6}}).\\
+		
+		En cuanto a la marca del vehículo, se observa que la frecuencia de siniestros se mantiene en niveles bajos para la mayoría de las categorías, con valores que oscilan entre 1 y 2 reclamos por póliza. Sin embargo, existen casos puntuales que alcanzan hasta 4 reclamos, especialmente en marcas japonesas (excepto Nissan) o coreanas, así como en Opel, General Motors o Ford (\hyperref[Anexo09]{\textcolor{blue}{Anexos - Figura 7}}). En cuanto al coste por daños corporales, la mayoría de los valores se sitúan cerca de cero, reflejando importes reducidos en la mayoría de los casos. No obstante, destacan dos casos extremos que corresponden a pólizas de vehículos de marca Renault, Nissan o Citroën, con cifras que alcanzan aproximadamente los 20.000.000 euros (\hyperref[Anexo10]{\textcolor{blue}{Anexos - Figura 8}}). 
 		
     % A realizar entre el 22/11/25 y el 19/12/25
     \subsection{Modelización seleccionada y objetivos a alcanzar}
@@ -223,11 +229,11 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		\end{tabularx}
 	\end{table}
 
-% Análisis descriptivo univariado (Variables numéricas): Técnica de segmentación
+% Análisis descriptivo univariado (Variables numéricas)
 	\label{Anexo02}
 	\begin{figure}[htbp]
 		\centering
-		\caption{Análisis descriptivo univariado - Técnica de segmentación}
+		\caption{Análisis descriptivo univariado}
 		% Primera fila
 		\begin{subfigure}[b]{0.4\textwidth}
 			\includegraphics[width=\textwidth]{Gráfico01.png}
@@ -297,7 +303,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	\begin{subfigure}[b]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{Gráfico13.png}
 	\end{subfigure}
-	% Primera fila
+	% Segunda fila
 	\begin{subfigure}[b]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{Gráfico14.png}
 	\end{subfigure}
@@ -357,6 +363,91 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		\includegraphics[width=\textwidth]{Gráfico16.png}
 	\end{subfigure}
 \end{figure}
+
+% Análisis descriptivo bivariado (Variables categóricas): Jitter plot - Power vs ClaimNb
+\label{Anexo07}
+\begin{figure}[htbp]
+	\centering
+	\caption{Jitter plot - Power vs ClaimNb}
+	% Primera fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico17.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico18.png}
+	\end{subfigure}
+	% Segunda fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico19.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico20.png}
+	\end{subfigure}
+\end{figure}
+
+% Análisis descriptivo bivariado (Variables categóricas): Jitter plot - Power vs InjuryAmount
+\label{Anexo08}
+\begin{figure}[htbp]
+	\centering
+	\caption{Jitter Plot - Power vs InjuryAmount}
+	% Primera fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico21.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico22.png}
+	\end{subfigure}
+	% Segunda fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico23.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico24.png}
+	\end{subfigure}
+\end{figure}
+
+% Análisis descriptivo bivariado (Variables categóricas): Jitter plot - Brand vs ClaimNb
+\label{Anexo09}
+\begin{figure}[htbp]
+	\centering
+	\caption{Jitter plot - Brand vs ClaimNb}
+	% Primera fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico25.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico26.png}
+	\end{subfigure}
+	% Segunda fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico27.png}
+	\end{subfigure}
+\end{figure}
+
+% Análisis descriptivo bivariado (Variables categóricas): Jitter plot - Brand vs InjuryAmount
+\label{Anexo10}
+\begin{figure}[htbp]
+	\centering
+	\caption{Jitter Plot - Power vs InjuryAmount}
+	% Primera fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico28.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico29.png}
+	\end{subfigure}
+	% Segunda fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico30.png}
+	\end{subfigure}
+\end{figure}
+
 
 % Referencias
 \newpage
