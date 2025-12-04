@@ -1215,3 +1215,17 @@ qqnorm(res_dev); qqline(res_dev, col="red")
 cooks_d <- cooks.distance(fit_glm_2)
 plot(cooks_d, type="h", main="Distancia de Cook")
 abline(h = 4 / (nrow(datos)-length(coef(fit_glm_2))), col="red")
+
+
+
+
+
+
+
+#######
+#CUANTIFICACIÓN DE RIESGOS
+injury_cost<-datos$InjuryAmount
+kernel<-density(injury_cost);kernel
+kernel2<-density(injury_cost,bw="SJ")
+kernel3<-density(injury_cost,kernel="epanechnikov",bw="SJ")
+sum(injury_cost>0)
