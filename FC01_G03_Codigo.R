@@ -887,11 +887,6 @@ ggplot(data = subset(datos, Gas %in% c("Diesel", "Regular")),
   theme_minimal() +
   labs(title = "",
        x = "Gas", y = "InjuryAmount (Miles euros)")
-
-
-
-
-
 #-------------------------------------------------------------------------------
 # 3.1.2.2.7 Region y ClaimNb
 #-------------------------------------------------------------------------------

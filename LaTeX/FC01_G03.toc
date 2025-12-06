@@ -8,6 +8,8 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Análisis descriptivo univariado}{5}{subsubsection.3.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.2}Análisis descriptivo bivariado}{7}{subsubsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.2}Modelización seleccionada y objetivos a alcanzar}{8}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Número de siniestros (Modelización estadística)}{8}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Costo del siniestro (Cuantificación de riesgos)}{9}{subsubsection.3.2.2}%
 \contentsline {section}{\numberline {4}Resultados}{9}{section.4}%
 \contentsline {section}{\numberline {5}Informe ejecutivo}{9}{section.5}%
 \contentsline {section}{\numberline {6}Anexos}{9}{section.6}%
