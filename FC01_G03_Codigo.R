@@ -26,6 +26,7 @@ for (pkg in paquetes) {
     install.packages(pkg)
   }
 }
+install.packages("writexl") # Escribir Excel
 install.packages("readxl") # Lector de Excel
 install.packages("ggplot2") # Gráficos
 install.packages("psych") # Estadísticos descriptivos
@@ -34,6 +35,7 @@ install.packages("corrplot") # Correlaciones
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
 }
+library("writexl") # Escribir Excel
 library("readxl") # Lector de Excel
 library("ggplot2") # Gráficos
 library("psych") # Estadísticos descriptivos
@@ -327,6 +329,10 @@ text(x = Density_barplot,
      y = DensityCluster_freq_rel,
      labels = round(DensityCluster_freq_rel, 1),
      pos = 3)
+#
+
+# Escribir en Excel
+write_xlsx(datos, "FC01_G03_BBDD_v02.xlsx")
 #-------------------------------------------------------------------------------
 # 3.1.1.1.6 ClaimAmount
 #-------------------------------------------------------------------------------
@@ -961,6 +967,51 @@ ggplot(data = subset(datos, Region %in% c("Poitou-Charentes")),
   theme_minimal() +
   labs(title = "",
        x = "Region", y = "InjuryAmount (Miles euros)")
+#-------------------------------------------------------------------------------
+# 3.2. Modelización seleccionada y objetivos a alcanzar
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.2.1 Número de siniestros (ClaimNb)
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# 3.2.1.1 Modelo Poisson
+#-------------------------------------------------------------------------------
+ClaimNb_Poisson_01<-glm( ClaimNb ~ Exposure, data=datos, family=poisson)
+ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + Power, data=datos, family=poisson)
+summary(ClaimNb_Poisson_01)
+summary(ClaimNb_Poisson_02)
+anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02)
+table(datos$Power)
+#-------------------------------------------------------------------------------
+# 3.2.1.2 Modelo GLM: Elección binaria - logit y probit
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# 3.2.1.3 Modelo GLM: Elección multinomial
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# 3.2.1.4 Modelo GLM: Elección multinomial ordenado
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# 3.2.1.5 Modelo GLM: Elección multinomial anidado
+#-------------------------------------------------------------------------------
+
+
+
+#-------------------------------------------------------------------------------
+# 3.2.2 Coste del siniestro (InjuryAmount)
+#-------------------------------------------------------------------------------
+
+
+
+
+
+
 
 
 
