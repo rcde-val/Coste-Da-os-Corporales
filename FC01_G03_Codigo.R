@@ -32,6 +32,7 @@ install.packages("ggplot2") # Gráficos
 install.packages("psych") # Estadísticos descriptivos
 install.packages("corrplot") # Correlaciones
 install.packages("dplyr") # Tratamiento de data frame
+install.packages("factoextra") # Componentes principales
 # Carga de paquetes
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
@@ -42,6 +43,7 @@ library("ggplot2") # Gráficos
 library("psych") # Estadísticos descriptivos
 library("corrplot") # Correlaciones
 library("dplyr") # Tratamiento de data frame
+library("factoextra") # Componentes principales
 #-------------------------------------------------------------------------------
 # Importación de base de datos
 #-------------------------------------------------------------------------------
@@ -104,7 +106,10 @@ Exposure_wss<-sapply(1:10, function(k){
 plot(1:10, Exposure_wss, type = "b", pch = 19,
      xlab = "Número de clusters (k)",
      ylab = "Suma de cuadrados dentro del cluster",
-     main = "Método del codo")
+     main = "Método del codo",
+     col="lightblue")
+# Añadir segunda línea al título
+mtext("(Exposure)", side = 3, line = 0.5, cex = 1)
 # Aplicación del método de k-means
 set.seed(123)
 Exposure_kmeans_result<-kmeans(Exposure_scaled,centers=4,nstart=25)
@@ -165,7 +170,10 @@ CarAge_wss<-sapply(1:10, function(k){
 plot(1:10, CarAge_wss, type = "b", pch = 19,
      xlab = "Número de clusters (k)",
      ylab = "Suma de cuadrados dentro del cluster",
-     main = "Método del codo")
+     main = "Método del codo",
+     col="lightblue")
+# Añadir segunda línea al título
+mtext("(CarAge)", side = 3, line = 0.5, cex = 1)
 # Aplicación del método de k-means
 set.seed(123)
 CarAge_kmeans_result<-kmeans(CarAge_scaled,centers=4,nstart=25)
@@ -209,7 +217,7 @@ text(x = CarAge_barplot,
      labels = round(CarAgeCluster_freq_rel, 1),
      pos = 3)
 #-------------------------------------------------------------------------------
-# 3.1.1.1.4 DriveAge
+# 3.1.1.1.4 DriverAge
 #-------------------------------------------------------------------------------
 # Estadísticos
 describe(datos$DriverAge)
@@ -226,7 +234,10 @@ DriverAge_wss<-sapply(1:10, function(k){
 plot(1:10, DriverAge_wss, type = "b", pch = 19,
      xlab = "Número de clusters (k)",
      ylab = "Suma de cuadrados dentro del cluster",
-     main = "Método del codo")
+     main = "Método del codo",
+     col="lightblue")
+# Añadir segunda línea al título
+mtext("(DriverAge)", side = 3, line = 0.5, cex = 1)
 # Aplicación del método de k-means
 set.seed(123)
 DriverAge_kmeans_result<-kmeans(DriverAge_scaled,centers=4,nstart=25)
@@ -287,7 +298,10 @@ Density_wss<-sapply(1:10, function(k){
 plot(1:10, Density_wss, type = "b", pch = 19,
      xlab = "Número de clusters (k)",
      ylab = "Suma de cuadrados dentro del cluster",
-     main = "Método del codo")
+     main = "Método del codo",
+     col="lightblue")
+# Añadir segunda línea al título
+mtext("(Density)", side = 3, line = 0.5, cex = 1)
 # Aplicación del método de k-means
 set.seed(123)
 Density_kmeans_result<-kmeans(Density_scaled,centers=4,nstart=25)
@@ -630,7 +644,10 @@ PowerNum_wss<-sapply(1:10, function(k){
 plot(1:10, PowerNum_wss, type = "b", pch = 19,
      xlab = "Número de clusters (k)",
      ylab = "Suma de cuadrados dentro del cluster",
-     main = "Método del codo")
+     main = "Método del codo",
+     col="lightblue")
+# Añadir segunda línea al título
+mtext("(Power)", side = 3, line = 0.5, cex = 1)
 # Aplicación del método de k-means
 set.seed(123)
 PowerNum_kmeans_result<-kmeans(PowerNum_scaled,centers=4,nstart=25)
@@ -1032,16 +1049,13 @@ ggplot(data = subset(datos, Region %in% c("Poitou-Charentes")),
 # 3.2.1.1 Modelo Poisson
 #-------------------------------------------------------------------------------
 ClaimNb_Poisson_01<-glm( ClaimNb ~ offset(log(Exposure)), data=datos, family=poisson)
-ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + DriverAge, data=datos, family=poisson)
-ClaimNb_Poisson_03<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster, data=datos, family=poisson)
-ClaimNb_Poisson_04<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density, data=datos, family=poisson)
-ClaimNb_Poisson_05<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge, data=datos, family=poisson)
-ClaimNb_Poisson_06<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster, data=datos, family=poisson)
-ClaimNb_Poisson_07<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas, data=datos, family=poisson)
-ClaimNb_Poisson_08<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster, data=datos, family=poisson)
-ClaimNb_Poisson_09<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster + InjuryAmount, data=datos, family=poisson)
-ClaimNb_Poisson_10<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster + InjuryAmount + PropertyAmount, data=datos, family=poisson)
-ClaimNb_Poisson_11<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster + InjuryAmount + PropertyAmount + ClaimAmount, data=datos, family=poisson)
+ClaimNb_Poisson_02<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge, data=datos, family=poisson)
+ClaimNb_Poisson_03<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density, data=datos, family=poisson)
+ClaimNb_Poisson_04<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge, data=datos, family=poisson)
+ClaimNb_Poisson_05<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster, data=datos, family=poisson)
+ClaimNb_Poisson_06<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas, data=datos, family=poisson)
+ClaimNb_Poisson_07<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas + PowerNumCluster, data=datos, family=poisson)
+ClaimNb_Poisson_08<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas + PowerNumCluster +  BrandCluster, data=datos, family=poisson)
 summary(ClaimNb_Poisson_01)
 summary(ClaimNb_Poisson_02)
 summary(ClaimNb_Poisson_03)
@@ -1050,13 +1064,7 @@ summary(ClaimNb_Poisson_05)
 summary(ClaimNb_Poisson_06)
 summary(ClaimNb_Poisson_07)
 summary(ClaimNb_Poisson_08)
-summary(ClaimNb_Poisson_09)
-summary(ClaimNb_Poisson_10)
-summary(ClaimNb_Poisson_11)
 anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08)
-anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09)
-anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09,ClaimNb_Poisson_10)
-anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09,ClaimNb_Poisson_10,ClaimNb_Poisson_11)
 # ¿Hay sobredispersión?
 ClaimNb_Poisson_mean<-mean(datos$ClaimNb)
 ClaimNb_Poisson_var<-var(datos$ClaimNb)
@@ -1077,30 +1085,99 @@ mtext("Poisson", side = 3, line = 0.5, cex = 1)
 # Diágnosis del modelo
 # Extraer residuos
 ClaimNb_Poisson_Pred_residuos<-residuals(ClaimNb_Poisson_08,type="deviance")
+# Histograma
+hist(ClaimNb_Poisson_Pred_residuos,
+     main="Residuos de desviación",
+     xlab = "Valor de los residuos",
+     ylab="Frecuencia absoluta",
+     col="lightblue",
+     breaks=20)
+# Añadir segunda línea al título
+mtext("Poisson", side = 3, line = 0.5, cex = 1)
 #-------------------------------------------------------------------------------
 # 3.2.1.2 Modelo GLM: Elección binaria - logit y probit
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
-# 3.2.1.3 Modelo GLM: Elección multinomial
+# 3.2.1.3.1 Modelo GLM: Elección multinomial
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
-# 3.2.1.4 Modelo GLM: Elección multinomial ordenado
+# 3.2.1.3.2 Modelo GLM: Elección multinomial ordenado
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
-# 3.2.1.5 Modelo GLM: Elección multinomial anidado
+# 3.2.1.3.3 Modelo GLM: Elección multinomial anidado
 #-------------------------------------------------------------------------------
 
 
+#-------------------------------------------------------------------------------
+# 3.2.1.4 Cluster jerárquico aglomerativo
+#-------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------
-# 3.2.2 Coste del siniestro (InjuryAmount)
+# 3.2.1.5 Cluster jerárquico divisivo
 #-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# 3.2.1.6 Cluster no jerárquico - k means
+#-------------------------------------------------------------------------------
+# Cluster Exposure
+round(Exposure_kmeans_result$centers,1)
+round(Exposure_centroides_original,1)
+# Mostrar tamaño de cada grupo
+print(table(datos$ExposureCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+print(round(ExposureCluster_rango,1))
+#
+# Cluster CarAge
+round(CarAge_kmeans_result$centers,1)
+round(CarAge_centroides_original,1)
+# Mostrar tamaño de cada grupo
+print(table(datos$CarAgeCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+print(round(CarAgeCluster_rango,1))
+#
+# Cluster DriverAge
+round(DriverAge_kmeans_result$centers,1)
+round(DriverAge_centroides_original,1)
+# Mostrar tamaño de cada grupo
+print(table(datos$DriverAgeCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+print(round(DriverAgeCluster_rango,1))
+#
+# Cluster Density
+round(Density_kmeans_result$centers,1)
+round(Density_centroides_original,1)
+# Mostrar tamaño de cada grupo
+print(table(datos$DensityCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+print(round(DensityCluster_rango,1))
+#
+# Cluster Power
+round(PowerNum_kmeans_result$centers,1)
+round(PowerNum_centroides_original,1)
+# Mostrar tamaño de cada grupo
+print(table(datos$PowerNumCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+print(round(PowerNumCluster_rango,1))
+#-------------------------------------------------------------------------------
+# 3.2.1.7 Análisis PCA
+#-------------------------------------------------------------------------------
+temporal<-cbind(Exposure_scaled,CarAge_scaled,DriverAge_scaled,Density_scaled,PowerNum_scaled)
+cor(temporal)
+princomp(temporal)
+summary(princomp(temporal))
+fviz_eig(princomp(temporal), addlabels = TRUE)
+fviz_pca_var(princomp(temporal))
+fviz_cos2(princomp(temporal), choice = "var", axes = 1:2)
+fviz_pca_var(princomp(temporal), col.var = "cos2",
+             gradient.cols = c("black", "orange", "green"),
+             repel = TRUE)
 
 
 

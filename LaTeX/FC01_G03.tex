@@ -141,7 +141,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     \subsection{Análisis descriptivo univariado y bivariado de la base de datos}
     
     	\subsubsection{Análisis descriptivo univariado}
-    	Se realiza un análisis descriptivo de las variables numéricas considerando medidas de tendencia central, dispersión y forma (\hyperref[Anexo01]{\textcolor{blue}{Cuadro 2}}). Adicionalmente, para las variables Exposure, CarAge, DriverAge y Density se aplica una técnica de segmentación mediante el método de k-means (\hyperref[Anexo02]{\textcolor{blue}{Figura 1}}). Esta metodología permite clasificar los datos en conjuntos homogéneos, minimizando la variabilidad interna dentro de cada grupo y maximizando la diferencia entre ellos. Concluido este análisis, se procede al estudio de las variables categóricas, examinando su distribución de frecuencias y representaciones gráficas para identificar patrones relevantes. Los aspectos más significativos se detallan a continuación:
+    	Se realiza un análisis descriptivo de las variables numéricas considerando medidas de tendencia central, dispersión y forma (\hyperref[Anexo01]{\textcolor{blue}{Cuadro 2}}). Adicionalmente, para las variables Exposure, CarAge, DriverAge y Density se aplica una técnica de segmentación mediante el método de k-means (\hyperref[Anexo02]{\textcolor{blue}{Figura 1}}). Concluido este análisis, se procede al estudio de las variables categóricas, examinando su distribución de frecuencias y representaciones gráficas para identificar patrones relevantes. Los aspectos más significativos se detallan a continuación:
     		\begin{itemize}
     			\item \textbf{Número de siniestros (ClaimNb):} Presenta valores muy bajos, con media de 0,04 y mediana cero, debido a que el 96,1 \% de las pólizas no registraron siniestros. La distribución es altamente sesgada a la derecha (asimetría 5,78) y leptocúrtica (curtosis 38,79), concentrada en cero pero con algunos valores extremos que generan gran variabilidad relativa, reflejada en una desviación estándar de 0,22 frente a una media muy pequeña.
     			\item \textbf{Tiempo de vigencia y exposición al riesgo (Exposure):} Caracterizada por una duración promedio de medio año (media 0,56; mediana 0,54) con baja variabilidad (desviación estándar 0,37), es decir, pólizas con duraciones similares. La distribución es prácticamente simétrica (asimetría -0,05) y platicúrtica (curtosis -1,57), más plana que la normal, con menor concentración en torno a la media y colas ligeras.
@@ -187,12 +187,27 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
         		\item \textbf{Modelo Poisson:} método estadístico donde los datos son números enteros no negativos, que permite identificar qué variables explicativas influyen en la frecuencia de un evento.
         		\item \textbf{Modelos lineales generalizados (GLM):} Existen diversos modelos que constituyen casos particulares. En este trabajo nos centraremos en aquellos que se aplican a variables dependientes de elección discreta.
         			\begin{enumerate}
-        				\item \textbf{Elección binaria - logit y probit:}
-        				\item \textbf{Elección multinomial:}
-        				\item \textbf{Elección multinomial ordenada:}
-        				\item \textbf{Elección multinomial anidada:}
+        				\item \textbf{Elección binaria - logit y probit:} Describe situaciones en las que la variable dependiente del modelo econométrico es discreta y toma únicamente dos valores posibles. En nuestro caso, utilizaremos variables ficticias binarias que adoptan los valores 0 y 1, donde 1 indica que el individuo ha tenido al menos un siniestro y 0 indica que no ha tenido siniestros. En estos modelos, se supone una relación no lineal entre las variables. El término de error sigue una distribución logística (modelo logit) o normal (probit).
+        				\item \textbf{Elección multinomial:} No lo utilizamos porque este tipo de modelo está pensado para variables cualitativas con categorías sin orden, como elegir entre colores o marcas. En nuestro caso, el número de siniestros (0, 1, 2, …) tiene un orden natural y representa cantidades, no categorías independientes. Si tratáramos cada número como una categoría separada, el modelo ignoraría esa relación.
+        				\item \textbf{Elección multinomial ordenada:} Se utiliza cuando la variable dependiente tiene categorías con orden, pero no es estrictamente numérica. Por ejemplo, medir el nivel de satisfacción: bajo, medio y alto. Aquí hay un orden, pero no sabemos si la distancia entre 'bajo' y 'medio' es igual a la de 'medio' y 'alto'. En cambio, el número de siniestros es una variable de conteo, donde las diferencias sí son cuantitativas y significativas.
+        				\item \textbf{Elección multinomial anidada:} Está pensado para decisiones jerárquicas entre alternativas cualitativas, no para cantidades. Usarlo para número de siniestros sería conceptualmente incorrecto porque no hay un proceso de elección jerárquico.
         			\end{enumerate}
+   				\item \textbf{Cluster jerárquico aglomerativo:} Pendiente
+        		\item \textbf{Cluster jerárquico divisivo:} Víctor Alonso
+        		\item \textbf{Cluster no jerárquico - k means:} Es un método de agrupamiento que busca dividir un conjunto de datos en 'k' grupos (clusters) basados en similitud. Es un algoritmo iterativo que elige 'k' centros (centroides) iniciales y asigna cada observación al centro más cercano. Luego recalcula cada centro como la media de los puntos en su grupo y repite este proceso hasta que las asignaciones no cambian. El objetivo es que los grupos sean lo más parecidos posibles entre sí y diferentes de los otros grupos.\\
         		
+        		Para aplicar el algoritmo k-means, se seleccionaron las variables \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power} (esta última convertida previamente a formato numérico). Todas fueron normalizadas mediante estandarización ($\frac{x-media}{desv. estandar}$). \\
+        		
+        		Para determinar el número óptimo de clusters (k), utilizamos el método del codo, que analiza la relación entre el número de clusters y la suma total de cuadrados dentro de los grupos (WSS). El punto donde la curva deja de disminuir de forma pronunciada y comienza a aplanarse se denomina 'codo'. En nuestro caso, para las variables analizadas, el número óptimo de clusters es 4 (\hyperref[Anexo15]{\textcolor{blue}{Figura 13}}). A continuación, se presentan los principales comentarios que resumen los resultados detallados en el Cuadro 4 del anexo (\hyperref[Anexo16]{\textcolor{blue}{Cuadro 4}}):
+        		\begin{itemize}
+        			\item \textbf{Exposure:} Clúster 4 tiene la mayor vigencia (1 año en promedio, rango de 0,8 a 2 años), representa el 35 \%. Clúster 1 la más corta (0,1 años en promedio, rango hasta 0,3 años), aporta el 31 \%. Ambos suman 66 \% del total.
+        			\item \textbf{CarAge:} Clúster 1 concentra vehículos nuevos (2,7 años en promedio, rango de 0 hasta 6 años) con 49 \%. Clúster 2, antigüedad intermedia (9,3 años en promedio, rango 7–13 años), aporta 35 \%. Ambos simbolizan el 84 \%
+        			\item \textbf{DriverAge:} Clúster 2 reúne edades medias (40,9 años en promedio, rango de 35–47) con 32 \%. Clúster 3, conductores mayores (54 años en promedio, rango 48–62 años), representa 29 \%.
+        			\item \textbf{Density:} Clúster 1 con zonas poco pobladas (398,9 km2, rango hasta 2.317), constituyendo el 80\% del total.
+        			\item \textbf{Power:} Clúster 2 concentra potencia media-baja (3,7 en promedio, rango de 3–5) con el 50 \%. Clúster 1, la más baja (1,5 en promedio, rango hasta 3), aporta 35 \%.
+        		\end{itemize}
+   
+           		\item \textbf{Análisis PCA:} Pendiente
         	\end{enumerate}
         	
         \subsubsection{Costo del siniestro (Cuantificación de riesgos)}
@@ -534,6 +549,77 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		\includegraphics[width=\textwidth]{Gráfico40.png}
 	\end{subfigure}
 \end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Cluster no jerárquico - k means
+\label{Anexo15}
+\begin{figure}[htbp]
+	\centering
+	\caption{Cluster no jerárquico - k means}
+	% Primera fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico41.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico42.png}
+	\end{subfigure}
+	% Segunda fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico43.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico44.png}
+	\end{subfigure}
+	% Tercera fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico45.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Cluster no jerárquico - k means
+\label{Anexo16}
+\begin{table}[H]
+	\centering
+	\caption{Clúster no jerárquico - k means}
+	\begin{tabularx}{\textwidth}{llrrrrr}
+		\toprule
+		\textbf{Concepto} & \textbf{Cluster} & \textbf{Exposure} & \textbf{CarAge} & \textbf{DriverAge} & \textbf{Density} & \textbf{Power} \\
+		\midrule
+		\multirow{4}{*}{Centroide estand.} 
+		& 1 & -1,2 & -0,8 & -1,2 & -0,3 & -0,9\\
+		& 2 & -0,4 & 0,4 & -0,3 & 0,5 & 0,1\\
+		& 3 & 0,4 & 1,5 & 0,6 & 2,3 & 1,7\\
+		& 4 & 1,2 & 4,2 & 1,8 & 5,2 & 3,3\\
+		\midrule
+		\multirow{4}{*}{Centroide} 
+		& 1 & 0,1 & 2,7 & 28,5 & 398,9 & 1,5\\
+		& 2 & 0,4 & 9,9 & 40,9 & 4.257,8 & 3,7\\
+		& 3 & 0,7 & 16,2 & 53,9 & 12.810,2 & 6,8\\
+		& 4 & 1,0 & 32,0 & 71,1 & 26.692,8 & 10,0\\
+		\midrule
+		\multirow{4}{*}{Mínimo} 
+		& 1 & 0,0 & 0 & 18 & 2 & 1\\
+		& 2 & 0,3 & 7 & 35 & 2.348 & 3\\
+		& 3 & 0,6 & 14 & 48 & 8.561 & 6\\
+		& 4 & 0,8 & 25 & 63 & 20.000 & 9\\
+		\midrule
+		\multirow{4}{*}{Máximo} 
+		& 1 & 0,3 & 6 & 34 & 2.317 & 3\\
+		& 2 & 0,6 & 13 & 47 & 8.346 & 5\\
+		& 3 & 0,8 & 24 & 62 & 18.229 & 8\\
+		& 4 & 2,0 & 100 & 99 & 27.000 & 12\\
+		\midrule
+		\multirow{4}{*}{Tamaño} 
+		& 1 & 128.390 & 201.485 & 108.167 & 329.523 & 145.339\\
+		& 2 & 83.237 & 144.258 & 132.408 & 64.073 & 214.001\\
+		& 3 & 58.021 & 65.981 & 120.016 & 9.015 & 45.274\\
+		& 4 & 144.312 & 2.236 & 53.369 & 11.349 & 9.346\\
+		\midrule
+		\bottomrule
+	\end{tabularx}
+\end{table} 
+
 
 % Referencias
 \newpage
