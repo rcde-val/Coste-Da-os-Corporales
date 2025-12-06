@@ -1032,15 +1032,31 @@ ggplot(data = subset(datos, Region %in% c("Poitou-Charentes")),
 # 3.2.1.1 Modelo Poisson
 #-------------------------------------------------------------------------------
 ClaimNb_Poisson_01<-glm( ClaimNb ~ Exposure, data=datos, family=poisson)
-ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + Power, data=datos, family=poisson)
+ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + DriverAge, data=datos, family=poisson)
+ClaimNb_Poisson_03<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster, data=datos, family=poisson)
+ClaimNb_Poisson_04<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density, data=datos, family=poisson)
+ClaimNb_Poisson_05<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge, data=datos, family=poisson)
+ClaimNb_Poisson_06<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster, data=datos, family=poisson)
+ClaimNb_Poisson_07<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas, data=datos, family=poisson)
+ClaimNb_Poisson_08<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster, data=datos, family=poisson)
+ClaimNb_Poisson_09<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster + InjuryAmount, data=datos, family=poisson)
+ClaimNb_Poisson_10<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster + InjuryAmount + PropertyAmount, data=datos, family=poisson)
+ClaimNb_Poisson_11<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster + InjuryAmount + PropertyAmount + ClaimAmount, data=datos, family=poisson)
 summary(ClaimNb_Poisson_01)
 summary(ClaimNb_Poisson_02)
-anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02)
-ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + PowerNumCluster, data=datos, family=poisson)
-summary(ClaimNb_Poisson_02)
-anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02)
-
-table(datos$Power)
+summary(ClaimNb_Poisson_03)
+summary(ClaimNb_Poisson_04)
+summary(ClaimNb_Poisson_05)
+summary(ClaimNb_Poisson_06)
+summary(ClaimNb_Poisson_07)
+summary(ClaimNb_Poisson_08)
+summary(ClaimNb_Poisson_09)
+summary(ClaimNb_Poisson_10)
+summary(ClaimNb_Poisson_11)
+anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08)
+anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09)
+anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09,ClaimNb_Poisson_10)
+anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09,ClaimNb_Poisson_10,ClaimNb_Poisson_11)
 #-------------------------------------------------------------------------------
 # 3.2.1.2 Modelo GLM: Elección binaria - logit y probit
 #-------------------------------------------------------------------------------
