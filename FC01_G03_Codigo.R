@@ -31,6 +31,7 @@ install.packages("readxl") # Lector de Excel
 install.packages("ggplot2") # Gráficos
 install.packages("psych") # Estadísticos descriptivos
 install.packages("corrplot") # Correlaciones
+install.packages("dplyr") # Tratamiento de data frame
 # Carga de paquetes
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
@@ -40,7 +41,7 @@ library("readxl") # Lector de Excel
 library("ggplot2") # Gráficos
 library("psych") # Estadísticos descriptivos
 library("corrplot") # Correlaciones
-
+library("dplyr") # Tratamiento de data frame
 #-------------------------------------------------------------------------------
 # Importación de base de datos
 #-------------------------------------------------------------------------------
@@ -330,9 +331,6 @@ text(x = Density_barplot,
      labels = round(DensityCluster_freq_rel, 1),
      pos = 3)
 #
-
-# Escribir en Excel
-write_xlsx(datos, "FC01_G03_BBDD_v02.xlsx")
 #-------------------------------------------------------------------------------
 # 3.1.1.1.6 ClaimAmount
 #-------------------------------------------------------------------------------
@@ -613,7 +611,47 @@ pie(Power_freq_rel_final,
     col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Power_freq_rel_final)),
     labels=Power_etiquetas)
 # Añadir segunda línea al título
-mtext("(d:menos potente a o:más potente); ", side = 3, line = 0.5, cex = 1)            
+mtext("(d:menos potente a o:más potente); ", side = 3, line = 0.5, cex = 1)
+#
+# Cluster
+# Categorizar Power
+Power_categorias<-letters[4:15]  # d hasta o
+# Agregar la columna PowerNum al data frame
+datos$PowerNum<-match(datos$Power,Power_categorias)
+# k-means para agrupar (solo variable Power)
+# Normalizar la variable
+PowerNum_scaled<-scale(datos$PowerNum)
+# Método del codo para determinar el número óptimo de clústers
+set.seed(123)
+PowerNum_wss<-sapply(1:10, function(k){
+  kmeans(PowerNum_scaled,centers=k,nstart=10)$tot.withinss
+})
+# Gráfico del codo
+plot(1:10, PowerNum_wss, type = "b", pch = 19,
+     xlab = "Número de clusters (k)",
+     ylab = "Suma de cuadrados dentro del cluster",
+     main = "Método del codo")
+# Aplicación del método de k-means
+set.seed(123)
+PowerNum_kmeans_result<-kmeans(PowerNum_scaled,centers=4,nstart=25)
+# Resultados en escala original
+PowerNum_media<-mean(datos$PowerNum)
+PowerNum_desv<-sd(datos$PowerNum)
+PowerNum_centroides_original<-PowerNum_kmeans_result$centers*PowerNum_desv+PowerNum_media
+# Añadir los clusters al data frame y analizar tamaños y rangos
+datos$PowerNumCluster<-PowerNum_kmeans_result$cluster
+# Mostrar tamaño de cada grupo
+print(table(datos$PowerNumCluster))
+# Mostrar rango (mínimo y máximo) por cluster
+PowerNumCluster_rango<- aggregate(datos$PowerNum, by = list(Cluster = datos$PowerNumCluster), range)
+print(PowerNumCluster_rango)
+# Reemplazar números de cluster por letras
+datos<-datos %>%
+  mutate(PowerNumbCluster = recode(PowerNumCluster,
+                                   `1` = "d-e",
+                                   `2` = "i-k",
+                                   `3` = "l-o",
+                                   `4` = "f-h"))
 #-------------------------------------------------------------------------------
 # 3.1.1.2.2 Brand
 #-------------------------------------------------------------------------------
@@ -648,6 +686,14 @@ pie(Brand_freq_rel_final,
     init.angle = 90,
     col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Brand_freq_rel_final)),
     labels=Brand_etiquetas)
+#
+# Cluster
+datos<-datos %>%
+  mutate(BrandCluster = case_when(
+    Brand %in% c("Fiat","Mercedes, Chrysler or BMW","Opel, General Motors or Ford","Renault, Nissan or Citroen","Volkswagen, Audi, Skoda or Seat","other") ~ "a",
+    Brand %in% c("Japanese (except Nissan) or Korean") ~ "b",
+    TRUE ~ "Otros"
+  ))
 #-------------------------------------------------------------------------------
 # 3.1.1.2.3 Gas
 #-------------------------------------------------------------------------------
@@ -716,6 +762,15 @@ pie(Region_freq_rel_final,
     init.angle = 90,
     col = colorRampPalette(c("#C6DBEF","#4292C6","#08306B"))(length(Region_freq_rel_final)),
     labels=Region_etiquetas)
+# Cluster
+datos<-datos %>%
+  mutate(RegionCluster = case_when(
+    Region %in% c("Aquitaine", "Ile-de-France", "Limousin","Nord-Pas-de-Calais","Poitou-Charentes") ~ "a",
+    Region %in% c("Basse-Normandie", "Bretagne", "Centre","Haute-Normandie","Pays-de-la-Loire") ~ "b",
+    TRUE ~ "Otros"
+  ))
+# Escribir en Excel
+write_xlsx(datos, "FC01_G03_BBDD_v02.xlsx")
 #-------------------------------------------------------------------------------
 # 3.1.2 Multivariado
 #-------------------------------------------------------------------------------
@@ -981,6 +1036,10 @@ ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + Power, data=datos, family=poisson)
 summary(ClaimNb_Poisson_01)
 summary(ClaimNb_Poisson_02)
 anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02)
+ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + PowerNumCluster, data=datos, family=poisson)
+summary(ClaimNb_Poisson_02)
+anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02)
+
 table(datos$Power)
 #-------------------------------------------------------------------------------
 # 3.2.1.2 Modelo GLM: Elección binaria - logit y probit
