@@ -647,7 +647,7 @@ PowerNumCluster_rango<- aggregate(datos$PowerNum, by = list(Cluster = datos$Powe
 print(PowerNumCluster_rango)
 # Reemplazar números de cluster por letras
 datos<-datos %>%
-  mutate(PowerNumbCluster = recode(PowerNumCluster,
+  mutate(PowerNumCluster = recode(PowerNumCluster,
                                    `1` = "d-e",
                                    `2` = "i-k",
                                    `3` = "l-o",
@@ -1031,17 +1031,17 @@ ggplot(data = subset(datos, Region %in% c("Poitou-Charentes")),
 #-------------------------------------------------------------------------------
 # 3.2.1.1 Modelo Poisson
 #-------------------------------------------------------------------------------
-ClaimNb_Poisson_01<-glm( ClaimNb ~ Exposure, data=datos, family=poisson)
+ClaimNb_Poisson_01<-glm( ClaimNb ~ offset(log(Exposure)), data=datos, family=poisson)
 ClaimNb_Poisson_02<-glm( ClaimNb ~ Exposure + DriverAge, data=datos, family=poisson)
 ClaimNb_Poisson_03<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster, data=datos, family=poisson)
 ClaimNb_Poisson_04<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density, data=datos, family=poisson)
 ClaimNb_Poisson_05<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge, data=datos, family=poisson)
 ClaimNb_Poisson_06<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster, data=datos, family=poisson)
 ClaimNb_Poisson_07<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas, data=datos, family=poisson)
-ClaimNb_Poisson_08<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster, data=datos, family=poisson)
-ClaimNb_Poisson_09<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster + InjuryAmount, data=datos, family=poisson)
-ClaimNb_Poisson_10<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster + InjuryAmount + PropertyAmount, data=datos, family=poisson)
-ClaimNb_Poisson_11<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumbCluster + InjuryAmount + PropertyAmount + ClaimAmount, data=datos, family=poisson)
+ClaimNb_Poisson_08<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster, data=datos, family=poisson)
+ClaimNb_Poisson_09<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster + InjuryAmount, data=datos, family=poisson)
+ClaimNb_Poisson_10<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster + InjuryAmount + PropertyAmount, data=datos, family=poisson)
+ClaimNb_Poisson_11<-glm( ClaimNb ~ Exposure + DriverAge + BrandCluster + Density + CarAge + RegionCluster + Gas + PowerNumCluster + InjuryAmount + PropertyAmount + ClaimAmount, data=datos, family=poisson)
 summary(ClaimNb_Poisson_01)
 summary(ClaimNb_Poisson_02)
 summary(ClaimNb_Poisson_03)
@@ -1057,6 +1057,26 @@ anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_0
 anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09)
 anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09,ClaimNb_Poisson_10)
 anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08,ClaimNb_Poisson_09,ClaimNb_Poisson_10,ClaimNb_Poisson_11)
+# ¿Hay sobredispersión?
+ClaimNb_Poisson_mean<-mean(datos$ClaimNb)
+ClaimNb_Poisson_var<-var(datos$ClaimNb)
+# Relación entre deviance y grados de libertad
+ClaimNb_Poisson_deviance_ratio<-deviance(ClaimNb_Poisson_08)/df.residual(ClaimNb_Poisson_08)
+# Predicción
+datos$ClaimNb_Poisson_Pred<-predict(ClaimNb_Poisson_08,type="response")
+datos$ClaimNb_Poisson_Pred<-round(datos$ClaimNb_Poisson_Pred,2)
+# Barplot
+ClaimNb_Poisson_Pred_barplot<-barplot(round(prop.table(table(datos$ClaimNb_Poisson_Pred))*100,1),
+                         main = "Predicción (ClaimNb)",
+                         xlab = "Número de reclamos",
+                         ylab = "Frecuencia relativa (%)",
+                         col = "lightblue",
+                         ylim = c(0,120))
+# Añadir segunda línea al título
+mtext("Poisson", side = 3, line = 0.5, cex = 1)
+# Diágnosis del modelo
+# Extraer residuos
+ClaimNb_Poisson_Pred_residuos<-residuals(ClaimNb_Poisson_08,type="deviance")
 #-------------------------------------------------------------------------------
 # 3.2.1.2 Modelo GLM: Elección binaria - logit y probit
 #-------------------------------------------------------------------------------
