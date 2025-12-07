@@ -235,7 +235,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
         	\paragraph{Cluster no jerárquico - k means}
 	        	Es un método de agrupamiento que busca dividir un conjunto de datos en 'k' grupos (clusters) basados en similitud. Es un algoritmo iterativo que elige 'k' centros (centroides) iniciales y asigna cada observación al centro más cercano. Luego recalcula cada centro como la media de los puntos en su grupo y repite este proceso hasta que las asignaciones no cambian. El objetivo es que los grupos sean lo más parecidos posibles entre sí y diferentes de los otros grupos.\\
 	        	
-	        	Para aplicar el algoritmo k-means, se seleccionaron las variables \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power} (esta última convertida previamente a formato numérico). Todas fueron normalizadas mediante estandarización ($\frac{x-media}{desv. estandar}$). \\
+	        	Para aplicar el algoritmo k-means, se seleccionaron las variables \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power} (esta última convertida previamente a formato numérico). Todas fueron normalizadas mediante estandarización ($(x-media)/desv. estandar$). \\
 	        	
 	        	Para determinar el número óptimo de clusters (k), utilizamos el método del codo, que analiza la relación entre el número de clusters y la suma total de cuadrados dentro de los grupos (WSS). El punto donde la curva deja de disminuir de forma pronunciada y comienza a aplanarse se denomina 'codo'. En nuestro caso, para las variables analizadas, el número óptimo de clusters es 4 (\hyperref[Anexo15]{\textcolor{blue}{Figura 13}}). A continuación, se presentan los principales comentarios que resumen los resultados detallados en el Cuadro 4 del anexo (\hyperref[Anexo16]{\textcolor{blue}{Cuadro 4}}):
 	        	\begin{itemize}
@@ -257,7 +257,17 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 
 			\paragraph{Teoría de valores extremos} Victor Alonso
 			
-			\paragraph{Distribuciones compuestas} Victor Perez
+			\paragraph{Distribuciones compuestas}
+				Una distribución compuesta es un modelo que combina dos distribuciones diferentes para representar adecuadamente datos con dos zonas de comportamiento:
+				\begin{itemize}
+					\item El cuerpo (valores pequeños o moderados), donde la frecuencia es alta y se ajusta bien con distribuciones como Weibull o Lognormal.
+					\item La cola (valores extremos), donde ocurren pérdidas muy grandes y se necesita una distribución de cola pesada como Pareto.
+				\end{itemize}
+				El punto que separa ambas zonas es el umbral $\theta$, que en este caso se ha determinado mediante el Hill Plot, identificando que la observación 1616 más grande de los daños corporales corresponde al threshold ($\theta \approx 21$). A partir de este umbral, se ajustan los parámetros de cada parte y se asignan pesos $r$ y $1-r$ para reflejar la proporción de datos en cada zona, optimizando por máxima verosimilitud.\\ 
+				
+				El (\hyperref[Anexo17]{\textcolor{blue}{Cuadro 2}}) muestra que los modelos simples (Weibull y Lognormal) no capturan bien ambos extremos: Weibull subestima el riesgo extremo ($VaR_{99,5\%}$: 151 miles de euros) y Lognormal lo sobreestima ($VaR_{99,5\%}$: 637 miles de euros). Las distribuciones compuestas reducen este sesgo: Weibull–Pareto es el mejor modelo al presentar el mayor loglik y el menor AIC (Akaike Information Criterio), con un $VaR_{99,5\%}$ más realista (309 miles de euros), lo que lo hace preferible para gestión de riesgo. Cuanto mayor sea el logaritmo de la función de verosimilitud (menos negativo), mejor explica el modelo los datos, mientras que menor sea el AIC, mejor explica el modelo los datos porque este criterio penaliza la complejidad y premia el buen ajuste. \\
+				
+				Asimismo, cuando se graficó la distribución Lognormal–Pareto (\hyperref[Anexo18]{\textcolor{blue}{Figura 14}}), se observó un salto en el umbral que une ambas distribuciones, por lo que se optó por incluir la restricción de continuidad en la función de densidad, determinando que el valor de $r$ debería ser de 0,83. Sin embargo, al incluir esta restricción, la precisión del modelo se vio perjudicada, ya que el loglik disminuyó y el AIC aumentó, lo que indica que imponer continuidad no siempre mejora el ajuste global, aunque puede ser útil para evitar discontinuidades visuales en la densidad.  
 			
 			\paragraph{Distribuciones multivariadas} Miquel
 			
@@ -669,6 +679,47 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	\end{tabularx}
 \end{table} 
 
+% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones compuestas
+\label{Anexo17}
+\begin{table}[H]
+	\centering
+	\caption{Distribuciones compuestas}
+	\begin{tabularx}{\textwidth}{lrrrrr}
+		\toprule
+		\textbf{Concepto} & \textbf{Wb} & \textbf{LN} & \textbf{Wb-Pareto} & \textbf{LN-Pareto} & \textbf{LN-Pareto (C)}\\
+		\midrule
+		scale & 5,71 & - & 5,53 & - & - \\
+		shape & 0,51 & - & 0,59 & - & -\\
+		meanlog & - & 0,71 & - & 3,02 & 3,02 \\
+		sdlog & - & 2,23 & - & 3,37 & 3,37 \\
+		alpha & - & - & 1,11 & 1,11 & 1,11 \\
+		theta & - & - & 21,09 & 21,09 & 21,09 \\
+		r & - & - & 0,90 & 0,90 & 0,83 \\  
+		loglik & -47.062 & -47.382 & -46.356 & -46.450 & -48.809 \\
+		AIC & 94.219 & 94.767 & 92.720 & 92.906 & 97.621 \\
+		$VaR_{99,5\%}$ (miles €) & 151 & 637 & 309 & 309 & 509 \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
+% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones compuestas
+\label{Anexo18}
+\begin{figure}[htbp]
+	\centering
+	\caption{Distribuciones compuestas}
+	% Primera fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico46.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico47.png}
+	\end{subfigure}
+	% Segunda fila
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico48.png}
+	\end{subfigure}
+\end{figure}
 
 % Referencias
 \newpage

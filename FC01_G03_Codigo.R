@@ -26,24 +26,58 @@ for (pkg in paquetes) {
     install.packages(pkg)
   }
 }
-install.packages("writexl") # Escribir Excel
-install.packages("readxl") # Lector de Excel
-install.packages("ggplot2") # Gráficos
-install.packages("psych") # Estadísticos descriptivos
-install.packages("corrplot") # Correlaciones
-install.packages("dplyr") # Tratamiento de data frame
-install.packages("factoextra") # Componentes principales
+# Escribir Excel
+install.packages("writexl")
+# Lector de Excel
+install.packages("readxl")
+# Gráficos
+install.packages("ggplot2")
+# Estadísticos descriptivos
+install.packages("psych")
+# Correlaciones
+install.packages("corrplot")
+# Tratamiento de data frame
+install.packages("dplyr")
+# Componentes principales
+install.packages("factoextra") 
+# Ajuste de distribuciones
+install.packages("MASS") 
+# Teoría de valores extremos
+install.packages("evir")
+# Extreme Value Mixture Modelling
+install.packages("evmix")
+# Extreme Risk Coefficient of Variation
+install.packages("ercv")
+# EnvStats
+install.packages("EnvStats")
 # Carga de paquetes
 for (pkg in paquetes) {
   library(pkg, character.only = TRUE)
 }
-library("writexl") # Escribir Excel
-library("readxl") # Lector de Excel
-library("ggplot2") # Gráficos
-library("psych") # Estadísticos descriptivos
-library("corrplot") # Correlaciones
-library("dplyr") # Tratamiento de data frame
-library("factoextra") # Componentes principales
+# Escribir Excel
+library("writexl")
+# Lector de Excel
+library("readxl")
+# Gráficos
+library("ggplot2")
+# Estadísticos descriptivos
+library("psych")
+# Correlaciones
+library("corrplot")
+# Tratamiento de data frame
+library("dplyr")
+# Componentes principales
+library("factoextra") 
+# Ajuste de distribuciones
+library("MASS") 
+# Teoría de valores extremos
+library("evir")
+# Extreme Value Mixture Modelling
+library("evmix")
+# Extreme Risk Coefficient of Variation
+library("ercv")
+# EnvStats
+library("EnvStats")
 #-------------------------------------------------------------------------------
 # Importación de base de datos
 #-------------------------------------------------------------------------------
@@ -57,6 +91,8 @@ datos_numericos<-datos[, sapply(datos,is.numeric)]
 head(datos)
 # Resumen
 summary(datos)
+# Coste daños corporales (en miles)
+daños_corporales<-as.matrix(datos$InjuryAmount[datos$InjuryAmount>0]/1000)
 #-------------------------------------------------------------------------------
 # 3. Análisis metodológico escogido
 #-------------------------------------------------------------------------------
@@ -1187,7 +1223,342 @@ fviz_pca_var(princomp(temporal), col.var = "cos2",
 #-------------------------------------------------------------------------------
 # 3.2.2.4 Distribuciones compuestas
 #-------------------------------------------------------------------------------
+# Cambio de variable 
+L<-daños_corporales
+L<-as.matrix(L)
+# Hillplot
+hp<-evmix::hillplot(L)
+# El threshold es 1616.
+#
+# ME
+meplot(L)
+#
+# CV plot
+ercv::cvplot(L)
+# Cola pesada, encima de 1.
+#
+# Weibull
+# Ajuste de los daños corporales a una distribución Weibull, almacenamos:
+# - Vector con los parámetros estimados: shape y escale.
+# - Errores estándar de los parámetros.
+# - Log-verosimilitud del ajuste.
+res<-fitdistr(L,"weibull")
+# Almacenamos algunos parámetros de la distribución Weibull ajustada
+fWei<-c(res$estimate,res$loglik,AIC(res),BIC(res))
+# Convertir en matriz
+fWei<-t(matrix(unlist(fWei),5,1))
+# Cambiar los nombres de las columnas y filas
+colnames(fWei)<-c("shape","scale","loglik","AIC","BIC")
+rownames(fWei)<-c("Losses")
+# VaR 99.5%
+round(qweibull(0.995, shape = res$estimate[1], scale = res$estimate[2]),0)
+# Ver los resultados
+fWei
+round(fWei,2)
+round(fWei,0)
+#
+# Lognormal
+# Ajuste de los daños corporales a una distribución Lognormal, almacenamos:
+# - Vector con los parámetros estimados: media y desviación estándar del logaritmo natural de los datos.
+# - Errores estándar de los parámetros.
+# - Log-verosimilitud del ajuste.
+res<-fitdistr(L,"lognormal")
+# Almacenamos algunos parámetros de la distribución lognormal ajustada
+fln<-c(res$estimate,res$loglik,AIC(res),BIC(res))
+# Convertir en matriz
+fln<-t(matrix(unlist(fln),5,1))
+# Cambiar los nombres de las columnas y filas
+colnames(fln)<-c("mean","sd","loglik","AIC","BIC")
+rownames(fln)<-c("Losses")
+# VaR 99.5%
+round(qlnorm(0.995, meanlog = res$estimate[1], sdlog = res$estimate[2]),0)
+# Ver los resultados
+fln
+round(fln,2)
+round(fln,0)
+#
+# Pareto (Valores Extremos)
+# Tamaño del objeto daños_corporales
+n<-length(L)
+# Ordenar el objeto de mayor a menor
+L<-sort(L, decreasing = T)
+# Guardar los 1616 (Threshold) daños_corporales más altos
+L99<-L[1:1616]
+# Ajuste de los daños corporales extremos a una distribución Pareto
+epar<-epareto(L99, method = "mle")
+# Parámetros de la distribución Pareto ajustada a los datos
+epar$parameters
+# Guardar el parámetro shape
+Hpar<-epar$parameters[2]
+# Guardar el parámetro location
+k<-epar$parameters[1]
+# Probabilidad acumulada en el cuerpo de la distribución compuesta
+fr<-(n-1616)/n
+# [1] 0.9001298
+# Nivel de confianza del VaR
+q<-0.995
+# Probabilidad acumulada que buscamos para llegar al VaR
+alfa<-q-fr
+# [1] 0.09487022
+# Probabilidad acumulada en la cola de la distribución
+1-fr
+# [1] 0.09987022
+# Nivel de confianza que buscamos en la cola de la distribución para llegar al VaR
+conf<-alfa/(1-fr)
+# [1] 0.949935
+# VaR
+VaR.Par<-as.numeric(k)/((1-conf)**(1/as.numeric(Hpar)))
+VaR.Par
+#
+# Pareto: Cálculo de la densidad de la distribución
+# Donde:
+# - x: vector de valores donde se evalúa la densidad.
+# - theta: parámetro de escala (scale) de la distribución Pareto.
+# - a: parámetro de forma (shape) de la distribución Pareto.
+# Comentarios:
+# - La distribución Pareto solo está definida para x>theta. Por eso se crea un vector
+#   lógico que valdrá 1 ó 0 (x>theta)
+# - Corresponde a la función de densidad: (a*theta**a)/(x**(a+1))
+fpareto<-function(x,theta,a){
+  rr<-(x>theta)*(a*theta**a)/(x**(a+1))
+  return(rr)
+}
+#
+# Compuesta Weibull-Pareto: Cálculo de la densidad de la distribución
+# Donde:
+# - x: vector de valores donde se evalúa la densidad.
+# - alpha: parámetro shape de la Weibull.
+# - sigma: parámetro scale de la Weibull.
+# - r: peso (probabilidad) asignada a la parte Weibull truncada.
+# - theta: umbral que separa la zona Weibull (≤ θ) de la zona Pareto (> θ).
+# - a: parámetro shape de Pareto (a > 0).
+# Comentarios:
+# - Para valores de x<=theta, usamos la distribución Weibull.
+# - Para valores de x>theta, usamos la distribución Pareto.
+# - (x<=theta) actúa como indicador, vale 1 si x<=theta y 0 si x>theta.
+# - dweibull(x,alpha,sigma) es la densidad Weibull con parámetros alpha y sigma.
+# - pweibull(theta, alpha, sigma) es la probabilidad acumulada de Weibull hasta theta.
+# - El factor r/pweibull() reescala la densidad Weibull para que la probabilidad 
+#   total que quede hasta theta sea exactamente r.
+# - fpareto(x,theta,a) es la densidad Pareto con umbral theta y parámetro de forma a.
+# - Multiplicamos por (1-r) para que la probabilidad total en la cola sea (1-r).
+fwepar<-function(x,alpha,sigma,r,theta,a){
+  rr<-((x<=theta)*(r/pweibull(theta,alpha,sigma))*dweibull(x,alpha,sigma))+((x>theta)*(1-r)*fpareto(x,theta,a))
+  return(rr)
+}
+#
+# Compuesta Lognormal-Pareto: Cálculo de la densidad de la distribución
+flnpar<-function(x,m,s,r,theta,a){
+  rr<-((x<=theta)*r*dlnorm(x,m,s)/plnorm(theta,m,s))+((x>theta)*(1-r)*fpareto(x,theta,a))
+  return(rr)
+}
+#
+# Cálculo del Log-verosimilitud del modelo Weibull-Pareto dado un conjunto de 
+# datos y valores fijos de r y θ.
+lik_WP<-function(par,x,r,theta){
+  alpha<-par[1]
+  sigma<-par[2]
+  a<-par[3]
+  rr<-sum(log(fwepar(x,alpha,sigma,r,theta,a)))
+  return(rr)
+}
+#
+# Cálculo del Log-verosimilitud del modelo Lognormal-Pareto dado un conjunto de 
+# datos y valores fijos de r y θ.
+lik_lnP<-function(par,x,r,theta){
+  m<-par[1]
+  s<-par[2]
+  a<-par[3]
+  rr<-sum(log(flnpar(x,m,s,r,theta,a)))
+  return(rr)
+}
+#
+# Ajuste a una distribución compuesta Weibull-Pareto para daños_corporales, buscando
+# el mejor peso "r" alrededor del valor empírico observado y maximizando la log-verosimilitud
+# Parámetro de forma de la distribución Pareto
+sh1<-epar$parameters[2]
+# Vector inicial para la optimización con los parámetros de la distribución Weibull y Pareto
+par1<-c(fWei[1:2],sh1)
+# Fijar el umbral (theta). Punto de corte donde la distribución pasa de Weibull a Pareto
+th1<-epar$parameters[1]
+# Copiar el vector de datos a un nuevo objeto
+x1<-L
+# Número de observaciones del cuerpo de la distribución compuesta
+n1<-sum(x1<=th1)
+# Proporción empírica a la izquierda. Este r1 es un punto de partida "natural" para
+# el peso de "r"
+r1<-n1/n
+# Rejilla de valores candidatos para "r" centrada en "r1" y con ancho ±0.2 (paso 0.01)
+gr1<-seq((r1-0.2),(r1+0.2),by=0.01)
+# Tamaño de la rejilla
+ng1<-length(gr1)
+# Si el extremo inferior de la rejilla cae por debajo de 0, lo recorta a 0.01 y 
+# refina el paso a 0.001 para mejorar resolución cerca del borde
+if(gr1[1]<0){gr1[(gr1<0)]<-0.01
+gr1<-seq(min(gr1),max(gr1),by=0.001)}
+# Si el extremo superior excede 1, lo recorta a 0.99 y también refina la rejilla
+# Garantizar que 0 < r < 1, condición necesaria para que la mezcla sea válida.
+if(gr1[ng1]>1){gr1[(gr1>1)]<-0.99
+gr1<-seq(min(gr1),max(gr1),by=0.001)}
+# Reserva una matriz de resultados con 6 columnas para cada valor de r
+# Contiene:
+# - theta usado (th1)
+# - Parámetro "shape" de Weibull óptimo para ese "r".
+# - Parámetro "scale" de Weibull óptimo para ese "r".
+# - Parámetro "shape" de Pareto óptimo para ese "r".
+# - r de la rejilla
+# - log-verosimilitud máxima alcanzada para ese "r"
+parlik1_WP<-matrix(0,length(gr1),6)
+for(j in 1:length(gr1)){
+  r1<-gr1[j] # Fija r1
+  opt_parWep1<-optim(par1,fn=lik_WP,x=x1,r=r1,theta=th1,control=list(fnscale=-1)) # Maximiza la log-verosimilitud respecto a los parámetros de la distribución manteniendo fijos "r" y "theta"
+  parlik1_WP[j,1]<-th1 # Guardar theta
+  parlik1_WP[j,2:4]<-opt_parWep1$par # Guardar el vector de parámetros óptimos de las distribuciones
+  parlik1_WP[j,5]<-r1 # Guardar r
+  parlik1_WP[j,6]<-lik_WP(opt_parWep1$par,x1,r1,th1) # Guardar log-verosimilitud
+}
+# Selecciona la fila con la mayor verosimilitud
+optimWP1<-as.matrix(parlik1_WP[which(parlik1_WP[,6]==max(parlik1_WP[,6])),])
+# AIC y BIC del mejor ajuste
+AIC1<-2*4-2*optimWP1[6]
+BIC1<-4*log(length(x1))-2*optimWP1[6]
+# Armar la salida final en una fila
+f_weipar<-t(as.matrix(c(optimWP1,AIC1,BIC1)))
+colnames(f_weipar)<-c("theta","shape","rate","alpha","r","loglik","AIC","BIC")
+rownames(f_weipar)<-c("Losses")
+# VaR
+q<-0.995
+alfa<-q-f_weipar[5]
+conf<-alfa/(1-f_weipar[5])
+VaR.WeiPar<-f_weipar[1]/((1-conf)**(1/f_weipar[4]))
+# Resultados
+f_weipar
+round(f_weipar,2)
+round(f_weipar,0)
+#
+# Gráfico
+# Ingresar manualmente los parámetros para 3 curvas
+# Cada curva: alpha (Weibull shape), sigma (Weibull scale), r (peso), theta (umbral), a (Pareto shape)
+params <- list(
+  curva1 = list(alpha = 0.5854359, sigma = 5.528376, r = 0.9001916, theta = 21.09075, a = 1.114799))
+# Crear un grid de x
+x_min <- 0
+x_max <- 30
+x_grid <- seq(x_min, x_max, length.out = 100)
+# Graficar las tres curvas
+plot(x_grid, fwepar(x_grid, params$curva1$alpha, params$curva1$sigma, params$curva1$r, params$curva1$theta, params$curva1$a),
+     type = "l", lwd = 2, col = "lightblue",
+     main = "Weibull–Pareto",
+     xlab = "InjuryAmount (miles euros)", 
+     ylab = "Densidad de probabilidad",
+     ylim=c(0,0.35))
+# Añadir segunda línea al título
+mtext("(Sin condición de continuidad)", side = 3, line = 0.5, cex = 1)
+#
+# Ajuste a una distribución compuesta Lognormal-Pareto para daños_corporales, buscando
+# el mejor peso "r" alrededor del valor empírico observado y maximizando la log-verosimilitud
+# Parámetro de forma de la distribución Pareto
+sh1<-epar$parameters[2]
+# Vector inicial para la optimización con los parámetros de la distribución Lognormal y Pareto
+par1<-c(fln[1:2],sh1)
+# Fijar el umbral (theta). Punto de corte donde la distribución pasa de Lognormal a Pareto
+th1<-epar$parameters[1]
+# Copiar el vector de datos a un nuevo objeto
+x1<-L
+# Número de observaciones del cuerpo de la distribución compuesta
+n1<-sum(x1<=th1)
+# Proporción empírica a la izquierda. Este r1 es un punto de partida "natural" para
+# el peso de "r"
+r1<-n1/n
+# Rejilla de valores candidatos para "r" centrada en "r1" y con ancho ±0.2 (paso 0.01)
+gr1<-seq((r1-0.2),(r1+0.2),by=0.01)
+# Tamaño de la rejilla
+ng1<-length(gr1)
+# Si el extremo inferior de la rejilla cae por debajo de 0, lo recorta a 0.01 y 
+# refina el paso a 0.001 para mejorar resolución cerca del borde
+if(gr1[1]<0){gr1[(gr1<0)]<-0.01
+gr1<-seq(min(gr1),max(gr1),by=0.001)}
+# Si el extremo superior excede 1, lo recorta a 0.99 y también refina la rejilla
+# Garantizar que 0 < r < 1, condición necesaria para que la mezcla sea válida.
+if(gr1[ng1]>1){gr1[(gr1>1)]<-0.99
+gr1<-seq(min(gr1),max(gr1),by=0.001)}
+# Reserva una matriz de resultados con 6 columnas para cada valor de r
+# Contiene:
+# - theta usado (th1)
+# - Parámetro "meanlog" de Lognormal óptimo para ese "r".
+# - Parámetro "sdlog" de Lognormal óptimo para ese "r".
+# - Parámetro "shape" de Pareto óptimo para ese "r".
+# - r de la rejilla
+# - log-verosimilitud máxima alcanzada para ese "r"
+parlik1_LnP<-matrix(0,length(gr1),6)
+for(j in 1:length(gr1)){
+  r1<-gr1[j]
+  opt_parLnp1<-optim(par1,fn=lik_lnP,x=x1,r=r1,theta=th1,control=list(fnscale=-1))
+  parlik1_LnP[j,1]<-th1
+  parlik1_LnP[j,2:4]<-opt_parLnp1$par
+  parlik1_LnP[j,5]<-r1
+  parlik1_LnP[j,6]<-lik_lnP(opt_parLnp1$par,x1,r1,th1)
+}
+# Selecciona la fila con la mayor verosimilitud
+optimLnP1<-as.matrix(parlik1_LnP[which(parlik1_LnP[,6]==max(parlik1_LnP[,6])),])
+# AIC y BIC del mejor ajuste
+AIC1<-2*3-2*optimLnP1[6]
+BIC1<-3*log(length(x1))-2*optimLnP1[6]
+# Armar la salida final en una fila
+f_lnpar<-t(as.matrix(c(optimLnP1,AIC1,BIC1)))
+colnames(f_lnpar)<-c("theta","mu","sigma","alpha","r","loglik","AIC","BIC")
+rownames(f_lnpar)<-c("Losses")
+# VaR
+q<-0.995
+alfa<-q-f_lnpar[5]
+conf<-alfa/(1-f_lnpar[5])
+VaR.lnpar<-f_lnpar[1]/((1-conf)**(1/f_lnpar[4]))
+# Resultados
+f_lnpar
+round(f_lnpar,2)
+round(f_lnpar,0)
+#
+# Condición de Continuidad Lognormal-Pareto:
+rcon<-fpareto(f_lnpar[1]+0.00000001,f_lnpar[1],f_lnpar[4])/
+  ((dlnorm(f_lnpar[1]+0.00000001,f_lnpar[2],f_lnpar[3])/plnorm(f_lnpar[1]+0.00000001,f_lnpar[2],f_lnpar[3]))+fpareto(f_lnpar[1]+0.00000001,f_lnpar[1],f_lnpar[4]))# Fitting Weib-Par univariate marginals
+rcon
+r1<-rcon
+opt_cont1<-optim(par1,fn=lik_lnP,x=x1,r=r1,theta=th1,control=list(fnscale=-1))
+AIC1<-2*2-2*opt_cont1$value
+# VaR
+q<-0.995
+alfa<-q-rcon
+conf<-alfa/(1-rcon)
+VaR.lnpar<-f_lnpar[1]/((1-conf)**(1/f_lnpar[4]))
 
+# Gráfico
+# Ingresar manualmente los parámetros para 3 curvas
+# Cada curva: alpha (Lognormal shape), sigma (Lognormal scale), r (peso), theta (umbral), a (Pareto shape)
+params <- list(
+  curva1 = list(mu = 3.017956, sigma = 3.372175, r = 0.9001916, theta = 21.09075, a = 1.114728),
+  curva2 = list(mu = 3.017956, sigma = 3.372175, r = 0.8259629, theta = 21.09075, a = 1.114728))
+# Crear un grid de x
+x_min <- 0
+x_max <- 30
+x_grid <- seq(x_min, x_max, length.out = 100)
+# Graficar la curva 1
+plot(x_grid, flnpar(x_grid, params$curva1$mu, params$curva1$sigma, params$curva1$r, params$curva1$theta, params$curva1$a),
+     type = "l", lwd = 2, col = "lightblue",
+     main = "Lognormal–Pareto",
+     xlab = "InjuryAmount (miles euros)", 
+     ylab = "Densidad de probabilidad",
+     ylim=c(0,0.35))
+# Añadir segunda línea al título
+mtext("(Sin condición de continuidad)", side = 3, line = 0.5, cex = 1)
+# Graficar la curva 2
+plot(x_grid, flnpar(x_grid, params$curva2$mu, params$curva2$sigma, params$curva2$r, params$curva2$theta, params$curva2$a),
+     type = "l", lwd = 2, col = "lightblue",
+     main = "Lognormal–Pareto",
+     xlab = "InjuryAmount (miles euros)", 
+     ylab = "Densidad de probabilidad",
+     ylim=c(0,0.35))
+# Añadir segunda línea al título
+mtext("(Condición de continuidad)", side = 3, line = 0.5, cex = 1)
 #-------------------------------------------------------------------------------
 # 3.2.2.5 Distribuciones multivariadas
 #-------------------------------------------------------------------------------
