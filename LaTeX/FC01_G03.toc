@@ -8,9 +8,25 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Análisis descriptivo univariado}{5}{subsubsection.3.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.2}Análisis descriptivo bivariado}{7}{subsubsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.2}Modelización seleccionada y objetivos a alcanzar}{8}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Número de siniestros (Modelización estadística)}{8}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Costo del siniestro (Cuantificación de riesgos)}{10}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Número de siniestros}{8}{subsubsection.3.2.1}%
+\contentsline {paragraph}{\numberline {3.2.1.1}Modelo de regresión lineal clásico}{9}{paragraph.3.2.1.1}%
+\contentsline {paragraph}{\numberline {3.2.1.2}Modelo Poisson}{9}{paragraph.3.2.1.2}%
+\contentsline {paragraph}{\numberline {3.2.1.3}Modelos lineales generalizados (GLM)}{9}{paragraph.3.2.1.3}%
+\contentsline {subparagraph}{\numberline {3.2.1.3.1}Elección binaria - logit y probit}{9}{subparagraph.3.2.1.3.1}%
+\contentsline {subparagraph}{\numberline {3.2.1.3.2}Elección multinomial}{9}{subparagraph.3.2.1.3.2}%
+\contentsline {subparagraph}{\numberline {3.2.1.3.3}Elección multinomial ordenada}{9}{subparagraph.3.2.1.3.3}%
+\contentsline {subparagraph}{\numberline {3.2.1.3.4}Elección multinomial anidada}{9}{subparagraph.3.2.1.3.4}%
+\contentsline {paragraph}{\numberline {3.2.1.4}Cluster jerárquico aglomerativo}{9}{paragraph.3.2.1.4}%
+\contentsline {paragraph}{\numberline {3.2.1.5}Cluster jerárquico divisivo}{9}{paragraph.3.2.1.5}%
+\contentsline {paragraph}{\numberline {3.2.1.6}Cluster no jerárquico - k means}{9}{paragraph.3.2.1.6}%
+\contentsline {paragraph}{\numberline {3.2.1.7}Análisis PCA}{10}{paragraph.3.2.1.7}%
+\contentsline {subsubsection}{\numberline {3.2.2}Costo del siniestro}{10}{subsubsection.3.2.2}%
+\contentsline {paragraph}{\numberline {3.2.2.1}Modelización no paramétrica}{10}{paragraph.3.2.2.1}%
+\contentsline {paragraph}{\numberline {3.2.2.2}Modelización paramétrica}{10}{paragraph.3.2.2.2}%
+\contentsline {paragraph}{\numberline {3.2.2.3}Teoría de valores extremos}{10}{paragraph.3.2.2.3}%
+\contentsline {paragraph}{\numberline {3.2.2.4}Distribuciones compuestas}{10}{paragraph.3.2.2.4}%
+\contentsline {paragraph}{\numberline {3.2.2.5}Distribuciones multivariadas}{10}{paragraph.3.2.2.5}%
 \contentsline {section}{\numberline {4}Resultados}{10}{section.4}%
-\contentsline {section}{\numberline {5}Informe ejecutivo}{10}{section.5}%
-\contentsline {section}{\numberline {6}Anexos}{10}{section.6}%
-\contentsline {section}{Referencias}{19}{table.caption.20}%
+\contentsline {section}{\numberline {5}Informe ejecutivo}{11}{section.5}%
+\contentsline {section}{\numberline {6}Anexos}{11}{section.6}%
+\contentsline {section}{Referencias}{20}{table.caption.19}%

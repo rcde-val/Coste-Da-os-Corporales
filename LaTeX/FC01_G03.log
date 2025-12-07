@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  6 DEC 2025 22:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  7 DEC 2025 12:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -72,17 +72,14 @@ Package babel Info: Making < an active character on input line 722.
 Package babel Info: Making > an active character on input line 722.
 ))
 LaTeX Encoding Info:    Redeclaring text command \guillemotleft (encoding OT1) 
-on input line 3.
+on input line 4.
 LaTeX Encoding Info:    Redeclaring text command \guillemotright (encoding OT1)
- on input line 3.
+ on input line 4.
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
 Package: inputenc 2024/02/08 v1.3d Input encoding file
 \inpenc@prehook=\toks18
 \inpenc@posthook=\toks19
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
-Package: setspace 2022/12/04 v6.7b set line spacing
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
@@ -111,8 +108,118 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@dimlist=\toks21
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\helvet.sty
 Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen158
+\Gin@req@width=\dimen159
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen160
+\captionmargin=\dimen161
+\caption@leftmargin=\dimen162
+\caption@rightmargin=\dimen163
+\caption@width=\dimen164
+\caption@indent=\dimen165
+\caption@parindent=\dimen166
+\caption@hangindent=\dimen167
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count289
+\c@continuedfloat=\count290
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count291
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count292
+) (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+\col@sep=\dimen168
+\ar@mcellbox=\box53
+\extrarowheight=\dimen169
+\NC@list=\toks22
+\extratabsurround=\skip51
+\backup@length=\skip52
+\ar@cellbox=\box54
+)
+\TX@col@width=\dimen170
+\TX@old@table=\dimen171
+\TX@old@col=\dimen172
+\TX@target=\dimen173
+\TX@delta=\dimen174
+\TX@cols=\count293
+\TX@ftn=\toks23
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen175
+\lightrulewidth=\dimen176
+\cmidrulewidth=\dimen177
+\belowrulesep=\dimen178
+\belowbottomsep=\dimen179
+\aboverulesep=\dimen180
+\abovetopsep=\dimen181
+\cmidrulesep=\dimen182
+\cmidrulekern=\dimen183
+\defaultaddspace=\dimen184
+\@cmidla=\count294
+\@cmidlb=\count295
+\@aboverulesep=\dimen185
+\@belowrulesep=\dimen186
+\@thisruleclass=\count296
+\@lastruleclass=\count297
+\@thisrulewidth=\dimen187
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip53
+\multirow@cntb=\count298
+\multirow@dima=\skip54
+\bigstrutjot=\dimen188
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count299
+\float@exts=\toks24
+\float@box=\box55
+\@float@everytoks=\toks25
+\@floatcapt=\box56
+)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/threeparttable\threepar
+ttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box57
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
@@ -160,20 +267,20 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count289
+\c@section@level=\count300
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count290
+\etb@tempcnta=\count301
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.s
 ty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
-\@linkdim=\dimen158
-\Hy@linkcounter=\count291
-\Hy@pagecounter=\count292
+\@linkdim=\dimen189
+\Hy@linkcounter=\count302
+\Hy@pagecounter=\count303
  (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -181,7 +288,7 @@ Now handling font encoding PD1 ...
 ) (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count293
+\Hy@SavedSpaceFactor=\count304
  (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -195,14 +302,14 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count294
+\c@Hy@tempcnt=\count305
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4801.
-\XeTeXLinkMargin=\dimen159
+\XeTeXLinkMargin=\dimen190
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -212,9 +319,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count295
-\Field@Width=\dimen160
-\Fld@charsize=\dimen161
+\Fld@menulength=\count306
+\Field@Width=\dimen191
+\Fld@charsize=\dimen192
 Package hyperref Info: Hyper figures OFF on input line 6078.
 Package hyperref Info: Link nesting OFF on input line 6083.
 Package hyperref Info: Hyper index ON on input line 6086.
@@ -222,16 +329,16 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring ON on input line 6096.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count296
-\c@Item=\count297
-\c@Hfootnote=\count298
+\Hy@abspage=\count307
+\c@Item=\count308
+\c@Hfootnote=\count309
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count299
-\c@bookmark@seq@number=\count300
+\Fld@listcount=\count310
+\c@bookmark@seq@number=\count311
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
 echeck.sty
@@ -244,110 +351,7 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 84.
 )
-\Hy@SectionHShift=\skip51
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
-
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
-
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
-Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
-fg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
-)
-Package graphics Info: Driver file: pdftex.def on input line 106.
-
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
-File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
-))
-\Gin@req@height=\dimen162
-\Gin@req@width=\dimen163
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
-Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
-
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
-Package: caption 2023/08/05 v3.6o Customizing captions (AR)
-
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
-Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen164
-\captionmargin=\dimen165
-\caption@leftmargin=\dimen166
-\caption@rightmargin=\dimen167
-\caption@width=\dimen168
-\caption@indent=\dimen169
-\caption@parindent=\dimen170
-\caption@hangindent=\dimen171
-Package caption Info: Standard document class detected.
-)
-\c@caption@flags=\count301
-\c@continuedfloat=\count302
-Package caption Info: hyperref package is loaded.
-)
-Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count303
-Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count304
-) (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
-Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
-
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
-Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
-\col@sep=\dimen172
-\ar@mcellbox=\box53
-\extrarowheight=\dimen173
-\NC@list=\toks22
-\extratabsurround=\skip52
-\backup@length=\skip53
-\ar@cellbox=\box54
-)
-\TX@col@width=\dimen174
-\TX@old@table=\dimen175
-\TX@old@col=\dimen176
-\TX@target=\dimen177
-\TX@delta=\dimen178
-\TX@cols=\count305
-\TX@ftn=\toks23
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
-Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen179
-\lightrulewidth=\dimen180
-\cmidrulewidth=\dimen181
-\belowrulesep=\dimen182
-\belowbottomsep=\dimen183
-\aboverulesep=\dimen184
-\abovetopsep=\dimen185
-\cmidrulesep=\dimen186
-\cmidrulekern=\dimen187
-\defaultaddspace=\dimen188
-\@cmidla=\count306
-\@cmidlb=\count307
-\@aboverulesep=\dimen189
-\@belowrulesep=\dimen190
-\@thisruleclass=\count308
-\@lastruleclass=\count309
-\@thisrulewidth=\dimen191
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
-Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip54
-\multirow@cntb=\count310
-\multirow@dima=\skip55
-\bigstrutjot=\dimen192
-)
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count311
-\float@exts=\toks24
-\float@box=\box55
-\@float@everytoks=\toks25
-\@floatcapt=\box56
+\Hy@SectionHShift=\skip55
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
@@ -357,13 +361,20 @@ File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO
 )
 \BKM@id=\count312
 ))
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/threeparttable\threepar
-ttable.sty
-Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box57
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box58
+\beforetitleunit=\skip56
+\aftertitleunit=\skip57
+\ttl@plus=\dimen193
+\ttl@minus=\dimen194
+\ttl@toksa=\toks26
+\titlewidth=\dimen195
+\titlewidthlast=\dimen196
+\titlewidthfirst=\dimen197
 )
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 2
-6.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 5
+7.
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
@@ -380,26 +391,26 @@ Package babel Info: 'spanish' activates 'spanish' shorthands.
 )
 \openout1 = `FC01_G03.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Info: Redefining \. on input line 26.
-LaTeX Info: Redefining \% on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Info: Redefining \. on input line 57.
+LaTeX Info: Redefining \% on input line 57.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -435,31 +446,21 @@ LaTeX Info: Redefining \% on input line 26.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
-Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
-
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
-File: color.cfg 2016/01/02 v1.6 sample color configuration
-)
-Package color Info: Driver file: pdftex.def on input line 149.
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
-)
-Package hyperref Info: Link coloring ON on input line 26.
 
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count314
-\scratchdimen=\dimen193
-\scratchbox=\box58
+\scratchdimen=\dimen198
+\scratchbox=\box59
 \nofMPsegments=\count315
 \nofMParguments=\count316
-\everyMPshowfont=\toks26
+\everyMPshowfont=\toks27
 \MPscratchCnt=\count317
-\MPscratchDim=\dimen194
+\MPscratchDim=\dimen199
 \MPnumerator=\count318
 \makeMPintoPDFobject=\count319
-\everyMPtoPDFconversion=\toks27
+\everyMPtoPDFconversion=\toks28
 )
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -473,14 +474,24 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: End \AtBeginDocument code.
+ (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+)
+Package hyperref Info: Link coloring ON on input line 57.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 31.
+(Font)              <12> on input line 62.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 31.
+(Font)              <8> on input line 62.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 31.
+(Font)              <6> on input line 62.
 
 
 [1
@@ -502,87 +513,82 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.37 \newpage
+l.68 \newpage
               [1]
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 74--75
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--50
+Underfull \hbox (badness 10000) in paragraph at lines 98--101
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--70
+Underfull \hbox (badness 10000) in paragraph at lines 102--103
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 73--75
+Underfull \hbox (badness 10000) in paragraph at lines 104--106
 
  []
 
 
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 76--78
+Underfull \hbox (badness 10000) in paragraph at lines 107--109
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--83
+Underfull \hbox (badness 10000) in paragraph at lines 110--114
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--87
+Underfull \hbox (badness 10000) in paragraph at lines 115--118
 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 9
-2.
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
+23.
 (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
 
  []
 
 
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 98--100
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--102
+Underfull \hbox (badness 10000) in paragraph at lines 129--131
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 103--104
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
 
  []
 
@@ -590,391 +596,392 @@ Underfull \hbox (badness 10000) in paragraph at lines 105--106
 
 [4]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 137.
+(Font)              <9> on input line 168.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 137.
+(Font)              <5> on input line 168.
 
 
 [5]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 157.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 188.
 
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
 
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 171--172
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
+Underfull \hbox (badness 10000) in paragraph at lines 206--207
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
 
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 197--198
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
+Underfull \hbox (badness 10000) in paragraph at lines 238--239
 
  []
 
 
 
 [9]
-Underfull \hbox (badness 10000) in alignment at lines 246--246
+
+[10]
+Underfull \hbox (badness 10000) in alignment at lines 295--295
 [][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 263--263
+Underfull \hbox (badness 10000) in alignment at lines 312--312
 [][][][] 
  []
 
-
-
-[10]
-<FC01_G03_Imagenes/Gráfico01.png, id=154, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico01.png, id=173, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico01.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico01.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico01.png  used on input line 2
-73.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico01.png  used on input line 3
+22.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico02.png, id=155, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico02.png, id=174, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico02.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico02.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico02.png  used on input line 2
-77.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico02.png  used on input line 3
+26.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico03.png, id=156, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico03.png, id=175, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico03.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico03.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico03.png  used on input line 2
-82.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico03.png  used on input line 3
+31.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico04.png, id=157, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico04.png, id=176, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico04.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico04.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico04.png  used on input line 2
-86.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico04.png  used on input line 3
+35.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico05.png, id=158, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico05.png, id=177, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico05.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico05.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico05.png  used on input line 2
-90.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico05.png  used on input line 3
+39.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico06.png, id=159, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico06.png, id=178, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico06.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico06.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico06.png  used on input line 3
-02.
+51.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico07.png, id=160, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico07.png, id=179, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico07.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico07.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico07.png  used on input line 3
-06.
+55.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico08.png, id=161, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico08.png, id=180, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico08.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico08.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico08.png  used on input line 3
-11.
+60.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico09.png, id=162, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico09.png, id=181, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico09.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico09.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico09.png  used on input line 3
-15.
+64.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico10.png, id=163, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico10.png, id=182, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico10.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico10.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico10.png  used on input line 3
-19.
+68.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico11.png, id=164, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico11.png, id=183, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico11.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico11.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico11.png  used on input line 3
-23.
+72.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico12.png, id=165, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico12.png, id=184, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico12.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico12.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico12.png  used on input line 3
-34.
+83.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico13.png, id=166, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico13.png, id=185, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico13.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico13.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico13.png  used on input line 3
-38.
+87.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico14.png, id=167, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico14.png, id=186, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico14.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico14.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico14.png  used on input line 3
-42.
+91.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
-<FC01_G03_Imagenes/Gráfico15.png, id=168, 444.4605pt x 298.716pt>
+<FC01_G03_Imagenes/Gráfico15.png, id=187, 444.4605pt x 298.716pt>
 File: FC01_G03_Imagenes/Gráfico15.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico15.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico15.png  used on input line 3
-46.
+95.
 (pdftex.def)             Requested size: 182.09486pt x 122.38318pt.
 
-Underfull \hbox (badness 10000) in alignment at lines 369--369
+Underfull \hbox (badness 10000) in alignment at lines 418--418
 [][][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 388--388
+Underfull \hbox (badness 10000) in alignment at lines 437--437
 [][][][] 
  []
 
 
 
-[11 <./FC01_G03_Imagenes/Gráfico01.png> <./FC01_G03_Imagenes/Gráfico02.png> <
+[11]
+
+[12 <./FC01_G03_Imagenes/Gráfico01.png> <./FC01_G03_Imagenes/Gráfico02.png> <
 ./FC01_G03_Imagenes/Gráfico03.png> <./FC01_G03_Imagenes/Gráfico04.png> <./FC0
 1_G03_Imagenes/Gráfico05.png>]
 
-[12 <./FC01_G03_Imagenes/Gráfico06.png> <./FC01_G03_Imagenes/Gráfico07.png> <
+[13 <./FC01_G03_Imagenes/Gráfico06.png> <./FC01_G03_Imagenes/Gráfico07.png> <
 ./FC01_G03_Imagenes/Gráfico08.png> <./FC01_G03_Imagenes/Gráfico09.png> <./FC0
 1_G03_Imagenes/Gráfico10.png> <./FC01_G03_Imagenes/Gráfico11.png> <./FC01_G03
 _Imagenes/Gráfico12.png> <./FC01_G03_Imagenes/Gráfico13.png> <./FC01_G03_Imag
 enes/Gráfico14.png> <./FC01_G03_Imagenes/Gráfico15.png>]
-<FC01_G03_Imagenes/Gráfico16.png, id=193, 509.5035pt x 310.761pt>
+<FC01_G03_Imagenes/Gráfico16.png, id=218, 509.5035pt x 310.761pt>
 File: FC01_G03_Imagenes/Gráfico16.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico16.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico16.png  used on input line 3
-97.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico16.png  used on input line 4
+46.
 (pdftex.def)             Requested size: 409.71692pt x 249.89891pt.
-<FC01_G03_Imagenes/Gráfico17.png, id=194, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico17.png, id=219, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico17.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico17.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico17.png  used on input line 4
-08.
+57.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico18.png, id=195, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico18.png, id=220, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico18.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico18.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico18.png  used on input line 4
-12.
+61.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico19.png, id=196, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico19.png, id=221, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico19.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico19.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico19.png  used on input line 4
-16.
+65.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico20.png, id=197, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico20.png, id=222, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico20.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico20.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico20.png  used on input line 4
-20.
+69.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico21.png, id=198, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico21.png, id=223, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico21.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico21.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico21.png  used on input line 4
-31.
+80.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico22.png, id=199, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico22.png, id=224, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico22.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico22.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico22.png  used on input line 4
-35.
+84.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico23.png, id=200, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico23.png, id=225, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico23.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico23.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico23.png  used on input line 4
-39.
+88.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico24.png, id=201, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico24.png, id=226, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico24.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico24.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico24.png  used on input line 4
-43.
-(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico25.png, id=202, 444.4605pt x 299.31825pt>
-File: FC01_G03_Imagenes/Gráfico25.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico25.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico25.png  used on input line 4
-54.
-(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico26.png, id=203, 444.4605pt x 299.31825pt>
-File: FC01_G03_Imagenes/Gráfico26.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico26.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico26.png  used on input line 4
-58.
-(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico27.png, id=204, 444.4605pt x 299.31825pt>
-File: FC01_G03_Imagenes/Gráfico27.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico27.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico27.png  used on input line 4
-62.
-(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico28.png, id=205, 444.4605pt x 299.31825pt>
-File: FC01_G03_Imagenes/Gráfico28.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico28.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico28.png  used on input line 4
-73.
-(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico29.png, id=206, 444.4605pt x 299.31825pt>
-File: FC01_G03_Imagenes/Gráfico29.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico29.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico29.png  used on input line 4
-77.
-(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico30.png, id=207, 444.4605pt x 299.31825pt>
-File: FC01_G03_Imagenes/Gráfico30.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico30.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico30.png  used on input line 4
-81.
-(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico31.png, id=208, 444.4605pt x 299.31825pt>
-File: FC01_G03_Imagenes/Gráfico31.png Graphic file (type png)
-<use FC01_G03_Imagenes/Gráfico31.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico31.png  used on input line 4
 92.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico32.png, id=209, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico25.png, id=227, 444.4605pt x 299.31825pt>
+File: FC01_G03_Imagenes/Gráfico25.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico25.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico25.png  used on input line 5
+03.
+(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
+<FC01_G03_Imagenes/Gráfico26.png, id=228, 444.4605pt x 299.31825pt>
+File: FC01_G03_Imagenes/Gráfico26.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico26.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico26.png  used on input line 5
+07.
+(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
+<FC01_G03_Imagenes/Gráfico27.png, id=229, 444.4605pt x 299.31825pt>
+File: FC01_G03_Imagenes/Gráfico27.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico27.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico27.png  used on input line 5
+11.
+(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
+<FC01_G03_Imagenes/Gráfico28.png, id=230, 444.4605pt x 299.31825pt>
+File: FC01_G03_Imagenes/Gráfico28.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico28.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico28.png  used on input line 5
+22.
+(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
+<FC01_G03_Imagenes/Gráfico29.png, id=231, 444.4605pt x 299.31825pt>
+File: FC01_G03_Imagenes/Gráfico29.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico29.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico29.png  used on input line 5
+26.
+(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
+<FC01_G03_Imagenes/Gráfico30.png, id=232, 444.4605pt x 299.31825pt>
+File: FC01_G03_Imagenes/Gráfico30.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico30.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico30.png  used on input line 5
+30.
+(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
+<FC01_G03_Imagenes/Gráfico31.png, id=233, 444.4605pt x 299.31825pt>
+File: FC01_G03_Imagenes/Gráfico31.png Graphic file (type png)
+<use FC01_G03_Imagenes/Gráfico31.png>
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico31.png  used on input line 5
+41.
+(pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
+<FC01_G03_Imagenes/Gráfico32.png, id=234, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico32.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico32.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico32.png  used on input line 5
-03.
+52.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico33.png, id=210, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico33.png, id=235, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico33.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico33.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico33.png  used on input line 5
-14.
+63.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico34.png, id=211, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico34.png, id=236, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico34.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico34.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico34.png  used on input line 5
-18.
+67.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico35.png, id=212, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico35.png, id=237, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico35.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico35.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico35.png  used on input line 5
-22.
+71.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico36.png, id=213, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico36.png, id=238, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico36.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico36.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico36.png  used on input line 5
-26.
+75.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico37.png, id=214, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico37.png, id=239, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico37.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico37.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico37.png  used on input line 5
-37.
+86.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico38.png, id=215, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico38.png, id=240, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico38.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico38.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico38.png  used on input line 5
-41.
+90.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico39.png, id=216, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico39.png, id=241, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico39.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico39.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico39.png  used on input line 5
-45.
+94.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico40.png, id=217, 444.4605pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico40.png, id=242, 444.4605pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico40.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico40.png>
 Package pdftex.def Info: FC01_G03_Imagenes/Gráfico40.png  used on input line 5
-49.
+98.
 (pdftex.def)             Requested size: 204.85846pt x 137.9621pt.
-<FC01_G03_Imagenes/Gráfico41.png, id=218, 456.5055pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico41.png, id=243, 456.5055pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico41.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico41.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico41.png  used on input line 5
-60.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico41.png  used on input line 6
+09.
 (pdftex.def)             Requested size: 204.85846pt x 134.31744pt.
-<FC01_G03_Imagenes/Gráfico42.png, id=219, 456.5055pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico42.png, id=244, 456.5055pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico42.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico42.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico42.png  used on input line 5
-64.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico42.png  used on input line 6
+13.
 (pdftex.def)             Requested size: 204.85846pt x 134.31744pt.
-<FC01_G03_Imagenes/Gráfico43.png, id=220, 456.5055pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico43.png, id=245, 456.5055pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico43.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico43.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico43.png  used on input line 5
-68.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico43.png  used on input line 6
+17.
 (pdftex.def)             Requested size: 204.85846pt x 134.31744pt.
-<FC01_G03_Imagenes/Gráfico44.png, id=221, 456.5055pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico44.png, id=246, 456.5055pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico44.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico44.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico44.png  used on input line 5
-72.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico44.png  used on input line 6
+21.
 (pdftex.def)             Requested size: 204.85846pt x 134.31744pt.
-<FC01_G03_Imagenes/Gráfico45.png, id=222, 456.5055pt x 299.31825pt>
+<FC01_G03_Imagenes/Gráfico45.png, id=247, 456.5055pt x 299.31825pt>
 File: FC01_G03_Imagenes/Gráfico45.png Graphic file (type png)
 <use FC01_G03_Imagenes/Gráfico45.png>
-Package pdftex.def Info: FC01_G03_Imagenes/Gráfico45.png  used on input line 5
-76.
+Package pdftex.def Info: FC01_G03_Imagenes/Gráfico45.png  used on input line 6
+25.
 (pdftex.def)             Requested size: 204.85846pt x 134.31744pt.
 
-Underfull \hbox (badness 10000) in alignment at lines 620--620
+Underfull \hbox (badness 10000) in alignment at lines 669--669
 [][][][][][][] 
  []
 
 
 
-[13 <./FC01_G03_Imagenes/Gráfico16.png>]
+[14 <./FC01_G03_Imagenes/Gráfico16.png>]
 
-[14 <./FC01_G03_Imagenes/Gráfico17.png> <./FC01_G03_Imagenes/Gráfico18.png> <
+[15 <./FC01_G03_Imagenes/Gráfico17.png> <./FC01_G03_Imagenes/Gráfico18.png> <
 ./FC01_G03_Imagenes/Gráfico19.png> <./FC01_G03_Imagenes/Gráfico20.png> <./FC0
 1_G03_Imagenes/Gráfico21.png> <./FC01_G03_Imagenes/Gráfico22.png> <./FC01_G03
 _Imagenes/Gráfico23.png> <./FC01_G03_Imagenes/Gráfico24.png>]
 
-[15 <./FC01_G03_Imagenes/Gráfico25.png> <./FC01_G03_Imagenes/Gráfico26.png> <
+[16 <./FC01_G03_Imagenes/Gráfico25.png> <./FC01_G03_Imagenes/Gráfico26.png> <
 ./FC01_G03_Imagenes/Gráfico27.png> <./FC01_G03_Imagenes/Gráfico28.png> <./FC0
 1_G03_Imagenes/Gráfico29.png> <./FC01_G03_Imagenes/Gráfico30.png>]
 
-[16 <./FC01_G03_Imagenes/Gráfico31.png> <./FC01_G03_Imagenes/Gráfico32.png> <
+[17 <./FC01_G03_Imagenes/Gráfico31.png> <./FC01_G03_Imagenes/Gráfico32.png> <
 ./FC01_G03_Imagenes/Gráfico33.png> <./FC01_G03_Imagenes/Gráfico34.png> <./FC0
 1_G03_Imagenes/Gráfico35.png> <./FC01_G03_Imagenes/Gráfico36.png>]
 
-[17 <./FC01_G03_Imagenes/Gráfico37.png> <./FC01_G03_Imagenes/Gráfico38.png> <
+[18 <./FC01_G03_Imagenes/Gráfico37.png> <./FC01_G03_Imagenes/Gráfico38.png> <
 ./FC01_G03_Imagenes/Gráfico39.png> <./FC01_G03_Imagenes/Gráfico40.png>]
 
-[18 <./FC01_G03_Imagenes/Gráfico41.png> <./FC01_G03_Imagenes/Gráfico42.png> <
+[19 <./FC01_G03_Imagenes/Gráfico41.png> <./FC01_G03_Imagenes/Gráfico42.png> <
 ./FC01_G03_Imagenes/Gráfico43.png> <./FC01_G03_Imagenes/Gráfico44.png> <./FC0
 1_G03_Imagenes/Gráfico45.png>] (FC01_G03.bbl)
 
-[19] (FC01_G03.aux
+[20] (FC01_G03.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
 )
@@ -984,13 +991,13 @@ L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 13241 strings out of 468130
- 224235 string characters out of 5430633
- 647754 words of memory out of 5000000
- 41621 multiletter control sequences out of 15000+600000
+ 13566 strings out of 468130
+ 228677 string characters out of 5430633
+ 653935 words of memory out of 5000000
+ 41939 multiletter control sequences out of 15000+600000
  650005 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,1313b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,1313b,546s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmmi8.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
 onts/cm/cmr10.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTeX/fonts/type1/pub
@@ -999,9 +1006,9 @@ type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/vpere/AppData/Local/Programs/MiKTe
 X/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/vpere/AppData/Local/Programs/Mi
 KTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/vpere/AppData/Local/Programs
 /MiKTeX/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on FC01_G03.pdf (20 pages, 447666 bytes).
+Output written on FC01_G03.pdf (21 pages, 458082 bytes).
 PDF statistics:
- 379 PDF objects out of 1000 (max. 8388607)
- 74 named destinations out of 1000 (max. 500000)
- 346 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 450 PDF objects out of 1000 (max. 8388607)
+ 78 named destinations out of 1000 (max. 500000)
+ 474 words of extra memory for PDF output out of 10000 (max. 10000000)
 

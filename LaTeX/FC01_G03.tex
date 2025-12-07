@@ -1,23 +1,54 @@
 \documentclass[11pt]{article}
-\usepackage[spanish]{babel}  % Idioma español
-\usepackage[utf8]{inputenc}
+% Idioma y codificación
+\usepackage[spanish]{babel}    % Idioma español
+\usepackage[utf8]{inputenc}    % Codificación UTF-8
+
+% Maquetación y espaciado
+\usepackage[a4paper,margin=2.5cm]{geometry} % Márgenes
 \usepackage{setspace}
-    \singlespacing  % Espaciado sencillo
-    \usepackage[a4paper,margin=2.5cm]{geometry}  % Márgenes de 2.5 cm
-\usepackage{helvet}  % Usa Helvética, que es muy similar a Arial
-    \renewcommand{\familydefault}{\sfdefault}  % Aplica fuente sans-serif (Helvética)
-\usepackage[colorlinks=true,linkcolor=black]{hyperref}  % Hipervínculos en el índice
-\usepackage{hyperref} % Hipervínculos
-\usepackage{graphicx} % Imágenes
-\usepackage{subcaption} % Imágenes
+\singlespacing                  % Espaciado sencillo
+
+% Fuente sans-serif (Helvética similar a Arial)
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Gráficos e imágenes
+\usepackage{graphicx}
+\usepackage{subcaption}
 \graphicspath{{FC01_G03_Imagenes/}}
-\usepackage{tabularx} % Tablas
-\usepackage{booktabs} % Tablas
-\usepackage{multirow} % Tablas
-\usepackage{float} % Tablas
-\usepackage{caption} % Tablas
+
+% Tablas
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{threeparttable}
+
+% Hipervínculos
+\usepackage[colorlinks=true,linkcolor=black]{hyperref}
 \usepackage{bookmark}
-\usepackage{threeparttable} % Notas al pie de tablas
+
+% Profundidades para numeración y TOC
+\setcounter{secnumdepth}{5} % numera hasta subparagraph
+\setcounter{tocdepth}{5}    % muestra hasta subparagraph en el índice
+
+% --- Encabezados en el documento: en negrita y en bloque ---
+\usepackage{titlesec}
+\titleformat{\paragraph}[block]
+{\normalfont\normalsize\bfseries} % negrita en documento
+{\theparagraph}{1em}{}
+\titleformat{\subparagraph}[block]
+{\normalfont\normalsize\bfseries} % negrita en documento
+{\thesubparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{1ex plus .5ex}{.5ex}
+\titlespacing*{\subparagraph}{0pt}{1ex plus .5ex}{.5ex}
+
+% --- Quitar negrita en el índice ---
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\numberline}{\bfseries}{}{}{}
+\makeatother         
 
 \title{\textbf{Costes esperados por daños corporales en seguro de automóviles e influencia en reservas\\[2em]}}
 \author{\underline{Grupo 3} \\ Víctor Alonso Lara \\ David López Avakian \\ Sergio Obando Henao \\ Víctor Manuel Pérez \\ Miquel Trullols Salat \\[6em]}
@@ -40,19 +71,19 @@
 % Fecha de entrega 1: 31/10/25 (Máximo 4 páginas en total)
 \section{Objetivo}
 
-XEste estudio tiene como objetivo aplicar los conocimientos en modelos estadísticos y cuantificación de riesgos al análisis de un caso práctico en el ámbito del seguro de automóviles. En particular, se centra en el estudio de los costes esperados por daños corporales y su influencia en el cálculo de reservas técnicas. Se trata de un tema de gran relevancia, especialmente en el mercado español, donde la compensación por daños corporales representa más del 60\% del coste total en el seguro de responsabilidad civil del automóvil \cite{santolino_prieto_metodos_2011}. \\
+Este estudio tiene como objetivo aplicar los conocimientos en modelos estadísticos y cuantificación de riesgos al análisis de un caso práctico en el ámbito del seguro de automóviles. En particular, se centra en el estudio de los costes esperados por daños corporales y su influencia en el cálculo de reservas técnicas. Se trata de un tema de gran relevancia, especialmente en el mercado español, donde la compensación por daños corporales representa más del 60\% del coste total en el seguro de responsabilidad civil del automóvil \cite{santolino_prieto_metodos_2011}. \\
 
 Para su desarrollo, el trabajo se estructura en dos fases:
-
-- Revisión de la literatura existente, con especial atención a los modelos utilizados en la estimación de costes y reservas.
-
-- Modelización del número y la cuantía de los siniestros, mediante técnicas estadísticas aplicadas a datos reales. \\
+	\begin{itemize}
+		\item Revisión de la literatura existente, con especial atención a los modelos utilizados en la estimación de costes y reservas.
+		\item Modelización del número y la cuantía de los siniestros, mediante técnicas estadísticas aplicadas a datos reales.
+	\end{itemize}
 
 Antes de abordar el análisis, se presentarán dos conceptos fundamentales que permiten contextualizar el problema y establecer las bases teóricas del estudio:
-
-- En España, el \textbf{seguro obligatorio de automóviles} está regulado por el Real Decreto Legislativo 8/2004. La ley establece que todo propietario de un vehículo a motor con estacionamiento habitual en España debe contratar y mantener un seguro que cubra la responsabilidad civil por los daños causados a personas o bienes durante la circulación del vehículo \cite{noauthor_boe--2004-18911_nodate}.
-
-- Los \textbf{daños corporales} son las lesiones físicas o psíquicas sufridas por una persona en un accidente de circulación, incluyendo lesiones temporales, secuelas permanentes y fallecimiento. Su valoración e indemnización se regulan en la Ley 35/2015 mediante el Baremo oficial \cite{jefatura_del_estado_ley_2015}. 
+	\begin{itemize}
+		\item En España, el \textbf{seguro obligatorio de automóviles} está regulado por el Real Decreto Legislativo 8/2004. La ley establece que todo propietario de un vehículo a motor con estacionamiento habitual en España debe contratar y mantener un seguro que cubra la responsabilidad civil por los daños causados a personas o bienes durante la circulación del vehículo \cite{noauthor_boe--2004-18911_nodate}.
+		\item Los \textbf{daños corporales} son las lesiones físicas o psíquicas sufridas por una persona en un accidente de circulación, incluyendo lesiones temporales, secuelas permanentes y fallecimiento. Su valoración e indemnización se regulan en la Ley 35/2015 mediante el Baremo oficial \cite{jefatura_del_estado_ley_2015}.
+	\end{itemize}
     
 % Sección 2: Estado de la cuestión: Revisión de la literatura existente
 % Fecha de entrega 1: 31/10/25 (Máximo 4 páginas en total)
@@ -180,38 +211,56 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		
     % A realizar entre el 22/11/25 y el 19/12/25
     \subsection{Modelización seleccionada y objetivos a alcanzar}
-        \subsubsection{Número de siniestros (Modelización estadística)}
-        	A continuación, desarrollaremos los distintos modelos estudiados a lo largo de la asignatura, indicando en cada caso las razones por las que no resultan aplicables cuando corresponda.
-        	\begin{enumerate}
-        		\item \textbf{Modelo de regresión lineal clásico:} No resulta adecuado cuando la variable dependiente es discreta, ya que este modelo parte del supuesto de que dicha variable es continua y sigue una distribución normal, condición que no se cumple en este caso.
-        		\item \textbf{Modelo Poisson:} método estadístico donde los datos son números enteros no negativos, que permite identificar qué variables explicativas influyen en la frecuencia de un evento.
-        		\item \textbf{Modelos lineales generalizados (GLM):} Existen diversos modelos que constituyen casos particulares. En este trabajo nos centraremos en aquellos que se aplican a variables dependientes de elección discreta.
-        			\begin{enumerate}
-        				\item \textbf{Elección binaria - logit y probit:} Describe situaciones en las que la variable dependiente del modelo econométrico es discreta y toma únicamente dos valores posibles. En nuestro caso, utilizaremos variables ficticias binarias que adoptan los valores 0 y 1, donde 1 indica que el individuo ha tenido al menos un siniestro y 0 indica que no ha tenido siniestros. En estos modelos, se supone una relación no lineal entre las variables. El término de error sigue una distribución logística (modelo logit) o normal (probit).
-        				\item \textbf{Elección multinomial:} No lo utilizamos porque este tipo de modelo está pensado para variables cualitativas con categorías sin orden, como elegir entre colores o marcas. En nuestro caso, el número de siniestros (0, 1, 2, …) tiene un orden natural y representa cantidades, no categorías independientes. Si tratáramos cada número como una categoría separada, el modelo ignoraría esa relación.
-        				\item \textbf{Elección multinomial ordenada:} Se utiliza cuando la variable dependiente tiene categorías con orden, pero no es estrictamente numérica. Por ejemplo, medir el nivel de satisfacción: bajo, medio y alto. Aquí hay un orden, pero no sabemos si la distancia entre 'bajo' y 'medio' es igual a la de 'medio' y 'alto'. En cambio, el número de siniestros es una variable de conteo, donde las diferencias sí son cuantitativas y significativas.
-        				\item \textbf{Elección multinomial anidada:} Está pensado para decisiones jerárquicas entre alternativas cualitativas, no para cantidades. Usarlo para número de siniestros sería conceptualmente incorrecto porque no hay un proceso de elección jerárquico.
-        			\end{enumerate}
-   				\item \textbf{Cluster jerárquico aglomerativo:} Pendiente
-        		\item \textbf{Cluster jerárquico divisivo:} Víctor Alonso
-        		\item \textbf{Cluster no jerárquico - k means:} Es un método de agrupamiento que busca dividir un conjunto de datos en 'k' grupos (clusters) basados en similitud. Es un algoritmo iterativo que elige 'k' centros (centroides) iniciales y asigna cada observación al centro más cercano. Luego recalcula cada centro como la media de los puntos en su grupo y repite este proceso hasta que las asignaciones no cambian. El objetivo es que los grupos sean lo más parecidos posibles entre sí y diferentes de los otros grupos.\\
-        		
-        		Para aplicar el algoritmo k-means, se seleccionaron las variables \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power} (esta última convertida previamente a formato numérico). Todas fueron normalizadas mediante estandarización ($\frac{x-media}{desv. estandar}$). \\
-        		
-        		Para determinar el número óptimo de clusters (k), utilizamos el método del codo, que analiza la relación entre el número de clusters y la suma total de cuadrados dentro de los grupos (WSS). El punto donde la curva deja de disminuir de forma pronunciada y comienza a aplanarse se denomina 'codo'. En nuestro caso, para las variables analizadas, el número óptimo de clusters es 4 (\hyperref[Anexo15]{\textcolor{blue}{Figura 13}}). A continuación, se presentan los principales comentarios que resumen los resultados detallados en el Cuadro 4 del anexo (\hyperref[Anexo16]{\textcolor{blue}{Cuadro 4}}):
-        		\begin{itemize}
-        			\item \textbf{Exposure:} Clúster 4 tiene la mayor vigencia (1 año en promedio, rango de 0,8 a 2 años), representa el 35 \%. Clúster 1 la más corta (0,1 años en promedio, rango hasta 0,3 años), aporta el 31 \%. Ambos suman 66 \% del total.
-        			\item \textbf{CarAge:} Clúster 1 concentra vehículos nuevos (2,7 años en promedio, rango de 0 hasta 6 años) con 49 \%. Clúster 2, antigüedad intermedia (9,3 años en promedio, rango 7–13 años), aporta 35 \%. Ambos simbolizan el 84 \%
-        			\item \textbf{DriverAge:} Clúster 2 reúne edades medias (40,9 años en promedio, rango de 35–47) con 32 \%. Clúster 3, conductores mayores (54 años en promedio, rango 48–62 años), representa 29 \%.
-        			\item \textbf{Density:} Clúster 1 con zonas poco pobladas (398,9 km2, rango hasta 2.317), constituyendo el 80\% del total.
-        			\item \textbf{Power:} Clúster 2 concentra potencia media-baja (3,7 en promedio, rango de 3–5) con el 50 \%. Clúster 1, la más baja (1,5 en promedio, rango hasta 3), aporta 35 \%.
-        		\end{itemize}
-   
-           		\item \textbf{Análisis PCA:} Pendiente
-        	\end{enumerate}
+        \subsubsection{Número de siniestros}
+        	A continuación, desarrollaremos los distintos modelos estudiados a lo largo de la asignatura 'Modelización estadística', indicando en cada caso las razones por las que no resultan aplicables cuando corresponda.
         	
-        \subsubsection{Costo del siniestro (Cuantificación de riesgos)}
+        	\paragraph{Modelo de regresión lineal clásico} No resulta adecuado cuando la variable dependiente es discreta, ya que este modelo parte del supuesto de que dicha variable es continua y sigue una distribución normal, condición que no se cumple en este caso.
+        	
+        	\paragraph{Modelo Poisson} método estadístico donde los datos son números enteros no negativos, que permite identificar qué variables explicativas influyen en la frecuencia de un evento.
+        	
+        	\paragraph{Modelos lineales generalizados (GLM)} Existen diversos modelos que constituyen casos particulares. En este trabajo nos centraremos en aquellos que se aplican a variables dependientes de elección discreta.
+        		
+        		\subparagraph{Elección binaria - logit y probit} Describe situaciones en las que la variable dependiente del modelo econométrico es discreta y toma únicamente dos valores posibles. En nuestro caso, utilizaremos variables ficticias binarias que adoptan los valores 0 y 1, donde 1 indica que el individuo ha tenido al menos un siniestro y 0 indica que no ha tenido siniestros. En estos modelos, se supone una relación no lineal entre las variables. El término de error sigue una distribución logística (modelo logit) o normal (probit).
+        		
+        		\subparagraph{Elección multinomial} No lo utilizamos porque este tipo de modelo está pensado para variables cualitativas con categorías sin orden, como elegir entre colores o marcas. En nuestro caso, el número de siniestros (0, 1, 2, …) tiene un orden natural y representa cantidades, no categorías independientes. Si tratáramos cada número como una categoría separada, el modelo ignoraría esa relación.
+        		
+        		\subparagraph{Elección multinomial ordenada} Se utiliza cuando la variable dependiente tiene categorías con orden, pero no es estrictamente numérica. Por ejemplo, medir el nivel de satisfacción: bajo, medio y alto. Aquí hay un orden, pero no sabemos si la distancia entre 'bajo' y 'medio' es igual a la de 'medio' y 'alto'. En cambio, el número de siniestros es una variable de conteo, donde las diferencias sí son cuantitativas y significativas.
+        		
+        		\subparagraph{Elección multinomial anidada} Está pensado para decisiones jerárquicas entre alternativas cualitativas, no para cantidades. Usarlo para número de siniestros sería conceptualmente incorrecto porque no hay un proceso de elección jerárquico.
+        	
+        	\paragraph{Cluster jerárquico aglomerativo} Pendiente
+        	
+        	\paragraph{Cluster jerárquico divisivo} Víctor Alonso
+        	
+        	\paragraph{Cluster no jerárquico - k means}
+	        	Es un método de agrupamiento que busca dividir un conjunto de datos en 'k' grupos (clusters) basados en similitud. Es un algoritmo iterativo que elige 'k' centros (centroides) iniciales y asigna cada observación al centro más cercano. Luego recalcula cada centro como la media de los puntos en su grupo y repite este proceso hasta que las asignaciones no cambian. El objetivo es que los grupos sean lo más parecidos posibles entre sí y diferentes de los otros grupos.\\
+	        	
+	        	Para aplicar el algoritmo k-means, se seleccionaron las variables \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power} (esta última convertida previamente a formato numérico). Todas fueron normalizadas mediante estandarización ($\frac{x-media}{desv. estandar}$). \\
+	        	
+	        	Para determinar el número óptimo de clusters (k), utilizamos el método del codo, que analiza la relación entre el número de clusters y la suma total de cuadrados dentro de los grupos (WSS). El punto donde la curva deja de disminuir de forma pronunciada y comienza a aplanarse se denomina 'codo'. En nuestro caso, para las variables analizadas, el número óptimo de clusters es 4 (\hyperref[Anexo15]{\textcolor{blue}{Figura 13}}). A continuación, se presentan los principales comentarios que resumen los resultados detallados en el Cuadro 4 del anexo (\hyperref[Anexo16]{\textcolor{blue}{Cuadro 4}}):
+	        	\begin{itemize}
+	        		\item \textbf{Exposure:} Clúster 4 tiene la mayor vigencia (1 año en promedio, rango de 0,8 a 2 años), representa el 35 \%. Clúster 1 la más corta (0,1 años en promedio, rango hasta 0,3 años), aporta el 31 \%. Ambos suman 66 \% del total.
+	        		\item \textbf{CarAge:} Clúster 1 concentra vehículos nuevos (2,7 años en promedio, rango de 0 hasta 6 años) con 49 \%. Clúster 2, antigüedad intermedia (9,3 años en promedio, rango 7–13 años), aporta 35 \%. Ambos simbolizan el 84 \%
+	        		\item \textbf{DriverAge:} Clúster 2 reúne edades medias (40,9 años en promedio, rango de 35–47) con 32 \%. Clúster 3, conductores mayores (54 años en promedio, rango 48–62 años), representa 29 \%.
+	        		\item \textbf{Density:} Clúster 1 con zonas poco pobladas (398,9 km2, rango hasta 2.317), constituyendo el 80\% del total.
+	        		\item \textbf{Power:} Clúster 2 concentra potencia media-baja (3,7 en promedio, rango de 3–5) con el 50 \%. Clúster 1, la más baja (1,5 en promedio, rango hasta 3), aporta 35 \%.
+	        	\end{itemize}
+			
+			\paragraph{Análisis PCA} Pendiente
+        	
+        \subsubsection{Costo del siniestro}
+	        En las siguientes secciones presentaremos los diferentes modelos abordados durante la asignatura 'Cuantificación de riesgos'.
+	                
+        	\paragraph{Modelización no paramétrica} David
+        	      	
+        	\paragraph{Modelización paramétrica} Sergio
 
+			\paragraph{Teoría de valores extremos} Victor Alonso
+			
+			\paragraph{Distribuciones compuestas} Victor Perez
+			
+			\paragraph{Distribuciones multivariadas} Miquel
+			
 % Sección 4: Resultados
 % Fecha de entrega: 19/12/25
 \section{Resultados}
