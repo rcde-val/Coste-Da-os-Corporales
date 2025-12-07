@@ -26,8 +26,14 @@
 \usepackage{threeparttable}
 
 % Hipervínculos
-\usepackage[colorlinks=true,linkcolor=black]{hyperref}
-\usepackage{bookmark}
+\usepackage{xcolor} % para definir colores
+\usepackage[
+	colorlinks=true,    % colores en lugar de recuadros
+	linkcolor=blue,     % color de enlaces internos: \ref, \pageref, etc.
+	citecolor=green,    % color de citas: \cite{...}
+	urlcolor=magenta    % color de URLs: \url{...}
+]{hyperref}
+\usepackage{bookmark} % opcional, para mejorar marcadores
 
 % Profundidades para numeración y TOC
 \setcounter{secnumdepth}{5} % numera hasta subparagraph
@@ -67,7 +73,10 @@
 \newpage
 
 % Índice
+\begingroup
+\hypersetup{linkcolor=black} % Fuerza negro SOLO dentro de este grupo
 \tableofcontents
+\endgroup
 \newpage
 
 % Sección 1: Objetivo
