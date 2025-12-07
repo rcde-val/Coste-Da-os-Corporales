@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  7 DEC 2025 23:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.30)  7 DEC 2025 23:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -619,11 +619,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 118--121
 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
-26.
-(C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1phv.fd
-File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
-)
+
 Underfull \hbox (badness 10000) in paragraph at lines 126--127
 
  []
@@ -662,7 +658,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
 
 
-[4]
+[4] (C:\Users\vpere\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1phv.fd)
 
 [5]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
@@ -1098,10 +1094,10 @@ L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 14336 strings out of 468130
- 239957 string characters out of 5430633
- 670216 words of memory out of 5000000
- 42681 multiletter control sequences out of 15000+600000
+ 14337 strings out of 468130
+ 239961 string characters out of 5430633
+ 670184 words of memory out of 5000000
+ 42682 multiletter control sequences out of 15000+600000
  651355 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,13n,79p,1313b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1115,7 +1111,7 @@ ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/vpere/AppData/Loc
 al/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/vpere/AppData/
 Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Users/vpere/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on FC01_G03.pdf (23 pages, 507263 bytes).
+Output written on FC01_G03.pdf (23 pages, 507284 bytes).
 PDF statistics:
  476 PDF objects out of 1000 (max. 8388607)
  83 named destinations out of 1000 (max. 500000)

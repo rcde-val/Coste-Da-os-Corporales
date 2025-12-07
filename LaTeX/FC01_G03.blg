@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: FC01_G03.aux
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+The style file: apalike.bst
+Reallocating 'name_of_file' (item size: 1) to 25 items.
+Database file #1: FC01_G03_Referencias.bib
+Repeated entry---line 229 of file FC01_G03_Referencias.bib
+ : @article{weisberg_quantitative_nodate
+ :                                      ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in SantolinoMiguel2007Urmd
+Warning--empty year in weisberg_quantitative_nodate
+Warning--empty journal in weisberg_quantitative_nodate
+You've used 8 entries,
+            1935 wiz_defined-function locations,
+            518 strings with 5686 characters,
+and the built_in function-call counts, 2721 in all, are:
+= -- 271
+> -- 101
+< -- 6
++ -- 32
+- -- 32
+* -- 224
+:= -- 497
+add.period$ -- 22
+call.type$ -- 8
+change.case$ -- 55
+chr.to.int$ -- 8
+cite$ -- 11
+duplicate$ -- 101
+empty$ -- 184
+format.name$ -- 46
+if$ -- 514
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 5
+newline$ -- 41
+num.names$ -- 24
+pop$ -- 43
+preamble$ -- 1
+purify$ -- 56
+quote$ -- 0
+skip$ -- 78
+stack$ -- 0
+substring$ -- 183
+swap$ -- 5
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 48
+warning$ -- 3
+while$ -- 23
+width$ -- 0
+write$ -- 98
+(There was 1 error message)
