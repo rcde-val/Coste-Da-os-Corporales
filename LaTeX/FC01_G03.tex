@@ -33,7 +33,7 @@
 \setcounter{secnumdepth}{5} % numera hasta subparagraph
 \setcounter{tocdepth}{5}    % muestra hasta subparagraph en el índice
 
-% --- Encabezados en el documento: en negrita y en bloque ---
+% Encabezados en el documento: en negrita y en bloque
 \usepackage{titlesec}
 \titleformat{\paragraph}[block]
 {\normalfont\normalsize\bfseries} % negrita en documento
@@ -44,11 +44,14 @@
 \titlespacing*{\paragraph}{0pt}{1ex plus .5ex}{.5ex}
 \titlespacing*{\subparagraph}{0pt}{1ex plus .5ex}{.5ex}
 
-% --- Quitar negrita en el índice ---
+% Quitar negrita en el índice
 \usepackage{etoolbox}
 \makeatletter
 \patchcmd{\numberline}{\bfseries}{}{}{}
-\makeatother         
+\makeatother
+
+% Matrices
+\usepackage{amsmath}         
 
 \title{\textbf{Costes esperados por daños corporales en seguro de automóviles e influencia en reservas\\[2em]}}
 \author{\underline{Grupo 3} \\ Víctor Alonso Lara \\ David López Avakian \\ Sergio Obando Henao \\ Víctor Manuel Pérez \\ Miquel Trullols Salat \\[6em]}
@@ -138,7 +141,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 % Sección 3: Análisis metodológico escogido
 % Fecha de entrega 2: 19/12/25
 % Comentarios: Deben quedar claramente diferenciados el enfoque metodológico y los resultados que desde el punto de vista del alumno se asocian a la asignatura de Modelos estadísticos y los que se asocian a la asignatura de Cuantificación de riesgos, indicando como decíamos en el punto anterior, sus contribuciones fundamentales. La asociación a cada asignatura debe ser fácilmente localizable en el texto.
-\section{Análisis metodológico escogido}
+\section{Análisis metodológico escogido y resultados}
     El objetivo inicial es comprender la estructura del conjunto de datos y familiarizarnos con las variables disponibles, ya que esto constituye la base para cualquier análisis exploratorio. En el Cuadro 1 se presenta una descripción resumida de las variables correspondientes a una cartera de una aseguradora en Francia, que incluyen características del vehículo, del conductor, de la póliza y los montos asociados a los reclamos, entre otros.
     
     \begin{table}[H]
@@ -220,7 +223,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
         	
         	\paragraph{Modelos lineales generalizados (GLM)} Existen diversos modelos que constituyen casos particulares. En este trabajo nos centraremos en aquellos que se aplican a variables dependientes de elección discreta.
         		
-        		\subparagraph{Elección binaria - logit y probit} Describe situaciones en las que la variable dependiente del modelo econométrico es discreta y toma únicamente dos valores posibles. En nuestro caso, utilizaremos variables ficticias binarias que adoptan los valores 0 y 1, donde 1 indica que el individuo ha tenido al menos un siniestro y 0 indica que no ha tenido siniestros. En estos modelos, se supone una relación no lineal entre las variables. El término de error sigue una distribución logística (modelo logit) o normal (probit).
+        		\subparagraph{Elección binaria - logit} Describe situaciones en las que la variable dependiente del modelo econométrico es discreta y toma únicamente dos valores posibles. En nuestro caso, utilizaremos variables ficticias binarias que adoptan los valores 0 y 1, donde 1 indica que el individuo ha tenido al menos un siniestro y 0 indica que no ha tenido siniestros. En estos modelos, se supone una relación no lineal entre las variables, dónde el término de error sigue una distribución logística.
         		
         		\subparagraph{Elección multinomial} No lo utilizamos porque este tipo de modelo está pensado para variables cualitativas con categorías sin orden, como elegir entre colores o marcas. En nuestro caso, el número de siniestros (0, 1, 2, …) tiene un orden natural y representa cantidades, no categorías independientes. Si tratáramos cada número como una categoría separada, el modelo ignoraría esa relación.
         		
@@ -269,19 +272,75 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				
 				Asimismo, cuando se graficó la distribución Lognormal–Pareto (\hyperref[Anexo18]{\textcolor{blue}{Figura 14}}), se observó un salto en el umbral que une ambas distribuciones, por lo que se optó por incluir la restricción de continuidad en la función de densidad, determinando que el valor de $r$ debería ser de 0,83. Sin embargo, al incluir esta restricción, la precisión del modelo se vio perjudicada, ya que el loglik disminuyó y el AIC aumentó, lo que indica que imponer continuidad no siempre mejora el ajuste global, aunque puede ser útil para evitar discontinuidades visuales en la densidad.  
 			
-			\paragraph{Distribuciones multivariadas} Miquel
+			\paragraph{Distribuciones multivariadas} PREGUNTAR UNIDAD DE MEDIDA DE LA ÚLTIMA TABLA
 			
-% Sección 4: Resultados
-% Fecha de entrega: 19/12/25
-\section{Resultados}
-    Por desarrollar.
+				Se procederá a modelizar conjuntamente los costes por daños materiales y los costes por daños corporales, aplicando previamente una transformación logarítmica a ambas variables. Sobre estos datos transformados se evaluará qué distribución multivariante ofrece el mejor ajuste. Una vez seleccionada la distribución óptima, se calcularán las métricas de riesgo VaR y TVaR para distintos niveles de confianza: 99 \%, 99,5 \% y 99,9 \%. \\
+				
+				En primer lugar, se aplicaron pruebas de normalidad a las transformaciones logarítmicas de los costes por separado, utilizando el test de Jarque-Bera. En ambos casos se obtuvieron p-valores inferiores a 2.2e-16, por lo que se rechaza la hipótesis nula con una confianza superior al 99 \%, concluyendo que los log-costes no siguen una distribución normal. Si las marginales no son normales, la distribución conjunta tampoco puede ser una normal multivariante. Para confirmarlo, se aplicó el test de Mardia sobre las dos variables transformadas en logaritmos, obteniendo p-valores de 0 tanto para asimetría como para curtosis. Por tanto, se rechaza la hipótesis nula de normalidad multivariante con una confianza superior al 99 \%. Ante este resultado, se procedió a ajustar distribuciones más flexibles: la hiperbólica generalizada, la t-Student, la hiperbólica, la normal inversa gaussiana y la varianza-gamma, cada una en sus variantes simétrica y asimétrica.
 
-% Sección 5: Informe ejecutivo
+				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones multivariadas
+					\begin{table}[H]
+						\centering
+						\caption{Distribuciones multivariadas}
+						\begin{tabular}{lcc}
+							\toprule
+							\textbf{Distribución} & \textbf{AIC (sim.)} & \textbf{AIC (asim.)} \\
+							\midrule
+								t-Student      & 105.028 & 96.189 \\
+								Hiperbólica    & 106.207 & 92.902 \\
+								NIG            & 105.161 & 94.489 \\
+								VG             & 106.523 & 89.148 \\
+								GHip           & 104.970 & 89.094 \\
+							\bottomrule
+						\end{tabular}
+					\end{table}
+									
+				La distribución que ofrece el mejor ajuste a los datos es la hiperbólica generalizada multivariante asimétrica. En este caso, los parámetros estimados para la distribución son los siguientes:
+				
+				\begin{equation*}
+					\begin{aligned}
+						\lambda &= 0.6063, \quad \bar{\alpha} = 0.0193 \\[6pt]
+						\mu &=
+						\begin{bmatrix}
+							-6.0297 \\
+							-4.7002
+						\end{bmatrix}, \quad
+						\sigma =
+						\begin{bmatrix}
+							4.6606 & -0.3728 \\
+							-0.3728 & 0.1868
+						\end{bmatrix}, \quad
+						\gamma =
+						\begin{bmatrix}
+							-0.1719 \\
+							-0.7390
+						\end{bmatrix}
+					\end{aligned}
+				\end{equation*}
+
+				Con estos parámetros se procedió a simular el VaR y el TVaR para niveles de confianza del 99 \%, 99,5 \% y 99,9 \%, obteniendo los siguientes resultados:
+				
+				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones multivariadas
+					\begin{table}[H]
+						\centering
+						\caption{Distribuciones multivariadas}
+						\begin{tabular}{lcc}
+							\toprule
+							\textbf{Nivel de confianza} & \textbf{VaR} & \textbf{TVaR)} \\
+							\midrule
+								$99,0\%$ & 0.7654302 & 2619.545 \\
+								$99,5\%$ & 2.4870659 & 5237.718 \\
+								$99,9\%$ & 37.9783727 & 26152.04 \\
+							\bottomrule
+						\end{tabular}
+					\end{table}
+
+% Sección 4: Informe ejecutivo
 % Fecha de entrega: 10/01/26
 \section{Informe ejecutivo}
     Por desarrollar.
 
-% Sección 6: Anexos
+% Sección 5: Anexos
 % Fecha de entrega: 10/01/26
 \section{Anexos}
 
