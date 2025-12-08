@@ -242,8 +242,36 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
         	
         	\paragraph{Clúster jerárquico aglomerativo} Pendiente
         	
-        	\paragraph{Clúster jerárquico divisivo} Víctor Alonso
+        	\paragraph{Clúster jerárquico divisivo}
         	
+	        	Para el análisis de la variable objetivo $\texttt{ClaimNb}$, caracterizada por una alta concentración de ceros y sobredispersión, se ha optado por un algoritmo de Árboles de Inferencia Condicional. A diferencia de los métodos tradicionales (CART), este enfoque no paramétrico utiliza pruebas de significación estadística para la selección de variables, evitando el sesgo hacia predictores con muchos niveles y detectando interacciones no lineales complejas.  Para garantizar la robustez del modelo y evitar el sobreajuste (overfitting) en una cartera de gran volumen, se definió un objeto de control conservador: 
+	      
+	        	\begin{itemize} 
+	        		\item \textbf{Criterio de División:} Corrección de Bonferroni con un nivel de confianza del 95 \% ($\alpha = 0.05$). 
+	        		\item \textbf{Tamaño de Nodos:} Se requiere un mínimo de 3000 observaciones para intentar una división ($min_split$) y 1500 para un nodo terminal ($min_bucket$). 
+	        		\item \textbf{Profundidad:} Limitada a 3 niveles ($max_depth$) para priorizar la interpretabilidad de los \textit{drivers} principales.
+	        	\end{itemize} 
+	        	
+	        	El árbol revela una clara jerarquización de los factores de riesgo, validando las segmentaciones propuestas: 
+	        	 
+        		\begin{itemize} 
+        			\item \textbf{Primer Nivel - Exposición ($\texttt{Exposure}$):} Variable más discriminante. Divide la cartera en tres tramos (Baja $\le 0.08$, Media, Alta $> 0.29$), confirmando la correlación positiva entre duración de póliza y probabilidad de siniestro.
+        			\item \textbf{Ramas de Riesgo (Interacciones):} 
+	        			\begin{itemize} 
+	        				\item \textit{Baja Exposición:} La variable secundaria es $\texttt{CarAge}$. Los vehículos nuevos ($\le 5$ años) presentan una siniestralidad reducida ($0.6\%$) frente a los antiguos ($1.2\%$). 
+	        				\item \textit{Exposición Media y Alta:} La marca ($\texttt{Brand}$) actúa como discriminante principal. Las marcas asiáticas (Japonesas/Coreanas) muestran sistemáticamente menor frecuencia ($1.6\%$) comparadas con las marcas occidentales ($2.7\%$). 
+	        			\end{itemize}
+	        		\item \textbf{Segmentación Geográfica (Interacción Crítica):} En el segmento de mayor volumen (Alta Exposición y Marcas Occidentales), la variable $\texttt{Region}$ revela la mayor disparidad de riesgo: 
+	        		\begin{itemize} 
+	        			\item \textbf{Grupo de Menor Riesgo:} Regiones como \textit{Bretagne} o \textit{Centre} ($4.9\%$ de frecuencia). 
+	        			\item \textbf{Grupo de Mayor Riesgo:} Zonas de alta densidad como \textit{Ile-de-France}, alcanzando la tasa de error más alta del modelo ($6.1\%$). 
+	        		\end{itemize}
+				\end{itemize}
+				
+				Complementariamente, se ha utilizado la función \texttt{sctest} (\textit{Structural Change Test}) de R, la cual muestra la 'competencia' estadística entre variables para decidir cuál se utiliza para dividir un nodo. El algoritmo evalúa la hipótesis nula de independencia entre cada predictor y la variable respuesta (\textit{ClaimNb}), verificando mediante los $p-valores$ que el proceso de selección y particionamiento realizado por el árbol de decisión ha sido eficiente y robusto.\\
+				
+				Aunque la predicción modal es cero, el árbol segmenta eficazmente el riesgo latente, identificando un rango de probabilidad de siniestro que oscila entre el $0.6 \%$ y el $6.1 \%$ según el perfil del asegurado. 
+				 
         	\paragraph{Clúster no jerárquico - k means}
 	        	Es un método de agrupamiento que busca dividir un conjunto de datos en 'k' grupos (clústers) basados en similitud. Es un algoritmo iterativo que elige 'k' centros (centroides) iniciales y asigna cada observación al centro más cercano. Luego recalcula cada centro como la media de los puntos en su grupo y repite este proceso hasta que las asignaciones no cambian. El objetivo es que los grupos sean lo más parecidos posibles entre sí y diferentes de los otros grupos.\\
 	        	
@@ -267,8 +295,45 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
         	      	
         	\paragraph{Modelización paramétrica} Sergio
 
-			\paragraph{Teoría de valores extremos} Victor Alonso
+			\paragraph{Teoría de valores extremos} A CONTINUACIÓN SE DETALLAN LAS EVIDENCIAS ESTADÍSTICAS Y GRÁFICAS: (VA ALGUNA IMAGEN??)
 			
+				El análisis de la variable de coste de daños corporales, fundamentado en la Teoría de Valores Extremos (EVT), confirma la presencia de una distribución de cola pesada (heavy-tailed distribution). A continuación se detallan las evidencias estadísticas y gráficas:
+				
+				Después de haber seleccionado únicamente los casos positivos de la variable \textit{InjuryAmount} y haberla transformado dividiéndola por 1.000. Los estadísticos básicos revelan una asimetría extrema y una curtosis muy elevada. Existe una discrepancia masiva entre la tendencia central (Media $\approx 15.75$) y el valor máximo ($19,792.8$). El tercer cuartil ($Q_3 \approx 9.13$) es insignificante comparado con el máximo, lo que indica que la gran mayoría de la densidad de probabilidad se concentra cerca de cero, pero el riesgo (la varianza y la media en menor medida) está dominado por eventos extremos poco frecuentes. Para validar el comportamiento de la cola de la distribución y confirmar la selección del umbral, se han analizado las siguientes herramientas visuales:
+			
+				\begin{itemize}
+					\item \textbf{Mean Excess Plot (Gráfico de Exceso Medio):} Muestra una clara tendencia lineal con pendiente positiva a medida que aumenta el umbral. En el contexto de la Teoría de Valores Extremos (EVT), esta pendiente positiva es una señal característica de una distribución de cola pesada. Esto confirma que el parámetro de forma es estrictamente positivo, descartando distribuciones de cola ligera o exponencial.
+					\item \textbf{Hill Plot:} Representa las estimaciones del índice de cola en función de los estadísticos de orden. Se observa una zona de estabilidad (indicada por la línea discontinua horizontal) donde el estimador converge a un valor aproximado de $0.9$. La línea vertical azul confirma que el umbral elegido ($u=21$) se encuentra dentro de esta región estable, validando la robustez de la estimación.
+					\item \textbf{CV-Plot (Gráfico de Coeficiente de Variación):} 
+					Esta herramienta complementaria analiza la dispersión de los excesos sobre el umbral. El comportamiento observado respalda la elección del umbral, mostrando consistencia con los resultados del Hill Plot y asegurando que la varianza de la cola se comporta según lo esperado para una GPD.
+				\end{itemize}
+				
+				Basándonos en la estabilidad de los gráficos de diagnóstico, se fijó un umbral de $u \approx 21$. Este corte aisla las 1616 observaciones más extremas de la muestra, que representan aproximadamente el $10\%$ superior de la distribución de pérdidas ($p < u \approx 0.90$).
+				
+				Se ajustó la Distribución Generalizada de Pareto (GPD) a estos excesos mediante el método de Máxima Verosimilitud (MLE). Los parámetros resultantes confirman la severidad de la cola, parámetro de forma ($\tilde{\zeta}$): $0.8831$ (Error estándar: $0.0456$) y parámetro de escala ($\psi$): $19.2994$ (Error estándar: $0.9092$).
+				
+				El valor de $\tilde{\zeta} \approx 0.88$ es positivo y significativamente distinto de cero (considerando su error estándar bajo), lo que ratifica la presencia de una cola pesada.
+				
+				Con los parámetros estimados, se procedió al cálculo del Capital Económico necesario para cubrir el riesgo al nivel de confianza del $99.5\%$ ($q=0.995$). Se compararon los resultados del enfoque de Pareto simple (Hill) frente al enfoque POT-GPD:
+
+				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Teoría de valores extremos
+					\begin{table}[H]
+						\centering
+						\caption{Teoría de valores extremos}
+						\begin{tabular}{lcc}
+							\toprule
+							\textbf{Metodología} & \textbf{Parámetros estimados} & \textbf{$VaR_{99.5\%}$} \\
+							\midrule
+								Pareto simple & $\hat{\xi}^{Hill} \approx 1.13$ & 284,32 \\
+								GPD (POT) & $\tilde{\zeta} \approx 0.88$, $\psi \approx 19.30$ & 285,77 \\
+							\bottomrule
+						\end{tabular}
+					\end{table}
+								
+				Como se observa en la Tabla, ambos modelos convergen hacia un riesgo extremo muy similar, situando el VaR en torno a las 285 unidades monetarias. 
+				
+				Específicamente, el modelo GPD estima un $VaR_{99.5\%} \approx 285.77$. Esto significa que, con una probabilidad del $0.5\%$, la entidad podría enfrentar pérdidas que superen este monto. Este valor es extremadamente alto en comparación con la media de los datos, lo que subraya que el riesgo principal de la cartera reside en estos eventos de baja frecuencia pero alto impacto.
+						
 			\paragraph{Distribuciones compuestas}
 				Una distribución compuesta es un modelo que combina dos distribuciones diferentes para representar adecuadamente datos con dos zonas de comportamiento:
 				\begin{itemize}
@@ -674,6 +739,17 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	\hfill
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{Gráfico40.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Clúster jerárquico aglomerativo
+\label{Anexo19}
+\begin{figure}[htbp]
+	\centering
+	\caption{Clúster jerárquico aglomerativo}
+	% Primera fila
+	\begin{subfigure}[b]{1.0\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico49.jpg}
 	\end{subfigure}
 \end{figure}
 
