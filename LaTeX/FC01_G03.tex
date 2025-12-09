@@ -147,6 +147,7 @@ La predicción del coste de indemnización es un aspecto crítico para las compa
 
 Por último, se recomienda a las aseguradoras prestar especial atención a los siniestros que superan el percentil 90-95\%, ya que representan casos atípicos con costes significativamente elevados. Estos expedientes requieren una evaluación más exhaustiva para verificar la consistencia de los gastos médicos reclamados y detectar posibles exageraciones o prácticas fraudulentas. Un análisis detallado en esta franja no solo contribuye a reducir el riesgo de sobre indemnización, sino que también permite optimizar la asignación de reservas \cite{weisberg_quantitative_nodate}.\\
 
+\newpage
 % Sección 3: Análisis metodológico escogido
 % Fecha de entrega 2: 19/12/25
 % Comentarios: Deben quedar claramente diferenciados el enfoque metodológico y los resultados que desde el punto de vista del alumno se asocian a la asignatura de Modelos estadísticos y los que se asocian a la asignatura de Cuantificación de riesgos, indicando como decíamos en el punto anterior, sus contribuciones fundamentales. La asociación a cada asignatura debe ser fácilmente localizable en el texto.
@@ -224,115 +225,239 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
     % A realizar entre el 22/11/25 y el 19/12/25
     \subsection{Modelización seleccionada y objetivos a alcanzar}
         \subsubsection{Número de siniestros}
-        	A continuación, desarrollaremos los distintos modelos estudiados a lo largo de la asignatura 'Modelización estadística', indicando en cada caso las razones por las que no resultan aplicables cuando corresponda.
-        	
-        	\paragraph{Modelo de regresión lineal clásico} No resulta adecuado cuando la variable dependiente es discreta, ya que este modelo parte del supuesto de que dicha variable es continua y sigue una distribución normal, condición que no se cumple en este caso.
-        	
-        	\paragraph{Modelo Poisson} método estadístico donde los datos son números enteros no negativos, que permite identificar qué variables explicativas influyen en la frecuencia de un evento.
-        	
-        	\paragraph{Modelos lineales generalizados (GLM)} Existen diversos modelos que constituyen casos particulares. En este trabajo nos centraremos en aquellos que se aplican a variables dependientes de elección discreta.
-        		
-        		\subparagraph{Elección binaria - logit} Describe situaciones en las que la variable dependiente del modelo econométrico es discreta y toma únicamente dos valores posibles. En nuestro caso, utilizaremos variables ficticias binarias que adoptan los valores 0 y 1, donde 1 indica que el individuo ha tenido al menos un siniestro y 0 indica que no ha tenido siniestros. En estos modelos, se supone una relación no lineal entre las variables, dónde el término de error sigue una distribución logística.
-        		
-        		\subparagraph{Elección multinomial} No lo utilizamos porque este tipo de modelo está pensado para variables cualitativas con categorías sin orden, como elegir entre colores o marcas. En nuestro caso, el número de siniestros (0, 1, 2, …) tiene un orden natural y representa cantidades, no categorías independientes. Si tratáramos cada número como una categoría separada, el modelo ignoraría esa relación.
-        		
-        		\subparagraph{Elección multinomial ordenada} Se utiliza cuando la variable dependiente tiene categorías con orden, pero no es estrictamente numérica. Por ejemplo, medir el nivel de satisfacción: bajo, medio y alto. Aquí hay un orden, pero no sabemos si la distancia entre 'bajo' y 'medio' es igual a la de 'medio' y 'alto'. En cambio, el número de siniestros es una variable de conteo, donde las diferencias sí son cuantitativas y significativas.
-        		
-        		\subparagraph{Elección multinomial anidada} Está pensado para decisiones jerárquicas entre alternativas cualitativas, no para cantidades. Usarlo para número de siniestros sería conceptualmente incorrecto porque no hay un proceso de elección jerárquico.
-        	
-        	\paragraph{Clúster jerárquico aglomerativo} Pendiente
-        	
+        	A continuación, desarrollaremos los distintos modelos estudiados a lo largo de la asignatura 'Modelización estadística', indicando en cada caso las razones por las que no resultan aplicables cuando corresponda. Aunque la base de datos incluye información sobre el coste de los siniestros, estas variables no se han incorporado en los modelos de frecuencia porque el coste depende directamente de la ocurrencia del siniestro. Incluirlas generaría un sesgo y una falsa sensación de precisión, además de romper la separación habitual entre frecuencia y severidad que se utiliza en la tarificación actuarial.
+
         	\paragraph{Clúster jerárquico divisivo}
-        	
-	        	Para el análisis de la variable objetivo $\texttt{ClaimNb}$, caracterizada por una alta concentración de ceros y sobredispersión, se ha optado por un algoritmo de Árboles de Inferencia Condicional. A diferencia de los métodos tradicionales (CART), este enfoque no paramétrico utiliza pruebas de significación estadística para la selección de variables, evitando el sesgo hacia predictores con muchos niveles y detectando interacciones no lineales complejas.  Para garantizar la robustez del modelo y evitar el sobreajuste (overfitting) en una cartera de gran volumen, se definió un objeto de control conservador: 
-	      
-	        	\begin{itemize} 
-	        		\item \textbf{Criterio de División:} Corrección de Bonferroni con un nivel de confianza del 95 \% ($\alpha = 0.05$). 
-	        		\item \textbf{Tamaño de Nodos:} Se requiere un mínimo de 3000 observaciones para intentar una división ($min_split$) y 1500 para un nodo terminal ($min_bucket$). 
-	        		\item \textbf{Profundidad:} Limitada a 3 niveles ($max_depth$) para priorizar la interpretabilidad de los \textit{drivers} principales.
-	        	\end{itemize} 
-	        	
-	        	El árbol revela una clara jerarquización de los factores de riesgo, validando las segmentaciones propuestas: 
-	        	 
-        		\begin{itemize} 
-        			\item \textbf{Primer Nivel - Exposición ($\texttt{Exposure}$):} Variable más discriminante. Divide la cartera en tres tramos (Baja $\le 0.08$, Media, Alta $> 0.29$), confirmando la correlación positiva entre duración de póliza y probabilidad de siniestro.
-        			\item \textbf{Ramas de Riesgo (Interacciones):} 
-	        			\begin{itemize} 
-	        				\item \textit{Baja Exposición:} La variable secundaria es $\texttt{CarAge}$. Los vehículos nuevos ($\le 5$ años) presentan una siniestralidad reducida ($0.6\%$) frente a los antiguos ($1.2\%$). 
-	        				\item \textit{Exposición Media y Alta:} La marca ($\texttt{Brand}$) actúa como discriminante principal. Las marcas asiáticas (Japonesas/Coreanas) muestran sistemáticamente menor frecuencia ($1.6\%$) comparadas con las marcas occidentales ($2.7\%$). 
-	        			\end{itemize}
-	        		\item \textbf{Segmentación Geográfica (Interacción Crítica):} En el segmento de mayor volumen (Alta Exposición y Marcas Occidentales), la variable $\texttt{Region}$ revela la mayor disparidad de riesgo: 
-	        		\begin{itemize} 
-	        			\item \textbf{Grupo de Menor Riesgo:} Regiones como \textit{Bretagne} o \textit{Centre} ($4.9\%$ de frecuencia). 
-	        			\item \textbf{Grupo de Mayor Riesgo:} Zonas de alta densidad como \textit{Ile-de-France}, alcanzando la tasa de error más alta del modelo ($6.1\%$). 
-	        		\end{itemize}
+				Para el análisis de la variable objetivo $\texttt{ClaimNb}$, caracterizada por una alta concentración de ceros y sobredispersión, se ha optado por un algoritmo de Árboles de Inferencia Condicional. A diferencia de los métodos tradicionales (CART), este enfoque no paramétrico utiliza pruebas de significación estadística para la selección de variables, evitando el sesgo hacia predictores con muchos niveles y detectando interacciones no lineales complejas.  Para garantizar la robustez del modelo y evitar el sobreajuste (overfitting) en una cartera de gran volumen, se definió un objeto de control conservador: 
+				
+				\begin{itemize} 
+					\item \textbf{Criterio de División:} Corrección de Bonferroni con un nivel de confianza del 95 \% ($\alpha = 0.05$). 
+					\item \textbf{Tamaño de Nodos:} Se requiere un mínimo de 3000 observaciones para intentar una división ($min_split$) y 1500 para un nodo terminal ($min_bucket$). 
+					\item \textbf{Profundidad:} Limitada a 3 niveles ($max_depth$) para priorizar la interpretabilidad de los \textit{drivers} principales.
+				\end{itemize} 
+				
+				El árbol revela una clara jerarquización de los factores de riesgo, validando las segmentaciones propuestas: 
+				
+				\begin{itemize} 
+					\item \textbf{Primer Nivel - Exposición ($\texttt{Exposure}$):} Variable más discriminante. Divide la cartera en tres tramos (Baja $\le 0.08$, Media, Alta $> 0.29$), confirmando la correlación positiva entre duración de póliza y probabilidad de siniestro.
+					\item \textbf{Ramas de Riesgo (Interacciones):} 
+					\begin{itemize} 
+						\item \textit{Baja Exposición:} La variable secundaria es $\texttt{CarAge}$. Los vehículos nuevos ($\le 5$ años) presentan una siniestralidad reducida ($0.6\%$) frente a los antiguos ($1.2\%$). 
+						\item \textit{Exposición Media y Alta:} La marca ($\texttt{Brand}$) actúa como discriminante principal. Las marcas asiáticas (Japonesas/Coreanas) muestran sistemáticamente menor frecuencia ($1.6\%$) comparadas con las marcas occidentales ($2.7\%$). 
+					\end{itemize}
+					\item \textbf{Segmentación Geográfica (Interacción Crítica):} En el segmento de mayor volumen (Alta Exposición y Marcas Occidentales), la variable $\texttt{Region}$ revela la mayor disparidad de riesgo: 
+					\begin{itemize} 
+						\item \textbf{Grupo de Menor Riesgo:} Regiones como \textit{Bretagne} o \textit{Centre} ($4.9\%$ de frecuencia). 
+						\item \textbf{Grupo de Mayor Riesgo:} Zonas de alta densidad como \textit{Ile-de-France}, alcanzando la tasa de error más alta del modelo ($6.1\%$). 
+					\end{itemize}
 				\end{itemize}
 				
 				Complementariamente, se ha utilizado la función \texttt{sctest} (\textit{Structural Change Test}) de R, la cual muestra la 'competencia' estadística entre variables para decidir cuál se utiliza para dividir un nodo. El algoritmo evalúa la hipótesis nula de independencia entre cada predictor y la variable respuesta (\textit{ClaimNb}), verificando mediante los $p-valores$ que el proceso de selección y particionamiento realizado por el árbol de decisión ha sido eficiente y robusto.\\
 				
 				Aunque la predicción modal es cero, el árbol segmenta eficazmente el riesgo latente, identificando un rango de probabilidad de siniestro que oscila entre el $0.6 \%$ y el $6.1 \%$ según el perfil del asegurado. 
-				 
-        	\paragraph{Clúster no jerárquico - k means}
-	        	Es un método de agrupamiento que busca dividir un conjunto de datos en 'k' grupos (clústers) basados en similitud. Es un algoritmo iterativo que elige 'k' centros (centroides) iniciales y asigna cada observación al centro más cercano. Luego recalcula cada centro como la media de los puntos en su grupo y repite este proceso hasta que las asignaciones no cambian. El objetivo es que los grupos sean lo más parecidos posibles entre sí y diferentes de los otros grupos.\\
-	        	
-	        	Para aplicar el algoritmo k-means, se seleccionaron las variables \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power} (esta última convertida previamente a formato numérico). Todas fueron normalizadas mediante estandarización ($(x-media)/desv. estandar$). \\
-	        	
-	        	Para determinar el número óptimo de clústers (k), utilizamos el método del codo, que analiza la relación entre el número de clústers y la suma total de cuadrados dentro de los grupos (WSS). El punto donde la curva deja de disminuir de forma pronunciada y comienza a aplanarse se denomina 'codo'. En nuestro caso, para las variables analizadas, el número óptimo de clústers es 4 (\hyperref[Anexo15]{\textcolor{blue}{Figura 13}}). A continuación, se presentan los principales comentarios que resumen los resultados detallados en el (\hyperref[Anexo16]{\textcolor{blue}{Cuadro 4}}):
-	        	\begin{itemize}
-	        		\item \textbf{Exposure:} Clúster 4 tiene la mayor vigencia (1 año en promedio, rango de 0,8 a 2 años), representa el 35 \%. Clúster 1 la más corta (0,1 años en promedio, rango hasta 0,3 años), aporta el 31 \%. Ambos suman 66 \% del total.
-	        		\item \textbf{CarAge:} Clúster 1 concentra vehículos nuevos (2,7 años en promedio, rango de 0 hasta 6 años) con 49 \%. Clúster 2, antigüedad intermedia (9,3 años en promedio, rango 7–13 años), aporta 35 \%. Ambos simbolizan el 84 \%
-	        		\item \textbf{DriverAge:} Clúster 2 reúne edades medias (40,9 años en promedio, rango de 35–47) con 32 \%. Clúster 3, conductores mayores (54 años en promedio, rango 48–62 años), representa 29 \%.
-	        		\item \textbf{Density:} Clúster 1 con zonas poco pobladas (398,9 km2, rango hasta 2.317), constituyendo el 80\% del total.
-	        		\item \textbf{Power:} Clúster 2 concentra potencia media-baja (3,7 en promedio, rango de 3–5) con el 50 \%. Clúster 1, la más baja (1,5 en promedio, rango hasta 3), aporta 35 \%.
-	        	\end{itemize}
+				
+			\paragraph{Clúster no jerárquico - k means}
+				Es un método de agrupamiento que busca dividir un conjunto de datos en 'k' grupos (clústers) basados en similitud. Es un algoritmo iterativo que elige 'k' centros (centroides) iniciales y asigna cada observación al centro más cercano. Luego recalcula cada centro como la media de los puntos en su grupo y repite este proceso hasta que las asignaciones no cambian. El objetivo es que los grupos sean lo más parecidos posibles entre sí y diferentes de los otros grupos.\\
+				
+				Para aplicar el algoritmo k-means, se seleccionaron las variables \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power} (esta última convertida previamente a formato numérico). Todas fueron normalizadas mediante estandarización ($(x-media)/desv. estandar$). \\
+				
+				Para determinar el número óptimo de clústers (k), utilizamos el método del codo, que analiza la relación entre el número de clústers y la suma total de cuadrados dentro de los grupos (WSS). El punto donde la curva deja de disminuir de forma pronunciada y comienza a aplanarse se denomina 'codo'. En nuestro caso, para las variables analizadas, el número óptimo de clústers es 4 (\hyperref[Anexo15]{\textcolor{blue}{Figura 13}}). A continuación, se presentan los principales comentarios que resumen los resultados detallados en el (\hyperref[Anexo16]{\textcolor{blue}{Cuadro 4}}):
+				\begin{itemize}
+					\item \textbf{Exposure:} Clúster 4 tiene la mayor vigencia (1 año en promedio, rango de 0,8 a 2 años), representa el 35 \%. Clúster 1 la más corta (0,1 años en promedio, rango hasta 0,3 años), aporta el 31 \%. Ambos suman 66 \% del total.
+					\item \textbf{CarAge:} Clúster 1 concentra vehículos nuevos (2,7 años en promedio, rango de 0 hasta 6 años) con 49 \%. Clúster 2, antigüedad intermedia (9,3 años en promedio, rango 7–13 años), aporta 35 \%. Ambos simbolizan el 84 \%
+					\item \textbf{DriverAge:} Clúster 2 reúne edades medias (40,9 años en promedio, rango de 35–47) con 32 \%. Clúster 3, conductores mayores (54 años en promedio, rango 48–62 años), representa 29 \%.
+					\item \textbf{Density:} Clúster 1 con zonas poco pobladas (398,9 km2, rango hasta 2.317), constituyendo el 80\% del total.
+					\item \textbf{Power:} Clúster 2 concentra potencia media-baja (3,7 en promedio, rango de 3–5) con el 50 \%. Clúster 1, la más baja (1,5 en promedio, rango hasta 3), aporta 35 \%.
+				\end{itemize}
+				
+		\paragraph{Análisis PCA}
+			Se aplicó el método de Análisis de Componentes Principales (PCA) sobre la matriz de correlaciones  para reducir la dimensionalidad y explorar patrones entre cinco variables: \textit{Exposure}, \textit{CarAge}, \textit{DriverAge}, \textit{Density} y \textit{Power}. Este procedimiento permite sintetizar la información en componentes no correlacionados que explican la mayor parte de la varianza original. \\
 			
-			\paragraph{Análisis PCA} Pendiente
+			La matriz de correlaciones (\hyperref[Anexo24]{\textcolor{blue}{Figura X}}) muestra relaciones en general débiles entre las variables, con valores máximos en torno a 0.19 (Exposure–DriverAge). Destacan correlaciones positivas leves entre Exposure y CarAge (0.14) y negativas moderadas entre Exposure y Density (-0.11). Las demás asociaciones son prácticamente nulas. \\
+			
+			Los resultados del PCA indican que los dos primeros componentes explican el 48.36 \% de la varianza total (26.13 \% y 22.23 \%, respectivamente), mientras que el tercer componente eleva la proporción acumulada al 68.28 \%. Esto sugiere que una representación bidimensional es adecuada para visualización, aunque la inclusión de un tercer componente permitiría capturar mayor estructura. \\
+			
+			El biplot (\hyperref[Anexo25]{\textcolor{blue}{Figura X}}) muestra que el Componente 1 diferencia principalmente Exposure y DriverAge frente a Density, reflejando las correlaciones observadas. El Componente 2 captura variabilidad adicional asociada a la edad del conductor, mientras que Power presenta baja calidad de representación en este plano, indicando que su aporte se concentra en componentes posteriores. En conjunto, el PCA ofrece una síntesis útil para análisis exploratorio y visualización.				
+        	
+        \paragraph{Modelo de regresión lineal clásico} No resulta adecuado cuando la variable dependiente es discreta, ya que este modelo parte del supuesto de que dicha variable es continua y sigue una distribución normal, condición que no se cumple en este caso.
+        	
+        \paragraph{Modelo Poisson} método estadístico donde los datos son números enteros no negativos, que permite identificar qué variables explicativas influyen en la frecuencia de un evento.
+        	
+        \paragraph{Modelos lineales generalizados (GLM)} Existen diversos modelos que constituyen casos particulares. En este trabajo nos centraremos en aquellos que se aplican a variables dependientes de elección discreta.
+        		
+        	\subparagraph{Elección binaria - logit} Describe situaciones en las que la variable dependiente del modelo econométrico es discreta y toma únicamente dos valores posibles. En nuestro caso, utilizaremos variables ficticias binarias que adoptan los valores 0 y 1, donde 1 indica que el individuo ha tenido al menos un siniestro y 0 indica que no ha tenido siniestros. En estos modelos, se supone una relación no lineal entre las variables, dónde el término de error sigue una distribución logística. \\
+        		
+        	La especificación del modelo es la siguiente:
+        		
+				\begin{align}
+					\operatorname{logit}\!\bigl(\Pr(\text{ClaimNB}\mid X)\bigr)
+					&= \beta_0 
+					+ \beta_1\,\text{Exposure}
+					+ \beta_2\,\text{CarAge}
+					+ \beta_3\,\text{DriverAge} + \notag \\
+					&\quad
+					+ \beta_4\,\text{Density}
+					+ \beta_5\,\text{GasRegular}
+					+ \beta_6\,\text{RegionCluster}_{b} + \notag \\
+					&\quad
+					+ \beta_7\,\text{BrandCluster}_{b}
+					+ \beta_8\,\text{PowerNumbCluster}_{f\text{-}h} + \notag \\
+					&\quad
+					+ \beta_9\,\text{PowerNumbCluster}_{i\text{-}k}
+					+ \beta_{10}\,\text{PowerNumbCluster}_{l\text{-}o} \notag
+				\end{align}
+				
+			Los principales hallazgos del modelo, cuyos resultados se presentan en el (\hyperref[Anexo13]{\textcolor{blue}{Cuadro X}}), son los siguientes:
+				\begin{itemize}
+					\item Tiempo de exposición es altamente significativo. A mayor periodo de exposición, mayor es la probabilidad de reclamo. Por cada unidad adicional, los odds (razón entre la probabilidad de que ocurra el evento y la de que no ocurra) se multiplican por 3,46, lo que indica que el evento es mucho más probable.
+					\item Por cada habitante adicional por km², los odds aumentan en torno a 0,001738 \%, lo que implica un incremento muy leve en la probabilidad.
+					\item Antigüedad del vehículo: Tiene un efecto inverso. Por cada año adicional, los odds se multiplican por 0,9882, disminuyendo en 1,18 \%, lo que significa que el evento es menos probable.
+					\item Edad del conductor: También reduce la probabilidad de reclamo. Por cada año adicional, los odds se multiplican por 0,9921, disminuyendo en 0,79 \%.
+					\item Los vehículos del clúster b (marcas japonesas, excepto Nissan, o coreanas) tienen odds de reclamo un 31,7 \% menores que los del clúster base a.
+					\item Cambiar a un clúster de potencia superior aumenta los odds entre 11 \% y 15 \%, mientras que el clúster más cercano al de referencia no es significativo y presenta un odds ratio menor.
+					\item En términos regionales, pertenecer al clúster b reduce los odds en 8,81 \% respecto al clúster a.
+					\item Los vehículos con gas regular tienen odds un 9,83 \% menores que los diésel.
+				\end{itemize}
+        		
+        	A continuación, se construyó la matriz de confusión con los datos de la muestra. En esta matriz, la celda (0,0) corresponde a los verdaderos negativos, la celda (1,0) a los falsos negativos (errores de tipo II), la celda (0,1) a los falsos positivos (errores de tipo I) y la celda (1,1) a los verdaderos positivos. En el Cuadro X se muestran los resultados:
+        		
+        	% Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Elección binaria - logit
+        		\begin{table}[H]
+        			\centering
+        			\caption{Elección binaria - logit}
+        			\begin{tabular}{lrr}
+        				\toprule
+        				\textbf{Real / Predicción} & \textbf{0} & \textbf{1} \\
+        				\midrule
+        					0 & 279.362 & 9.039 \\
+							1 & 118.417 & 7.142 \\
+        				\bottomrule
+        			\end{tabular}
+        		\end{table}
+        		
+        	Al analizarla, se observa que el modelo alcanza una precisión del 69,21 \%, calculado como la suma de verdaderos positivos y verdaderos negativos dividida entre el total de observaciones. Este valor indica un rendimiento aceptable. Sin embargo, se aprecia un desbalance en la predicción de la clase 1, ya que el modelo presenta baja capacidad para identificar reclamos: hay más falsos negativos que verdaderos positivos, lo que sugiere sobreajuste hacia la clase 0.
+        		
+        		\subparagraph{Elección multinomial} No lo utilizamos porque este tipo de modelo está pensado para variables cualitativas con categorías sin orden, como elegir entre colores o marcas. En nuestro caso, el número de siniestros (0, 1, 2, …) tiene un orden natural y representa cantidades, no categorías independientes. Si tratáramos cada número como una categoría separada, el modelo ignoraría esa relación.
+        		
+        		\subparagraph{Elección multinomial ordenada} Se utiliza cuando la variable dependiente tiene categorías con orden, pero no es estrictamente numérica. Por ejemplo, medir el nivel de satisfacción: bajo, medio y alto. Aquí hay un orden, pero no sabemos si la distancia entre 'bajo' y 'medio' es igual a la de 'medio' y 'alto'. En cambio, el número de siniestros es una variable de conteo, donde las diferencias sí son cuantitativas y significativas.
+        		
+        		\subparagraph{Elección multinomial anidada} Está pensado para decisiones jerárquicas entre alternativas cualitativas, no para cantidades. Usarlo para número de siniestros sería conceptualmente incorrecto porque no hay un proceso de elección jerárquico.     	
         	
         \subsubsection{Costo del siniestro}
-	        En las siguientes secciones presentaremos los diferentes modelos abordados durante la asignatura 'Cuantificación de riesgos'.
+	        En las siguientes secciones presentaremos los diferentes modelos abordados durante la asignatura 'Cuantificación de riesgos'. Para ello, hemos trabajado únicamente con las pólizas que registran algún coste (pólizas con siniestros). Además, las cifras originales se han dividido por 1.000 con el fin de facilitar el análisis, ya que desde el punto de vista estadístico es preferible trabajar con números más pequeños: esto reduce problemas de escala sin alterar la interpretación de los resultados.
 	                
-        	\paragraph{Modelización no paramétrica} David
+        	\paragraph{Modelización no paramétrica}
+        	
+	        	En primer lugar, se ha representado la distribución empírica de la variable Coste de compensación por lesiones corporales (considerando únicamente los valores estrictamente positivos), tal como se muestra en la (\hyperref[Anexo20]{\textcolor{blue}{Figura X}}). Asimismo, en el Cuadro X se muestra el Valor en Riesgo (VaR) de dicha distribución empírica para distintos niveles de confianza:
+	        	
+	        	% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización no paramétrica
+	        	\begin{table}[H]
+	        		\centering
+	        		\begin{threeparttable}
+	        		\caption{Modelización no paramétrica}
+	        		\begin{tabular}{lr}
+	        			\toprule
+	        			\textbf{Nivel de confianza} & \textbf{VaR} \\
+	        			\midrule
+							$99,0\%$ & 157,0 \\
+							$99,5\%$ & 349,8 \\
+							$99,9\%$ & 1.284,4 \\
+	        			\bottomrule
+	        		\end{tabular}
+				    \begin{tablenotes}[flushleft]
+						\footnotesize
+						\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
+					\end{tablenotes}
+					\end{threeparttable}
+	        	\end{table}
+	        	
+	        	Tal como se muestra en el Cuadro X, el 99,9 \% de los costes (considerando únicamente aquellos estrictamente positivos) no supera los 1.284,4 miles de euros, que corresponde al valor máximo observado en dicho percentil. \\
+	        	
+	        	A continuación, se obtiene la estimación de la función de densidad mediante el método de núcleo, utilizando tanto el núcleo gaussiano como el núcleo Epanechnikov, y considerando distintas opciones para el cálculo del parámetro de suavizado (bandwidth). Cabe destacar que los valores del parámetro de suavizado no varían entre ambos núcleos. Se han evaluado tres configuraciones:
+	        	
+	        	\begin{itemize}
+	        		\item Opción por defecto: proporciona un parámetro de suavizado de 814,2.
+	        		\item Método SJ, que arroja un valor de 3,379.
+	        		\item Valor fijo, definido subjetivamente, estableciendo el parámetro en 3.
+	        	\end{itemize}
+	        	
+	        	La (\hyperref[Anexo21]{\textcolor{blue}{Figura X}}) muestra las funciones de densidad obtenidas para cada configuración. Se observa que, a medida que aumenta el parámetro de suavizado, la función de densidad se vuelve más plana, reflejando una mayor suavización de la distribución.\\
+	        	
+	        	Asimismo, se ha obtenido la estimación de la función de distribución mediante el método de núcleos para diferentes valores del parámetro de suavizado (bandwidth) (\hyperref[Anexo21]{\textcolor{blue}{Figura X}}): 86 (valor por defecto), 2, 50 y 100. A continuación, el Cuadro X presenta los valores del VaR (miles de euros) correspondientes a cada una de estas estimaciones:
+
+	        	% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización no paramétrica
+				\begin{table}[H]
+					\centering
+					\begin{threeparttable}
+					\caption{Modelización no paramétrica}
+					\begin{tabular}{lrrrr}
+						\toprule
+						\textbf{Nivel de confianza} & \textbf{86} & \textbf{2} & \textbf{50} & \textbf{100} \\
+						\midrule
+						$99,0\%$ & 157.9 & 158.0 & 158.0 & 157.9 \\
+						$99,5\%$ & 350.4 & 350.6 & 350.5 & 350.4 \\
+						$99,9\%$ & 1.290,1 & 1.290,0 & 1.290,0 & 1.290,1 \\
+						\bottomrule
+					\end{tabular}
+				       \begin{tablenotes}[flushleft]
+						\footnotesize
+						\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
+					\end{tablenotes}
+					\end{threeparttable}
+				\end{table}
+				
+				Al comparar con la tabla correspondiente a la distribución empírica (Cuadro X), se observa que todos los valores del VaR, independientemente del parámetro de suavizado (h), son superiores a los obtenidos en la distribución empírica. Esto se debe a que el proceso de suavización extiende la función de distribución más allá del valor máximo observado en los datos originales.\\
+				
+				Además, el Cuadro X muestra que, a medida que el nivel de confianza se aproxima a 1 (por ejemplo, 0,999), un mayor parámetro de suavizado implica que la función de distribución tarda más en alcanzar el valor 1, lo que se traduce en un VaR más elevado. Por ejemplo, para un parámetro de suavizado igual a 100, el 99,9 \% de los costes no supera los 1.290,1 miles de euros, mientras que con un parámetro de suavizado igual a 2, el 99,9 \% de los costes no supera los 1.290,0 miles de euros.
         	      	
         	\paragraph{Modelización paramétrica} Sergio
 
-			\paragraph{Teoría de valores extremos} A CONTINUACIÓN SE DETALLAN LAS EVIDENCIAS ESTADÍSTICAS Y GRÁFICAS: (VA ALGUNA IMAGEN??)
+			\paragraph{Teoría de valores extremos}
 			
-				El análisis de la variable de coste de daños corporales, fundamentado en la Teoría de Valores Extremos (EVT), confirma la presencia de una distribución de cola pesada (heavy-tailed distribution). A continuación se detallan las evidencias estadísticas y gráficas:
-				
-				Después de haber seleccionado únicamente los casos positivos de la variable \textit{InjuryAmount} y haberla transformado dividiéndola por 1.000. Los estadísticos básicos revelan una asimetría extrema y una curtosis muy elevada. Existe una discrepancia masiva entre la tendencia central (Media $\approx 15.75$) y el valor máximo ($19,792.8$). El tercer cuartil ($Q_3 \approx 9.13$) es insignificante comparado con el máximo, lo que indica que la gran mayoría de la densidad de probabilidad se concentra cerca de cero, pero el riesgo (la varianza y la media en menor medida) está dominado por eventos extremos poco frecuentes. Para validar el comportamiento de la cola de la distribución y confirmar la selección del umbral, se han analizado las siguientes herramientas visuales:
-			
+				El análisis de la variable “coste de daños corporales”, basado en la Teoría de Valores Extremos (EVT), confirma la existencia de una distribución con cola pesada (heavy-tailed distribution). Para verificar el comportamiento de la cola y validar la elección del umbral, se han empleado las siguientes herramientas visuales:
+					
 				\begin{itemize}
-					\item \textbf{Mean Excess Plot (Gráfico de Exceso Medio):} Muestra una clara tendencia lineal con pendiente positiva a medida que aumenta el umbral. En el contexto de la Teoría de Valores Extremos (EVT), esta pendiente positiva es una señal característica de una distribución de cola pesada. Esto confirma que el parámetro de forma es estrictamente positivo, descartando distribuciones de cola ligera o exponencial.
-					\item \textbf{Hill Plot:} Representa las estimaciones del índice de cola en función de los estadísticos de orden. Se observa una zona de estabilidad (indicada por la línea discontinua horizontal) donde el estimador converge a un valor aproximado de $0.9$. La línea vertical azul confirma que el umbral elegido ($u=21$) se encuentra dentro de esta región estable, validando la robustez de la estimación.
+					\item \textbf{Hill Plot:} El estimador de Hill se utiliza en la Teoría de Valores Extremos para calcular el índice de cola ($\xi$) de distribuciones con colas pesadas, a partir de los valores más extremos de la muestra. Este estimador permite evaluar si la cola sigue un comportamiento tipo Pareto y es clave para seleccionar un umbral adecuado. En la (\hyperref[Anexo26]{\textcolor{blue}{Figura X}}), el eje horizontal representa el orden de los estadísticos y el vertical las estimaciones de $\xi$. La línea negra muestra cómo varía el estimador según el número de datos extremos considerados, mientras que la línea discontinua horizontal indica una zona de estabilidad alrededor de $\xi$ $\approx$ 0.9. La línea vertical azul señala el umbral elegido (u=21).
+					\item \textbf{Mean Excess Plot (Gráfico de Exceso Medio):} La (\hyperref[Anexo27]{\textcolor{blue}{Figura X}}) representa el exceso medio en función del umbral. Se observa una tendencia creciente y aproximadamente lineal con pendiente positiva a medida que aumenta el umbral, lo que indica que los valores extremos se incrementan de forma sistemática. En el marco de la Teoría de Valores Extremos (EVT), esta pendiente positiva es característica de distribuciones con cola pesada, confirmando que el parámetro de forma ($\xi$) es estrictamente positivo. Esto descarta distribuciones de cola ligera, como la exponencial, y respalda la idoneidad del modelo Pareto para la cola.
 					\item \textbf{CV-Plot (Gráfico de Coeficiente de Variación):} 
-					Esta herramienta complementaria analiza la dispersión de los excesos sobre el umbral. El comportamiento observado respalda la elección del umbral, mostrando consistencia con los resultados del Hill Plot y asegurando que la varianza de la cola se comporta según lo esperado para una GPD.
+					En el contexto de la Teoría de Valores Extremos, el valor del CV es un indicador del tipo de cola:
+						\begin{itemize}
+							\item Si el CV es mayor que 1, la distribución presenta cola pesada, característica de distribuciones tipo Pareto.
+							\item Si el CV es igual a 1, la cola sigue un comportamiento exponencial, típico de distribuciones con cola ligera.
+							\item Si el CV es menor que 1, la cola es ligera, asociada a distribuciones con soporte finito.
+						\end{itemize}
+					En la (\hyperref[Anexo28]{\textcolor{blue}{Figura X}}), la línea azul se mantiene claramente por encima de 1 en la región relevante, lo que confirma la presencia de una cola pesada y respalda la idoneidad del modelo GPD (Generalized Pareto Distribution) para los excesos.
 				\end{itemize}
 				
-				Basándonos en la estabilidad de los gráficos de diagnóstico, se fijó un umbral de $u \approx 21$. Este corte aisla las 1616 observaciones más extremas de la muestra, que representan aproximadamente el $10\%$ superior de la distribución de pérdidas ($p < u \approx 0.90$).
+				Basándose en la estabilidad observada en los gráficos de diagnóstico, se estableció un umbral de \(u \approx 21\). Este valor permite aislar las 1.616 observaciones más extremas de la muestra, que corresponden aproximadamente al \(10\%\) superior de la distribución de pérdidas \((P(X > u) \approx 0.10)\). \\
 				
-				Se ajustó la Distribución Generalizada de Pareto (GPD) a estos excesos mediante el método de Máxima Verosimilitud (MLE). Los parámetros resultantes confirman la severidad de la cola, parámetro de forma ($\tilde{\zeta}$): $0.8831$ (Error estándar: $0.0456$) y parámetro de escala ($\psi$): $19.2994$ (Error estándar: $0.9092$).
+				Se ajustó la Distribución Pareto Generalizada (GPD) a los excesos sobre el umbral mediante el método de Máxima Verosimilitud (MLE). Los parámetros estimados reflejan la severidad de la cola: parámetro de forma (\(\tilde{\zeta}\)) igual a \(0.8831\) (error estándar: \(0.0456\)) y parámetro de escala (\(\psi\)) igual a \(19.2994\) (error estándar: \(0.9092\)).\\
 				
-				El valor de $\tilde{\zeta} \approx 0.88$ es positivo y significativamente distinto de cero (considerando su error estándar bajo), lo que ratifica la presencia de una cola pesada.
+				El valor positivo y significativamente distinto de cero de \(\tilde{\zeta} \approx 0.88\), considerando su bajo error estándar, confirma la presencia de una cola pesada. \\
 				
-				Con los parámetros estimados, se procedió al cálculo del Capital Económico necesario para cubrir el riesgo al nivel de confianza del $99.5\%$ ($q=0.995$). Se compararon los resultados del enfoque de Pareto simple (Hill) frente al enfoque POT-GPD:
-
+				Con estos parámetros, se calculó el capital necesario para cubrir el riesgo al nivel de confianza del \(99.5\%\) (\(q = 0.995\)), comparando los resultados obtenidos mediante el enfoque Pareto simple (Hill) frente al enfoque POT-GPD (Peaks Over Threshold + Generalized Pareto Distribution). El primero asume que toda la cola sigue una distribución Pareto, utilizando el estimador de Hill para aproximar el índice de cola, mientras que el enfoque POT-GPD se centra únicamente en los excesos sobre un umbral y los modela con la Distribución Pareto Generalizada, tal como recomienda la Teoría de Valores Extremos. Esta última aproximación es más robusta, ya que no impone que toda la distribución sea Pareto, sino que describe con mayor precisión el comportamiento extremo.
+				
 				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Teoría de valores extremos
 					\begin{table}[H]
 						\centering
+						\begin{threeparttable}
 						\caption{Teoría de valores extremos}
 						\begin{tabular}{lcc}
 							\toprule
 							\textbf{Metodología} & \textbf{Parámetros estimados} & \textbf{$VaR_{99.5\%}$} \\
 							\midrule
-								Pareto simple & $\hat{\xi}^{Hill} \approx 1.13$ & 284,32 \\
-								GPD (POT) & $\tilde{\zeta} \approx 0.88$, $\psi \approx 19.30$ & 285,77 \\
+								Pareto simple & $\hat{\xi}^{Hill} \approx 1.13$ & 284,3 \\
+								POT-GPD & $\tilde{\zeta} \approx 0.88$, $\psi \approx 19.30$ & 285,8 \\
 							\bottomrule
 						\end{tabular}
+				        \begin{tablenotes}[flushleft]
+							\footnotesize
+							\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
+						\end{tablenotes}
+						\end{threeparttable}
 					\end{table}
 								
-				Como se observa en la Tabla, ambos modelos convergen hacia un riesgo extremo muy similar, situando el VaR en torno a las 285 unidades monetarias. 
-				
-				Específicamente, el modelo GPD estima un $VaR_{99.5\%} \approx 285.77$. Esto significa que, con una probabilidad del $0.5\%$, la entidad podría enfrentar pérdidas que superen este monto. Este valor es extremadamente alto en comparación con la media de los datos, lo que subraya que el riesgo principal de la cartera reside en estos eventos de baja frecuencia pero alto impacto.
+					Como se muestra en el Cuadro X, ambos modelos convergen hacia un riesgo extremo similar, situando el \(VaR\) en torno a 285 mil euros. En particular, el enfoque POT-GPD estima un \(VaR_{99.5\%} \approx 285.8\) miles de euros, lo que implica que, con una probabilidad del \(0.5\%\), las pérdidas podrían superar este monto. Este valor, muy superior a la media, evidencia que el riesgo se concentra en eventos de baja frecuencia y alto impacto.
 						
 			\paragraph{Distribuciones compuestas}
 				Una distribución compuesta es un modelo que combina dos distribuciones diferentes para representar adecuadamente datos con dos zonas de comportamiento:
@@ -340,7 +465,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 					\item El cuerpo (valores pequeños o moderados), donde la frecuencia es alta y se ajusta bien con distribuciones como Weibull o Lognormal.
 					\item La cola (valores extremos), donde ocurren pérdidas muy grandes y se necesita una distribución de cola pesada como Pareto.
 				\end{itemize}
-				El punto que separa ambas zonas es el umbral $\theta$, que en este caso se ha determinado mediante el Hill Plot, identificando que la observación 1616 más grande de los daños corporales corresponde al threshold ($\theta \approx 21$). A partir de este umbral, se ajustan los parámetros de cada parte y se asignan pesos $r$ y $1-r$ para reflejar la proporción de datos en cada zona, optimizando por máxima verosimilitud.\\ 
+				El punto que separa ambas zonas es el umbral $\theta$, que en este caso se ha determinado mediante el Hill Plot del apartado anterior (observación 1616). A partir de este umbral, se ajustan los parámetros de cada parte y se asignan pesos $r$ y $1-r$ para reflejar la proporción de datos en cada zona, optimizando por máxima verosimilitud.\\ 
 				
 				El (\hyperref[Anexo17]{\textcolor{blue}{Cuadro 2}}) muestra que los modelos simples (Weibull y Lognormal) no capturan bien ambos extremos: Weibull subestima el riesgo extremo ($VaR_{99,5\%}$: 151 miles de euros) y Lognormal lo sobreestima ($VaR_{99,5\%}$: 637 miles de euros). Las distribuciones compuestas reducen este sesgo: Weibull–Pareto es el mejor modelo al presentar el mayor loglik y el menor AIC (Akaike Information Criterio), con un $VaR_{99,5\%}$ más realista (309 miles de euros), lo que lo hace preferible para gestión de riesgo. Cuanto mayor sea el logaritmo de la función de verosimilitud (menos negativo), mejor explica el modelo los datos, mientras que menor sea el AIC, mejor explica el modelo los datos porque este criterio penaliza la complejidad y premia el buen ajuste. \\
 				
@@ -397,23 +522,31 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones multivariadas
 					\begin{table}[H]
 						\centering
-						\caption{Distribuciones multivariadas}
+						\begin{threeparttable}
+						\caption{Distribuciones multivariadas: Por revisar tabla después de consulta a profesora}
 						\begin{tabular}{lcc}
 							\toprule
-							\textbf{Nivel de confianza} & \textbf{VaR} & \textbf{TVaR)} \\
+							\textbf{Nivel de confianza} & \textbf{VaR} & \textbf{TVaR} \\
 							\midrule
 								$99,0\%$ & 0.7654302 & 2619.545 \\
 								$99,5\%$ & 2.4870659 & 5237.718 \\
 								$99,9\%$ & 37.9783727 & 26152.04 \\
 							\bottomrule
 						\end{tabular}
+				        \begin{tablenotes}[flushleft]
+							\footnotesize
+							\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
+						\end{tablenotes}
+						\end{threeparttable}
 					\end{table}
 
+\newpage
 % Sección 4: Informe ejecutivo
 % Fecha de entrega: 10/01/26
 \section{Informe ejecutivo}
     Por desarrollar.
 
+\newpage
 % Sección 5: Anexos
 % Fecha de entrega: 10/01/26
 \section{Anexos}
@@ -742,6 +875,34 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	\end{subfigure}
 \end{figure}
 
+% Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Elección binaria - logit
+\label{Anexo23}
+\begin{table}[H]
+	\centering
+	\caption{Elección binaria - logit}
+	\begin{tabularx}{\textwidth}{lrrr}
+		\toprule
+		\textbf{Concepto} & \textbf{Coeficiente} & \textbf{p-value} & \textbf{Odds-ratio} \\
+		\midrule
+			Constante & -3.435e+00 & $<$ 2e-16 *** & 0.0322 \\
+			Tiempo de exposición & 1.241e+00 & $<$ 2e-16 *** & 3.4604 \\
+			Edad del vehículo & -1.182e-02 & 1.46e-13 *** & 0.9882 \\
+			Edad del conductor & -7.929e-03 & $<$ 2e-16 *** & 0.9921 \\
+			Densidad poblacional & 1.738e-05 & $<$ 2e-16 *** & 1.00001738 \\
+			Gas diesel & - & - & 1 \\
+			Gas regular & -1.035e-01 & 9.75e-10 *** & 0.9017 \\
+			RegionClusterA & - & - & 1 \\
+			RegionClusterB & -9.216e-02 & 2.11e-06 *** & 0.9119 \\
+			BrandClusterA & - & - & 1 \\
+			BrandClusterB & -3.811e-01 & $<$ 2e-16 *** & 0.6830 \\
+			PowerNumbClusterd-f & - & - & 1 \\
+			PowerNumbClusterf-h & 2.051e-02 & 0.2554 & 1.0207 \\
+			PowerNumbClusteri-k & 1.454e-01 & 1.98e-07 *** & 1.1565 \\
+			PowerNumbClusterl-o & 1.071e-01 & 0.0596 & 1.1129 \\
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
 % Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Clúster jerárquico aglomerativo
 \label{Anexo19}
 \begin{figure}[htbp]
@@ -795,7 +956,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		& 3 & 0,4 & 1,5 & 0,6 & 2,3 & 1,7\\
 		& 4 & 1,2 & 4,2 & 1,8 & 5,2 & 3,3\\
 		\midrule
-		\multirow{4}{*}{Centroide} 
+		\multirow{4}{*}{Centroide desestand.} 
 		& 1 & 0,1 & 2,7 & 28,5 & 398,9 & 1,5\\
 		& 2 & 0,4 & 9,9 & 40,9 & 4.257,8 & 3,7\\
 		& 3 & 0,7 & 16,2 & 53,9 & 12.810,2 & 6,8\\
@@ -822,6 +983,83 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 		\bottomrule
 	\end{tabularx}
 \end{table} 
+
+% Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Análisis PCA
+\label{Anexo24}
+\begin{figure}[htbp]
+	\centering
+	\caption{Análisis de Componentes principales (PCA)}
+	% Primera fila
+	\begin{subfigure}[b]{1.0\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico53.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Número de siniestros - Análisis PCA
+\label{Anexo25}
+\begin{figure}[htbp]
+	\centering
+	\caption{Análisis de Componentes principales (PCA)}
+	% Primera fila
+	\begin{subfigure}[b]{1.0\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico54.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización no paramétrica
+\label{Anexo20}
+\begin{figure}[htbp]
+	\centering
+	\caption{Modelización no paramétrica}
+	% Primera fila
+	\begin{subfigure}[b]{1.0\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico50.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización no paramétrica
+\label{Anexo21}
+\begin{figure}[htbp]
+	\centering
+	\caption{Modelización no paramétrica}
+	% Primera fila
+	\begin{subfigure}[b]{1.0\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico51.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Teoría de valores extremos
+\label{Anexo26}
+\begin{figure}[htbp]
+	\centering
+	\caption{Teoría de valores extremos}
+	% Primera fila
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico55.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Teoría de valores extremos
+\label{Anexo27}
+\begin{figure}[htbp]
+	\centering
+	\caption{Teoría de valores extremos}
+	% Primera fila
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico56.png}
+	\end{subfigure}
+\end{figure}
+
+% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Teoría de valores extremos
+\label{Anexo28}
+\begin{figure}[htbp]
+	\centering
+	\caption{Teoría de valores extremos}
+	% Primera fila
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{Gráfico57.png}
+	\end{subfigure}
+\end{figure}
 
 % Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones compuestas
 \label{Anexo17}

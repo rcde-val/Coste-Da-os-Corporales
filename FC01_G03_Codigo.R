@@ -1199,14 +1199,24 @@ print(round(PowerNumCluster_rango,1))
 # 3.2.1.7 Análisis PCA
 #-------------------------------------------------------------------------------
 temporal<-cbind(Exposure_scaled,CarAge_scaled,DriverAge_scaled,Density_scaled,PowerNum_scaled)
-cor(temporal)
+temporal_correlaciones<-as.matrix(cor(temporal))
+rownames(temporal_correlaciones)<-c("Exposure","CarAge","DriverAge","Density","Power")
+colnames(temporal_correlaciones)<-c("Exposure","CarAge","DriverAge","Density","Power")
+cor(temporal_correlaciones)
+# Gráfico
+corrplot(temporal_correlaciones,
+         method = "circle",      # círculos
+         type = "lower",         # solo la parte inferior
+         tl.col = "black",         # color de las etiquetas
+         tl.cex = 0.8,           # tamaño de las etiquetas
+         col = colorRampPalette(c("red", "grey90", "lightblue"))(200)) # paleta de colores
 princomp(temporal)
 summary(princomp(temporal))
 fviz_eig(princomp(temporal), addlabels = TRUE)
 fviz_pca_var(princomp(temporal))
 fviz_cos2(princomp(temporal), choice = "var", axes = 1:2)
 fviz_pca_var(princomp(temporal), col.var = "cos2",
-             gradient.cols = c("black", "orange", "green"),
+             gradient.cols = c("lightblue", "grey90", "red"),
              repel = TRUE)
 #-------------------------------------------------------------------------------
 # 3.2.2 Costo del siniestro
