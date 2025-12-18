@@ -1,31 +1,6 @@
-# Cambios en los outputs
-
-library(usethis)
-#usethis::edit_git_config()
-#usethis::create_github_token()
-
-#git clone https://github.com/rcde-val/Coste-Da-os-Corporales.git
-#cd Coste-Da-os-Corporales
-#File->Open Project y seleccionar .Rproj
-
-#git add .
-#git commit -m "Primer commit"
-
-#git branch -M master   # asegura que tu rama se llama main
-#git push -u origin master
-# git push una vez que ya lo hayamos linkeado con el master, vamos a usar solo push
-
 #-------------------------------------------------------------------------------
-# Paquetes
+# Instalación de paquetes
 #-------------------------------------------------------------------------------
-# Definición de paquetes
-paquetes <- c("tidyverse", "readxl", "usethis", "ggplot2", "moments","dplyr","sandwich","MASS","car","broom","performance")
-# Instalación de paquetes no instalados (de ser requerido)
-for (pkg in paquetes) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg)
-  }
-}
 # Escribir Excel
 install.packages("writexl")
 # Lector de Excel
@@ -50,10 +25,9 @@ install.packages("evmix")
 install.packages("ercv")
 # EnvStats
 install.packages("EnvStats")
+#-------------------------------------------------------------------------------
 # Carga de paquetes
-for (pkg in paquetes) {
-  library(pkg, character.only = TRUE)
-}
+#-------------------------------------------------------------------------------
 # Escribir Excel
 library("writexl")
 # Lector de Excel
@@ -1092,8 +1066,8 @@ ClaimNb_Poisson_03<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density, 
 ClaimNb_Poisson_04<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge, data=datos, family=poisson)
 ClaimNb_Poisson_05<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster, data=datos, family=poisson)
 ClaimNb_Poisson_06<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas, data=datos, family=poisson)
-ClaimNb_Poisson_07<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas + PowerNumCluster, data=datos, family=poisson)
-ClaimNb_Poisson_08<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas + PowerNumCluster +  BrandCluster, data=datos, family=poisson)
+ClaimNb_Poisson_07<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas + BrandCluster, data=datos, family=poisson)
+ClaimNb_Poisson_08<-glm( ClaimNb ~ offset(log(Exposure)) + DriverAge + Density + CarAge + RegionCluster + Gas + BrandCluster +  PowerNumCluster, data=datos, family=poisson)
 summary(ClaimNb_Poisson_01)
 summary(ClaimNb_Poisson_02)
 summary(ClaimNb_Poisson_03)
@@ -1103,6 +1077,10 @@ summary(ClaimNb_Poisson_06)
 summary(ClaimNb_Poisson_07)
 summary(ClaimNb_Poisson_08)
 anova(ClaimNb_Poisson_01,ClaimNb_Poisson_02,ClaimNb_Poisson_03,ClaimNb_Poisson_04,ClaimNb_Poisson_05,ClaimNb_Poisson_06,ClaimNb_Poisson_07,ClaimNb_Poisson_08)
+# e^B
+round(exp(ClaimNb_Poisson_08$coefficients),4)
+# IRR
+round((exp(ClaimNb_Poisson_08$coefficients)-1)*100,4)
 # ¿Hay sobredispersión?
 ClaimNb_Poisson_mean<-mean(datos$ClaimNb)
 ClaimNb_Poisson_var<-var(datos$ClaimNb)
@@ -1219,7 +1197,7 @@ fviz_pca_var(princomp(temporal), col.var = "cos2",
              gradient.cols = c("lightblue", "grey90", "red"),
              repel = TRUE)
 #-------------------------------------------------------------------------------
-# 3.2.2 Costo del siniestro
+# 3.2.2 Coste del siniestro
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 # 3.2.2.1 Modelización no paramétrica
