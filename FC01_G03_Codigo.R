@@ -25,6 +25,8 @@ install.packages("evmix")
 install.packages("ercv")
 # EnvStats
 install.packages("EnvStats")
+# Hmisc
+install.packages("Hmisc")
 #-------------------------------------------------------------------------------
 # Carga de paquetes
 #-------------------------------------------------------------------------------
@@ -52,6 +54,8 @@ library("evmix")
 library("ercv")
 # EnvStats
 library("EnvStats")
+# Hmisc
+library("Hmisc")
 #-------------------------------------------------------------------------------
 # Importación de base de datos
 #-------------------------------------------------------------------------------
@@ -806,13 +810,25 @@ write_xlsx(datos, "FC01_G03_BBDD_v02.xlsx")
 # Correlación Pearson
 datos_numericos_matriz_cor<-cor(datos_numericos,use = "complete.obs",method = "pearson")
 round(datos_numericos_matriz_cor,4)
-# Gráfico
-corrplot(datos_numericos_matriz_cor,
-         method = "circle",      # círculos
-         type = "lower",         # solo la parte inferior
-         tl.col = "black",         # color de las etiquetas
-         tl.cex = 0.8,           # tamaño de las etiquetas
-         col = colorRampPalette(c("red", "grey90", "lightblue"))(200)) # paleta de colores
+# Significación de correlaciones
+datos_numericos_matriz_cor_pvalue<- rcorr(as.matrix(datos_numericos), type = "pearson")
+# Correlaciones
+datos_numericos_matriz_cor_pvalue$r
+# Ver p-values
+round(datos_numericos_matriz_cor_pvalue$P,4)>0.05
+# Alinear y graficar
+vars <- intersect(colnames(datos_numericos_matriz_cor),
+                  colnames(datos_numericos_matriz_cor_pvalue$P))
+corrplot(as.matrix(datos_numericos_matriz_cor)[vars, vars],
+         method    = "circle",
+         type      = "lower",
+         tl.col    = "black",
+         tl.cex    = 0.8,
+         col       = colorRampPalette(c("red", "grey90", "lightblue"))(200),
+         p.mat     = {p <- as.matrix(datos_numericos_matriz_cor_pvalue$P)[vars, vars];
+         diag(p) <- NA; p},
+         sig.level = 0.05,
+         insig     = "blank")
 #-------------------------------------------------------------------------------
 # 3.1.2.2 Variables categóricas
 #-------------------------------------------------------------------------------

@@ -7,8 +7,8 @@
 \contentsline {subsection}{\numberline {3.1}Análisis descriptivo univariado y bivariado de la base de datos}{6}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Análisis descriptivo univariado}{6}{subsubsection.3.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.2}Análisis descriptivo bivariado}{8}{subsubsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.2}Modelización seleccionada y objetivos a alcanzar}{9}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Número de siniestros}{9}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2}Modelización seleccionada y objetivos a alcanzar}{10}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Número de siniestros}{10}{subsubsection.3.2.1}%
 \contentsline {paragraph}{\numberline {3.2.1.1}Clúster jerárquico divisivo}{10}{paragraph.3.2.1.1}%
 \contentsline {paragraph}{\numberline {3.2.1.2}Clúster no jerárquico - k means}{11}{paragraph.3.2.1.2}%
 \contentsline {paragraph}{\numberline {3.2.1.3}Análisis PCA}{11}{paragraph.3.2.1.3}%
@@ -16,8 +16,8 @@
 \contentsline {paragraph}{\numberline {3.2.1.5}Modelo Poisson}{12}{paragraph.3.2.1.5}%
 \contentsline {paragraph}{\numberline {3.2.1.6}Modelos lineales generalizados (GLM)}{13}{paragraph.3.2.1.6}%
 \contentsline {subparagraph}{\numberline {3.2.1.6.1}Elección binaria - logit}{13}{subparagraph.3.2.1.6.1}%
-\contentsline {subparagraph}{\numberline {3.2.1.6.2}Elección multinomial}{14}{subparagraph.3.2.1.6.2}%
-\contentsline {subparagraph}{\numberline {3.2.1.6.3}Elección multinomial ordenada}{14}{subparagraph.3.2.1.6.3}%
+\contentsline {subparagraph}{\numberline {3.2.1.6.2}Elección multinomial}{15}{subparagraph.3.2.1.6.2}%
+\contentsline {subparagraph}{\numberline {3.2.1.6.3}Elección multinomial ordenada}{15}{subparagraph.3.2.1.6.3}%
 \contentsline {subparagraph}{\numberline {3.2.1.6.4}Elección multinomial anidada}{15}{subparagraph.3.2.1.6.4}%
 \contentsline {subsubsection}{\numberline {3.2.2}Costo del siniestro}{15}{subsubsection.3.2.2}%
 \contentsline {paragraph}{\numberline {3.2.2.1}Modelización no paramétrica}{15}{paragraph.3.2.2.1}%
@@ -26,23 +26,23 @@
 \contentsline {paragraph}{\numberline {3.2.2.4}Distribuciones compuestas}{19}{paragraph.3.2.2.4}%
 \contentsline {paragraph}{\numberline {3.2.2.5}Distribuciones multivariadas}{19}{paragraph.3.2.2.5}%
 \contentsline {paragraph}{\numberline {3.2.2.6}Cópulas}{20}{paragraph.3.2.2.6}%
-\contentsline {section}{\numberline {4}Informe ejecutivo}{21}{section.4}%
-\contentsline {section}{\numberline {5}Anexos}{22}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Análisis descriptivo univariado y bivariado de las bases de datos}{22}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Análisis descriptivo univariado}{22}{subsubsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.2}Análisis descriptivo bivariado}{26}{subsubsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.2}Modelización seleccionada y objetivos a alcanzar}{33}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Número de siniestros}{33}{subsubsection.5.2.1}%
-\contentsline {paragraph}{\numberline {5.2.1.1}Clúster jerárquico divisivo}{33}{paragraph.5.2.1.1}%
-\contentsline {paragraph}{\numberline {5.2.1.2}Clúster no jerárquico - k means}{33}{paragraph.5.2.1.2}%
-\contentsline {paragraph}{\numberline {5.2.1.3}Análisis PCA}{35}{paragraph.5.2.1.3}%
-\contentsline {paragraph}{\numberline {5.2.1.4}Modelo Poisson}{35}{paragraph.5.2.1.4}%
-\contentsline {paragraph}{\numberline {5.2.1.5}Modelos lineales generalizados (GLM)}{35}{paragraph.5.2.1.5}%
-\contentsline {subparagraph}{\numberline {5.2.1.5.1}Elección binaria - logit}{35}{subparagraph.5.2.1.5.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Costo del siniestro}{36}{subsubsection.5.2.2}%
-\contentsline {paragraph}{\numberline {5.2.2.1}Modelización no paramétrica}{36}{paragraph.5.2.2.1}%
-\contentsline {paragraph}{\numberline {5.2.2.2}Modelización paramétrica}{40}{paragraph.5.2.2.2}%
-\contentsline {paragraph}{\numberline {5.2.2.3}Teoría de valores extremos}{40}{paragraph.5.2.2.3}%
-\contentsline {paragraph}{\numberline {5.2.2.4}Distribuciones compuestas}{40}{paragraph.5.2.2.4}%
-\contentsline {paragraph}{\numberline {5.2.2.5}Distribuciones multivariadas}{40}{paragraph.5.2.2.5}%
-\contentsline {section}{Referencias}{41}{figure.caption.48}%
+\contentsline {section}{\numberline {4}Informe ejecutivo}{22}{section.4}%
+\contentsline {section}{\numberline {5}Anexos}{23}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Análisis descriptivo univariado y bivariado de las bases de datos}{23}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Análisis descriptivo univariado}{23}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Análisis descriptivo bivariado}{27}{subsubsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.2}Modelización seleccionada y objetivos a alcanzar}{34}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Número de siniestros}{34}{subsubsection.5.2.1}%
+\contentsline {paragraph}{\numberline {5.2.1.1}Clúster jerárquico divisivo}{34}{paragraph.5.2.1.1}%
+\contentsline {paragraph}{\numberline {5.2.1.2}Clúster no jerárquico - k means}{34}{paragraph.5.2.1.2}%
+\contentsline {paragraph}{\numberline {5.2.1.3}Análisis PCA}{36}{paragraph.5.2.1.3}%
+\contentsline {paragraph}{\numberline {5.2.1.4}Modelo Poisson}{36}{paragraph.5.2.1.4}%
+\contentsline {paragraph}{\numberline {5.2.1.5}Modelos lineales generalizados (GLM)}{36}{paragraph.5.2.1.5}%
+\contentsline {subparagraph}{\numberline {5.2.1.5.1}Elección binaria - logit}{36}{subparagraph.5.2.1.5.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Costo del siniestro}{37}{subsubsection.5.2.2}%
+\contentsline {paragraph}{\numberline {5.2.2.1}Modelización no paramétrica}{37}{paragraph.5.2.2.1}%
+\contentsline {paragraph}{\numberline {5.2.2.2}Modelización paramétrica}{41}{paragraph.5.2.2.2}%
+\contentsline {paragraph}{\numberline {5.2.2.3}Teoría de valores extremos}{41}{paragraph.5.2.2.3}%
+\contentsline {paragraph}{\numberline {5.2.2.4}Distribuciones compuestas}{41}{paragraph.5.2.2.4}%
+\contentsline {paragraph}{\numberline {5.2.2.5}Distribuciones multivariadas}{41}{paragraph.5.2.2.5}%
+\contentsline {section}{Referencias}{42}{figure.caption.48}%
