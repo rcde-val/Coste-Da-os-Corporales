@@ -62,7 +62,7 @@
 
 \title{\textbf{Costes esperados por daños corporales en seguro de automóviles e influencia en reservas\\[2em]}}
 \author{\underline{Grupo 3} \\ Víctor Alonso Lara \\ David López Avakian \\ Sergio Obando Henao \\ Víctor Manuel Pérez \\ Miquel Trullols Salat \\[6em]}
-\date{19 de Diciembre de 2025}
+\date{29 de Diciembre de 2025}
 
 \begin{document}
 
@@ -414,20 +414,20 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	                
         	\paragraph{Modelización no paramétrica}
 \hypertarget{Volver24}{} 
-	        	En primer lugar, se ha representado la distribución empírica de la variable \textit{InjuryAmount} (considerando únicamente los valores estrictamente positivos), tal como se muestra en la \textcolor{blue}{\hyperlink{Figura18}{(Figura 18)}}. Asimismo, en el Cuadro 2 se muestra el Valor en Riesgo (VaR) de dicha distribución empírica para distintos niveles de confianza:
+	        	En primer lugar, se ha representado la distribución empírica de la variable \textit{InjuryAmount} (considerando únicamente los valores estrictamente positivos), tal como se muestra en la \textcolor{blue}{\hyperlink{Figura18}{(Figura 18)}}. Asimismo, en el Cuadro 2 se muestra el Valor en Riesgo (VaR) de la distribución empírica de \textit{InjuryAmount}, \textit{PropertyAmount} y \textit{ClaimAmount}, así como la suma del VaR de \textit{InjuryAmount} y \textit{Property Amount} para distintos niveles de confianza.:
 	        	
 	        	% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización no paramétrica
 	        	\begin{table}[H]
 	        		\centering
 	        		\begin{threeparttable}
-	        		\caption{Mod. no paramétrica}
-	        		\begin{tabular}{lr}
+	        		\caption{Distribución empírica}
+	        		\begin{tabular}{crrrr}
 	        			\toprule
-	        			\textbf{Nivel de confianza} & \textbf{VaR} \\
+	        			\textbf{VaR} & \textbf{InjuryAmount} & \textbf{PropertyAmount} & \textbf{VaR Inj+ VaR Prop} & \textbf{ClaimAmount}\\
 	        			\midrule
-							$99,0\%$ & 157,0 \\
-							$99,5\%$ & 349,8 \\
-							$99,9\%$ & 1.284,4 \\
+							$VaR_{99,0\%}$ & 157,0 & 10,3 & 167,3 & 161,1 \\
+							$VaR_{99,5\%}$ & 349,8 & 10,5 & 359,3 & 354,3 \\
+							$VaR_{99,9\%}$ & 1.284,4 & 27,9 & 1.312,1 & 1.318,3 \\
 	        			\bottomrule
 	        		\end{tabular}
 				    \begin{tablenotes}[flushleft]
@@ -437,9 +437,9 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 					\end{threeparttable}
 	        	\end{table}
 	        	
-	        	Tal como se muestra en el Cuadro 2, el 99,9 \% de los costes (considerando únicamente aquellos estrictamente positivos) no supera los 1.284,4 miles de euros, que corresponde al valor máximo observado en dicho percentil. \\
+	        	Tal como se muestra en el Cuadro 2, el 99,9 \% de los costes por daños corporales (considerando únicamente aquellos estrictamente positivos) no supera los 1.284,4 miles de euros, que corresponde al valor máximo observado en dicho percentil. Asimismo, para los niveles de confianza del 99 \% y 99,5 \%, la suma del VaR de \textit{InjuryAmount} y\textit{ PropertyAmount} resulta superior al VaR calculado para la variable \textit{ClaimAmount}, situación que no se presenta en el caso del VaR al 99,9 \%. \\
 	        	
-	        	A continuación, se obtiene la estimación de la función de densidad mediante el método de núcleo, utilizando tanto el núcleo gaussiano como el núcleo Epanechnikov, y considerando distintas opciones para el cálculo del parámetro de suavizado (bandwidth). Cabe destacar que los valores del parámetro de suavizado no varían entre ambos núcleos. Se han evaluado tres configuraciones:
+	        	A continuación, nos centramos en la variable \textit{InjuryAmount} y se obtiene la estimación de la función de densidad mediante el método de núcleo, utilizando tanto el núcleo gaussiano como el núcleo Epanechnikov, y considerando distintas opciones para el cálculo del parámetro de suavizado (bandwidth). Cabe destacar que los valores del parámetro de suavizado no varían entre ambos núcleos. Se han evaluado tres configuraciones:
 	        	
 	        	\begin{itemize}
 	        		\item Opción por defecto: proporciona un parámetro de suavizado de 814,2.
@@ -457,14 +457,14 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{table}[H]
 					\centering
 					\begin{threeparttable}
-					\caption{Modelización no paramétrica}
-					\begin{tabular}{lrrrr}
+					\caption{Distribución kernel: \textit{InjuryAmount}}
+					\begin{tabular}{crrrr}
 						\toprule
-						\textbf{Nivel de confianza} & \textbf{86} & \textbf{2} & \textbf{50} & \textbf{100} \\
+						\textbf{Nivel de confianza / bandwidth} & \textbf{86} & \textbf{2} & \textbf{50} & \textbf{100} \\
 						\midrule
-						$99,0\%$ & 157.9 & 158.0 & 158.0 & 157.9 \\
-						$99,5\%$ & 350.4 & 350.6 & 350.5 & 350.4 \\
-						$99,9\%$ & 1.290,1 & 1.290,0 & 1.290,0 & 1.290,1 \\
+							$VaR_{99,0\%}$ & 157.9 & 158.0 & 158.0 & 157.9 \\
+							$VaR_{99,5\%}$ & 350.4 & 350.6 & 350.5 & 350.4 \\
+							$VaR_{99,9\%}$ & 1.290,1 & 1.290,0 & 1.290,0 & 1.290,1 \\
 						\bottomrule
 					\end{tabular}
 				       \begin{tablenotes}[flushleft]
@@ -476,34 +476,59 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				
 				Al comparar con el Cuadro 2, correspondiente a la distribución empírica, se observa que todos los valores del VaR, independientemente del parámetro de suavizado (h), son superiores. Esto se debe a que el proceso de suavización extiende la función de distribución más allá del valor máximo observado en los datos originales.\\
 				
-				Además, el Cuadro 3 muestra que, a medida que el nivel de confianza se aproxima a 1 (por ejemplo, 0,999), un mayor parámetro de suavizado implica que la función de distribución tarda más en alcanzar el valor 1, lo que se traduce en un VaR más elevado. Por ejemplo, para un parámetro de suavizado igual a 100, el 99,9 \% de los costes no supera los 1.290,1 miles de euros, mientras que con un parámetro de suavizado igual a 2, el 99,9 \% de los costes no supera los 1.290,0 miles de euros.
+				Además, el Cuadro 3 muestra que, a medida que el nivel de confianza se aproxima a 1 (por ejemplo, 0,999), un mayor parámetro de suavizado implica que la función de distribución tarda más en alcanzar el valor 1, lo que se traduce en un VaR más elevado. Por ejemplo, para un parámetro de suavizado igual a 100, el 99,9 \% de los costes no supera los 1.290,1 miles de euros, mientras que con un parámetro de suavizado igual a 2, el 99,9 \% de los costes no supera los 1.290,0 miles de euros.\\
+				
+				El Cuadro 4 muestra el VaR de la estimación núcleo de la CDF con h=86,48855 de \textit{InjuryAmount}, \textit{PropertyAmount}, la suma de los costes y la suma del VaR \textit{InjuryAmount} y del VaR de \textit{Property Amount}.
+
+	        	% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización no paramétrica
+				\begin{table}[H]
+					\centering
+					\begin{threeparttable}
+						\caption{Distribución kernel (h=86,48855)}
+						\begin{tabular}{crrrr}
+							\toprule
+							\textbf{VaR} & \textbf{InjuryAmount} & \textbf{PropertyAmount} & \textbf{VaR Inj + VaR Prop} & \textbf{ClaimAmount}\\
+							\midrule
+							$VaR_{99,0\%}$ & 157,9 & 10,4 & 168,3 & 161,4 \\
+							$VaR_{99,5\%}$ & 350,4 & 10,5 & 361,0 & 354,3 \\
+							$VaR_{99,9\%}$ & 1.290,1 & 28,2 & 1.318,3 & 1.325,1 \\
+							\bottomrule
+						\end{tabular}
+						\begin{tablenotes}[flushleft]
+							\footnotesize
+							\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
+						\end{tablenotes}
+					\end{threeparttable}
+				\end{table}
+				
+				Para los niveles de confianza del 99 \% y 99,5 \%, la suma del VaR de \textit{InjuryAmount} y \textit{PropertyAmoun}t supera al VaR de \textit{ClaimAmount}, lo que no ocurre al 99,9 \%. 
         	      	
         	\paragraph{Modelización paramétrica}
         	
-        		En la modelización paramétrica se estimaron primero distintas distribuciones clásicas, como Weibull, Lognormal, Log-logística y Gamma, sobre los costes positivos reescalados, evaluando su capacidad para reproducir la asimetría y la cola que define el riesgo extremo. El ajuste por máxima verosimilitud permitió estimar los parámetros de las distribuciones y comparar su calidad relativa mediante el criterio de información de Akaike (AIC). Con los modelos seleccionados se calcularon los valores de referencia del Valor en Riesgo (VaR) en los niveles de confianza del 95 \%, 99 \% y 99,5 \%.\\
+        		En la modelización paramétrica se estimaron primero distintas distribuciones clásicas, como Weibull, Lognormal, Log-logística y Gamma, sobre los costes positivos reescalados de daños corporales, evaluando su capacidad para reproducir la asimetría y la cola que define el riesgo extremo. El ajuste por máxima verosimilitud permitió estimar los parámetros de las distribuciones y comparar su calidad relativa mediante el criterio de información de Akaike (AIC). Con los modelos seleccionados se calcularon los valores de referencia del Valor en Riesgo (VaR) en los niveles de confianza del 99,0 \%, 99,5 \% y 99,9 \%.\\
         		
         		También se estimaron modelos en la escala logarítmica de los costes con el objetivo de mejorar la representación de la cola y capturar de manera más precisa los siniestros severos. Esta transformación permite estabilizar la variable y facilita el ajuste de distribuciones flexibles, entre ellas la Gaussiana (equivalente a la log-normal en la escala original), la GH, la Hiperbólica, la t-Student, la NIG y la VG. Para cada familia se consideraron versiones simétricas y asimétricas, analizando sus parámetros de forma y escala con el fin de evaluar la capacidad de reproducir tanto la asimetría como el comportamiento en la cola. El AIC calculado sobre log(costes) no es directamente comparable con el de las distribuciones clásicas; para corregirlo se suma $2*\sum log(costes)$. Así, los valores de AIC quedan en la misma escala que los modelos ajustados directamente sobre los costes, permitiendo una comparación homogénea. \\
         		
-        		En todos los casos, los modelos asimétricos ofrecieron un mejor ajuste, destacando especialmente las distribuciones VG y GH asimétricas como las más parsimoniosas y con estimaciones de riesgo más coherentes en las colas extremas. Los VaR calculados y reportados en el análisis corresponden igualmente a estas versiones asimétricas. En el Cuadro 4 se presentan los resultados obtenidos:
+        		En todos los casos, los modelos asimétricos ofrecieron un mejor ajuste, destacando especialmente las distribuciones VG y GH asimétricas como las más parsimoniosas y con estimaciones de riesgo más coherentes en las colas extremas. Los VaR calculados y reportados en el análisis corresponden igualmente a estas versiones asimétricas. En el Cuadro 5 se presentan los resultados obtenidos:
         		
 	        	% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización paramétrica
 				\begin{table}[H]
 					\centering
 					\begin{threeparttable}
-						\caption{Modelización paramétrica}
+						\caption{VaR y AIC para distribuciones paramétricas univariantes}
 						\begin{tabular}{lrrrr}
 							\toprule
-							\textbf{Distribución} & \textbf{$VaR_{99,0\%}$} & \textbf{$VaR_{99,5\%}$} & \textbf{$VaR_{99,\%}$} & \textbf{AI}C \\
+							\textbf{Distribución} & \textbf{$VaR_{99,0\%}$} & \textbf{$VaR_{99,5\%}$} & \textbf{$VaR_{99,9\%}$} & \textbf{AI}C \\
 							\midrule
-								Weibull & 49 & 114 & 151 & 94.128 \\
-								Gamma & 70 & 131 & 159 & 99.511 \\
-								Log-Normal & 80 & 365 & 637 & 94.767 \\
-								Log-Logística & 94 & 723 & 1.712 & 94.499 \\
-								GH (asim.) & 34 & 131 & 239 & 91.922 \\
-								Hyp (asim.) & 34 & 128 & 224 & 92.027 \\
-								t-Student (asim.) & 43 & 127 & 192 & 93.183 \\
-								NIG (asim.) & 40 & 128 & 209 & 92.839 \\
-								VG (asim.) & 34 & 132 & 240 & 91.919 \\
+								Weibull & 114 & 151 & 254 & 94.128 \\
+								Gamma & 131 & 159 & 227 & 99.511 \\
+								Log-Normal & 365 & 637 & 2.008 & 94.767 \\
+								Log-Logística & 723 & 1.712 & 12.248 & 94.499 \\
+								GH (asim.) & 131 & 239 & 970 & 91.922 \\
+								Hyp (asim.) & 128 & 224 & 829 & 92.027 \\
+								t-Student (asim.) & 127 & 192 & 476 & 93.183 \\
+								NIG (asim.) & 128 & 209 & 641 & 92.839 \\
+								VG (asim.) & 132 & 240 & 980 & 91.919 \\
 							\bottomrule
 						\end{tabular}
 						\begin{tablenotes}[flushleft]
@@ -513,11 +538,33 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 					\end{threeparttable}
 				\end{table}
         		
-        		La comparación entre los modelos clásicos y las distribuciones de la familia Generalized Hyperbolic (GH) revela diferencias claras en la representación del comportamiento extremo de los costes positivos. Las funciones tradicionales muestran limitaciones: aunque algunas ofrecen un ajuste relativamente mejor, sus valores de AIC siguen siendo elevados y evidencian dificultades para capturar la concentración de probabilidad en las colas. Esta rigidez se refleja también en el cálculo del Valor en Riesgo (VaR), donde tienden a inflar los cuantiles en percentiles altos, generando estimaciones poco realistas en escenarios severos.\\
+        		La comparación entre los modelos clásicos y las distribuciones de la familia Generalized Hyperbolic (GH) revela diferencias claras en la representación del comportamiento extremo de los costes positivos. Las funciones tradicionales muestran limitaciones: sus valores de AIC siguen siendo elevados y evidencian dificultades para capturar la concentración de probabilidad en las colas. Esta rigidez se refleja también en el cálculo del Valor en Riesgo (VaR), donde tienden a inflar los cuantiles en percentiles altos, generando estimaciones poco realistas en escenarios severos.\\
         		
-        		En contraste, las distribuciones GH ajustadas en escala logarítmica logran mejoras sustanciales tanto en los valores de AIC como en la estimación del VaR. Su capacidad para incorporar colas más pesadas y una estructura flexible permite reflejar con mayor fidelidad la variabilidad en los extremos, evitando la inflación de cuantiles y ofreciendo resultados coherentes con la evidencia empírica. Dentro de este grupo, GH y VG destacan por alcanzar los AIC más bajos, mientras que la Hiperbólica se consolida como una alternativa robusta al producir valores de VaR consistentes y estables en escenarios de riesgo severo. \\
+        		En contraste, las distribuciones GH ajustadas en escala logarítmica logran mejoras sustanciales tanto en los valores de AIC como en la estimación del VaR. Su capacidad para incorporar colas más pesadas y una estructura flexible permite reflejar con mayor fidelidad la variabilidad en los extremos, evitando la inflación de cuantiles y ofreciendo resultados coherentes con la evidencia empírica. Dentro de este grupo, GH y VG destacan por alcanzar los AIC más bajos. \\
         		
         		En suma, las distribuciones de la familia GH superan las limitaciones de los modelos clásicos y se perfilan como herramientas idóneas para la gestión del riesgo extremo, combinando ajuste global y estimaciones realistas del VaR de la variable \textit{InjuryAmount}.
+
+	        	% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización no paramétrica
+				\begin{table}[H]
+					\centering
+					\begin{threeparttable}
+						\caption{VaR al 99,5 \% de distribuciones univariantes de mixtura de normales}
+						\begin{tabular}{crrrr}
+							\toprule
+							\textbf{Distribución} & \textbf{InjuryAmount} & \textbf{PropertyAmount} & \textbf{VaR Inj + VaR Prop} & \textbf{ClaimAmount}\\
+							\midrule
+							VG & 240 & 12 & 252 & 274 \\
+							GH & 239 & 12 & 251 & 579 \\
+							\bottomrule
+						\end{tabular}
+						\begin{tablenotes}[flushleft]
+							\footnotesize
+							\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
+						\end{tablenotes}
+					\end{threeparttable}
+				\end{table}
+				
+				Al 99,5 \% de confianza, el VaR de la suma es mayor que la suma de los VaR individuales.
         		
 			\paragraph{Teoría de valores extremos}
 			
@@ -567,7 +614,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 						\end{threeparttable}
 					\end{table}
 								
-					Como se muestra en el Cuadro 5, ambos modelos convergen hacia un riesgo extremo similar, situando el \(VaR\) en torno a 285 mil euros. En particular, el enfoque POT-GPD estima un \(VaR_{99.5\%} \approx 285.8\) miles de euros, lo que implica que, con una probabilidad del \(0.5\%\), las pérdidas podrían superar este monto. Este valor, muy superior a la media, evidencia que el riesgo se concentra en eventos de baja frecuencia y alto impacto.
+					Como se muestra en el Cuadro 7, ambos modelos convergen hacia un riesgo extremo similar, situando el \(VaR\) en torno a 285 mil euros. En particular, el enfoque POT-GPD estima un \(VaR_{99.5\%} \approx 285.8\) miles de euros, lo que implica que, con una probabilidad del \(0.5\%\), las pérdidas podrían superar este monto. Este valor, muy superior a la media, evidencia que el riesgo se concentra en eventos de baja frecuencia y alto impacto.
 						
 			\paragraph{Distribuciones compuestas}
 				Una distribución compuesta es un modelo que combina dos distribuciones diferentes para representar adecuadamente datos con dos zonas de comportamiento:
@@ -578,33 +625,45 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				El punto que separa ambas zonas es el umbral $\theta$, que en este caso se ha determinado mediante el Hill Plot del apartado anterior (observación 1616). A partir de este umbral, se ajustan los parámetros de cada parte y se asignan pesos $r$ y $1-r$ para reflejar la proporción de datos en cada zona, optimizando por máxima verosimilitud.\\ 
 
 \hypertarget{Volver30}{} 				
-				El \textcolor{blue}{\hyperlink{Cuadro15}{(Cuadro 15)}} muestra que los modelos simples (Weibull y Lognormal) no capturan bien ambos extremos: Weibull subestima el riesgo extremo ($VaR_{99,5\%}$: 151 miles de euros) y Lognormal lo sobreestima ($VaR_{99,5\%}$: 637 miles de euros). Las distribuciones compuestas reducen este sesgo: Weibull–Pareto es el mejor modelo al presentar el mayor loglik y el menor AIC (Akaike Information Criterio), con un $VaR_{99,5\%}$ más realista (309 miles de euros), lo que lo hace preferible para gestión de riesgo. Cuanto mayor sea el logaritmo de la función de verosimilitud (menos negativo), mejor explica el modelo los datos, mientras que menor sea el AIC, mejor explica el modelo los datos porque este criterio penaliza la complejidad y premia el buen ajuste. \\
+				El \textcolor{blue}{\hyperlink{Cuadro15}{(Cuadro 16)}} muestra que los modelos simples (Weibull y Lognormal) no capturan bien ambos extremos: Weibull subestima el riesgo extremo ($VaR_{99,5\%}$: 151 miles de euros) y Lognormal lo sobreestima ($VaR_{99,5\%}$: 637 miles de euros). Las distribuciones compuestas reducen este sesgo: Weibull–Pareto es el mejor modelo al presentar el mayor loglik y el menor AIC (Akaike Information Criterio), con un $VaR_{99,5\%}$ más realista (309 miles de euros), lo que lo hace preferible para gestión de riesgo. Cuanto mayor sea el logaritmo de la función de verosimilitud (menos negativo), mejor explica el modelo los datos, mientras que menor sea el AIC, mejor explica el modelo los datos porque este criterio penaliza la complejidad y premia el buen ajuste. \\
 
 \hypertarget{Volver31}{} 				
 				Asimismo, cuando se graficó la distribución Lognormal–Pareto \textcolor{blue}{\hyperlink{Figura24}{(Figura 24)}}, se observó un salto en el umbral que une ambas distribuciones, por lo que se optó por incluir la restricción de continuidad en la función de densidad, determinando que el valor de $r$ debería ser de 0,83. Sin embargo, al incluir esta restricción, la precisión del modelo se vio perjudicada, ya que el loglik disminuyó y el AIC aumentó, lo que indica que imponer continuidad no siempre mejora el ajuste global, aunque puede ser útil para evitar discontinuidades visuales en la densidad.  
 			
 			\paragraph{Distribuciones multivariadas}
 			
-				Se procederá a modelizar conjuntamente los costes por daños materiales y los costes por daños corporales, aplicando previamente una transformación logarítmica a ambas variables. Sobre estos datos transformados se evaluará qué distribución multivariante ofrece el mejor ajuste. Una vez seleccionada la distribución óptima, se calcularán las métricas de riesgo VaR y TVaR para distintos niveles de confianza: 99 \%, 99,5 \% y 99,9 \%. \\
-				
+				Se procederá a modelizar conjuntamente los costes por daños materiales y los costes por daños corporales, aplicando previamente una transformación logarítmica a ambas variables. Sobre estos datos transformados se evaluará qué distribución multivariante ofrece el mejor ajuste. Se calculará la métrica de riesgo (VaR) para distintos niveles de confianza: 99 \%, 99,5 \% y 99,9 \%. \\
+	
 				En primer lugar, se aplicaron pruebas de normalidad a las transformaciones logarítmicas de los costes por separado, utilizando el test de Jarque-Bera. En ambos casos se obtuvieron p-valores inferiores a $2.2e-16$, por lo que se rechaza la hipótesis nula con una confianza superior al 99 \%, concluyendo que los log-costes no siguen una distribución normal. Si las marginales no son normales, la distribución conjunta tampoco puede ser una normal multivariante. Para confirmarlo, se aplicó el test de Mardia sobre las dos variables transformadas en logaritmos, obteniendo p-valores de 0 tanto para asimetría como para curtosis. Por tanto, se rechaza la hipótesis nula de normalidad multivariante con una confianza superior al 99 \%. Ante este resultado, se procedió a ajustar distribuciones más flexibles: la hiperbólica generalizada, la t-Student, la hiperbólica, la normal inversa gaussiana y la varianza-gamma, cada una en sus variantes simétrica y asimétrica.
 
-				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones multivariadas
-					\begin{table}[H]
-						\centering
-						\caption{Distribuciones multivariadas}
-						\begin{tabular}{lcc}
+	        	% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Modelización paramétrica
+				\begin{table}[H]
+					\centering
+					\begin{threeparttable}
+						\caption{VaR y AIC para distribuciones multivariadas}
+						\begin{tabular}{lrrrr}
 							\toprule
-							\textbf{Distribución} & \textbf{AIC escala original (sim.)} & \textbf{AIC escala original (asim.)} \\
+							\textbf{Distribución} & \textbf{$VaR_{99,0\%}$} & \textbf{$VaR_{99,5\%}$} & \textbf{$VaR_{99,9\%}$} & \textbf{AIC} \\
 							\midrule
-								t-Student & 622.497 & 613.658 \\
-								Hiperbólica & 623.676 & 610.371 \\
-								NIG & 622.630 & 611.958 \\
-								VG & 623.992 & 606.617 \\
-								GHip & 622.439 & 606.563 \\
+							GH (sim.) & 4.127 & 28.539 & 5.856.066 & 622.439 \\
+							GH (asim.) & 765 & 2.487 & 37.978 & 606.563 \\
+							Hyp (sim.) & 787 & 1.839 & 13.855 & 623.676 \\
+							Hyp (asim.) & 397 & 951 & 6.571 & 610.371 \\
+							t-Student (sim.) & 4.893 & 45.945 & 95.673.595 & 622.497 \\
+							t-Student (asim.) & 152 & 308 & 2.091 & 613.658 \\
+							NIG (sim.) & 3.678 & 18.476 & 1.054.266 & 622.630 \\
+							NIG (asim.) & 282 & 764 & 8.781 & 611.958 \\
+							VG (sim.) & 775 & 1.765 & 12.025 & 623.992 \\
+							VG (asim.) & 745 & 2.312 & 34.300 & 606.617 \\
+							Gaussiana & 375 & 641 & 1.970 & 625.887 \\
 							\bottomrule
 						\end{tabular}
-					\end{table}
+						\begin{tablenotes}[flushleft]
+							\footnotesize
+							\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
+						\end{tablenotes}
+					\end{threeparttable}
+				\end{table}
 									
 				La distribución que ofrece el mejor ajuste a los datos es la hiperbólica generalizada multivariante asimétrica. En este caso, los parámetros estimados para la distribución son los siguientes:
 				
@@ -630,30 +689,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\end{equation*}
 
 \hypertarget{Volver32}{} 
-				En la \textcolor{blue}{\hyperlink{Figura25}{(Figura 25)}} se presenta un mapa de calor de los datos. Se observa que, aunque la distribución hiperbólica generalizada multivariante asimétrica ofrece un mejor ajuste que la distribución gaussiana, su desempeño en los extremos sigue siendo insuficiente. \\
-				
-				Con estos parámetros se procedió a simular el VaR y el TVaR para niveles de confianza del 99 \%, 99,5 \% y 99,9 \%, obteniendo los siguientes resultados:
-				
-				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones multivariadas
-					\begin{table}[H]
-						\centering
-						\begin{threeparttable}
-						\caption{Distribuciones multivariadas}
-						\begin{tabular}{lcc}
-							\toprule
-							\textbf{Nivel de confianza} & \textbf{VaR} & \textbf{TVaR} \\
-							\midrule
-								$99,0\%$ & 765 & 2.620 \\
-								$99,5\%$ & 2.487 & 5.238 \\
-								$99,9\%$ & 37.978 & 26.152.044 \\
-							\bottomrule
-						\end{tabular}
-				        \begin{tablenotes}[flushleft]
-							\footnotesize
-							\item \textit{Nota}: cifras monetarias expresadas en miles de euros.
-						\end{tablenotes}
-						\end{threeparttable}
-					\end{table}
+				En la \textcolor{blue}{\hyperlink{Figura25}{(Figura 25)}} se presenta, entre otros, un mapa de calor de los datos. Se observa que, aunque la distribución hiperbólica generalizada multivariante asimétrica ofrece un mejor ajuste que la distribución gaussiana, su desempeño en los extremos sigue siendo insuficiente.
 
 			\paragraph{Cópulas}
 			
@@ -663,12 +699,12 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{table}[H]
 					\centering
 					\begin{threeparttable}
-						\caption{Cópulas}
+						\caption{AIC y VaR para cópulas}
 						\begin{tabular}{lcccc}
 							\toprule
 							\textbf{Marginales} & \textbf{AIC ajustado} & \textbf{$VaR_{99,0\%}$} & \textbf{$VaR_{99,5\%}$} & \textbf{$VaR_{99,9\%}$} \\
 							\midrule
-								Log-normales & 62.834 & 375 & 643 & 2.013 \\
+								Log-normales & 62.834 & 371 & 646 & 2.091 \\
 								Log-logísticas & 62.651 & 738 & 1.712 & 12.487 \\
 							\bottomrule
 						\end{tabular}
@@ -679,8 +715,26 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 					\end{threeparttable}
 				\end{table}
 
-				Tal como se muestra en el Cuadro 8, la cópula gaussiana con marginales log-logísticas ofrece el mejor ajuste a los datos, ya que presenta el menor valor de AIC. En este escenario, para un nivel de confianza del 99.9 \%, la pérdida máxima esperada asciende a 12.487 miles de euros.
-
+				Tal como se muestra en el Cuadro 9, la cópula gaussiana con marginales log-logísticas ofrece el mejor ajuste a los datos, ya que presenta el menor valor de AIC. En este escenario, para un nivel de confianza del 99.9 \%, la pérdida máxima esperada asciende a 12.487 miles de euros.
+				
+			\paragraph{Resumen comparativo}
+				A continuación, se presenta un resumen de los resultados obtenidos para el $VaR_{99,5\%}$ derivado de las distintas modelizaciones de la variable \textit{InjuryAmount}: 
+				\begin{itemize}
+					\item Distribución empírica: 349,8. 
+					\item Distribución no paramétrica - kernel (bw=): 350,4.
+					\item Distribución paramétrica - VG (asim.): 240,0 (AIC: 91.919).
+					\item Valores extremos - POT-GPD: 285,8
+					\item Distribuciones compuestas - Weibull-Pareto: 309,0 (AIC: 92.720).
+				\end{itemize}
+				Observamos que:
+				\begin{itemize}
+					\item Los enfoques empíricos y no paramétricos (349,8 y 350,4 miles de euros) producen valores muy similares y altos, reflejando la forma real de los datos.
+					\item El modelo paramétrico VG (asimétrico) da un valor menor (240,0 miles de euros), lo que indica que su ajuste no captura adecuadamente la cola extrema.
+					\item El método de valores extremos (POT-GPD) reduce el VaR a 285,8, lo que sugiere que concentra la estimación en la cola, pero no tanto como el enfoque empírico y no paramétricos.
+					\item La distribución compuesta Weibull-Pareto (309,0) ofrece un compromiso entre los enfoques anteriores, con un AIC similar al VG.
+					\item Las distribuciones multivariadas (mixtura de normales y cópulas) ofrecen unos resultados muy elevados comparados con la distribución empírica. 
+				\end{itemize}
+					
 \newpage
 % Sección 4: Informe ejecutivo
 % Fecha de entrega: 10/01/26
@@ -1249,7 +1303,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura18}{}
 					\centering
-					\caption{Mod. no paramétrica}
+					\caption{Distribución empírica}
 					% Primera fila
 					\begin{subfigure}[b]{1.0\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico50.png}
@@ -1261,7 +1315,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura19}{}
 					\centering
-					\caption{Modelización no paramétrica}
+					\caption{Distribución kernel}
 					% Primera fila
 					\begin{subfigure}[b]{1.0\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico51.png}
@@ -1273,7 +1327,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 					\begin{figure}[htbp]
 \hypertarget{Figura20}{}
 						\centering
-						\caption{Modelización no paramétrica}
+						\caption{Distribución kernel}
 						% Primera fila
 						\begin{subfigure}[b]{1.0\textwidth}
 							\includegraphics[width=\textwidth]{Gráfico52.png}
@@ -1286,7 +1340,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura21}{}
 					\centering
-					\caption{Teoría de valores extremos}
+					\caption{Hill Plot}
 					% Primera fila
 					\begin{subfigure}[b]{0.6\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico55.png}
@@ -1299,7 +1353,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura22}{}
 					\centering
-					\caption{Teoría de valores extremos}
+					\caption{Mean Excess Plot}
 					% Primera fila
 					\begin{subfigure}[b]{0.6\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico56.png}
@@ -1311,7 +1365,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura23}{}
 					\centering
-					\caption{Teoría de valores extremos}
+					\caption{Coefficient of Variation}
 					% Primera fila
 					\begin{subfigure}[b]{0.6\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico57.png}

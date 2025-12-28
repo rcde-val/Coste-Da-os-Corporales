@@ -27,6 +27,42 @@ install.packages("ercv")
 install.packages("EnvStats")
 # Hmisc
 install.packages("Hmisc")
+# ks
+install.packages("ks")
+# fBasics
+install.packages("fBasics")
+# QRM
+install.packages("QRM")
+# ghyp
+install.packages("ghyp")
+# copula
+install.packages("copula")
+# fitdistrplus
+install.packages("fitdistrplus")
+# flexsurv
+install.packages("flexsurv")
+# caret
+install.packages("caret")
+# ROCR
+install.packages("ROCR")
+# pROC
+install.packages("pROC")
+# e1071
+install.packages("e1071")
+# survival
+install.packages("survival")
+# actuar
+install.packages("actuar")
+# ghyp 
+install.packages("ghyp")
+# partykit
+install.packages("partykit", dependencies = TRUE, type = "binary")
+# grid
+install.packages("grid")
+# ggparty
+install.packages("ggparty")
+# strucchange
+install.packages("strucchange")
 #-------------------------------------------------------------------------------
 # Carga de paquetes
 #-------------------------------------------------------------------------------
@@ -56,6 +92,42 @@ library("ercv")
 library("EnvStats")
 # Hmisc
 library("Hmisc")
+# ks
+library("ks")
+# fBasics
+library("fBasics")
+# QRM
+library("QRM")
+# ghyp
+library("ghyp")
+# copula
+library("copula")
+# fitdistrplus
+library("fitdistrplus")
+# flexsurv
+library("flexsurv")
+# caret
+library("caret")
+# ROCR
+library("ROCR")
+# pROC
+library("pROC")
+# e1071
+library("e1071")
+# survival
+library("survival")
+# actuar
+library("actuar")
+# ghyp
+library("ghyp")
+# partykit
+library("partykit")
+# grid
+library("grid")
+# ggparty
+library("ggparty")
+# strucchange
+library("strucchange")
 #-------------------------------------------------------------------------------
 # Importación de base de datos
 #-------------------------------------------------------------------------------
@@ -1132,6 +1204,103 @@ mtext("Poisson", side = 3, line = 0.5, cex = 1)
 #-------------------------------------------------------------------------------
 # 3.2.1.3.1 Elección binaria - logit y probit
 #-------------------------------------------------------------------------------
+FC01_G03_BBDD_v02<-read_excel("FC01_G03_BBDD_v02.xlsx")
+data("FC01_G03_BBDD_v02")
+ClaimNB<-FC01_G03_BBDD_v02$ClaimNb
+numclaims_logit1<-glm(I(ClaimNB > 0) ~ Exposure + CarAge + DriverAge + Density + ClaimAmount+ InjuryAmount, PropertyAmount, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit1) 
+
+numclaims_logit0<-glm(I(ClaimNB > 0) ~ Exposure, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit0) 
+
+numclaims_logit2<-glm(I(ClaimNB > 0) ~ ClaimAmount, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit2) 
+
+numclaims_logit3<-glm(I(ClaimNB > 0) ~ PropertyAmount, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit3) 
+
+numclaims_logit4<-glm(I(ClaimNB > 0) ~ Density, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit4) 
+
+numclaims_logit5<-glm(I(ClaimNB > 0) ~ CarAge, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit5) 
+
+numclaims_logit6<-glm(I(ClaimNB > 0) ~ DriverAge, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit6)
+
+numclaims_logit7<-glm(I(ClaimNB > 0) ~ InjuryAmount, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit7) 
+
+numclaims_logit8<-glm(I(ClaimNB > 0) ~ BrandCluster, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit8)
+
+numclaims_logit9<-glm(I(ClaimNB > 0) ~ PowerNumCluster, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit9)
+
+numclaims_logit9<-glm(I(ClaimNB > 0) ~ RegionCluster, data = FC01_G03_BBDD_v02,
+                      family = binomial(link = "logit"))
+summary(numclaims_logit9)
+
+numclaims_logit10<-glm(I(ClaimNB > 0) ~ Gas, data = FC01_G03_BBDD_v02,
+                       family = binomial(link = "logit"))
+summary(numclaims_logit10)
+
+numclaims_logit20<-glm(I(ClaimNB > 0) ~ Exposure + CarAge + DriverAge + Density + Gas + RegionCluster + BrandCluster + PowerNumCluster, data = FC01_G03_BBDD_v02, 
+                       family = binomial(link = "logit"))
+summary(numclaims_logit20) 
+
+
+#MATRIZ DE CONFUSION
+
+
+
+prob_predicha_total <- predict(numclaims_logit20, type = "response")
+
+umbral <- 0.6305
+prediccion_binaria_total <- ifelse(prob_predicha_total > umbral, 1, 0)
+
+
+valores_reales_total <- FC01_G03_BBDD_v02$ClaimNb > 0 
+
+pred_factor <- factor(prediccion_binaria_total, levels = c("0", "1"))
+real_factor <- factor(as.numeric(valores_reales_total), levels = c("0", "1")) 
+
+matriz_confusion_entrenamiento <- confusionMatrix(pred_factor, real_factor)
+
+print(matriz_confusion_entrenamiento)
+
+
+
+pred<-prediction(fitted(numclaims_logit20))
+plot(performance(prob_predicha_total,"tpr","fpr"))
+
+
+# Predicciones de probabilidad
+prob <- predict(numclaims_logit20, type = "response")
+
+# Variable real (0/1)
+real <- ifelse(I(ClaimNB > 0), 1, 0)
+
+# Curva ROC
+roc_obj <- roc(real, prob)
+
+# Plot ROC
+plot(roc_obj, col = "blue", lwd = 2, main = "Curva ROC - Modelo Logit")
+abline(a = 0, b = 1, lty = 2, col = "red")
+
+# AUC
+auc(roc_obj)
+
 #-------------------------------------------------------------------------------
 # 3.2.1.3.2 Elección multinomial
 #-------------------------------------------------------------------------------
@@ -1147,6 +1316,72 @@ mtext("Poisson", side = 3, line = 0.5, cex = 1)
 #-------------------------------------------------------------------------------
 # 3.2.1.5 Cluster jerárquico divisivo
 #-------------------------------------------------------------------------------
+#Descarga de datos
+citdata <- read_excel("FC01_G03_BBDD_v02.xlsx")
+#citdata<-read_excel("FC01_G03_BBDD_v02.xlsx")
+head(citdata)
+
+
+# pasar strings a factor
+citdata <- citdata %>%
+  dplyr::mutate_if(is.character, factor)
+citdata <- citdata %>%
+  #  dplyr::select(-PolicyID, -ClaimAmount, -InjuryAmount, -PropertyAmount,-CarAge,-Exposure,-DriverAge,-PowerNum,-Power,-Density,-Region,-Brand,-PowerNumCluster)
+  dplyr::select(-PolicyID, -ClaimAmount, -InjuryAmount, -PropertyAmount)
+citdata <- citdata %>%
+  dplyr::mutate_if(is.character, factor)
+citdata$ClaimNb<-as.factor(citdata$ClaimNb)
+
+
+#Se puede proceder a los árboles de decisión 
+#La implementación del Test de Inferencia Condicional (CIT) requiere la definición inicial de un mecanismo de control explícito. Este control tiene como propósito gestionar la ejecución simultánea de múltiples pruebas de hipótesis.La aplicación de dicho control se traduce en la necesidad de ajustar los niveles de significancia individuales ($\alpha_i$). Este ajuste es fundamental para garantizar que el Nivel de Significación Global (o la Tasa de Error Tipo I a Nivel Familiar, $\text{FWER}$) del conjunto completo de pruebas se mantenga en un umbral predefinido, típicamente $\alpha = 0.05$.Esta corrección por comparaciones múltiples es una medida esencial para mitigar la inflación de la probabilidad de cometer un Error Tipo I (Falsos Positivos), asegurando la validez y la solidez inferencial del análisis realizado.
+# corrección de Bonferroni (1 mínimo alpha multiplicado por n predictores)
+control = ctree_control(mincriterion=0.95,
+                        testtype = "Bonferroni",
+                        minsplit = 3000,
+                        minbucket = 1500,
+                        maxdepth = 3
+)
+
+#Implementamos el CIT a partir de la función partykit
+citd.ctree <- partykit::ctree(ClaimNb ~ .,data = citdata,control = control)
+print(citd.ctree)
+plot(citd.ctree, type = "simple", gp = gpar(fontsize = 8))
+
+# extraemos p-values
+pvals <- unlist(nodeapply(citd.ctree, ids = nodeids(citd.ctree), function(n) info_node(n)$p.value))
+pvals <- pvals[pvals <.05]
+# graficamos
+ggparty(citd.ctree) +
+  geom_edge() +
+  geom_edge_label() +
+  geom_node_label(line_list = list(aes(label = splitvar),
+                                   aes(label = paste0("N=", nodesize, ", p", 
+                                                      ifelse(pvals < .001, "<.001", paste0("=", round(pvals, 3)))), 
+                                       size = 10)),
+                  line_gpar = list(list(size = 13), 
+                                   list(size = 10)), 
+                  ids = "inner") +
+  geom_node_label(aes(label = paste0("Node ", id, ", N = ", nodesize)),
+                  ids = "terminal", nudge_y = -0.0, nudge_x = 0.01) +
+  geom_node_plot(gglist = list(
+    geom_bar(aes(x = "", fill = LikeUser),
+             position = position_fill(), color = "black"),
+    theme_minimal(),
+    scale_fill_manual(values = c("gray50", "gray80"), guide = FALSE),
+    scale_y_continuous(breaks = c(0, 1)),
+    xlab(""), 
+    ylab("Probability"),
+    geom_text(aes(x = "", group = LikeUser,
+                  label = stat(count)),
+              stat = "count", position = position_fill(), vjust = 1.1)),
+    shared_axis_labels = TRUE)
+
+"¿Qué tan fuerte es la relación entre mis predictores y mi variable objetivo en este nodo?"
+# Ver los tests del nodo 2
+sctest(citd.ctree, node = 2)
+# Ver los tests del nodo 3
+sctest(citd.ctree, node = 3)
 #-------------------------------------------------------------------------------
 # 3.2.1.6 Cluster no jerárquico - k means
 #-------------------------------------------------------------------------------
@@ -1218,12 +1453,392 @@ fviz_pca_var(princomp(temporal), col.var = "cos2",
 #-------------------------------------------------------------------------------
 # 3.2.2.1 Modelización no paramétrica
 #-------------------------------------------------------------------------------
+#CUANTIFICACIÓN DE RIESGOS
+alfa<-c(0.99, 0.995,0.999) #niveles cuantiles para el VaR
+
+injury_cost<-datos$InjuryAmount[datos$InjuryAmount>0]
+injury_cost
+summary(injury_cost)
+#EMPIRICAL DISTRIBUTION
+ecdf_injury <- ecdf(injury_cost)
+par(mfrow=c(1,2))
+plot(ecdf_injury(0:100000),type="l",xlab="Injury Cost",ylab="Empirical")
+plot(ecdf_injury(100000:20000000),type="l",xlab="Injury Cost",ylab="Empirical")
+
+quantile(injury_cost,alfa)
+
+property_cost<-datos$PropertyAmount[datos$PropertyAmount>0]
+quantile(property_cost,alfa)
+
+total_cost<-datos$ClaimAmount[datos$ClaimAmount>0]
+quantile(total_cost,alfa)#VaR(X1+X2)
+quantile(injury_cost,alfa)+quantile(property_cost,alfa)#VaR(X1)+VaR(X2)
+
+
+#histograma
+hist(injury_cost,10000,xlim=c(0,500000))
+
+#kernel density estimation
+kernel<-density(injury_cost);kernel
+kernel2<-density(injury_cost,bw="SJ");kernel2
+kernel3<-density(injury_cost,bw=3);kernel3
+kernel4<-density(injury_cost, kernel="epanechnikov");kernel4
+kernel5<-density(injury_cost,kernel="epanechnikov",bw="SJ");kernel5
+kernel6<-density(injury_cost,kernel="epanechnikov",bw=3);kernel6
+
+par(mfrow=c(3,2))
+plot(kernel,xlim=c(0,500000))
+plot(kernel2,xlim=c(0,500000))
+plot(kernel3,xlim=c(0,500000))
+plot(kernel4,xlim=c(0,500000))
+plot(kernel5,xlim=c(0,500000))
+plot(kernel6,xlim=c(0,500000))
+
+#kernel estimation of cdf
+
+ckernel<-kcde(injury_cost,gridsize=1000,xmin=0,xmax=1000000)
+ckernel2<-kcde(injury_cost,h=2,gridsize=1000,xmin=0,xmax=1000000)
+ckernel3<-kcde(injury_cost,h=50,gridsize=1000,xmin=0,xmax=1000000)
+ckernel4<-kcde(injury_cost,h=100,gridsize=1000,xmin=0,xmax=1000000)
+
+par(mfrow=c(2,2))
+plot(ckernel, main="h=86.48855")
+plot(ckernel2, main="h=2")
+plot(ckernel3, main="h=50")
+plot(ckernel4, main="h=100")
+
+# programa para el cálculo de los cuantiles
+pKe<-function(x){return(pnorm(x))}
+cdf_x<-function(y,ydata,nr,h){
+  #z is a scalar, v is a vector, x is a vector of variable values.
+  help1<-pKe((y-ydata)/h)
+  rr<-sum(help1)/nr
+  return(rr)
+}
+
+FUN_y<- function(y){
+  #z is a scalar, v is a vector
+  cdf<-cdf_x(y,ydata,nr,h)
+  rr=cdf-alpha
+  return(rr)
+}
+al<-c(0.99,0.995,0.999)
+ydata<-injury_cost
+nr<-length(injury_cost)
+
+h<-2
+for(i in 1:3) {
+  alpha<-al[i]
+  print(uniroot(FUN_y,c(0,10000000))$root)
+}
+
+h<-50
+for(i in 1:3) {
+  alpha<-al[i]
+  print(uniroot(FUN_y,c(0,10000000))$root)
+}
+
+h<-100
+for(i in 1:3) {
+  alpha<-al[i]
+  print(uniroot(FUN_y,c(0,10000000))$root)
+}
+
+h<-86.48855
+var_inj<-rep(0,3);var_inj
+for(i in 1:3) {
+  alpha<-al[i]
+  var_inj[i]<-uniroot(FUN_y,c(0,10000000))$root
+}
+round(var_inj/1000,1)
+
+al<-c(0.99,0.995,0.999)
+ydata<-property_cost
+nr<-length(property_cost)
+var_prop<-rep(0,3);var_prop
+h<-86.48855
+for(i in 1:3) {
+  alpha<-al[i]
+  var_prop[i]<-uniroot(FUN_y,c(0,10000000))$root
+}
+round(var_prop/1000,1)
+round((var_inj+var_prop)/1000,1)
+
+al<-c(0.99,0.995,0.999)
+ydata<-total_cost
+nr<-length(total_cost)
+var_tot<-rep(0,3);var_tot
+h<-86.48855
+for(i in 1:3) {
+  alpha<-al[i]
+  var_tot[i]<-uniroot(FUN_y,c(0,10000000))$root
+}
+var_inj
+var_prop
+var_inj+var_prop#var(x1)+var(x2)
+var_tot#var(x1+x2)
+round(var_tot/1000,1)
 #-------------------------------------------------------------------------------
 # 3.2.2.2 Modelización paramétrica
 #-------------------------------------------------------------------------------
+### LIMPIEZA DE DATOS ###
+InjuryAmount <- datos$InjuryAmount
+InjuryAmount <- InjuryAmount[InjuryAmount > 0]
+summary(InjuryAmount)
+
+# Escala en miles
+dat <- InjuryAmount / 1000
+
+### EXPLORACIÓN INICIAL ###
+summary(dat)
+hist(dat, breaks = 50)
+boxplot(dat)
+
+skewness(dat)
+kurtosis(dat)
+
+plot(survfit(Surv(dat) ~ 1), fun = "cloglog",
+     main = "Cola en escala log-log")
+
+qqnorm(log(dat))
+qqline(log(dat))
+
+descdist(dat, boot = 100)
+
+### NIVELES DE CONFIANZA PARA VaR ###
+alfa <- c(0.99, 0.995, 0.999)
+
+################################################
+###   DISTRIBUCIONES CLÁSICAS EN ESCALA dat  ###
+################################################
+
+## Weibull
+mweib <- fitdist(dat, "weibull", method = "mle")
+mweib
+AIC(mweib)
+
+VaR_weib_k <- qweibull(alfa,
+                       shape = mweib$estimate["shape"],
+                       scale = mweib$estimate["scale"])
+VaR_weib <- VaR_weib_k * 1000   # escala original
+
+plot(mweib)
+
+## Gamma
+mgam <- fitdist(dat, "gamma", method = "mle")
+mgam
+AIC(mgam)
+
+VaR_gam_k <- qgamma(alfa,
+                    shape = mgam$estimate["shape"],
+                    rate  = mgam$estimate["rate"])  # Ojo: es 'rate'
+VaR_gam <- VaR_gam_k * 1000
+
+plot(mgam)
+
+## Log-normal
+mln <- fitdist(dat, "lnorm", method = "mle")
+mln
+AIC(mln)
+
+VaR_lnorm_k <- qlnorm(alfa,
+                      meanlog = mln$estimate["meanlog"],
+                      sdlog   = mln$estimate["sdlog"])
+VaR_lnorm <- VaR_lnorm_k * 1000
+
+plot(mln)
+
+## Log-logistic
+mll <- fitdist(dat, "llogis", method = "mle")
+mll
+AIC(mll)
+
+VaR_llogis_k <- qllogis(alfa,
+                        shape = mll$estimate["shape"],
+                        scale = mll$estimate["scale"])
+VaR_llogis <- VaR_llogis_k * 1000
+
+plot(mll)
+
+################################################
+###   MODELOS EN ESCALA LOGARÍTMICA ldat     ###
+################################################
+
+
+ldat <- log(dat)
+
+# Función auxiliar: ajusta simétrico y asimétrico, calcula AIC y VaR del mejor
+fit_and_select <- function(fit_fun, ldat, alfa) {
+  # Ajustes
+  mod_sym  <- fit_fun(ldat, symmetric = TRUE)
+  mod_asym <- fit_fun(ldat, symmetric = FALSE)
+  
+  # AIC en escala log
+  aic_sym_log  <- AIC(mod_sym)
+  aic_asym_log <- AIC(mod_asym)
+  
+  # AIC en escala original
+  aic_sym_orig  <- aic_sym_log  + 2 * sum(ldat)
+  aic_asym_orig <- aic_asym_log + 2 * sum(ldat)
+  
+  # Selección del mejor (menor AIC original)
+  if (aic_sym_orig <= aic_asym_orig) {
+    best_model <- mod_sym
+    best_type  <- "Simétrico"
+    best_aic   <- aic_sym_orig
+  } else {
+    best_model <- mod_asym
+    best_type  <- "Asimétrico"
+    best_aic   <- aic_asym_orig
+  }
+  
+  # VaR en escala original
+  VaR_k <- exp(qghyp(alfa, object = best_model))
+  VaR   <- VaR_k * 1000
+  
+  return(list(
+    modelo = deparse(substitute(fit_fun)),
+    mejor_tipo = best_type,
+    mejor_AIC  = best_aic,
+    VaR        = VaR
+  ))
+}
+
+
+# GH
+res_GH <- fit_and_select(fit.ghypuv, ldat, alfa)
+
+# Hyp
+res_Hyp <- fit_and_select(fit.hypuv, ldat, alfa)
+
+# Student-t
+res_t <- fit_and_select(fit.tuv, ldat, alfa)
+
+# NIG
+res_NIG <- fit_and_select(fit.NIGuv, ldat, alfa)
+
+# VG
+res_VG <- fit_and_select(fit.VGuv, ldat, alfa)
+
+
+res_GH
+res_Hyp
+res_t
+res_NIG
+res_VG
+
+
+################################################
+###   RESUMEN POR MODELO     ###
+################################################
+
+VaR_resumen_miles <- data.frame(
+  alfa      = alfa,
+  Weibull   = VaR_weib / 1000,
+  Gamma     = VaR_gam / 1000,
+  LogNormal = VaR_lnorm / 1000,
+  LogLogis  = VaR_llogis / 1000,
+  GH        = res_GH$VaR / 1000,
+  Hyp       = res_Hyp$VaR / 1000,
+  t         = res_t$VaR / 1000,
+  NIG       = res_NIG$VaR / 1000,
+  VG        = res_VG$VaR / 1000
+)
+
+round(print(VaR_resumen_miles),0)
+################################################
+###   AIC comparativo: Clásicos vs Asimétricos
+################################################
+
+# Ajustes asimétricos (asegúrate de tener ldat definido)
+mghy_asym  <- fit.ghypuv(ldat, symmetric = FALSE)
+mhy_asym   <- fit.hypuv(ldat, symmetric = FALSE)
+mt_asym    <- fit.tuv(ldat, symmetric = FALSE)
+mNIG_asym  <- fit.NIGuv(ldat, symmetric = FALSE)
+mVG_asym   <- fit.VGuv(ldat, symmetric = FALSE)
+
+# Tabla de AIC clásicos (ya en escala original)
+AIC_clasicos <- data.frame(
+  Modelo = c("Weibull", "Gamma", "Lognormal", "Log-logistic"),
+  AIC_original = c(
+    AIC(mweib),
+    AIC(mgam),
+    AIC(mln),
+    AIC(mll)
+  )
+)
+
+# Tabla de AIC avanzados (solo asimétricos, corregidos a escala original)
+AIC_asim <- data.frame(
+  Modelo = c("GH_asim", "Hyp_asim", "t_asim", "NIG_asim", "VG_asim"),
+  AIC_original = c(
+    AIC(mghy_asym) + 2 * sum(ldat),
+    AIC(mhy_asym)  + 2 * sum(ldat),
+    AIC(mt_asym)   + 2 * sum(ldat),
+    AIC(mNIG_asym) + 2 * sum(ldat),
+    AIC(mVG_asym)  + 2 * sum(ldat)
+  )
+)
+
+# Unir ambas tablas
+AIC_comparativo <- rbind(AIC_clasicos, AIC_asim)
+
+print(AIC_comparativo)
+
 #-------------------------------------------------------------------------------
 # 3.2.2.3 Teoría de valores extremos
 #-------------------------------------------------------------------------------
+datos <- read_excel("FC01_G03_BBDD_v02.xlsx")
+L<-datos$InjuryAmount[datos$InjuryAmount>0]
+L<-L[L>0]
+L<-L/1000 #Reescalamos
+summary(L) 
+hist(L)
+L<-L[order(L)]
+x.L<-c(1:length(L))
+
+plot(x.L,L,type="p",col=1,xlab="",ylab="Size",main='Losses',cex.main=0.9,col.main=1)
+
+L<-as.matrix(L)  
+# Hill-plot
+par(mfrow=c(1,1))
+hp<-hillplot(L)
+hp
+meplot(L)
+cvplot(L)
+
+
+q<-0.995
+n<-length(L)
+L<-sort(L, decreasing = F)
+length(hp$data..n.[hp$data..n.<22])
+umbral<-length(L[L<=22])#Elegimos como umbral el tamaño de los datos con costes igual o menor a 21, que es cuando se estabiliza y donde no detectamos cola pesada
+umbral
+
+Lnueva<-L[((umbral+1):length(L))]
+
+epar<-epareto(Lnueva, method = "mle")
+attributes(epar)
+epar$parameters
+Hpar<-epar$parameters[2]
+k<-epar$parameters[1]
+fr<-(umbral)/n
+n
+fr
+alfa<-q-fr
+alfa
+conf<-alfa/(1-fr)
+conf
+VaR.Par<-k/((1-conf)**(1/Hpar))
+VaR.Par
+
+# GPD
+k<-L[(umbral+1)]
+par.GPD<-gpd(L,threshold = k)
+par.GPD
+VaR_GPD = k + evir::qgpd(conf, par.GPD$par.ests[1], 0, par.GPD$par.ests[2])
+VaR_GPD
+
 #-------------------------------------------------------------------------------
 # 3.2.2.4 Distribuciones compuestas
 #-------------------------------------------------------------------------------
@@ -1566,271 +2181,370 @@ mtext("(Condición de continuidad)", side = 3, line = 0.5, cex = 1)
 #-------------------------------------------------------------------------------
 # 3.2.2.5 Distribuciones multivariadas
 #-------------------------------------------------------------------------------
+property_cost<-datos$PropertyAmount[datos$PropertyAmount>0]
+length(property_cost)==length(injury_cost)
+costes<-cbind(injury_cost,property_cost);costes
+costes<-as.data.frame(costes)
+summary(costes)
+plot(costes$injury_cost,costes$property_cost)
+costes<-as.matrix(costes)
+#transformación logarítmica
+log_costes<-log(costes)
+summary(log_costes)
 
 
+normalTest(log_costes[,1],"jb")
+normalTest(log_costes[,2],"jb")
+#
+
+MardiaTest(log_costes)
 
 
+mod.gauss<-fit.gaussmv(log_costes)
+mod.gauss
+AIC(mod.gauss)
+
+mod.ghyp1<-fit.ghypmv(log_costes,symmetric=TRUE)
+mod.ghyp1
+AIC(mod.ghyp1)
 
 
+mod.ghyp2<-fit.ghypmv(log_costes,symmetric=FALSE)
+mod.ghyp2
+AIC(mod.ghyp2)
+
+mod.t1 <- fit.tmv(log_costes,symmetric = TRUE)
+mod.t1
+AIC(mod.t1)
+
+mod.t2 <- fit.tmv(log_costes,symmetric = FALSE)
+mod.t2
+AIC(mod.t2)
+
+mod.hyp1<- fit.hypmv(log_costes,symmetric = TRUE)
+mod.hyp1
+AIC(mod.hyp1)
+
+mod.hyp2<- fit.hypmv(log_costes,symmetric = FALSE)
+mod.hyp2
+AIC(mod.hyp2)
+
+mod.nig1<- fit.NIGmv(log_costes,symmetric = TRUE)
+mod.nig1
+AIC(mod.nig1)
+
+mod.nig2<- fit.NIGmv(log_costes,symmetric = FALSE)
+mod.nig2
+AIC(mod.nig2)
+
+mod.vg1<- fit.VGmv(log_costes,symmetric = TRUE)
+mod.vg1
+AIC(mod.vg1)
+
+mod.vg2<- fit.VGmv(log_costes,symmetric = FALSE)
+mod.vg2
+AIC(mod.vg2)
+
+# AIC EN ESCALA ORIGINAL
+aic_gauss<-AIC(mod.gauss)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_t1<-AIC(mod.t1)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_t2<-AIC(mod.t2)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_hyp1<-AIC(mod.hyp1)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_hyp2<-AIC(mod.hyp2)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_nig1<-AIC(mod.nig1)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_nig2<-AIC(mod.nig2)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_vg1<-AIC(mod.vg1)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_vg2<-AIC(mod.vg2)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_ghyp1<-AIC(mod.ghyp1)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+aic_ghyp2<-AIC(mod.ghyp2)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
+
+pairs(mod.ghyp2, cex=0.5, nbins=20)
+
+
+###Simulación de las observaciones procedentes de las distribuciones estimadas
+#Cálculo del VaR
+alfa<-c(0.99, 0.995,0.999)
+set.seed(123) # Fijo una semilla
+r<-1000000 # N?mero total de valores a simular   
+
+# Optimal multivariate model
+Sim_lc_ghyp2<-rghyp(r, object = mod.ghyp2)
+Sim_lc_ghyp2<-exp(Sim_lc_ghyp2)
+MC.Lsim <-rowSums(Sim_lc_ghyp2)
+var_ghyp2<-quantile(MC.Lsim, alfa);var_ghyp2
+
+#los otros modelos
+Sim_lc_gauss<-rghyp(r, object = mod.gauss)
+Sim_lc_gauss<-exp(Sim_lc_gauss)
+MC.Lsim <-rowSums(Sim_lc_gauss)
+var_gauss<-quantile(MC.Lsim, alfa);var_gauss
+
+Sim_lc_ghyp1<-rghyp(r, object = mod.ghyp1)
+Sim_lc_ghyp1<-exp(Sim_lc_ghyp1)
+MC.Lsim <-rowSums(Sim_lc_ghyp1)
+var_ghyp1<-quantile(MC.Lsim, alfa);var_ghyp1
+
+Sim_lc_t1<-rghyp(r, object = mod.t1)
+Sim_lc_t1<-exp(Sim_lc_t1)
+MC.Lsim <-rowSums(Sim_lc_t1)
+var_t1<-quantile(MC.Lsim, alfa);var_t1
+
+Sim_lc_t2<-rghyp(r, object = mod.t2)
+Sim_lc_t2<-exp(Sim_lc_t2)
+MC.Lsim <-rowSums(Sim_lc_t2)
+var_t2<-quantile(MC.Lsim, alfa);var_t2
+
+Sim_lc_hyp1<-rghyp(r, object = mod.hyp1)
+Sim_lc_hyp1<-exp(Sim_lc_hyp1)
+MC.Lsim <-rowSums(Sim_lc_hyp1)
+var_hyp1<-quantile(MC.Lsim, alfa);var_hyp1
+
+Sim_lc_hyp2<-rghyp(r, object = mod.hyp2)
+Sim_lc_hyp2<-exp(Sim_lc_hyp2)
+MC.Lsim <-rowSums(Sim_lc_hyp2)
+var_hyp2<-quantile(MC.Lsim, alfa);var_hyp2
+
+Sim_lc_nig1<-rghyp(r, object = mod.nig1)
+Sim_lc_nig1<-exp(Sim_lc_nig1)
+MC.Lsim <-rowSums(Sim_lc_nig1)
+var_nig1<-quantile(MC.Lsim, alfa);var_nig1
+
+Sim_lc_nig2<-rghyp(r, object = mod.nig2)
+Sim_lc_nig2<-exp(Sim_lc_nig2)
+MC.Lsim <-rowSums(Sim_lc_nig2)
+var_nig2<-quantile(MC.Lsim, alfa);var_nig2
+
+Sim_lc_vg1<-rghyp(r, object = mod.vg1)
+Sim_lc_vg1<-exp(Sim_lc_vg1)
+MC.Lsim <-rowSums(Sim_lc_vg1)
+var_vg1<-quantile(MC.Lsim, alfa);var_vg1
+
+Sim_lc_vg2<-rghyp(r, object = mod.vg2)
+Sim_lc_vg2<-exp(Sim_lc_vg2)
+MC.Lsim <-rowSums(Sim_lc_vg2)
+var_vg2<-quantile(MC.Lsim, alfa);var_vg2
+
+#Resumen VaR
+round(var_ghyp1/1000,0)
+round(var_ghyp2/1000,0)
+round(var_hyp1/1000,0)
+round(var_hyp2/1000,0)
+round(var_t1/1000,0)
+round(var_t2/1000,0)
+round(var_nig1/1000,0)
+round(var_nig2/1000,0)
+round(var_vg1/1000,0)
+round(var_vg2/1000,0)
+round(var_gauss/1000,0)
 
 
 
 
 
 #-------------------------------------------------------------------------------
-# Definición de las variables numéricas
-namesNum <-c("ClaimNb", "Exposure", "CarAge", "DriverAge",
-             "Density", "ClaimAmount", "InjuryAmount", "PropertyAmount")
-# Definición de las variables categóricas
-namesChar<-c("Power","Brand","Gas","Region")
-# Convertir variables categóricas a factor
-datos <- datos %>%
-  mutate(
-    Power  = factor(Power),
-    Brand  = factor(Brand),
-    Gas    = factor(Gas),
-    Region = factor(Region)
-  )
+# 3.2.2.6 Cópulas
+#-------------------------------------------------------------------------------
+#	Estimate the Pearson, Tau and Spearman correlation coefficients between cost1 and cost2:
+rop<-cor(costes)
+rop
+rotau<-cor(costes,method="kendall")
+roS<-cor(costes,method="spearman")
+rop
+rotau
+roS
 
-# Filtrar pólizas con exposición válida
-datos <- datos %>% filter(Exposure > 0)
+# Estimate the parameter associated with the Gumbel copula and the upper tail correlation:
+ParGum<-1/(1-rotau[1,2])
+landau<-2-(2**(1/ParGum)) 
+ParGum #no podemos usar la cópula de gumbel pq el parámetro estimado es inferior a 1.
+landau 
 
-
-apply(datos[namesNum],2,summary)
-apply(datos[namesNum],2,var)
-apply(datos[namesNum],2,skewness)
-apply(datos[namesNum],2,kurtosis)
-apply(datos[namesNum],2,boxplot)
-apply(datos[namesNum],2,hist)
-apply(datos[namesChar],2,table)
-
-pairs <- combn(namesChar, 2, simplify = FALSE)
-for (p in pairs) {
-  cat("\nTabla de:", p[1], "vs", p[2], "\n")
-  print(table(datos[[p[1]]], datos[[p[2]]]))
-}
+ParClay<-(2*rotau[1,2])/(1-rotau[1,2])
+ParClay
+# Estimate the parameter associated with the Gumbel copula by maximum likelihood:
+nrow(costes)/(nrow(costes)+1) #n/n+1
 
 
+Udata <- pobs(costes) #me estima las u's
+summary(Udata)
+plot(Udata[,1],Udata[,2]) 
+plot(costes[,1],costes[,2])
 
 
-cor_matrix<-cor(datos[namesNum], use = "complete.obs")
-heatmap(cor_matrix, 
-        Rowv = NA, Colv = NA, 
-        col = colorRampPalette(c("red","white","green"))(20), 
-        scale = "none")
+# Gaussian copula
+norm.cop0 <- normalCopula(rop[1,2], dim = 2)
+norm.cop0
+
+norm.cop<-fitCopula(norm.cop0,Udata, method="mpl")
+summary(norm.cop)
+AIC(norm.cop) 
 
 
+# Simulate the values of the copulas (u1 and u2):
+rep=1000000
 
-
-for (catVar in namesChar) {
-  for (numVar in namesNum) {
-    p <- ggplot(datos, aes_string(x = catVar, y = numVar)) +
-      geom_boxplot(fill = "lightblue") +
-      labs(title = paste("Boxplot de", numVar, "por", catVar),
-           x = catVar, y = numVar) +
-      theme_minimal()
-    print(p)
-  }
-}
-
-#Tarda mucho este scatterplor en ejecutarse
-#pairs(datos[namesNum], main="Scatterplots entre variables numéricas")
+norm.cop1 <- normalCopula(attributes(norm.cop)$estimate, dim =2) 
+norm.cop1
+#set.seed(123)
+sim.data.normalcopula <- rCopula(rep,norm.cop1)
+sim.norm<-as.matrix(sim.data.normalcopula)
+plot(sim.norm[1:5000,1],sim.norm[1:5000,2])
 
 
 
-apply(datos[,-datos$InjuryAmount],2,function(x) lm(datos$InjuryAmount~x))
+# Calculate the VaR for the loss L from the dome assuming log-normal marginals:
+ln1<-fitdist(costes[,1],distr = "lnorm",method = "mle")
+AIC(ln1)
+ln2<-fitdist(costes[,2],distr = "lnorm",method = "mle")
+AIC(ln2)
+sim.ln.coste1 <- qlnorm(sim.data.normalcopula[,1],mean=ln1$estimate[1], sd=ln1$estimate[2]) #inversa log-normal
+sim.ln.coste2 <- qlnorm(sim.data.normalcopula[,2], mean=ln2$estimate[1], sd=ln2$estimate[2])
+sim.cop.L=sim.ln.coste1+sim.ln.coste2
+alfa<-c(0.99,0.995,0.999)
+lik<-attributes(norm.cop)$loglik+ln1$loglik+ln2$loglik
+AIC<-2*5-2*lik;AIC
+VaRCopulaLN<-quantile(sim.cop.L, alfa)
+VaRCopulaLN
 
+# Calculate the VaR for the loss L from the dome assuming log-logistic marginals:
+ll1<-fitdist(costes[,1],distr = "llogis",method = "mle")
+AIC(ll1)
+ll2<-fitdist(costes[,2],distr = "llogis",method = "mle")
+AIC(ll2)
+sim.ll.coste1 <- qllogis(sim.data.normalcopula[,1],ll1$estimate[1],ll1$estimate[2])
+sim.ll.coste2 <- qllogis(sim.data.normalcopula[,2],ll2$estimate[1],ll2$estimate[2])
+sim.cop.L=sim.ll.coste1+sim.ll.coste2
+lik<-attributes(norm.cop)$loglik+ll1$loglik+ll2$loglik
+AIC<-2*5-2*lik;AIC
 
-names_without_output <- c("ClaimNb","Exposure","CarAge","DriverAge",
-              "Density","ClaimAmount","PropertyAmount",
-              "Power","Brand","Gas","Region")  # No esta InjuryAmount
-datos1<-datos[,-1]#Quitamos PolicyID
+VaRCopulaLl<-quantile(sim.cop.L, alfa)
+VaRCopulaLl
 
-modelSimple<- function(output, data=datos1, input_names=names_without_output) {
-  
-  
-  
-  models <- lapply(input_names, function(x) {
-    
-    formula <- as.formula(paste(output, "~", x))
-    
-    lm(formula, data = datos)
-    
-  })
-  
-  return(models)
-  
-}
+#-------------------------------------------------------------------------------
+# Nueva solicitud
+#-------------------------------------------------------------------------------
 
-#Modelo Simple para Coste de Daños Personales. Cuantificación de Riesgos
+# ===============================
+# NIVELES DE VaR
+# ===============================
+alfa <- c(0.99, 0.995, 0.999)
 
-modelSimple_InjuryAmount<-modelSimple(output="InjuryAmount",datos1,names_without_output)
+# =========================================================
+# 1:PropertyAmount
+# =========================================================
 
-modelSimple_InjuryAmount
+# 1) Preparar datos
+dat_prop <- datos$PropertyAmount
+dat_prop <- dat_prop[dat_prop > 0] / 1000
+logdat_prop <- log(dat_prop)
 
-summary_modelSimple_InjuryAmount<-lapply(modelSimple_InjuryAmount, summary)
+# 2) Ajuste de las 3 mejores distribuciones (asimétricas)
+mVG_prop  <- fit.VGuv(logdat_prop,  symmetric = FALSE)
+mGH_prop  <- fit.ghypuv(logdat_prop, symmetric = FALSE)
+mHyp_prop <- fit.hypuv(logdat_prop, symmetric = FALSE)
 
-summary_modelSimple_InjuryAmount
-
-#Modelo General para Coste de Daños Personales. Cuantificación de Riesgos
-
-modelGeneral_InjuryAmount<-lm(InjuryAmount~.,data=datos1)
-
-summary(modelGeneral_InjuryAmount)
-
-
-
-#Modelo Simple para Número de Siniestros. Modelos Estadísticos
-
-modelSimple_ClaimNb<-modelSimple(output="ClaimNb",datos1,names_without_output)
-
-modelSimple_ClaimNb
-
-summary_modelSimple_ClaimNb<-lapply(modelSimple_ClaimNb, summary)
-
-summary_modelSimple_ClaimNb
-
-#Modelo General para Número de Siniestros. Modelos Estadísticos
-
-modelGeneral_ClaimNb<-lm(ClaimNb~.,data=datos1)
-
-summary(modelGeneral_ClaimNb)
-
-
-#Descargamos los datos modificados
-#library(openxlsx)
-#nombre_archivo <- "datos.xlsx" 
-#write.xlsx(x = datos, path = nombre_archivo)
-
-
-
-
-
-#Parte de Cuantificación
-###############################################
-#   5. AJUSTE DEL MODELO POISSON (FRECUENCIA)
-###############################################
-
-fit_glm_2 <- glm(
-  ClaimNb ~ DriverAge + CarAge + Power + Brand + Gas + Region + Density,
-  data   = datos,
-  family = poisson(link = "log"),
-  offset = log(Exposure)
-)
-
-summary(fit_glm_2)
-
-###############################################
-#   6. SOBREDISPERSIÓN
-###############################################
-
-mean_claim <- mean(datos$ClaimNb)
-var_claim  <- var(datos$ClaimNb)
-cat("Media ClaimNb:", mean_claim, "  Varianza ClaimNb:", var_claim, "\n")
-
-deviance_ratio <- deviance(fit_glm_2) / df.residual(fit_glm_2)
-cat("Razón Deviance/GL:", deviance_ratio, "\n")
-
-if (deviance_ratio > 1.5) {
-  cat("Hay indicios de sobredispersión.\n")
-} else {
-  cat("No hay evidencia de sobredispersión.\n")
-}
-
-###############################################
-#   7. TEST CHI-CUADRADO DE AJUSTE GLOBAL
-###############################################
-
-with(
-  fit_glm_2,
-  cbind(
-    res.deviance = deviance,
-    df           = df.residual,
-    p            = pchisq(deviance, df.residual, lower.tail = FALSE)
+# 3) AIC corregido a escala original
+AIC_prop <- data.frame(
+  Modelo = c("VG_asim", "GH_asim", "Hyp_asim"),
+  AIC_original = c(
+    AIC(mVG_prop)  + 2 * sum(logdat_prop),
+    AIC(mGH_prop)  + 2 * sum(logdat_prop),
+    AIC(mHyp_prop) + 2 * sum(logdat_prop)
   )
 )
 
-###############################################
-#   8. ERRORES ROBUSTOS
-###############################################
+print(AIC_prop)
 
-cov_poisson_rob <- sandwich::vcovHC(fit_glm_2, type = "HC0")
-std.err <- sqrt(diag(cov_poisson_rob))
-
-resultados_robustos <- cbind(
-  Estimate     = coef(fit_glm_2),
-  `EE robusto` = std.err,
-  `Pr(>|z|)`   = 2 * pnorm(abs(coef(fit_glm_2)/std.err), lower.tail = FALSE)
+# 4) VaR (en miles)
+VaR_prop <- data.frame(
+  alfa = alfa,
+  VG   = exp(qghyp(alfa, object = mVG_prop)),
+  GH   = exp(qghyp(alfa, object = mGH_prop)),
+  Hyp  = exp(qghyp(alfa, object = mHyp_prop))
 )
 
-resultados_robustos
+print(VaR_prop)
 
-###############################################
-#   9. MODELO QUASIPOISSON
-###############################################
+# =========================================================
+# 2: PropertyAmount + InjuryAmount
+# =========================================================
 
-mod_quasi <- glm(
-  ClaimNb ~ DriverAge + CarAge + Power + Brand + Gas + Region + Density,
-  data   = datos,
-  family = quasipoisson(link = "log"),
-  offset = log(Exposure)
+# 1) Crear variable suma y preparar datos
+dat_total <- datos %>%
+  mutate(TotalAmount = PropertyAmount + InjuryAmount) %>%
+  pull(TotalAmount)
+
+dat_total <- datos$ClaimAmount
+
+dat_total <- dat_total[dat_total > 0] / 1000
+logdat_total <- log(dat_total)
+
+# 2) Ajuste de las 3 mejores distribuciones (asimétricas)
+mVG_total  <- fit.VGuv(logdat_total,  symmetric = FALSE)
+mGH_total  <- fit.ghypuv(logdat_total, symmetric = FALSE)
+mHyp_total <- fit.hypuv(logdat_total, symmetric = FALSE)
+
+# 3) AIC corregido a escala original
+AIC_total <- data.frame(
+  Modelo = c("VG_asim", "GH_asim", "Hyp_asim"),
+  AIC_original = c(
+    AIC(mVG_total)  + 2 * sum(logdat_total),
+    AIC(mGH_total)  + 2 * sum(logdat_total),
+    AIC(mHyp_total) + 2 * sum(logdat_total)
+  )
 )
 
-summary(mod_quasi)
+print(AIC_total)
 
-###############################################
-#   10. MODELO BINOMIAL NEGATIVO
-###############################################
+# 4) VaR (en miles)
+VaR_total <- data.frame(
+  alfa = alfa,
+  VG   = exp(qghyp(alfa, object = mVG_total)),
+  GH   = exp(qghyp(alfa, object = mGH_total)),
+  Hyp  = exp(qghyp(alfa, object = mHyp_total))
+)
+VaR_resumen_miles
+print(VaR_total)
 
-mod_nb <- glm.nb(
-  ClaimNb ~ DriverAge + CarAge + Power + Brand + Gas + Region + Density + offset(log(Exposure)),
-  data = datos
+# =========================================================
+# TABLA COMPARATIVA FINAL (VaR 95%, 99% y 99.5%)
+# =========================================================
+
+# Mejor modelo según AIC
+best_prop  <- AIC_prop$Modelo[which.min(AIC_prop$AIC_original)]
+best_total <- AIC_total$Modelo[which.min(AIC_total$AIC_original)]
+
+# AIC mínimo
+bestAIC_prop  <- min(AIC_prop$AIC_original)
+bestAIC_total <- min(AIC_total$AIC_original)
+
+# Extraer VaR del mejor modelo (PropertyAmount)
+VaR_prop_best <- VaR_prop %>%
+  select(alfa, all_of(sub("_asim","", best_prop))) %>%
+  filter(alfa %in% c(0.95, 0.99, 0.995))
+
+# Extraer VaR del mejor modelo (Property + Injury)
+VaR_total_best <- VaR_total %>%
+  select(alfa, all_of(sub("_asim","", best_total))) %>%
+  filter(alfa %in% c(0.95, 0.99, 0.995))
+
+# Tabla comparativa final
+Tabla_Comparativa <- data.frame(
+  Variable = c("PropertyAmount", "PropertyAmount + InjuryAmount"),
+  Mejor_Modelo = c(best_prop, best_total),
+  AIC = c(bestAIC_prop, bestAIC_total),
+  VaR_95 = c(
+    VaR_prop_best[VaR_prop_best$alfa == 0.95, 2],
+    VaR_total_best[VaR_total_best$alfa == 0.95, 2]
+  ),
+  VaR_99 = c(
+    VaR_prop_best[VaR_prop_best$alfa == 0.99, 2],
+    VaR_total_best[VaR_total_best$alfa == 0.99, 2]
+  ),
+  VaR_995 = c(
+    VaR_prop_best[VaR_prop_best$alfa == 0.995, 2],
+    VaR_total_best[VaR_total_best$alfa == 0.995, 2]
+  )
 )
 
-summary(mod_nb)
-
-# Comparación Quasi vs Binomial Negativa
-anova(mod_quasi, mod_nb, test = "F")
-
-###############################################
-#   11. PREDICCIONES DEL MODELO
-###############################################
-
-datos$pred <- predict(fit_glm_2, type = "response")
-
-ggplot(datos, aes(x = pred)) +
-  geom_histogram(color = "black", bins = 40) +
-  theme_bw() +
-  ggtitle("Predicciones del número esperado de siniestros")
-
-###############################################
-#   12. DIAGNÓSTICO
-###############################################
-
-par(mfrow = c(2,2))
-plot(fit_glm_2)
-
-# Residuos de deviance
-res_dev <- residuals(fit_glm_2, type = "deviance")
-
-hist(res_dev, col="lightblue", main="Residuos de deviance")
-qqnorm(res_dev); qqline(res_dev, col="red")
-
-# Distancia de Cook
-cooks_d <- cooks.distance(fit_glm_2)
-plot(cooks_d, type="h", main="Distancia de Cook")
-abline(h = 4 / (nrow(datos)-length(coef(fit_glm_2))), col="red")
-
-
-
-
-
-
-
-#######
-#CUANTIFICACIÓN DE RIESGOS
-injury_cost<-datos$InjuryAmount
-kernel<-density(injury_cost);kernel
-kernel2<-density(injury_cost,bw="SJ")
-kernel3<-density(injury_cost,kernel="epanechnikov",bw="SJ")
-sum(injury_cost>0)
+print(Tabla_Comparativa)
