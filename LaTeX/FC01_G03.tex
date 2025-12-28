@@ -420,14 +420,14 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 	        	\begin{table}[H]
 	        		\centering
 	        		\begin{threeparttable}
-	        		\caption{Mod. no paramétrica}
-	        		\begin{tabular}{lr}
+	        		\caption{Distribución empírica}
+	        		\begin{tabular}{cr}
 	        			\toprule
 	        			\textbf{Nivel de confianza} & \textbf{VaR} \\
 	        			\midrule
-							$99,0\%$ & 157,0 \\
-							$99,5\%$ & 349,8 \\
-							$99,9\%$ & 1.284,4 \\
+							$VaR_{99,0\%}$ & 157,0 \\
+							$VaR_{99,5\%}$ & 349,8 \\
+							$VaR_{99,9\%}$ & 1.284,4 \\
 	        			\bottomrule
 	        		\end{tabular}
 				    \begin{tablenotes}[flushleft]
@@ -457,14 +457,14 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{table}[H]
 					\centering
 					\begin{threeparttable}
-					\caption{Modelización no paramétrica}
-					\begin{tabular}{lrrrr}
+					\caption{Distribución kernel}
+					\begin{tabular}{crrrr}
 						\toprule
-						\textbf{Nivel de confianza} & \textbf{86} & \textbf{2} & \textbf{50} & \textbf{100} \\
+						\textbf{Nivel de confianza / bandwidth} & \textbf{86} & \textbf{2} & \textbf{50} & \textbf{100} \\
 						\midrule
-						$99,0\%$ & 157.9 & 158.0 & 158.0 & 157.9 \\
-						$99,5\%$ & 350.4 & 350.6 & 350.5 & 350.4 \\
-						$99,9\%$ & 1.290,1 & 1.290,0 & 1.290,0 & 1.290,1 \\
+							$VaR_{99,0\%}$ & 157.9 & 158.0 & 158.0 & 157.9 \\
+							$VaR_{99,5\%}$ & 350.4 & 350.6 & 350.5 & 350.4 \\
+							$VaR_{99,9\%}$ & 1.290,1 & 1.290,0 & 1.290,0 & 1.290,1 \\
 						\bottomrule
 					\end{tabular}
 				       \begin{tablenotes}[flushleft]
@@ -490,7 +490,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{table}[H]
 					\centering
 					\begin{threeparttable}
-						\caption{Modelización paramétrica}
+						\caption{VaR y AIC para distribuciones paramétricas}
 						\begin{tabular}{lrrrr}
 							\toprule
 							\textbf{Distribución} & \textbf{$VaR_{99,0\%}$} & \textbf{$VaR_{99,5\%}$} & \textbf{$VaR_{99,\%}$} & \textbf{AI}C \\
@@ -592,7 +592,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				% Modelización seleccionada y objetivos a alcanzar: Costo del siniestro - Distribuciones multivariadas
 					\begin{table}[H]
 						\centering
-						\caption{Distribuciones multivariadas}
+						\caption{AIC para distribuciones multivariadas}
 						\begin{tabular}{lcc}
 							\toprule
 							\textbf{Distribución} & \textbf{AIC escala original (sim.)} & \textbf{AIC escala original (asim.)} \\
@@ -638,7 +638,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 					\begin{table}[H]
 						\centering
 						\begin{threeparttable}
-						\caption{Distribuciones multivariadas}
+						\caption{VaR y TVaR para distrib. multiv.}
 						\begin{tabular}{lcc}
 							\toprule
 							\textbf{Nivel de confianza} & \textbf{VaR} & \textbf{TVaR} \\
@@ -663,7 +663,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{table}[H]
 					\centering
 					\begin{threeparttable}
-						\caption{Cópulas}
+						\caption{AIC y VaR para cópulas}
 						\begin{tabular}{lcccc}
 							\toprule
 							\textbf{Marginales} & \textbf{AIC ajustado} & \textbf{$VaR_{99,0\%}$} & \textbf{$VaR_{99,5\%}$} & \textbf{$VaR_{99,9\%}$} \\
@@ -680,6 +680,24 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\end{table}
 
 				Tal como se muestra en el Cuadro 8, la cópula gaussiana con marginales log-logísticas ofrece el mejor ajuste a los datos, ya que presenta el menor valor de AIC. En este escenario, para un nivel de confianza del 99.9 \%, la pérdida máxima esperada asciende a 12.487 miles de euros.
+				
+			\paragraph{Resumen comparativo}
+				A continuación, se presenta un resumen de los resultados obtenidos para el $VaR_{99,5\%}$ derivado de las distintas modelizaciones de la variable \textit{InjuryAmount}: 
+				\begin{itemize}
+					\item Distribución empírica: 349,8. 
+					\item Distribución no paramétrica - kernel: 350,4.
+					\item Distribución paramétrica - VG (asim.): 132,0 (AIC: 91.919).
+					\item Valores extremos - POT-GPD: 285,8
+					\item Distribuciones compuestas - Weibull-Pareto: 309,0 (AIC: 92.720). 
+				\end{itemize}
+				Observamos que:
+				\begin{itemize}
+					\item Los enfoques empíricos y no paramétricos (349,8 y 350,4 miles de euros) producen valores muy similares y altos, reflejando la forma real de los datos.
+					\item El modelo paramétrico VG (asimétrico) da un valor mucho menor (132,0 miles de euros), lo que indica que su ajuste no captura adecuadamente la cola extrema.
+					\item El método de valores extremos (POT-GPD) reduce el VaR a 285,8, lo que sugiere que concentra la estimación en la cola, pero no tanto como el enfoque empírico y no paramétricos.
+					\item La distribución compuesta Weibull-Pareto (309,0) ofrece un compromiso entre los enfoques anteriores, con un AIC similar al VG.
+				\end{itemize}
+					
 
 \newpage
 % Sección 4: Informe ejecutivo
@@ -1249,7 +1267,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura18}{}
 					\centering
-					\caption{Mod. no paramétrica}
+					\caption{Distribución empírica}
 					% Primera fila
 					\begin{subfigure}[b]{1.0\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico50.png}
@@ -1261,7 +1279,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura19}{}
 					\centering
-					\caption{Modelización no paramétrica}
+					\caption{Distribución kernel}
 					% Primera fila
 					\begin{subfigure}[b]{1.0\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico51.png}
@@ -1273,7 +1291,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 					\begin{figure}[htbp]
 \hypertarget{Figura20}{}
 						\centering
-						\caption{Modelización no paramétrica}
+						\caption{Distribución kernel}
 						% Primera fila
 						\begin{subfigure}[b]{1.0\textwidth}
 							\includegraphics[width=\textwidth]{Gráfico52.png}
@@ -1286,7 +1304,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura21}{}
 					\centering
-					\caption{Teoría de valores extremos}
+					\caption{Hill Plot}
 					% Primera fila
 					\begin{subfigure}[b]{0.6\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico55.png}
@@ -1299,7 +1317,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura22}{}
 					\centering
-					\caption{Teoría de valores extremos}
+					\caption{Mean Excess Plot}
 					% Primera fila
 					\begin{subfigure}[b]{0.6\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico56.png}
@@ -1311,7 +1329,7 @@ Por último, se recomienda a las aseguradoras prestar especial atención a los s
 				\begin{figure}[htbp]
 \hypertarget{Figura23}{}
 					\centering
-					\caption{Teoría de valores extremos}
+					\caption{Coefficient of Variation}
 					% Primera fila
 					\begin{subfigure}[b]{0.6\textwidth}
 						\includegraphics[width=\textwidth]{Gráfico57.png}
