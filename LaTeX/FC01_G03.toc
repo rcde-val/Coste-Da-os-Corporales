@@ -24,6 +24,7 @@
 \contentsline {paragraph}{\numberline {3.2.2.2}Modelización paramétrica}{17}{paragraph.3.2.2.2}%
 \contentsline {paragraph}{\numberline {3.2.2.3}Teoría de valores extremos}{18}{paragraph.3.2.2.3}%
 \contentsline {paragraph}{\numberline {3.2.2.4}Distribuciones compuestas}{19}{paragraph.3.2.2.4}%
+<<<<<<< HEAD
 \contentsline {paragraph}{\numberline {3.2.2.5}Distribuciones multivariadas}{20}{paragraph.3.2.2.5}%
 \contentsline {paragraph}{\numberline {3.2.2.6}Cópulas}{21}{paragraph.3.2.2.6}%
 \contentsline {paragraph}{\numberline {3.2.2.7}Resumen comparativo}{21}{paragraph.3.2.2.7}%
@@ -47,3 +48,28 @@
 \contentsline {paragraph}{\numberline {5.2.2.4}Distribuciones compuestas}{42}{paragraph.5.2.2.4}%
 \contentsline {paragraph}{\numberline {5.2.2.5}Distribuciones multivariadas}{42}{paragraph.5.2.2.5}%
 \contentsline {section}{Referencias}{43}{figure.caption.51}%
+=======
+\contentsline {paragraph}{\numberline {3.2.2.5}Distribuciones multivariadas}{19}{paragraph.3.2.2.5}%
+\contentsline {paragraph}{\numberline {3.2.2.6}Cópulas}{20}{paragraph.3.2.2.6}%
+\contentsline {paragraph}{\numberline {3.2.2.7}Resumen comparativo}{21}{paragraph.3.2.2.7}%
+\contentsline {section}{\numberline {4}Informe ejecutivo}{22}{section.4}%
+\contentsline {section}{\numberline {5}Anexos}{23}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Análisis descriptivo univariado y bivariado de las bases de datos}{23}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Análisis descriptivo univariado}{23}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Análisis descriptivo bivariado}{27}{subsubsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.2}Modelización seleccionada y objetivos a alcanzar}{34}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Número de siniestros}{34}{subsubsection.5.2.1}%
+\contentsline {paragraph}{\numberline {5.2.1.1}Clúster jerárquico divisivo}{34}{paragraph.5.2.1.1}%
+\contentsline {paragraph}{\numberline {5.2.1.2}Clúster no jerárquico - k means}{34}{paragraph.5.2.1.2}%
+\contentsline {paragraph}{\numberline {5.2.1.3}Análisis PCA}{36}{paragraph.5.2.1.3}%
+\contentsline {paragraph}{\numberline {5.2.1.4}Modelo Poisson}{36}{paragraph.5.2.1.4}%
+\contentsline {paragraph}{\numberline {5.2.1.5}Modelos lineales generalizados (GLM)}{36}{paragraph.5.2.1.5}%
+\contentsline {subparagraph}{\numberline {5.2.1.5.1}Elección binaria - logit}{36}{subparagraph.5.2.1.5.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Costo del siniestro}{37}{subsubsection.5.2.2}%
+\contentsline {paragraph}{\numberline {5.2.2.1}Modelización no paramétrica}{37}{paragraph.5.2.2.1}%
+\contentsline {paragraph}{\numberline {5.2.2.2}Modelización paramétrica}{41}{paragraph.5.2.2.2}%
+\contentsline {paragraph}{\numberline {5.2.2.3}Teoría de valores extremos}{41}{paragraph.5.2.2.3}%
+\contentsline {paragraph}{\numberline {5.2.2.4}Distribuciones compuestas}{41}{paragraph.5.2.2.4}%
+\contentsline {paragraph}{\numberline {5.2.2.5}Distribuciones multivariadas}{41}{paragraph.5.2.2.5}%
+\contentsline {section}{Referencias}{42}{figure.caption.48}%
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92

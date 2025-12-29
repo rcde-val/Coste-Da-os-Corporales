@@ -1550,7 +1550,10 @@ for(i in 1:3) {
   alpha<-al[i]
   var_inj[i]<-uniroot(FUN_y,c(0,10000000))$root
 }
+<<<<<<< HEAD
 round(var_inj/1000,1)
+=======
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 
 al<-c(0.99,0.995,0.999)
 ydata<-property_cost
@@ -1561,9 +1564,12 @@ for(i in 1:3) {
   alpha<-al[i]
   var_prop[i]<-uniroot(FUN_y,c(0,10000000))$root
 }
+<<<<<<< HEAD
 round(var_prop/1000,1)
 round((var_inj+var_prop)/1000,1)
 
+=======
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 al<-c(0.99,0.995,0.999)
 ydata<-total_cost
 nr<-length(total_cost)
@@ -1577,12 +1583,19 @@ var_inj
 var_prop
 var_inj+var_prop#var(x1)+var(x2)
 var_tot#var(x1+x2)
+<<<<<<< HEAD
 round(var_tot/1000,1)
+=======
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 #-------------------------------------------------------------------------------
 # 3.2.2.2 Modelización paramétrica
 #-------------------------------------------------------------------------------
 ### LIMPIEZA DE DATOS ###
+<<<<<<< HEAD
 InjuryAmount <- datos$InjuryAmount
+=======
+InjuryAmount <- FC01_G03_BBDD_v02$InjuryAmount
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 InjuryAmount <- InjuryAmount[InjuryAmount > 0]
 summary(InjuryAmount)
 
@@ -1606,7 +1619,11 @@ qqline(log(dat))
 descdist(dat, boot = 100)
 
 ### NIVELES DE CONFIANZA PARA VaR ###
+<<<<<<< HEAD
 alfa <- c(0.99, 0.995, 0.999)
+=======
+alfa <- c(0.95, 0.99, 0.995)
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 
 ################################################
 ###   DISTRIBUCIONES CLÁSICAS EN ESCALA dat  ###
@@ -1745,7 +1762,11 @@ VaR_resumen_miles <- data.frame(
   VG        = res_VG$VaR / 1000
 )
 
+<<<<<<< HEAD
 round(print(VaR_resumen_miles),0)
+=======
+print(VaR_resumen_miles)
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 ################################################
 ###   AIC comparativo: Clásicos vs Asimétricos
 ################################################
@@ -2259,6 +2280,7 @@ aic_ghyp1<-AIC(mod.ghyp1)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
 aic_ghyp2<-AIC(mod.ghyp2)+2*sum(log_costes[,1])+2*sum(log_costes[,2])
 
 pairs(mod.ghyp2, cex=0.5, nbins=20)
+<<<<<<< HEAD
 
 
 ###Simulación de las observaciones procedentes de las distribuciones estimadas
@@ -2336,10 +2358,85 @@ round(var_nig2/1000,0)
 round(var_vg1/1000,0)
 round(var_vg2/1000,0)
 round(var_gauss/1000,0)
+=======
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 
 
+###Simulación de las observaciones procedentes de las distribuciones estimadas
+#Cálculo del VaR
+alfa<-c(0.99, 0.995,0.999)
+set.seed(123) # Fijo una semilla
+r<-1000000 # N?mero total de valores a simular   
 
+# Optimal multivariate model
+Sim_lc_ghyp2<-rghyp(r, object = mod.ghyp2)
+Sim_lc_ghyp2<-exp(Sim_lc_ghyp2)
+MC.Lsim <-rowSums(Sim_lc_ghyp2)
+var_ghyp2<-quantile(MC.Lsim, alfa);var_ghyp2
 
+#los otros modelos
+Sim_lc_gauss<-rghyp(r, object = mod.gauss)
+Sim_lc_gauss<-exp(Sim_lc_gauss)
+MC.Lsim <-rowSums(Sim_lc_gauss)
+var_gauss<-quantile(MC.Lsim, alfa);var_gauss
+
+Sim_lc_ghyp1<-rghyp(r, object = mod.ghyp1)
+Sim_lc_ghyp1<-exp(Sim_lc_ghyp1)
+MC.Lsim <-rowSums(Sim_lc_ghyp1)
+var_ghyp1<-quantile(MC.Lsim, alfa);var_ghyp1
+
+Sim_lc_t1<-rghyp(r, object = mod.t1)
+Sim_lc_t1<-exp(Sim_lc_t1)
+MC.Lsim <-rowSums(Sim_lc_t1)
+var_t1<-quantile(MC.Lsim, alfa);var_t1
+
+Sim_lc_t2<-rghyp(r, object = mod.t2)
+Sim_lc_t2<-exp(Sim_lc_t2)
+MC.Lsim <-rowSums(Sim_lc_t2)
+var_t2<-quantile(MC.Lsim, alfa);var_t2
+
+Sim_lc_hyp1<-rghyp(r, object = mod.hyp1)
+Sim_lc_hyp1<-exp(Sim_lc_hyp1)
+MC.Lsim <-rowSums(Sim_lc_hyp1)
+var_hyp1<-quantile(MC.Lsim, alfa);var_hyp1
+
+Sim_lc_hyp2<-rghyp(r, object = mod.hyp2)
+Sim_lc_hyp2<-exp(Sim_lc_hyp2)
+MC.Lsim <-rowSums(Sim_lc_hyp2)
+var_hyp2<-quantile(MC.Lsim, alfa);var_hyp2
+
+Sim_lc_nig1<-rghyp(r, object = mod.nig1)
+Sim_lc_nig1<-exp(Sim_lc_nig1)
+MC.Lsim <-rowSums(Sim_lc_nig1)
+var_nig1<-quantile(MC.Lsim, alfa);var_nig1
+
+Sim_lc_nig2<-rghyp(r, object = mod.nig2)
+Sim_lc_nig2<-exp(Sim_lc_nig2)
+MC.Lsim <-rowSums(Sim_lc_nig2)
+var_nig2<-quantile(MC.Lsim, alfa);var_nig2
+
+Sim_lc_vg1<-rghyp(r, object = mod.vg1)
+Sim_lc_vg1<-exp(Sim_lc_vg1)
+MC.Lsim <-rowSums(Sim_lc_vg1)
+var_vg1<-quantile(MC.Lsim, alfa);var_vg1
+
+Sim_lc_vg2<-rghyp(r, object = mod.vg2)
+Sim_lc_vg2<-exp(Sim_lc_vg2)
+MC.Lsim <-rowSums(Sim_lc_vg2)
+var_vg2<-quantile(MC.Lsim, alfa);var_vg2
+
+#Resumen VaR
+var_ghyp2
+var_gauss
+var_ghyp1
+var_t1
+var_t2
+var_hyp1
+var_hyp2
+var_nig1
+var_nig2
+var_vg1
+var_vg2
 
 #-------------------------------------------------------------------------------
 # 3.2.2.6 Cópulas
@@ -2385,7 +2482,11 @@ rep=1000000
 
 norm.cop1 <- normalCopula(attributes(norm.cop)$estimate, dim =2) 
 norm.cop1
+<<<<<<< HEAD
 #set.seed(123)
+=======
+set.seed(123)
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 sim.data.normalcopula <- rCopula(rep,norm.cop1)
 sim.norm<-as.matrix(sim.data.normalcopula)
 plot(sim.norm[1:5000,1],sim.norm[1:5000,2])
@@ -2427,14 +2528,22 @@ VaRCopulaLl
 # ===============================
 # NIVELES DE VaR
 # ===============================
+<<<<<<< HEAD
 alfa <- c(0.99, 0.995, 0.999)
+=======
+alfa <- c(0.95, 0.99, 0.995)
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 
 # =========================================================
 # 1:PropertyAmount
 # =========================================================
 
 # 1) Preparar datos
+<<<<<<< HEAD
 dat_prop <- datos$PropertyAmount
+=======
+dat_prop <- CASO_5_dan_os_corporales_autos$PropertyAmount
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 dat_prop <- dat_prop[dat_prop > 0] / 1000
 logdat_prop <- log(dat_prop)
 
@@ -2470,12 +2579,19 @@ print(VaR_prop)
 # =========================================================
 
 # 1) Crear variable suma y preparar datos
+<<<<<<< HEAD
 dat_total <- datos %>%
   mutate(TotalAmount = PropertyAmount + InjuryAmount) %>%
   pull(TotalAmount)
 
 dat_total <- datos$ClaimAmount
 
+=======
+dat_total <- CASO_5_dan_os_corporales_autos %>%
+  mutate(TotalAmount = PropertyAmount + InjuryAmount) %>%
+  pull(TotalAmount)
+
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 dat_total <- dat_total[dat_total > 0] / 1000
 logdat_total <- log(dat_total)
 
@@ -2502,6 +2618,7 @@ VaR_total <- data.frame(
   VG   = exp(qghyp(alfa, object = mVG_total)),
   GH   = exp(qghyp(alfa, object = mGH_total)),
   Hyp  = exp(qghyp(alfa, object = mHyp_total))
+<<<<<<< HEAD
 )
 VaR_resumen_miles
 print(VaR_total)
@@ -2547,4 +2664,51 @@ Tabla_Comparativa <- data.frame(
   )
 )
 
+=======
+)
+
+print(VaR_total)
+
+# =========================================================
+# TABLA COMPARATIVA FINAL (VaR 95%, 99% y 99.5%)
+# =========================================================
+
+# Mejor modelo según AIC
+best_prop  <- AIC_prop$Modelo[which.min(AIC_prop$AIC_original)]
+best_total <- AIC_total$Modelo[which.min(AIC_total$AIC_original)]
+
+# AIC mínimo
+bestAIC_prop  <- min(AIC_prop$AIC_original)
+bestAIC_total <- min(AIC_total$AIC_original)
+
+# Extraer VaR del mejor modelo (PropertyAmount)
+VaR_prop_best <- VaR_prop %>%
+  select(alfa, all_of(sub("_asim","", best_prop))) %>%
+  filter(alfa %in% c(0.95, 0.99, 0.995))
+
+# Extraer VaR del mejor modelo (Property + Injury)
+VaR_total_best <- VaR_total %>%
+  select(alfa, all_of(sub("_asim","", best_total))) %>%
+  filter(alfa %in% c(0.95, 0.99, 0.995))
+
+# Tabla comparativa final
+Tabla_Comparativa <- data.frame(
+  Variable = c("PropertyAmount", "PropertyAmount + InjuryAmount"),
+  Mejor_Modelo = c(best_prop, best_total),
+  AIC = c(bestAIC_prop, bestAIC_total),
+  VaR_95 = c(
+    VaR_prop_best[VaR_prop_best$alfa == 0.95, 2],
+    VaR_total_best[VaR_total_best$alfa == 0.95, 2]
+  ),
+  VaR_99 = c(
+    VaR_prop_best[VaR_prop_best$alfa == 0.99, 2],
+    VaR_total_best[VaR_total_best$alfa == 0.99, 2]
+  ),
+  VaR_995 = c(
+    VaR_prop_best[VaR_prop_best$alfa == 0.995, 2],
+    VaR_total_best[VaR_total_best$alfa == 0.995, 2]
+  )
+)
+
+>>>>>>> 05772434410dc775388e8531891016d4c2776b92
 print(Tabla_Comparativa)
