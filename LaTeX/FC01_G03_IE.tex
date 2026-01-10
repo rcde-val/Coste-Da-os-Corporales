@@ -1,0 +1,312 @@
+\documentclass[11pt]{article}
+% Idioma y codificación
+\usepackage[spanish]{babel}    % Idioma español
+\usepackage[utf8]{inputenc}    % Codificación UTF-8
+
+% Maquetación y espaciado
+\usepackage[a4paper,margin=2.5cm]{geometry} % Márgenes
+\usepackage{setspace}
+\singlespacing                  % Espaciado sencillo
+
+% Fuente sans-serif (Helvética similar a Arial)
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Gráficos e imágenes
+\usepackage{graphicx}
+\usepackage{subcaption}
+\graphicspath{{FC01_G03_IE_Imagenes/}}
+
+% Tablas
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{threeparttable}
+
+% Hipervínculos
+\usepackage{xcolor} % para definir colores
+\usepackage[
+colorlinks=true,    % colores en lugar de recuadros
+linkcolor=blue,     % color de enlaces internos: \ref, \pageref, etc.
+citecolor=green,    % color de citas: \cite{...}
+urlcolor=magenta    % color de URLs: \url{...}
+]{hyperref}
+\usepackage{bookmark} % opcional, para mejorar marcadores
+
+% Profundidades para numeración y TOC
+\setcounter{secnumdepth}{5} % numera hasta subparagraph
+\setcounter{tocdepth}{5}    % muestra hasta subparagraph en el índice
+
+% Encabezados en el documento: en negrita y en bloque
+\usepackage{titlesec}
+\titleformat{\paragraph}[block]
+{\normalfont\normalsize\bfseries} % negrita en documento
+{\theparagraph}{1em}{}
+\titleformat{\subparagraph}[block]
+{\normalfont\normalsize\bfseries} % negrita en documento
+{\thesubparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{1ex plus .5ex}{.5ex}
+\titlespacing*{\subparagraph}{0pt}{1ex plus .5ex}{.5ex}
+
+% Quitar negrita en el índice
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\numberline}{\bfseries}{}{}{}
+\makeatother
+
+% Formulación matemática
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\title{\textbf{Informe ejecutivo: Costes esperados por daños corporales en seguro de automóviles e influencia en reservas\\[2em]}}
+\author{\underline{Grupo 3} \\ Víctor Alonso Lara \\ David López Avakian \\ Sergio Obando Henao \\ Víctor Manuel Pérez \\ Miquel Trullols Salat \\[6em]}
+\date{10 de Enero de 2026}
+
+\begin{document}
+	
+	% Portada
+	\begin{titlepage}
+		\maketitle
+		\thispagestyle{empty}
+	\end{titlepage}
+	\newpage
+	
+	% Índice
+	\begingroup
+	\hypersetup{linkcolor=black} % Fuerza negro SOLO dentro de este grupo
+	\tableofcontents
+	\endgroup
+	\newpage
+	
+	% Sección 1: Objetivo
+	% Fecha de entrega 1: 31/10/25 (Máximo 4 páginas en total)
+	\section{Objetivo}
+	
+	Este estudio tiene como objetivo aplicar los conocimientos en modelos estadísticos y cuantificación de riesgos al análisis de un caso práctico en el ámbito del seguro de automóviles. En particular, se centra en el estudio de los costes esperados por daños corporales y su influencia en el cálculo de reservas técnicas.\\
+	 
+	Antes de abordar el análisis, se presentarán dos conceptos fundamentales que permiten contextualizar el problema y establecer las bases teóricas del estudio:
+	
+	\begin{itemize}
+		\item En España, el seguro obligatorio de automóviles está regulado por el Real Decreto Legislativo 8/2004. La ley establece que todo propietario de un vehículo a motor con estacionamiento habitual en España debe contratar y mantener un seguro que cubra la responsabilidad civil por los daños causados a personas o bienes durante la circulación del vehículo \cite{noauthor_boe--2004-18911_nodate}.
+		\item Los daños corporales son las lesiones físicas o psíquicas sufridas por una persona en un accidente de circulación, incluyendo lesiones temporales, secuelas permanentes y fallecimiento. Su valoración e indemnización se regulan en la Ley 35/2015 mediante el Baremo oficial \cite{jefatura_del_estado_ley_2015}.
+	\end{itemize} 
+	
+	% Sección 2: Estado de la cuestión: Revisión de la literatura existente
+	\section{Estado de la cuestión: Revisión de la literatura existente}
+
+		\subsection{Número de siniestros}
+			La frecuencia de siniestros es un elemento fundamental en la estimación de los costes por daños corporales en el seguro del automóvil, ya que una predicción más precisa del número de reclamaciones permite ajustar con mayor exactitud las reservas técnicas. \\
+			
+			Los siniestros con daños corporales constituyen un subconjunto específico dentro del conjunto total de siniestros en el seguro de automóviles. \\
+			
+			En este contexto, Álvarez Jareño y Muñiz Rodríguez analizan la idoneidad de las distribuciones clásicas para modelizar el número de siniestros en carteras de seguros de responsabilidad civil de automóviles. A partir del estudio de 15 carteras, los autores identifican diversas anomalías muestrales recurrentes que cuestionan la validez de la distribución de Poisson como modelo base. Entre estas anomalías destacan el contagio, la sobredispersión (varianza superior a la media), el inflado de ceros (frecuencia excesiva de asegurados sin siniestros), el desinflado de unos (subestimación de asegurados con un único siniestro) y la presencia de colas más pesadas (subestimación de conductores con múltiples siniestros). Estas irregularidades evidencian que el supuesto de independencia entre eventos y la igualdad entre media y varianza del modelo de Poisson no se cumplen en la práctica \cite{alvarez_jareno_reparametrizacion_2010}.\\
+			
+			Para abordar estas limitaciones, los autores proponen la reparametrización de distribuciones alternativas que ofrecen un mejor ajuste a los datos observados: la distribución binomial negativa, la distribución Pólya-Aeppli, la distribución Poisson Inversa Gaussiana y la distribución Poisson Pascal Generalizada.\\
+			 
+			Otros autores como Pechon, Trufin y Denuit analizan la frecuencia de siniestros en el seguro obligatorio de responsabilidad civil automotriz tomando al hogar como unidad de riesgo. A diferencia de los modelos que tratan cada póliza de manera independiente, los autores incorporan efectos aleatorios correlacionados a través de mezclas Poisson–LogNormal y Poisson–Gamma, con el propósito de capturar la dependencia entre los miembros de un mismo hogar y la heterogeneidad no observada. Los resultados muestran una correlación significativa entre las siniestralidades de los cónyuges, cercana al 40 \%, lo que confirma la existencia de una propensión común al riesgo \cite{pechon_multivariate_2018}.\\
+			
+			Otro enfoque a tener en cuenta es el de \cite{tzougas_bivariate_2023}. En su artículo, desarrollan una clase de modelos de regresión Poisson bivariados mixtos con dispersión variable, orientados a modelizar de forma conjunta la frecuencia de reclamaciones por daños corporales y la frecuencia de reclamaciones por daños materiales en el seguro de responsabilidad civil de automóviles. 
+
+		\subsection{Cuantía del siniestro}
+			Los siniestros con daños corporales en el seguro de automóviles se caracterizan por una alta variabilidad en sus costes. En España, durante 2005, la mayoría de estos siniestros costaron menos de 1.500 euros, pero un 0,5 \% superaron los 300.000 euros, y algunos casos graves, pueden superar el millón de euros \cite{SantolinoMiguel2007Urmd}.\\
+			
+			Marter y Weisberg (1991) clasifican los siniestros de tráfico en cuatro categorías según el tipo de lesión sufrida por la víctima —esguince, fractura, contusión y herido grave— y, para cada una, comparan elementos como el coste médico total, el coste sin hospitalización, el proveedor de asistencia, la frecuencia de visitas y el período de curación \cite{santolino_prieto_metodos_2011}.\\
+			 
+			A partir del análisis descriptivo, la literatura propone modelos para estimar el coste de los siniestros. Weisberg y Derrig \cite{santolino_prieto_metodos_2011} plantean el uso del modelo Tobit, donde la indemnización no puede ser inferior a cero ni superar los límites legales o de póliza. La variable dependiente es la indemnización (continua y censurada), mientras que las explicativas incluyen factores dicotómicos —contratación de abogado, lesión grave— y cuantitativos —porcentaje de culpa, coste médico total—. Los resultados muestran que la contratación de un abogado, la clasificación de la lesión como grave y la presencia de fracturas incrementan la indemnización.\\
+			
+			En el contexto de siniestros, el modelo logit ordenado permite clasificar la severidad de los eventos en distintos niveles como leve, moderado y grave, y evaluar cómo diferentes factores influyen en la probabilidad de que un siniestro pertenezca a una categoría de mayor severidad. Para abordar limitaciones del modelo logit ordenado clásico, se pueden considerar varias extensiones: ordenado mixto, ordenado heterocedástico y multinomiales \cite{santolino_prieto_metodos_2011}.\\
+			
+			Santolino propone un modelo econométrico log-lineal para explicar el logaritmo de la indemnización total, incorporando variables como edad, tipo de lesión, tipo de vehículo y sexo del lesionado \cite{santolino_prieto_metodos_2011}.\\
+			
+			La predicción del coste de indemnización es un aspecto crítico para las compañías aseguradoras, ya que determina la capacidad de la entidad para cumplir con sus obligaciones futuras. Este desafío se intensifica en los siniestros corporales cuya indemnización se reclama por vía judicial, dado que la resolución suele demorarse durante meses o incluso años, lo que obliga a realizar provisiones adecuadas para cubrir el coste esperado \cite{santolino_prieto_metodos_2011}.\\
+			
+			Por último, se recomienda a las aseguradoras prestar especial atención a los siniestros que superan el percentil 90–95 \%, ya que representan casos atípicos con costes significativamente elevados. Un análisis detallado en esta franja no solo contribuye a reducir el riesgo de sobreindemnización, sino que también permite optimizar la asignación de reservas \cite{weisberg_quantitative_nodate}.
+
+	\newpage
+	% Sección 3: Análisis metodológico escogido
+	\section{Análisis metodológico escogido y resultados}
+
+    El objetivo inicial es comprender la estructura del conjunto de datos y familiarizarnos con las variables disponibles, ya que esto constituye la base para cualquier análisis exploratorio. En el Cuadro 1 se presenta una descripción resumida de las variables correspondientes a una cartera de una aseguradora en Francia, que incluyen características del vehículo, del conductor, de la póliza y los montos asociados a los reclamos, entre otros.
+
+	\begin{table}[H]
+		\centering
+		\caption{Diccionario de Variables}
+		\begin{tabularx}{\textwidth}{llX}
+			\toprule
+			\textbf{Variable} & \textbf{Tipo\textsuperscript{(1)}} & \textbf{Descripción} \\
+			\midrule
+			IDpol & 2 & Número de póliza. \\
+			ClaimNb & 2 & Número de siniestros. \\
+			Exposure & 2 & Tiempo de vigencia y exposición al riesgo, en años. \\
+			Power & 1 &Potencia del coche (en orden ascendente, de d a o). \\
+			CarAge & 2 & Antigüedad del vehículo, en años. \\
+			DriverAge & 2 & Edad del conductor, en años. \\
+			Brand & 1 & Marca del vehículo. \\
+			Gas & 1 & Tipo de combustible: Diesel o Regular. \\
+			Density & 2 & Número de habitantes por km² en la ciudad del conductor. \\
+			Region & 1 & Región de la póliza en Francia. \\
+			ClaimAmount & 2 & Costo total del reclamo. \\
+			InjuryAmount & 2 & Costo de compensación por lesiones corporales. \\
+			PropertyAmount & 2 & Costo por daños materiales. \\
+			\bottomrule
+		\end{tabularx}
+		\vspace{0.5em}
+		\raggedright
+		\footnotesize{\textsuperscript{(1)} 1 = variable categórica, 2 = variable numérica.}
+	\end{table}
+	
+		\subsection{Análisis descriptivo univariado y bivariado de la base de datos}
+	
+			\subsubsection{Análisis descriptivo univariado}
+			
+				El análisis realizado sobre la cartera de seguros muestra que la frecuencia de siniestros es muy baja: el 96 \% de las pólizas no registraron ningún reclamo, lo que se traduce en una media prácticamente nula. Esto indica que la mayoría de los asegurados no generan coste, aunque existe un pequeño grupo con múltiples siniestros que concentra el riesgo y puede tener un impacto significativo en la compañía.\\
+				
+				En cuanto a la duración de las pólizas, se observa una gran homogeneidad, con una vigencia promedio cercana a medio año y poca variabilidad entre contratos. Esto sugiere que la exposición al riesgo es bastante uniforme en términos temporales. \\
+				
+				Respecto a las características del vehículo y del conductor, el perfil predominante corresponde a conductores adultos, con una edad media de 45 años, y vehículos relativamente nuevos, con una antigüedad promedio de 7,5 años. Aunque existen casos extremos, como vehículos muy antiguos, estos son excepcionales y no alteran la tendencia general.\\
+				
+				El análisis del entorno geográfico revela una fuerte disparidad en la densidad poblacional: la mayoría de los asegurados reside en zonas poco pobladas, pero también hay pólizas en grandes ciudades, lo que incrementa la exposición al riesgo en entornos urbanos.\\
+				
+				En relación con los costes de los siniestros, se confirma una alta concentración en valores nulos, ya que más de la mitad de las pólizas no presentan reclamaciones. Sin embargo, cuando ocurren, la mayoría de los reclamos son de bajo importe, aunque existen casos excepcionales que superan varios millones de euros. El coste promedio del total del reclamo es de 832,57 euros y el 96.9|\% de las pólizas que reportaron algín  siniestro no superan los 50 mil euros. \\
+				
+				Estos siniestros graves, aunque poco frecuentes, representan un riesgo económico considerable y justifican la necesidad de contar con reservas suficientes para cubrir eventos extremos.\\
+				
+				Por último, el análisis de las variables categóricas muestra que la cartera está concentrada en vehículos de potencia media y en marcas como Renault, Nissan o Citroën, que representan más de la mitad del total. El tipo de combustible se distribuye de manera equilibrada entre diésel y gasolina, mientras que la región Centre concentra una proporción significativa de pólizas. Esta concentración en determinados segmentos puede influir en la exposición agregada al riesgo. \\
+				
+				En síntesis, el análisis confirma que el riesgo está altamente concentrado en pocos casos de gran severidad, mientras que la mayoría de los asegurados no generan coste. Este patrón refuerza la importancia de una adecuada gestión del riesgo extremo y de provisiones suficientes para garantizar la estabilidad financiera.
+			
+			\subsubsection{Análisis descriptivo bivariado}
+			
+				El coste total del siniestro está dominado por las lesiones corporales. Prácticamente, cuando hay lesiones, el importe global del reclamo se dispara y explica casi todo el coste. Los daños materiales también contribuyen, pero con un peso claramente menor. Esto significa que nuestra exposición económica se juega en el ámbito corporal, no en el material: es ahí donde se concentran los eventos que comprometen reservas y resultados.\\
+				
+				La relación entre número de siniestros y coste no es lineal ni estable. Aunque más siniestros tienden a asociarse con más daños materiales, no vemos un patrón consistente que los conecte con mayores lesiones corporales. En otras palabras, la severidad manda: un único siniestro con daños corporales relevantes puede tener más impacto que varios siniestros materiales de bajo importe.\\
+				
+				Las variables del perfil (edad del conductor, antigüedad del vehículo, potencia, marca, tipo de combustible) no muestran una relación clara y útil con el coste de las lesiones. Hay outliers en diversas categorías, pero no justifican estrategias de selección de riesgo o tarificación basadas en estas características. Esto es importante: no hay palancas obvias en el perfil del cliente o del coche que reduzcan el coste por lesiones. \\
+				
+				El entorno (regiones y densidad poblacional) sí muestra matices: en zonas de alta exposición (e.g., grandes áreas urbanas) se observa algo más de frecuencia, pero sin evidencia de que ello se traduzca en lesiones corporales más costosas de forma sistemática. El mensaje para Gerencia es que frecuencia y severidad se comportan de forma distinta y deben gestionarse con herramientas diferentes.\\
+				
+				Por último, los casos extremos aparecen dispersos entre categorías y regiones. No están concentrados en un segmento específico, por lo que la gestión del riesgo extremo debe ser transversal, con foco en procedimientos de reclamación y control de costes médicos/legales, más que en la segmentación del cliente o del vehículo.
+
+    	\subsection{Modelización seleccionada y objetivos a alcanzar}
+			
+			\subsubsection{Número de siniestros}
+			    A continuación, desarrollaremos los distintos modelos estudiados a lo largo de la asignatura \textit{Modelización estadística}. Aunque la base de datos incluye información sobre el coste de los siniestros, estas variables no se han incorporado en los modelos de frecuencia porque el coste depende directamente de la ocurrencia del siniestro. Incluirlas generaría un sesgo y una falsa sensación de precisión, además de romper la separación habitual entre frecuencia y severidad que se utiliza en la tarificación actuarial.
+			
+				\paragraph{Clúster jerárquico divisivo}
+				
+					El análisis se aplicó sobre la variable número de siniestros (ClaimNb), caracterizada por una alta concentración de pólizas sin reclamos y algunos casos con múltiples siniestros. El objetivo fue segmentar la cartera para identificar perfiles con distinta probabilidad de siniestro mediante un árbol jerárquico que organiza las divisiones en función de las variables más influyentes.\\
+					
+					La primera partición se realizó sobre la exposición (duración efectiva del contrato), utilizando como umbral el valor de 0,29 años. Este corte divide la cartera en dos grandes grupos: pólizas con baja exposición (igual o inferior a 0,29 años) y pólizas con alta exposición (superior a 0,29 años). A partir de esta división principal, el modelo profundiza en cada rama con criterios adicionales.\\
+					
+					En el grupo de baja exposición, el siguiente factor relevante es la antigüedad del vehículo, que separa autos nuevos de los más antiguos, y posteriormente la marca del vehículo, distinguiendo entre marcas occidentales y asiáticas.\\
+					
+					En el grupo de alta exposición, la primera variable discriminante es la marca, seguida por la región geográfica, que permite diferenciar zonas con comportamientos distintos, y finalmente un nuevo corte en exposición en torno a 0,65 años para refinar el análisis.\\
+					
+					Esta estructura jerárquica confirma que la duración del contrato es el factor más determinante, mientras que la marca y la región aportan información adicional en contratos de mayor vigencia, y la antigüedad del vehículo resulta útil en contratos cortos.
+				
+				\paragraph{Clúster no jerárquico - k means}
+				
+					Se aplicó k‑means de forma independiente sobre cada variable clave—exposición del contrato (Exposure), antigüedad del vehículo (CarAge), edad del conductor (DriverAge), densidad poblacional (Density) y potencia del vehículo (Power)—tras estandarizar los datos. El número óptimo de clústeres se determinó mediante el método del codo, que indicó que cuatro grupos por variable ofrecían el mejor equilibrio entre simplicidad e información.\\
+					
+					En exposición, los grupos más relevantes son el de larga duración, con una media cercana a 1 año y casos hasta 2 años, y el de muy corta, con una media de 0,1 años y un máximo de 0,3. Ambos concentran la mayor parte de la cartera. En antigüedad del vehículo, predominan los clústeres de vehículos nuevos (0–6 años, media 2,7) y intermedios (7–13 años, media 9,9), que juntos representan la mayoría del parque. En edad del conductor, los segmentos más frecuentes son adultos (35–47 años, media 40,9) y conductores mayores (48–62 años, media 53,9). En densidad poblacional, el clúster de baja densidad (media ~399 hab/km², máximo ~2.317) concentra la mayor parte de las pólizas, mientras que los entornos metropolitanos (hasta 27.000 hab/km²) son minoritarios. Por último, en potencia, los niveles bajos y medio‑bajos (categorías 1–5) agrupan la gran mayoría de los vehículos, mientras que los niveles altos son residuales. \\
+					
+					Esta segmentación independiente por variable permite describir la cartera en términos claros: contratos mayoritariamente de corta o larga duración, vehículos nuevos o intermedios, conductores adultos, entornos poco densos y potencias bajas o medias.
+				
+				\paragraph{Análisis PCA}
+				
+					El PCA se aplicó para sintetizar la información de cinco variables cuantitativas —exposición (Exposure), antigüedad del vehículo (CarAge), edad del conductor (DriverAge), densidad poblacional (Density) y potencia (Power)— y comprobar si existía redundancia entre ellas. \\
+					
+					El resultado es claro: no hay una única dimensión que explique el conjunto. Con dos componentes se recoge aproximadamente el 48 \% de la variabilidad y, aun ampliando a tres componentes, se llega solo a 68 \%. En términos prácticos, cada variable aporta información distinta y conviene mantenerlas todas en el análisis. Entre ellas, exposición y densidad son las que más estructura aportan cuando se observan de forma conjunta; la edad del conductor añade información adicional, y la potencia tiene un peso menor en la explicación global. \\
+					
+					En resumen,  el PCA confirma que no procede simplificar eliminando factores y que el seguimiento debe concentrarse especialmente en exposición y densidad, sin perder de vista el resto.
+				
+				\paragraph{Modelo Poisson}
+				
+					El modelo Poisson se empleó para explicar la frecuencia de siniestros (ClaimNb) como variable de conteo con alta presencia de ceros, ajustando por la exposición mediante un offset en log(Exposure) para trabajar en términos de tasa.\\
+					
+					La construcción siguió un proceso incremental: partimos de un modelo básico con la exposición y fuimos añadiendo variables una a una, evaluando en cada paso con ANOVA si la nueva inclusión mejoraba significativamente el modelo anterior. Con este criterio, el mejor modelo fue el que incluye todas las variables explicativas disponibles, sin incorporar variables de coste (para mantener la separación actuarial entre frecuencia y severidad).\\
+					
+					Para mejorar la interpretabilidad, trabajamos con clústeres en la construcción del modelo: regiones, marcas y potencia en tramos derivados de la segmentación previa. \\
+					
+					Los principales resultados son:
+					
+					\begin{itemize}
+						\item Exposición es el factor más determinante: a mayor tiempo asegurado, mayor tasa esperada de siniestros.
+						\item Edad del conductor y antigüedad del vehículo muestran efectos de reducción: conforme aumentan, la frecuencia esperada disminuye ligeramente.
+						\item Densidad poblacional aporta una señal positiva (más densidad, mayor frecuencia).
+					\end{itemize}
+					
+					Desde el punto de vista técnico, el modelo ajusta bien y se descarta sobredispersión; lo que hace innecesarias extensiones como cuasi‑Poisson o binomial negativa.
+				
+				\paragraph{Modelos lineales generalizados (GLM)}
+				
+					\subparagraph{Elección binaria - logit}
+					
+						El modelo Logit se aplicó para analizar la probabilidad de que una póliza registre al menos un siniestro frente a no tener ninguno, transformando la variable objetivo en binaria (0 = sin siniestros, 1 = con siniestros). Este enfoque permite estimar cómo influyen las características del contrato, del vehículo y del asegurado en la ocurrencia del evento, considerando relaciones no lineales entre variables.\\
+						
+						La construcción del modelo siguió el mismo criterio incremental que en Poisson: partimos de un modelo básico y fuimos incorporando variables una a una, evaluando con el AIC si la inclusión mejoraba el ajuste. También en este caso se trabajó con clústeres para variables categóricas (marca, región y potencia). El modelo final incluyó todas las variables explicativas relevantes, sin incorporar costes, para mantener la separación entre frecuencia y severidad.\\
+						
+						Los resultados confirman que la exposición es el factor más influyente: por cada unidad adicional, la razón de probabilidades (odds) se multiplica por 3,46, lo que indica un incremento muy significativo en la probabilidad de siniestro. La edad del conductor y la antigüedad del vehículo reducen ligeramente la probabilidad a medida que aumentan, mientras que la densidad poblacional aporta un efecto positivo, aunque pequeño. Entre las variables categóricas, se observan diferencias entre clústeres de marca y potencia, y los vehículos con gasolina regular presentan odds menores que los diésel.\\
+						
+						A pesar de estos hallazgos, el modelo Logit mostró limitaciones importantes: la variable objetivo está fuertemente desbalanceada (96 \% de las pólizas sin siniestros), lo que provocó que el modelo tendiera a predecir siempre la clase mayoritaria. Incluso tras ajustar el umbral con análisis ROC, la matriz de confusión evidenció que no se lograba una clasificación efectiva. El modelo no resulta adecuado como herramienta predictiva en esta base de datos debido al desbalance extremo.
+			
+			\subsubsection{Costo del siniestro}
+				En las siguientes secciones presentaremos los diferentes modelos abordados durante la asignatura \textit{Cuantificación de riesgos}. Para ello, hemos trabajado únicamente con las pólizas que registran algún coste (pólizas con siniestros). Además, las cifras originales se han dividido por 1.000 con el fin de facilitar el análisis, ya que desde el punto de vista estadístico es preferible trabajar con números más pequeños: esto reduce problemas de escala sin alterar la interpretación de los resultados.
+			
+				\paragraph{Modelización no paramétrica}
+					En la modelización no paramétrica trabajamos únicamente con pólizas que presentan costes positivos para lesiones corporales (InjuryAmount) y daños materiales (PropertyAmount), con el fin de evitar la distorsión que provoca la concentración de ceros. El objetivo fue estimar el Valor en Riesgo (VaR) al 99,5 \% sin imponer una forma funcional, comparando la distribución empírica con la estimación por núcleo (kernel). \\
+					
+					Sobre la distribución empírica, el VaR 99,5\% de InjuryAmount asciende a 349,8 miles de euros, mientras que el de PropertyAmount es de 10,5 miles de euros. El VaR 99,5\% del total (ClaimAmount) se sitúa en 354,3 miles de euros. Si se suman los VaR marginales de lesiones y materiales, el resultado (359,3 miles de euros) queda por encima del VaR del total, lo que muestra que la agregación simple de riesgos marginales puede ofrecer una visión más conservadora que el comportamiento conjunto del total en este nivel de confianza.\\
+					
+					Con estimación por núcleo (bandwidth por defecto, h $\approx$ 86,49), el VaR 99,5 \% de InjuryAmount aumenta ligeramente hasta 350,4 miles de euros, y el de PropertyAmount permanece en torno a 10,5 miles de euros; el ClaimAmount se mantiene en 354,3 miles de euros. La suma de VaR marginales bajo kernel alcanza 361,0 miles de euros, de nuevo por encima del VaR del total. Este patrón confirma dos ideas clave: primero, el riesgo extremo está dominado por las lesiones corporales, ya que el aporte de materiales al cuantil alto es reducido; segundo, la suavización por kernel tiende a extender la cola y, por tanto, a elevar levemente el VaR frente a la empírica en lesiones, mientras que en materiales el efecto es prácticamente neutro. En consecuencia, al 99,5 \% conviene reportar tanto el VaR del total como la suma de VaR marginales y señalar explícitamente que el método kernel produce valores ligeramente superiores a la empírica en lesiones, reflejando una asignación de mayor peso a escenarios extremos coherente con la cola pesada observada en los datos.
+					
+				\paragraph{Modelización paramétrica}
+				
+					Para estimar el coste por daños corporales (InjuryAmount) bajo supuestos paramétricos se contrastaron, primero, distribuciones clásicas ajustadas directamente sobre los costes positivos (Weibull, Gamma, Log‑normal y Log‑logística) y, después, familias más flexibles ajustadas sobre la escala logarítmica —en sus versiones asimétricas— como Generalized Hyperbolic (GH), Hiperbólica, t‑Student, NIG y Variance‑Gamma (VG). La comparación se realizó mediante AIC homogéneo (corrigiendo el de los modelos en log‑costes) y VaR en distintos niveles de confianza.\\
+					
+					Los resultados muestran un patrón claro: las familias clásicas presentan sesgos en cola en sentidos opuestos —Weibull subestima los cuantiles altos, mientras que la Log‑logística los sobreestima y la Log‑normal se sitúa en un punto intermedio con colas todavía elevadas.\\
+					
+					En cambio, las familias flexibles en log‑costes mejoran el ajuste global: GH asimétrica alcanza AIC 91.922 con VaR 99,5 \% $\approx$ 239 mil euros, y VG asimétrica AIC 91.919 con VaR 99,5 \% $\approx$ 240 mil euros.\\
+					
+					El mejor ajuste estadístico (AIC) lo aportan GH y VG asimétricas en log‑costes, pero su VaR 99,5 \% se sitúa sustancialmente por debajo de los valores empíricos/no paramétricos reportados ($\approx$ 350 mil euros), lo que indica que los modelos paramétricos tienden a ser menos conservadores frente a la cola pesada observada en los datos reales.\\
+					 
+					Como contraste adicional, para las distribuciones GH y VG el VaR 99,5 \% del total (ClaimAmount) supera la suma de los VaR marginales (Injury + Property), lo que evidencia que el comportamiento conjunto puede generar agregaciones más severas que las estimaciones individuales, un matiz relevante para la gestión del riesgo agregado.\\
+					
+					En definitiva, se recomienda priorizar familias flexibles en log‑costes (GH y VG asimétricas) por calidad de ajuste (AIC); no obstante, conviene interpretarlas con cautela si el objetivo es capturar de forma conservadora la cola pesada de InjuryAmount.
+				
+				\paragraph{Teoría de valores extremos}
+				
+					El diagnóstico de cola pesada se apoyó en tres pruebas complementarias sobre InjuryAmount. El Hill Plot mostró una zona amplia de estabilidad, esta estabilidad es precisamente el indicador de que estamos ante una cola con comportamiento del tipo Pareto. El Mean Excess Plot presentó una tendencia creciente y aproximadamente lineal, rasgo característico de distribuciones de cola pesada. El CV‑Plot mantuvo el coeficiente de variación por encima de 1 en la región relevante, lo que descarta tanto colas exponenciales (CV $\approx$ 1) como colas ligeras (CV $<$ 1) y refuerza la conclusión de cola pesada.\\
+					
+					La coherencia entre estas tres evidencias valida que la severidad observada se concentra en un subconjunto de eventos de baja frecuencia y alto impacto, para los cuales los enfoques estándar tienden a infraestimar el riesgo.\\
+					
+					Sobre esa base, el modelo POT‑GPD registra un VaR 99,5 \% que se sitúa en torno a 286 mil euros, muy próximo al estimado por el enfoque Pareto simple (284 mil euros), lo que aporta robustez al resultado y confirma que la cuantificación de la cola mediante EVT es más conservadora que los modelos paramétricos en log‑costes. \\
+					
+					En resumen, esto significa que POT‑GPD captura mejor el comportamiento extremo observado, ofreciendo un punto de referencia prudente para dimensionar reservas en percentiles altos; su uso como complemento a los modelos paramétricos resulta aconsejable cuando la prioridad es mitigar el riesgo de subestimación en escenarios críticos.
+				
+				\paragraph{Distribuciones compuestas}
+				
+					El análisis parte de una limitación estructural: las distribuciones simples no logran representar simultáneamente el comportamiento del cuerpo y la cola de la distribución de costes. Weibull, por ejemplo, ajusta bien la zona central pero subestima los cuantiles extremos, mientras que Lognormal tiende a inflarlos, generando estimaciones poco realistas en escenarios severos. \\
+					
+					Para abordar esta complejidad, se aplicaron modelos compuestos, que combinan dos distribuciones: una para el cuerpo (Weibull o Lognormal) y otra para la cola (Pareto), separadas por un umbral determinado mediante diagnóstico EVT (Hill Plot). Este enfoque permite que cada parte del modelo se especialice en la zona donde ofrece mejor ajuste, evitando el sesgo sistemático que se observa en los modelos simples.\\
+					
+					Los resultados confirman que la combinación Weibull–Pareto es la más robusta, alcanzando el mayor loglik y el menor AIC entre las alternativas evaluadas. Además, su estimación del VaR 99,5 \% $\approx$ 309 mil euros se sitúa en un rango intermedio, reduciendo la subestimación de Weibull y la sobreestimación de Lognormal.\\
+					
+					Un aspecto relevante es que imponer continuidad en la función de densidad (para evitar saltos en el umbral) no siempre mejora el ajuste global: aunque suaviza la transición visual entre cuerpo y cola, incrementa el AIC y reduce la verosimilitud, lo que indica que la prioridad debe ser la precisión estadística antes que la estética del modelo.
+				
+				\paragraph{Distribuciones multivariadas}
+				
+				\paragraph{Cópulas}
+				
+	\section{Conclusiones}				
+\newpage
+
+
+% Referencias
+\addcontentsline{toc}{section}{Referencias}
+\bibliographystyle{apalike}
+\bibliography{FC01_G03_Referencias.bib}
+
+\end{document}
