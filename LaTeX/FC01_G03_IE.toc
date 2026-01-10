@@ -22,5 +22,6 @@
 \contentsline {paragraph}{\numberline {3.2.2.4}Distribuciones compuestas}{10}{paragraph.3.2.2.4}%
 \contentsline {paragraph}{\numberline {3.2.2.5}Distribuciones multivariadas}{10}{paragraph.3.2.2.5}%
 \contentsline {paragraph}{\numberline {3.2.2.6}Cópulas}{10}{paragraph.3.2.2.6}%
-\contentsline {section}{\numberline {4}Conclusiones}{10}{section.4}%
-\contentsline {section}{Referencias}{11}{section.4}%
+\contentsline {paragraph}{\numberline {3.2.2.7}Comparativo}{11}{paragraph.3.2.2.7}%
+\contentsline {section}{\numberline {4}Conclusiones}{12}{section.4}%
+\contentsline {section}{Referencias}{14}{section.4}%
